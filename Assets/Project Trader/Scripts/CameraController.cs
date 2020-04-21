@@ -12,28 +12,28 @@ public class CameraController : MonoBehaviour
     private Vector3 targetPosition;
     private Vector3 prevTargetPosition;
     private Vector3 targetVelocity;
-    private Vector3 prevtargetVelocity;
+    //private Vector3 prevtargetVelocity;
 
-    public void SetTargetObject(GameObject targetObject)
-    {
-        if (targetObject != null)
-        {
-            //targetRigidbody = targetObject.GetComponent<Rigidbody2D>();
-        }
-    }
+    //public void SetTargetObject(GameObject targetObject)
+    //{
+    //    if (targetObject != null)
+    //    {
+    //        //targetRigidbody = targetObject.GetComponent<Rigidbody2D>();
+    //    }
+    //}
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        SetTargetObject(targetObject);
-    }
+    //// Start is called before the first frame update
+    //void Start()
+    //{
+    //    SetTargetObject(targetObject);
+    //}
 
     // Update is called once per frame
     void FixedUpdate()
     {
 
         prevTargetPosition = targetPosition;
-        prevtargetVelocity = targetVelocity;
+        //prevtargetVelocity = targetVelocity;
 
         // targetPosition 보간
         targetPosition += (targetObject.transform.position - targetPosition) * speed;
