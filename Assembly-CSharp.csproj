@@ -68,6 +68,7 @@
     <Compile Include="Assets\Project Trader\Scripts\Inputs\VirtualJoystickController.cs" />
     <Compile Include="Assets\Project Trader\Scripts\PlayerController.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
+    <None Include="Assets\Spine\version.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
@@ -688,6 +689,20 @@
     <Reference Include="System.Xml.Serialization">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.9f1/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="spine-unity-examples.csproj">
+      <Project>{282BA0FC-4C91-A3D7-96A8-4E6A5AFC0B0D}</Project>
+      <Name>spine-unity-examples</Name>
+    </ProjectReference>
+    <ProjectReference Include="spine-unity.csproj">
+      <Project>{F6CC304B-0256-AE15-AFB5-25F530C856B3}</Project>
+      <Name>spine-unity</Name>
+    </ProjectReference>
+    <ProjectReference Include="spine-unity-editor.csproj">
+      <Project>{B181D5B2-B9D0-606F-4DDA-7636D58A58B9}</Project>
+      <Name>spine-unity-editor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
