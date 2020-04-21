@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public GameObject targetObject;
+    public Vector2 offset = Vector2.zero;
     public float velocityImpact = 30;
     public float speed = 0.1f;
 
@@ -22,11 +23,11 @@ public class CameraController : MonoBehaviour
     //    }
     //}
 
-    //// Start is called before the first frame update
-    //void Start()
-    //{
-    //    SetTargetObject(targetObject);
-    //}
+    // Start is called before the first frame update
+    void Start()
+    {
+        targetPosition = targetObject.transform.position - targetPosition + (Vector3)offset;
+    }
 
     // Update is called once per frame
     void FixedUpdate()
@@ -36,13 +37,13 @@ public class CameraController : MonoBehaviour
         //prevtargetVelocity = targetVelocity;
 
         // targetPosition 보간
-        targetPosition += (targetObject.transform.position - targetPosition) * speed;
+        targetPosition += (targetObject.transform.position - targetPosition + (Vector3)offset) * speed;
 
 
         targetVelocity = targetPosition - prevTargetPosition;
         //Debug.Log($"targetVelocity {targetVelocity}");
         var interpolationTargetPosition = targetPosition;
-            interpolationTargetPosition += targetVelocity * velocityImpact;
+        interpolationTargetPosition += targetVelocity * velocityImpact;
 
         var direction = interpolationTargetPosition - this.transform.position;
         direction *= speed;

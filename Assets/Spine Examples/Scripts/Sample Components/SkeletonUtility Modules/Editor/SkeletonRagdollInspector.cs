@@ -29,6 +29,7 @@
 
 // Contributed by: Mitch Thompson
 
+#if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
 
@@ -44,3 +45,4 @@ namespace Spine.Unity.Examples {
 	}
 
 }
+#endif
