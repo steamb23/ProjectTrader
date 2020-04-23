@@ -6,14 +6,14 @@ public class MonsterAi : MonoBehaviour
 {
     public GameObject player;
     public float distance = 10;
-    public float speed = 0.04f;
+    public float speed = 10;
     void Start()
     {
 
     }
 
-    
-    void Update()
+
+    void FixedUpdate()
     {
         PlayerTrace();
     }
@@ -26,9 +26,12 @@ public class MonsterAi : MonoBehaviour
         Vector3 direction = (playerpos - transform.position).normalized;
         //몬스터-플레이어 사이 거리계산
         float between = Vector3.Distance(playerpos, transform.position);
+        Debug.Log(between);
         if (between <= distance)
         {
-            this.transform.position = new Vector3(transform.position.x + (direction.x * speed), transform.position.y + (direction.y * speed), 0);
+            this.transform.position = new Vector3(
+                transform.position.x + (direction.x * speed * Time.deltaTime),
+                transform.position.y + (direction.y * speed * Time.deltaTime), 0);
         }
     }
 }
