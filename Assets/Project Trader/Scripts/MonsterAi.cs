@@ -38,7 +38,6 @@ public class MonsterAi : MonoBehaviour
         Vector3 direction = (playerpos - transform.position).normalized;
         //몬스터-플레이어 사이 거리계산
         float between = Vector3.Distance(playerpos, transform.position);
-        Debug.Log(between);
         if (between <= distance)
         {
             this.transform.position = new Vector3(
