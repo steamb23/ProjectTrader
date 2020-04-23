@@ -63,10 +63,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Project Trader\Classes\CsvData.cs" />
     <Compile Include="Assets\Project Trader\Scripts\CameraController.cs" />
     <Compile Include="Assets\Project Trader\Scripts\Inputs\JoystickMapper.cs" />
     <Compile Include="Assets\Project Trader\Scripts\Inputs\VirtualJoystickController.cs" />
     <Compile Include="Assets\Project Trader\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Project Trader\쓰레기\Test.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\Spine\version.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
