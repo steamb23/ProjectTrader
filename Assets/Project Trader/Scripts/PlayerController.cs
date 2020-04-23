@@ -1,12 +1,10 @@
 ﻿using Inputs;
-using Spine.Unity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public SkeletonAnimation skeletonAnimation;
     public float speed = 10;
     Rigidbody2D rigidBody;
     // Start is called before the first frame update
@@ -22,25 +20,25 @@ public class PlayerController : MonoBehaviour
         rigidBody.velocity = joystickVector * speed;
 
         // 애니메이션 예제
-        var currentSpeed = joystickVector.magnitude;
-        if (currentSpeed > 0)
-        {
-            skeletonAnimation.transform.localScale = new Vector3(joystickVector.x < 0 ? -1 : 1, 1, 1);
-            if (currentSpeed > 0.5f)
-            {
-                skeletonAnimation.AnimationName = "run";
-                skeletonAnimation.timeScale = currentSpeed;
-            }
-            else
-            {
-                skeletonAnimation.AnimationName = "walk";
-                skeletonAnimation.timeScale = currentSpeed / 0.5f;
-            }
-        }
-        else
-        {
-            skeletonAnimation.AnimationName = "idle";
-            skeletonAnimation.timeScale = 1;
-        }
+        //var currentSpeed = joystickVector.magnitude;
+        //if (currentSpeed > 0)
+        //{
+        //    skeletonAnimation.transform.localScale = new Vector3(joystickVector.x < 0 ? -1 : 1, 1, 1);
+        //    if (currentSpeed > 0.5f)
+        //    {
+        //        skeletonAnimation.AnimationName = "run";
+        //        skeletonAnimation.timeScale = currentSpeed;
+        //    }
+        //    else
+        //    {
+        //        skeletonAnimation.AnimationName = "walk";
+        //        skeletonAnimation.timeScale = currentSpeed / 0.5f;
+        //    }
+        //}
+        //else
+        //{
+        //    skeletonAnimation.AnimationName = "idle";
+        //    skeletonAnimation.timeScale = 1;
+        //}
     }
 }
