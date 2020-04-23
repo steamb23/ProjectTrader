@@ -13,6 +13,7 @@ public class CameraController : MonoBehaviour
     private Vector3 targetPosition;
     private Vector3 prevTargetPosition;
     private Vector3 targetVelocity;
+    private Vector3 interpolationTargetPosition;
     //private Vector3 prevtargetVelocity;
 
     //public void SetTargetObject(GameObject targetObject)
@@ -32,22 +33,41 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        var interpolatedSpeed = speed * Time.deltaTime;
 
         prevTargetPosition = targetPosition;
         //prevtargetVelocity = targetVelocity;
 
         // targetPosition 보간
-        targetPosition += (targetObject.transform.position - targetPosition + (Vector3)offset) * speed;
+        targetPosition += (targetObject.transform.position - targetPosition + (Vector3)offset) * interpolatedSpeed;
 
 
         targetVelocity = targetPosition - prevTargetPosition;
         //Debug.Log($"targetVelocity {targetVelocity}");
-        var interpolationTargetPosition = targetPosition;
+        interpolationTargetPosition = targetPosition;
         interpolationTargetPosition += targetVelocity * velocityImpact;
 
         var direction = interpolationTargetPosition - this.transform.position;
-        direction *= speed;
+        direction *= interpolatedSpeed;
 
         transform.Translate(direction.x, direction.y, 0);
     }
+
+#if UNITY_EDITOR
+    void OnDrawGizmos()
+    {
+        if (Application.isPlaying)
+        {
+            var origColor = UnityEditor.Handles.color;
+
+            Gizmos.DrawIcon(interpolationTargetPosition, "Camera Gizmo", true, Color.gray);
+            UnityEditor.Handles.color = Color.yellow;
+            UnityEditor.Handles.DrawLine(targetObject.transform.position + (Vector3)offset, interpolationTargetPosition);
+            UnityEditor.Handles.color = Color.gray;
+            UnityEditor.Handles.DrawLine(transform.position, interpolationTargetPosition);
+
+            UnityEditor.Handles.color = origColor;
+        }
+    }
+#endif
 }

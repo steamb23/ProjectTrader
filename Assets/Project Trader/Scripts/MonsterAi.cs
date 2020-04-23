@@ -18,7 +18,19 @@ public class MonsterAi : MonoBehaviour
         PlayerTrace();
     }
 
-    
+#if UNITY_EDITOR
+    void OnDrawGizmos()
+    {
+        var origColor = UnityEditor.Handles.color;
+        UnityEditor.Handles.color = new Color(1, 0, 0, 0.1f);
+        UnityEditor.Handles.DrawSolidDisc(transform.position, Vector3.forward, distance);
+        UnityEditor.Handles.color = new Color(1, 0, 0, 1f);
+        UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.forward, distance);
+        UnityEditor.Handles.color = origColor;
+    }
+#endif
+
+
     void PlayerTrace()
     {
         Vector3 playerpos = player.transform.position;
