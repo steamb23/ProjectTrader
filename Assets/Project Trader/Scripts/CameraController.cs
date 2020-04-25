@@ -27,6 +27,12 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (targetObject==null)
+        {
+            Debug.LogError("카메라에 타겟 오브젝트가 지정되지 않았습니다.");
+            this.enabled = false;
+            return;
+        }
         targetPosition = targetObject.transform.position - targetPosition + (Vector3)offset;
     }
 
