@@ -140,6 +140,8 @@ public class VisitorAi : MonoBehaviour
         // 랜덤 아이템 선택
         var index = UnityEngine.Random.Range(0, pathNodeManager.itemNodes.Count);
 
+        // TODO:해당 위치에 캐릭터가 존재하면 다시 선택하도록 수정
+
         SetTarget(pathNodeManager.itemNodes[index]);
         state = AiState.Finded;
     }
