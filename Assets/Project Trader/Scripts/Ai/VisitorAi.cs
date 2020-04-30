@@ -55,6 +55,8 @@ public class VisitorAi : MonoBehaviour
 
     public PathNode targetNode;
 
+    public int targetItemIndex;
+
     public PathNodeManager pathNodeManager;
 
     // 추후 아이템 클래스 형식으로 변경
@@ -142,11 +144,19 @@ public class VisitorAi : MonoBehaviour
     {
         Debug.Log("Finding");
         // 랜덤 아이템 선택
-        var index = UnityEngine.Random.Range(0, pathNodeManager.itemNodes.Count);
+        targetItemIndex = UnityEngine.Random.Range(0, pathNodeManager.itemNodes.Count);
 
         // TODO:해당 위치에 캐릭터가 존재하면 다시 선택하도록 수정
+        if (pathNodeManager.ItemOccupancyList[targetItemIndex] != null)
+        {
+            state = AiState.Finding;
+            return;
+        }
 
-        SetTarget(pathNodeManager.itemNodes[index]);
+        SetTarget(pathNodeManager.itemNodes[targetItemIndex]);
+        // 아이템 점유
+        pathNodeManager.ItemOccupancyList[targetItemIndex] = this;
+
         state = AiState.Finded;
     }
 
@@ -177,6 +187,9 @@ public class VisitorAi : MonoBehaviour
             {
                 state = AiState.Discard;
             }
+
+            // 아이템 점유 해제
+            pathNodeManager.ItemOccupancyList[targetItemIndex] = null;
         }
     }
 
@@ -184,7 +197,7 @@ public class VisitorAi : MonoBehaviour
     {
         Debug.Log("ToCounter");
         // 대기열 찾기
-        counterWaitNumber = pathNodeManager.waitQueue.Count - 1;
+        counterWaitNumber = pathNodeManager.WaitQueue.Count - 1;
         if (counterWaitNumber >= 0)
         {
             SetTarget(pathNodeManager.waitNodes[counterWaitNumber]);
@@ -194,13 +207,13 @@ public class VisitorAi : MonoBehaviour
             SetTarget(targetNode = pathNodeManager.counterNode);
             //state = AiState.Buy;
         }
-        pathNodeManager.waitQueue.Enqueue(this);
+        pathNodeManager.WaitQueue.Enqueue(this);
         state = AiState.CounterWait;
     }
 
     void CounterWait()
     {
-        if (pathNodeManager.waitQueue.Peek() == this)
+        if (pathNodeManager.WaitQueue.Peek() == this)
         {
             state = AiState.Buy;
         }
@@ -230,10 +243,10 @@ public class VisitorAi : MonoBehaviour
     void Buyed()
     {
         Debug.Log("Buyed");
-        pathNodeManager.waitQueue.Dequeue();
+        pathNodeManager.WaitQueue.Dequeue();
         //다른 visitor들 지정해주기
         int i = 0;
-        foreach(var visitor in pathNodeManager.waitQueue)
+        foreach(var visitor in pathNodeManager.WaitQueue)
         {
             if (i == 0)
             {
