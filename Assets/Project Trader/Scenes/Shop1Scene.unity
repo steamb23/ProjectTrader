@@ -1835,6 +1835,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dummy
       objectReference: {fileID: 0}
+    - target: {fileID: 7349710795555686304, guid: 6af8c605b6fe520418c28ecd2f72b11f,
+        type: 3}
+      propertyPath: canSearch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7349710795555686304, guid: 6af8c605b6fe520418c28ecd2f72b11f,
+        type: 3}
+      propertyPath: maxAcceleration
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7349710795555686304, guid: 6af8c605b6fe520418c28ecd2f72b11f,
+        type: 3}
+      propertyPath: repathRate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8098585787299443117, guid: 6af8c605b6fe520418c28ecd2f72b11f,
         type: 3}
       propertyPath: m_LocalPosition.x

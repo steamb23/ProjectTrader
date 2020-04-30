@@ -10,6 +10,7 @@ public class VisitorAi : MonoBehaviour
 {
     public enum AiState
     {
+        None,
         /// <summary>
         /// 아이템 찾기
         /// </summary>
@@ -71,6 +72,8 @@ public class VisitorAi : MonoBehaviour
 
     void Start()
     {
+        // 초기 상태 지정
+        state = AiState.Finding;
         astarAI = GetComponent<IAstarAI>();
         if (pathNodeManager == null)
             pathNodeManager = FindObjectOfType<PathNodeManager>();
@@ -94,6 +97,7 @@ public class VisitorAi : MonoBehaviour
         this.targetNode = targetNode;
 
         astarAI.destination = targetNode.transform.position;
+        astarAI.SearchPath();
     }
 
     void Action()
@@ -268,5 +272,7 @@ public class VisitorAi : MonoBehaviour
     {
         Debug.Log("Exit");
         // 파괴절차
+        Destroy(this.gameObject, 1);
+        state = AiState.None;
     }
 }
