@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1289040719}
   - component: {fileID: 1559798081}
   m_Layer: 0
-  m_Name: DummyVisitor
+  m_Name: Dummy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,7 +70,7 @@ MonoBehaviour:
   repathRate: 0.1
   canSearch: 1
   canMove: 1
-  maxSpeed: 1
+  maxSpeed: 1.5
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
@@ -144,6 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetNode: {fileID: 0}
   pathNodeManager: {fileID: 0}
+  state: 0
 --- !u!1 &4400036019111586016
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,7 +170,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4400036019111586016}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.15, z: 0}
+  m_LocalPosition: {x: 0, y: 0.24, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8098585787299443117}
@@ -214,7 +215,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 193d6d8edadbc9745a82671ecddb8584, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ff6ef29c8259b70499197ee0fad21280, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
