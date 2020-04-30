@@ -142,7 +142,7 @@ public class VisitorAi : MonoBehaviour
 
     void Finding()
     {
-        Debug.Log("Finding");
+        //Debug.Log("Finding");
         // 랜덤 아이템 선택
         targetItemIndex = UnityEngine.Random.Range(0, pathNodeManager.itemNodes.Count);
 
@@ -162,7 +162,7 @@ public class VisitorAi : MonoBehaviour
 
     void Finded()
     {
-        Debug.Log("Finded");
+        //Debug.Log("Finded");
         waitTime = UnityEngine.Random.Range(0f, 1f);
 
         state = AiState.Thinking;
@@ -170,7 +170,7 @@ public class VisitorAi : MonoBehaviour
 
     void Thinking()
     {
-        Debug.Log("Thinking");
+        //Debug.Log("Thinking");
         waitTime -= Time.deltaTime;
         if (waitTime <= 0)
         {
@@ -195,7 +195,7 @@ public class VisitorAi : MonoBehaviour
 
     void ToCounter()
     {
-        Debug.Log("ToCounter");
+        //Debug.Log("ToCounter");
         // 대기열 찾기
         counterWaitNumber = pathNodeManager.WaitQueue.Count - 1;
         if (counterWaitNumber >= 0)
@@ -221,7 +221,7 @@ public class VisitorAi : MonoBehaviour
 
     void Buy()
     {
-        Debug.Log("Buy");
+        //Debug.Log("Buy");
         // 캐릭터 상호작용
         // 프로토타입에서는 대기로 대체
         waitTime = 1;
@@ -230,7 +230,7 @@ public class VisitorAi : MonoBehaviour
 
     void Buying()
     {
-        Debug.Log("Buying");
+        //Debug.Log("Buying");
         // 캐릭터 상호작용
         // 프로토타입에서는 대기로 대체
         waitTime -= Time.deltaTime;
@@ -242,7 +242,7 @@ public class VisitorAi : MonoBehaviour
 
     void Buyed()
     {
-        Debug.Log("Buyed");
+        //Debug.Log("Buyed");
         pathNodeManager.WaitQueue.Dequeue();
         //다른 visitor들 지정해주기
         int i = 0;
@@ -264,7 +264,7 @@ public class VisitorAi : MonoBehaviour
 
     void Discard()
     {
-        Debug.Log("Discard");
+        //Debug.Log("Discard");
         // 판매 포기 확률
         float discardProbability = 0.01f;
 
@@ -283,7 +283,7 @@ public class VisitorAi : MonoBehaviour
 
     void Exit()
     {
-        Debug.Log("Exit");
+        //Debug.Log("Exit");
         // 파괴절차
         Destroy(this.gameObject, 1);
         state = AiState.None;
