@@ -7,6 +7,7 @@ public class DynamicSpriteSorting : MonoBehaviour
     const int unitPerPixel = 100;
 
     public bool isStatic = false;
+    public float virtualElevation = 0;
     public SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
     void Start()
@@ -37,7 +38,7 @@ public class DynamicSpriteSorting : MonoBehaviour
     {
         var position = transform.position;
 
-        var y = position.y * unitPerPixel;
+        var y = (position.y - virtualElevation) * unitPerPixel;
 
         spriteRenderer.sortingOrder = -(int)y;
     }

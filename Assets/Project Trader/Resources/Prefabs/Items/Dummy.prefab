@@ -90,8 +90,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3300557459885890393}
+  - component: {fileID: 161094503}
   m_Layer: 0
-  m_Name: Item
+  m_Name: Dummy
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,3 +113,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &161094503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3300557459885890399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e41e1d1bdbee114dbf33b1b818f4ba5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isStatic: 1
+  virtualElevation: 0.2
+  spriteRenderer: {fileID: 3646961542341969034}

@@ -505,7 +505,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStatic: 1
+  virtualElevation: 0
   spriteRenderer: {fileID: 0}
+--- !u!1 &161094502 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3300557459885890399, guid: 2cec7c5cc2bdc7d41bfe5cf9e5e3434f,
+    type: 3}
+  m_PrefabInstance: {fileID: 3300557460419855788}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &161094503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161094502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e41e1d1bdbee114dbf33b1b818f4ba5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isStatic: 0
+  virtualElevation: 10
+  spriteRenderer: {fileID: 1089735631}
 --- !u!1 &174107412
 GameObject:
   m_ObjectHideFlags: 0
@@ -768,6 +790,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStatic: 1
+  virtualElevation: 0
   spriteRenderer: {fileID: 0}
 --- !u!1001 &476007461
 PrefabInstance:
@@ -991,6 +1014,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStatic: 1
+  virtualElevation: 0
   spriteRenderer: {fileID: 0}
 --- !u!1 &559143045
 GameObject:
@@ -1804,7 +1828,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStatic: 1
+  virtualElevation: 0
   spriteRenderer: {fileID: 0}
+--- !u!212 &1089735631 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 3646961542341969034, guid: 2cec7c5cc2bdc7d41bfe5cf9e5e3434f,
+    type: 3}
+  m_PrefabInstance: {fileID: 3300557460419855788}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1096866287
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2038,6 +2069,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStatic: 1
+  virtualElevation: 0
   spriteRenderer: {fileID: 0}
 --- !u!1 &1141038205
 GameObject:
@@ -2730,6 +2762,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStatic: 1
+  virtualElevation: 0
   spriteRenderer: {fileID: 0}
 --- !u!1 &1546584903
 GameObject:
@@ -2954,6 +2987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStatic: 1
+  virtualElevation: 0
   spriteRenderer: {fileID: 0}
 --- !u!1 &1661349539
 GameObject:
@@ -3107,6 +3141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStatic: 1
+  virtualElevation: 0
   spriteRenderer: {fileID: 0}
 --- !u!1 &1700846104
 GameObject:
@@ -3898,6 +3933,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStatic: 1
+  virtualElevation: 0
   spriteRenderer: {fileID: 0}
 --- !u!1 &2143131355
 GameObject:
@@ -3994,6 +4030,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStatic: 1
+  virtualElevation: 0
   spriteRenderer: {fileID: 0}
 --- !u!1001 &3300557460419855788
 PrefabInstance:
