@@ -58,6 +58,7 @@ public class VisitorAi : MonoBehaviour
     public int targetItemIndex;
 
     public PathNodeManager pathNodeManager;
+    public VisitorManager visitorManager;
 
     // 추후 아이템 클래스 형식으로 변경
     object item = null;
@@ -79,6 +80,8 @@ public class VisitorAi : MonoBehaviour
         astarAI = GetComponent<IAstarAI>();
         if (pathNodeManager == null)
             pathNodeManager = FindObjectOfType<PathNodeManager>();
+        if (visitorManager == null)
+            visitorManager = FindObjectOfType<VisitorManager>();
     }
 
     // Update is called once per frame
@@ -287,5 +290,10 @@ public class VisitorAi : MonoBehaviour
         // 파괴절차
         Destroy(this.gameObject, 1);
         state = AiState.None;
+    }
+
+    private void OnDestroy()
+    {
+        visitorManager.visitors.Remove(this);
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 //
@@ -28,7 +27,7 @@ public class PathNode : MonoBehaviour
     {
         
     }
-
+#if UNITY_EDITOR
     protected virtual void OnDrawGizmos()
     {
         var origColor = UnityEditor.Handles.color;
@@ -38,4 +37,5 @@ public class PathNode : MonoBehaviour
         UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.forward, gizmoRadius);
         UnityEditor.Handles.color = origColor;
     }
+#endif
 }
