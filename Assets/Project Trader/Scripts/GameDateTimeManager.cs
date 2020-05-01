@@ -63,7 +63,6 @@ class GameDateTimeManager : MonoBehaviour
         }
     }
 
-    //private float time = 0;
     private float gameTime = 0;
     private void Start()
     {
@@ -82,11 +81,6 @@ class GameDateTimeManager : MonoBehaviour
         var gameDateTime = GameDateTime;
         gameDateTime.AddSecond(gameTimeInt);
         GameDateTime = gameDateTime;
-        //if (time > 1)
-        //{
-        //    GameDateTime.AddSecond();
-        //    time -= 1;
-        //}
 
 #if UNITY_EDITOR
         // 출력
