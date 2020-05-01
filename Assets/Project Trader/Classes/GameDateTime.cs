@@ -42,42 +42,53 @@ namespace ProjectTrader
         /// </summary>
         public const int MaxYear = MaxMonth / 30;
 
-        public int Ticks { get; set; }
+        public GameDateTime(int year = 0, int month = 0, int day = 0, int hour = 0, int minute = 0, int second = 0)
+        {
+            ticks =
+                year * TicksPerYear +
+                month * TicksPerMonth +
+                day * TicksPerDay +
+                hour * TicksPerHour +
+                minute * TicksPerMinute +
+                second * TicksPerSecond;
+        }
+
+        public int ticks;
 
         public int TotalSeconds
         {
-            get => Ticks / TicksPerSecond;
-            set => Ticks = value * TicksPerSecond;
+            get => ticks / TicksPerSecond;
+            set => ticks = value * TicksPerSecond;
         }
 
         public int TotalMinutes
         {
-            get => Ticks / TicksPerMinute;
-            set => Ticks = value * TicksPerMinute;
+            get => ticks / TicksPerMinute;
+            set => ticks = value * TicksPerMinute;
         }
 
         public int TotalHours
         {
-            get => Ticks / TicksPerHour;
-            set => Ticks = value * TicksPerHour;
+            get => ticks / TicksPerHour;
+            set => ticks = value * TicksPerHour;
         }
 
         public int TotalDays
         {
-            get => Ticks / TicksPerDay;
-            set => Ticks = value * TicksPerDay;
+            get => ticks / TicksPerDay;
+            set => ticks = value * TicksPerDay;
         }
 
         public int TotalMonths
         {
-            get => Ticks / TicksPerMonth;
-            set => Ticks = value * TicksPerMonth;
+            get => ticks / TicksPerMonth;
+            set => ticks = value * TicksPerMonth;
         }
 
         public int TotalYears
         {
-            get => Ticks / TicksPerYear;
-            set => Ticks = value * TicksPerYear;
+            get => ticks / TicksPerYear;
+            set => ticks = value * TicksPerYear;
         }
 
         public int Second
@@ -116,6 +127,7 @@ namespace ProjectTrader
             set => TotalYears = value;
         }
 
+        public void AddSecond() => TotalSeconds++;
         public void AddSecond(int value) => TotalSeconds += value;
         public void AddMinute(int value) => TotalMinutes += value;
         public void AddHour(int value) => TotalHours += value;
