@@ -64,11 +64,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Project Trader\Classes\CsvData.cs" />
+    <Compile Include="Assets\Project Trader\Classes\DataSave.cs" />
     <Compile Include="Assets\Project Trader\Classes\GameDateTime.cs" />
+    <Compile Include="Assets\Project Trader\Classes\PlayData.cs" />
     <Compile Include="Assets\Project Trader\Scripts\Ai\MonsterAi.cs" />
     <Compile Include="Assets\Project Trader\Scripts\Ai\VisitorAi.cs" />
     <Compile Include="Assets\Project Trader\Scripts\CameraController.cs" />
-    <Compile Include="Assets\Project Trader\Scripts\DataSave.cs" />
     <Compile Include="Assets\Project Trader\Scripts\DynamicSpriteSorting.cs" />
     <Compile Include="Assets\Project Trader\Scripts\Inputs\JoystickMapper.cs" />
     <Compile Include="Assets\Project Trader\Scripts\Inputs\VirtualJoystickController.cs" />
