@@ -91,6 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3300557459885890393}
   - component: {fileID: 161094503}
+  - component: {fileID: 4426954722865159754}
   m_Layer: 0
   m_Name: Dummy
   m_TagString: Item
@@ -128,3 +129,17 @@ MonoBehaviour:
   isStatic: 1
   virtualElevation: 0.2
   spriteRenderer: {fileID: 3646961542341969034}
+--- !u!114 &4426954722865159754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3300557459885890399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f29516a00a61bb2439d59dec706de03c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
+  itemCount: 10

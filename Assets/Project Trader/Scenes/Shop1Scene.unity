@@ -610,7 +610,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 416812293}
-  - component: {fileID: 416812295}
+  - component: {fileID: 416812294}
   m_Layer: 0
   m_Name: Item
   m_TagString: Untagged
@@ -632,7 +632,7 @@ Transform:
   m_Father: {fileID: 2059710785}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &416812295
+--- !u!114 &416812294
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -641,12 +641,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 416812292}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0549a741fadd1746801213674e5578d, type: 3}
+  m_Script: {fileID: 11500000, guid: 25830d6cd80cd5649977dcd11ba869f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   connectedNodeList: []
   gizmoRadius: 0.05
   gizmoColor: {r: 0.84, g: 0.48, b: 0.72, a: 1}
+  displayedItem: {fileID: 0}
 --- !u!1 &430736746
 GameObject:
   m_ObjectHideFlags: 0
@@ -1192,12 +1193,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 697161641}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0549a741fadd1746801213674e5578d, type: 3}
+  m_Script: {fileID: 11500000, guid: 25830d6cd80cd5649977dcd11ba869f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   connectedNodeList: []
   gizmoRadius: 0.05
   gizmoColor: {r: 0.84, g: 0.48, b: 0.72, a: 1}
+  displayedItem: {fileID: 0}
 --- !u!1 &698670074
 GameObject:
   m_ObjectHideFlags: 0
@@ -1254,7 +1256,7 @@ MonoBehaviour:
   - {fileID: 670500458}
   - {fileID: 174107413}
   itemNodes:
-  - {fileID: 416812295}
+  - {fileID: 416812294}
   - {fileID: 815979529}
   - {fileID: 1258275496}
   - {fileID: 1859720211}
@@ -1489,12 +1491,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 815979527}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0549a741fadd1746801213674e5578d, type: 3}
+  m_Script: {fileID: 11500000, guid: 25830d6cd80cd5649977dcd11ba869f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   connectedNodeList: []
   gizmoRadius: 0.05
   gizmoColor: {r: 0.84, g: 0.48, b: 0.72, a: 1}
+  displayedItem: {fileID: 0}
 --- !u!1001 &821403747
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2084,12 +2087,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1258275494}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0549a741fadd1746801213674e5578d, type: 3}
+  m_Script: {fileID: 11500000, guid: 25830d6cd80cd5649977dcd11ba869f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   connectedNodeList: []
   gizmoRadius: 0.05
   gizmoColor: {r: 0.84, g: 0.48, b: 0.72, a: 1}
+  displayedItem: {fileID: 0}
 --- !u!1 &1273220251
 GameObject:
   m_ObjectHideFlags: 0
@@ -3199,12 +3203,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1851160898}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0549a741fadd1746801213674e5578d, type: 3}
+  m_Script: {fileID: 11500000, guid: 25830d6cd80cd5649977dcd11ba869f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   connectedNodeList: []
   gizmoRadius: 0.05
   gizmoColor: {r: 0.84, g: 0.48, b: 0.72, a: 1}
+  displayedItem: {fileID: 0}
 --- !u!1 &1859720209
 GameObject:
   m_ObjectHideFlags: 0
@@ -3245,12 +3250,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1859720209}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0549a741fadd1746801213674e5578d, type: 3}
+  m_Script: {fileID: 11500000, guid: 25830d6cd80cd5649977dcd11ba869f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   connectedNodeList: []
   gizmoRadius: 0.05
   gizmoColor: {r: 0.84, g: 0.48, b: 0.72, a: 1}
+  displayedItem: {fileID: 0}
 --- !u!1 &1910127218
 GameObject:
   m_ObjectHideFlags: 0
