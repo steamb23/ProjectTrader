@@ -14,11 +14,18 @@ public class DynamicSpriteSorting : MonoBehaviour
     {
         if (spriteRenderer == null)
         {
+            // 현재 오브젝트에서 검색
             spriteRenderer = GetComponent<SpriteRenderer>();
             if (spriteRenderer==null)
             {
-                Destroy(this);
-                return;
+                // 자식 오브젝트에서 검색
+                spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+                if (spriteRenderer == null)
+                {
+                    // 자식 오브젝트에서도 존재하지 않으면
+                    Destroy(this);
+                    return;
+                }
             }
         }
         if (isStatic)
