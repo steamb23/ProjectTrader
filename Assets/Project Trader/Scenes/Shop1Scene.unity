@@ -251,7 +251,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.63, y: 0.56}
+  m_Size: {x: 0.79, y: 0.73}
   m_EdgeRadius: 0
 --- !u!1 &65360844
 GameObject:
@@ -1074,7 +1074,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.63, y: 0.56}
+  m_Size: {x: 0.79, y: 0.73}
   m_EdgeRadius: 0
 --- !u!1 &586873957
 GameObject:
@@ -1734,7 +1734,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.63, y: 0.56}
+  m_Size: {x: 0.79, y: 0.73}
   m_EdgeRadius: 0
 --- !u!1 &1001629148
 GameObject:
@@ -2042,7 +2042,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.63, y: 0.56}
+  m_Size: {x: 0.79, y: 0.73}
   m_EdgeRadius: 0
 --- !u!1 &1258275494
 GameObject:
@@ -2123,7 +2123,7 @@ MonoBehaviour:
   - visitor: {fileID: 1559798081, guid: 6af8c605b6fe520418c28ecd2f72b11f, type: 3}
     priority: 1
   pathNodeManager: {fileID: 0}
-  enterProbability: 0.5
+  enterProbability: 1
   maxVisitor: 0
   visitors: []
 --- !u!4 &1273220253
@@ -2711,7 +2711,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.63, y: 0.56}
+  m_Size: {x: 0.79, y: 0.73}
   m_EdgeRadius: 0
 --- !u!1 &1653549202
 GameObject:
@@ -3306,7 +3306,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.63, y: 0.56}
+  m_Size: {x: 0.79, y: 0.73}
   m_EdgeRadius: 0
 --- !u!1 &1966579446
 GameObject:
