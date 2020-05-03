@@ -10,6 +10,7 @@ public class DataSave : MonoBehaviour
 {
     GameObject textUi;
     PlayData pda = new PlayData();
+
     void Start()
     {
         textUi = GameObject.Find("TextUiControl");
@@ -19,8 +20,7 @@ public class DataSave : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.D))
         {
-            GameLoad();
-            pda.PrintPlayData();
+            GameSave();
         }
     }
 
@@ -36,10 +36,10 @@ public class DataSave : MonoBehaviour
         string load = LoadJson();
         Debug.Log(load);
         var loadData = JsonToObject<PlayData>(load);
-        pda.SetMoney(loadData.money);
-        pda.SetLevel(loadData.level);
-        pda.SetFamous(loadData.famous);
-        pda.SetShopName(loadData.shopName);
+        pda.money = loadData.money;
+        pda.level = loadData.level;
+        pda.famous = loadData.famous;
+        pda.shopName = loadData.shopName;
 
     }
 

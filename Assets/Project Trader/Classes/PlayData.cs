@@ -11,10 +11,10 @@ namespace ProjectTrader
     public class PlayData
     {
         //재화,가게 등급,인지도,가게이름
-        public int money;
-        public int level;
-        public float famous;
-        public string shopName;
+        public int money { set; get; }
+        public int level { set; get; }
+        public float famous { set; get; }
+        public string shopName { set; get; }
         public PlayData() { }
         public PlayData(int m, int l, float f, string sN)
         {
@@ -40,29 +40,6 @@ namespace ProjectTrader
             else
                 famous = 0;
         }
-        public void SetShopName(string name)
-        {
-            shopName = name;
-        }
-        public void SetMoney(int mon)
-        {
-            money = mon;
-        }
-        public void SetLevel(int lev)
-        {
-            level = lev;
-        }
-        public void SetFamous(float fam)
-        {
-            famous = fam;
-        }
 
-        public void PrintPlayData()
-        {
-            Debug.Log(money);
-            Debug.Log(famous);
-            Debug.Log(level);
-            Debug.Log(shopName);
-        }
     }
 }
