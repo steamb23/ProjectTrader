@@ -58,12 +58,22 @@ class GameDateTimeManager : MonoBehaviour
             gameDateTime = value;
 
             // 초기화
-            gameTime = default;
-            data = default;
+            data = (GameDateTimeInitData)gameDateTime;
         }
     }
 
-    private float gameTime = 0;
+    public float timePart = 0;
+
+    /// <summary>
+    /// 시간을 초기화합니다.
+    /// </summary>
+    public void Reset()
+    {
+        gameDateTime = default;
+        timePart = default;
+        data = default;
+    }
+
     private void Start()
     {
         GameDateTime = (GameDateTime)data;
@@ -72,19 +82,19 @@ class GameDateTimeManager : MonoBehaviour
     private void Update()
     {
         // 업데이트
-        gameTime += timeScale * Time.deltaTime;
+        timePart += timeScale * Time.deltaTime;
 
-        int gameTimeInt = (int)gameTime;
+        int gameTimeInt = (int)timePart;
         // 소수점부 남기고 0으로 초기화
-        gameTime -= gameTimeInt;
+        timePart -= gameTimeInt;
 
-        var gameDateTime = GameDateTime;
+        var gameDateTime = this.gameDateTime;
         gameDateTime.AddSecond(gameTimeInt);
-        GameDateTime = gameDateTime;
+        this.gameDateTime = gameDateTime;
 
 #if UNITY_EDITOR
         // 출력
-        data = (GameDateTimeInitData)GameDateTime;
+        data = (GameDateTimeInitData)gameDateTime;
 #endif
     }
 }
