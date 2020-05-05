@@ -134,5 +134,7 @@ namespace ProjectTrader
         public void AddDay(int value) => TotalDays += value;
         public void AddMonth(int value) => TotalMonths += value;
         public void AddYear(int value) => TotalYears += value;
+
+        public override string ToString() => Year + "년 " + Month + "월 " + Day + "일 " + Hour + "시 " + Minute + "분 " + Second + "초";
     }
 }
