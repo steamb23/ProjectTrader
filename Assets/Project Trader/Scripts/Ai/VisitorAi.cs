@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
@@ -60,8 +61,10 @@ public class VisitorAi : MonoBehaviour
     public PathNodeManager pathNodeManager;
     public VisitorManager visitorManager;
 
-    // 추후 아이템 클래스 형식으로 변경
-    object item = null;
+    [UnityEngine.SerializeField]
+    private List<ProjectTrader.Datas.Item> wishItems = new List<ProjectTrader.Datas.Item>();
+
+    public List<ProjectTrader.Datas.Item> WishItems => this.wishItems;
 
     public AiState state;
 

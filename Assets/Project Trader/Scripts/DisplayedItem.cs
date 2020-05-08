@@ -10,16 +10,14 @@ public class DisplayedItem : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
 
-    // TODO: 아이템 데이터, 추가 예정
-    // public Item itemData
+    public ProjectTrader.Datas.Item item;
 
     /// <summary>
     /// 남은 아이템. 인스펙터 전용. 코드에서 접근하지마세요.
     /// </summary>
-    [Obsolete("인스펙터 전용 변수입니다. 대신에 ItemCount 프로퍼티를 사용하세요.")]
+    [UnityEngine.SerializeField]
     public int itemCount;
 
-#pragma warning disable CS0618
     public int ItemCount
     {
         get => itemCount;
@@ -31,7 +29,6 @@ public class DisplayedItem : MonoBehaviour
             spriteRenderer.enabled = itemCount > 0;
         }
     }
-#pragma warning restore CS0618
 
     void Start()
     {
