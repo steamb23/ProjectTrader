@@ -27,4 +27,9 @@ class CashierAi : MonoBehaviour
         // 구매할 아이템 초기화
         visitor.WishItems.Clear();
     }
+
+    public void ItemDealAnimation()
+    {
+
+    }
 }
