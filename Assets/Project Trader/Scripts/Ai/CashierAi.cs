@@ -10,26 +10,29 @@ using UnityEngine;
 /// </summary>
 class CashierAi : MonoBehaviour
 {
+    new CashierAnimation animation;
+    private void Start()
+    {
+        animation = GetComponentInChildren<CashierAnimation>();
+    }
+
+
     /// <summary>
     /// 물품을 거래합니다.
     /// </summary>
     /// <param name="visitor">거래할 손님</param>
     public void ItemDeal(VisitorAi visitor)
     {
-        // 가격
-        int price = 0;
-        foreach (var item in visitor.WishItems)
-        {
-            // 아래와 같이 구현 예정
-            price += item.Data.SellPrice * item.Count;
-        }
+        animation.PlayDealAnimation(()=> {
+            // 가격
+            int price = 0;
+            foreach (var item in visitor.WishItems)
+            {
+                price += item.Data.SellPrice * item.Count;
+            }
 
-        // 구매할 아이템 초기화
-        visitor.WishItems.Clear();
-    }
-
-    public void ItemDealAnimation()
-    {
-
+            // 구매할 아이템 초기화
+            visitor.WishItems.Clear();
+        });
     }
 }

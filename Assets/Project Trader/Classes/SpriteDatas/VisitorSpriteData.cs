@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System;
 using Unity.Collections;
 
-namespace ProjectTrader
+namespace ProjectTrader.SpriteDatas
 {
-    [CreateAssetMenu(fileName = "CharacterSpriteData", menuName = "캐릭터 스프라이트 데이터")]
-    public class CharacterSpriteData : ScriptableObject
+    [CreateAssetMenu(fileName = "VisitorSpriteData", menuName = "스프라이트 데이터/손님 스프라이트 데이터")]
+    public class VisitorSpriteData : ScriptableObject
     {
         [Serializable]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2235")]
