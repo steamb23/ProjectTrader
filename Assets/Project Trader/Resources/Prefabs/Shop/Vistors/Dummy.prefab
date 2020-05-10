@@ -69,7 +69,7 @@ MonoBehaviour:
   radius: 0.1
   height: 2
   repathRate: 1
-  canSearch: 1
+  canSearch: 0
   canMove: 1
   maxSpeed: 1.5
   gravity: {x: 0, y: 0, z: 0}
@@ -147,6 +147,7 @@ MonoBehaviour:
   targetItemIndex: 0
   pathNodeManager: {fileID: 0}
   visitorManager: {fileID: 0}
+  wishItems: []
   state: 0
 --- !u!114 &7024676274704472373
 MonoBehaviour:

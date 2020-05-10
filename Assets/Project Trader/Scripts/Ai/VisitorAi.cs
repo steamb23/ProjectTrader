@@ -26,6 +26,10 @@ public class VisitorAi : MonoBehaviour
         /// </summary>
         Thinking,
         /// <summary>
+        /// 카운터 찾기
+        /// </summary>
+        FindCounter,
+        /// <summary>
         /// 카운터로 가기
         /// </summary>
         ToCounter,
@@ -77,6 +81,7 @@ public class VisitorAi : MonoBehaviour
     // 카운터 대기 번호
     int counterWaitNumber = 0;
 
+    static int debugIndex = 0;
     void Start()
     {
         // 초기 상태 지정
@@ -86,6 +91,10 @@ public class VisitorAi : MonoBehaviour
             pathNodeManager = FindObjectOfType<PathNodeManager>();
         if (visitorManager == null)
             visitorManager = FindObjectOfType<VisitorManager>();
+
+#if UNITY_EDITOR
+        name += debugIndex++.ToString();
+#endif
     }
 
     // Update is called once per frame
@@ -122,6 +131,9 @@ public class VisitorAi : MonoBehaviour
                 break;
             case AiState.Thinking:
                 Thinking();
+                break;
+            case AiState.FindCounter:
+                FindCounter();
                 break;
             case AiState.ToCounter:
                 ToCounter();
@@ -188,7 +200,7 @@ public class VisitorAi : MonoBehaviour
 
             if (random < purchasingProbability)
             {
-                state = AiState.ToCounter;
+                state = AiState.FindCounter;
             }
             else
             {
@@ -200,19 +212,50 @@ public class VisitorAi : MonoBehaviour
         }
     }
 
+    Coroutine findCounterCoroutine;
+    void FindCounter()
+    {
+        findCounterCoroutine = StartCoroutine(FindCounterCoroutine());
+        state = AiState.ToCounter;
+    }
+
+    IEnumerator FindCounterCoroutine()
+    {
+        while (true)
+        {
+            // 대기열 찾기
+            counterWaitNumber = pathNodeManager.WaitQueue.Count - 1;
+            if (counterWaitNumber >= 0)
+            {
+                SetTarget(pathNodeManager.waitNodes[counterWaitNumber]);
+            }
+            else
+            {
+                SetTarget(targetNode = pathNodeManager.counterNode);
+            }
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
     void ToCounter()
     {
-        //Debug.Log("ToCounter");
-        // 대기열 찾기
-        counterWaitNumber = pathNodeManager.WaitQueue.Count - 1;
-        if (counterWaitNumber >= 0)
+        // 이동 완료후 처리
+        StopCoroutine(findCounterCoroutine);
+        var currentWaitNumber = pathNodeManager.WaitQueue.Count - 1;
+        Debug.Log($"currentWaitNumber = {currentWaitNumber}, counterWaitNumber = {counterWaitNumber}");
+        // 기억했던 대기번호와 현재 대기번호가 상이하면 새로운 대기 노드 검색
+        if (currentWaitNumber != counterWaitNumber)
         {
-            SetTarget(pathNodeManager.waitNodes[counterWaitNumber]);
-        }
-        else
-        {
-            SetTarget(targetNode = pathNodeManager.counterNode);
-            //state = AiState.Buy;
+            Debug.Log("ToCounter 대기노드 검색");
+            counterWaitNumber = currentWaitNumber;
+            if (counterWaitNumber >= 0)
+            {
+                SetTarget(pathNodeManager.waitNodes[counterWaitNumber]);
+            }
+            else
+            {
+                SetTarget(targetNode = pathNodeManager.counterNode);
+            }
         }
         pathNodeManager.WaitQueue.Enqueue(this);
         state = AiState.CounterWait;
@@ -222,6 +265,7 @@ public class VisitorAi : MonoBehaviour
     {
         if (pathNodeManager.WaitQueue.Peek() == this)
         {
+            Debug.Log($"{name} 계산");
             state = AiState.Buy;
         }
     }

@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class CashierAnimation : AnimationBase
 {
+    public SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
     void Start()
     {
-        
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     // Update is called once per frame
