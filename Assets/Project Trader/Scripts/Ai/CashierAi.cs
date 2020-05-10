@@ -21,9 +21,15 @@ class CashierAi : MonoBehaviour
     /// 물품을 거래합니다.
     /// </summary>
     /// <param name="visitor">거래할 손님</param>
-    public void ItemDeal(VisitorAi visitor)
+    public void ItemDeal(VisitorAi visitor, Action dealCompleted)
     {
-        animation.PlayDealAnimation(()=> {
+        if (animation != null)
+            animation.PlayDealAnimation(ItemDealCallback);
+        else
+            ItemDealCallback();
+
+        void ItemDealCallback()
+        {
             // 가격
             int price = 0;
             foreach (var item in visitor.WishItems)
@@ -33,6 +39,7 @@ class CashierAi : MonoBehaviour
 
             // 구매할 아이템 초기화
             visitor.WishItems.Clear();
-        });
+            dealCompleted?.Invoke();
+        }
     }
 }

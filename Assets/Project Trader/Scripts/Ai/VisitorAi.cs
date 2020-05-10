@@ -1,4 +1,5 @@
 ﻿using Pathfinding;
+using ProjectTrader.Datas;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -229,21 +230,25 @@ public class VisitorAi : MonoBehaviour
     {
         //Debug.Log("Buy");
         // 캐릭터 상호작용
-        // 프로토타입에서는 대기로 대체
-        waitTime = 1;
+
+        //TODO:'FindObjectOfType<CashierAi>()'대신에 매니저 클래스를 이용하여 최적화 필요함.
+        var cashierAI = FindObjectOfType<CashierAi>();
+
+        // 계산원이 없으면 무한 대기
+        if (cashierAI == null)
+            return;
+
         state = AiState.Buying;
+        cashierAI.ItemDeal(this, () =>
+        {
+            // 상호작용이 끝나면 
+            state = AiState.Buyed;
+        });
     }
 
     void Buying()
     {
-        //Debug.Log("Buying");
-        // 캐릭터 상호작용
-        // 프로토타입에서는 대기로 대체
-        waitTime -= Time.deltaTime;
-        if (waitTime <= 0)
-        {
-            state = AiState.Buyed;
-        }
+        // Buy에서 ItemDeal 콜백에서 Buyed로 변환함.
     }
 
     void Buyed()
@@ -252,7 +257,7 @@ public class VisitorAi : MonoBehaviour
         pathNodeManager.WaitQueue.Dequeue();
         //다른 visitor들 지정해주기
         int i = 0;
-        foreach(var visitor in pathNodeManager.WaitQueue)
+        foreach (var visitor in pathNodeManager.WaitQueue)
         {
             if (i == 0)
             {
@@ -260,7 +265,7 @@ public class VisitorAi : MonoBehaviour
             }
             else
             {
-                visitor.SetTarget(pathNodeManager.waitNodes[i-1]);
+                visitor.SetTarget(pathNodeManager.waitNodes[i - 1]);
             }
             i++;
         }
