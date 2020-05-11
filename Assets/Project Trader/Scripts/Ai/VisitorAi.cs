@@ -92,6 +92,32 @@ public class VisitorAi : MonoBehaviour
         if (visitorManager == null)
             visitorManager = FindObjectOfType<VisitorManager>();
 
+        SpriteRenderer spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        StartCoroutine(Appear());
+
+        IEnumerator Appear()
+        {
+            var color = spriteRenderer.color;
+            color.a = 0;
+            spriteRenderer.color = color;
+            yield return null;
+            while (true)
+            {
+                color = spriteRenderer.color;
+                color.a += 1 / 0.2f * Time.deltaTime;
+                if (color.a >= 1)
+                {
+                    color.a = 1;
+                    break; // 루프 탈출
+                }
+                else
+                {
+                    spriteRenderer.color = color;
+                }
+                yield return null;
+            }
+        }
+
 #if UNITY_EDITOR
         name += debugIndex++.ToString();
 #endif
@@ -340,8 +366,31 @@ public class VisitorAi : MonoBehaviour
     {
         //Debug.Log("Exit");
         // 파괴절차
-        Destroy(this.gameObject, 1);
+        //Destroy(this.gameObject, 1);
+
+        SpriteRenderer spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        StartCoroutine(Disappear());
+
         state = AiState.None;
+
+        IEnumerator Disappear()
+        {
+            while (true)
+            {
+                var color = spriteRenderer.color;
+                color.a -= 1 / 0.2f * Time.deltaTime;
+                if (color.a <= 0)
+                {
+                    Destroy(gameObject);
+                    break; // 루프 탈출
+                }
+                else
+                {
+                    spriteRenderer.color = color;
+                }
+                yield return null;
+            }
+        }
     }
 
     private void OnDestroy()

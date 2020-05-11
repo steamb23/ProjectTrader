@@ -2515,7 +2515,7 @@ MonoBehaviour:
   - visitor: {fileID: 1559798081, guid: 6af8c605b6fe520418c28ecd2f72b11f, type: 3}
     priority: 1
   pathNodeManager: {fileID: 0}
-  enterProbability: 1
+  enterProbability: 0.2
   maxVisitor: 0
   visitors: []
 --- !u!4 &1273220253
