@@ -142,4 +142,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 0}
-  itemCount: 10
+  item:
+    code: 1
+    count: 5
