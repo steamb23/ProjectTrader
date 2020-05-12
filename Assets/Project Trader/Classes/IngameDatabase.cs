@@ -12,7 +12,7 @@ namespace ProjectTrader
     {
         public class ReadOnlyContainer<T>
         {
-            T[] datas;
+            readonly T[] datas;
 
             public ReadOnlyContainer(T[] datas)
             {
