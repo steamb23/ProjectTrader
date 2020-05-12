@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FloatingTimer : FloatingUIBase
 {
@@ -39,33 +40,89 @@ public class FloatingTimer : FloatingUIBase
     public float currentTime = 0;
 
     public Action<FloatingTimer> timeoutCallback;
+    bool isDestory = false;
 
     // Start is called before the first frame update
     void Start()
     {
         if (uiImage == null)
             uiImage = GetComponentInChildren<UnityEngine.UI.Image>();
+        //Fadein();
     }
 
     // Update is called once per frame
     protected override void Update()
     {
         base.Update();
-        if (currentTime <= targetTime)
+        if (!isDestory)
         {
-            currentTime += Time.deltaTime;
+            if (currentTime <= targetTime)
+            {
+                currentTime += Time.deltaTime;
 
-            if (targetTime != 0)
-                uiImage.fillAmount = currentTime / targetTime;
+                if (targetTime != 0)
+                    uiImage.fillAmount = currentTime / targetTime;
+                else
+                    uiImage.fillAmount = 1;
+            }
             else
-                uiImage.fillAmount = 1;
+            {
+                if (timeoutCallback != null)
+                    timeoutCallback(this);
+                else
+                    FadeoutWithDestory();
+            }
         }
-        else
+    }
+
+    //public void Fadein()
+    //{
+    //    StartCoroutine(FadeinCoroutine());
+    //    IEnumerator FadeinCoroutine()
+    //    {
+    //        var color = uiImage.color;
+    //        color.a = 0;
+    //        uiImage.color = color;
+    //        yield return null;
+    //        while (true)
+    //        {
+    //            color = uiImage.color;
+    //            color.a += 1 / 0.2f * Time.deltaTime;
+    //            if (color.a >= 1)
+    //            {
+    //                color.a = 1;
+    //                break; // 루프 탈출
+    //            }
+    //            else
+    //            {
+    //                uiImage.color = color;
+    //            }
+    //            yield return null;
+    //        }
+    //    }
+    //}
+
+    public void FadeoutWithDestory()
+    {
+        isDestory = true;
+        StartCoroutine(FadeoutWithDestoryCoroutine());
+        IEnumerator FadeoutWithDestoryCoroutine()
         {
-            if (timeoutCallback != null)
-                timeoutCallback(this);
-            else
-                Destroy(gameObject);
+            while (true)
+            {
+                var color = uiImage.color;
+                color.a -= 1 / 0.2f * Time.deltaTime;
+                if (color.a <= 0)
+                {
+                    Destroy(gameObject);
+                    break; // 루프 탈출
+                }
+                else
+                {
+                    uiImage.color = color;
+                }
+                yield return null;
+            }
         }
     }
 }
