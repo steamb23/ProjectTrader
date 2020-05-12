@@ -1,5 +1,6 @@
 ﻿using Pathfinding;
 using ProjectTrader.Datas;
+using ProjectTrader.SpriteDatas;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -58,10 +59,12 @@ public class VisitorAi : MonoBehaviour
         /// </summary>
         Exit
     }
+    public SpriteRenderer itemSpriteRenderer;
 
     public PathNode targetNode;
+    public ItemNode targetItemNode;
 
-    public int targetItemIndex;
+    public int targetItemNodeIndex;
 
     public PathNodeManager pathNodeManager;
     public VisitorManager visitorManager;
@@ -91,6 +94,8 @@ public class VisitorAi : MonoBehaviour
             pathNodeManager = FindObjectOfType<PathNodeManager>();
         if (visitorManager == null)
             visitorManager = FindObjectOfType<VisitorManager>();
+        if (itemSpriteRenderer == null)
+            itemSpriteRenderer = GetComponentsInChildren<SpriteRenderer>()[1];
 
         SpriteRenderer spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         StartCoroutine(Appear());
@@ -133,6 +138,16 @@ public class VisitorAi : MonoBehaviour
         if ((astarAI.destination - transform.position).sqrMagnitude < 0.0001f)
         {
             targetNode = null;
+        }
+
+        // 아이템 스프라이트
+        if (wishItems.Count > 0)
+        {
+            itemSpriteRenderer.sprite = ItemSpriteData.GetItemSprite(wishItems[0].Code);
+        }
+        else
+        {
+            itemSpriteRenderer.sprite = null;
         }
     }
 
@@ -189,18 +204,19 @@ public class VisitorAi : MonoBehaviour
     {
         //Debug.Log("Finding");
         // 랜덤 아이템 선택
-        targetItemIndex = UnityEngine.Random.Range(0, pathNodeManager.itemNodes.Count);
+        targetItemNodeIndex = UnityEngine.Random.Range(0, pathNodeManager.itemNodes.Count);
 
         // TODO:해당 위치에 캐릭터가 존재하면 다시 선택하도록 수정
-        if (pathNodeManager.ItemOccupancyList[targetItemIndex] != null)
+        if (pathNodeManager.ItemOccupancyList[targetItemNodeIndex] != null)
         {
             state = AiState.Finding;
             return;
         }
 
-        SetTarget(pathNodeManager.itemNodes[targetItemIndex]);
+        SetTarget(pathNodeManager.itemNodes[targetItemNodeIndex]);
+        targetItemNode = targetNode as ItemNode;
         // 아이템 점유
-        pathNodeManager.ItemOccupancyList[targetItemIndex] = this;
+        pathNodeManager.ItemOccupancyList[targetItemNodeIndex] = this;
 
         state = AiState.Finded;
     }
@@ -226,6 +242,13 @@ public class VisitorAi : MonoBehaviour
 
             if (random < purchasingProbability)
             {
+                var displayedItem = targetItemNode.displayedItem;
+
+                WishItems.Add(new Item()
+                {
+                    Code = displayedItem.Item.Code,
+                    Count = 1
+                });
                 state = AiState.FindCounter;
             }
             else
@@ -234,7 +257,7 @@ public class VisitorAi : MonoBehaviour
             }
 
             // 아이템 점유 해제
-            pathNodeManager.ItemOccupancyList[targetItemIndex] = null;
+            pathNodeManager.ItemOccupancyList[targetItemNodeIndex] = null;
         }
     }
 

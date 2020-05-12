@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProjectTrader.Datas;
+using UnityEditor.iOS;
+using UnityEngine;
 
 namespace ProjectTrader
 {
@@ -30,6 +32,26 @@ namespace ProjectTrader
             }
         }
         public static ReadOnlyContainer<ItemData> ItemDatas { get; private set; }
+
+        static IngameDatabase()
+        {
+            Initialize();
+        }
+
+        public static void Initialize()
+        {
+            var itemCsvData = CsvData.LoadFromResources("Datas/ItemData");
+            ItemData[] itemDatas = new ItemData[itemCsvData.RowLength];
+            for(int i = 1; i < itemDatas.Length; i++)
+            {
+                ItemData itemData = new ItemData();
+                itemData.Code = Convert.ToInt32(itemCsvData[i, "CODE"]);
+                itemData.SellPrice = Convert.ToInt32(itemCsvData[i, "SELL_PRICE"]);
+
+                itemDatas[i] = itemData;
+            }
+            Set(itemDatas);
+        }
 
         [Obsolete("게임 초기화 단계에서만 호출해야합니다.")]
         public static void Set<T>(T[] datas)
