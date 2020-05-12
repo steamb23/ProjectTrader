@@ -8,6 +8,11 @@ public class FloatingUIBase : MonoBehaviour
 
     protected virtual void Update()
     {
+        SetPosition();
+    }
+
+    public void SetPosition()
+    {
         if (targetTransform != null)
         {
             transform.position = targetTransform.position + offset;

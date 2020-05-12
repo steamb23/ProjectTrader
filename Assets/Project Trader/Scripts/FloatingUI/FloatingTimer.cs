@@ -18,6 +18,15 @@ public class FloatingTimer : FloatingUIBase
         var gameObject = Instantiate(gameObjectAsset);
 
         var behaviour = gameObject.GetComponent<FloatingTimer>();
+        var image = gameObject.GetComponent<Image>();
+
+        // 부모관계 설정
+        var floatingCanvas = GameObject.Find("FloatingCanvas");
+        var transform = gameObject.transform;
+        transform.SetParent(floatingCanvas.transform, true);
+        transform.localScale = Vector3.one;
+        image.SetNativeSize();
+        image.fillAmount = 0;
 
         // 초기화
         behaviour.targetTime = targetTime;
@@ -25,11 +34,7 @@ public class FloatingTimer : FloatingUIBase
 
         behaviour.targetTransform = targetTransform;
         behaviour.offset = offset;
-
-        // 부모관계 설정
-        var floatingCanvas = GameObject.Find("FloatingCanvas");
-        var transform = gameObject.transform;
-        transform.SetParent(floatingCanvas.transform);
+        behaviour.SetPosition();
 
         return behaviour;
     }

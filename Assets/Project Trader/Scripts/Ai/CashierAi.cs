@@ -30,16 +30,20 @@ class CashierAi : MonoBehaviour
 
         void ItemDealCallback()
         {
-            // 가격
-            int price = 0;
-            foreach (var item in visitor.WishItems)
+            FloatingTimer.CreateFloatingTimer(this.transform, new Vector3(0.2f,0), 5, (floatingTimer) =>
             {
-                price += item.Data.SellPrice * item.Count;
-            }
+                floatingTimer.FadeoutWithDestory();
+                // 가격
+                int price = 0;
+                foreach (var item in visitor.WishItems)
+                {
+                    price += item.Data.SellPrice * item.Count;
+                }
 
-            // 구매할 아이템 초기화
-            visitor.WishItems.Clear();
-            dealCompleted?.Invoke();
+                // 구매할 아이템 초기화
+                visitor.WishItems.Clear();
+                dealCompleted?.Invoke();
+            });
         }
     }
 }

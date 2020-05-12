@@ -88,6 +88,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTransform: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
-  uiImage: {fileID: 0}
+  uiImage: {fileID: 7622273513403763811}
   targetTime: 10
   currentTime: 0
