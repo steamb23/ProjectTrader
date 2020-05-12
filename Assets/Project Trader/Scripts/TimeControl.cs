@@ -6,7 +6,8 @@ using UnityEngine;
 public class TimeControl : MonoBehaviour
 {
     //게임일자
-    DateTime gameDay = new DateTime(2020, 01, 01);
+    public DateTime gameDay = new DateTime(2020, 01, 01);
+    
     //차 계산시 기준점
     DateTime game;
     // 현재시간
@@ -66,4 +67,6 @@ public class TimeControl : MonoBehaviour
         Debug.Log("Day end");
         startDay = false;
     }
+
+
 }

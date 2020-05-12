@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 7024676274704472373}
   m_Layer: 0
   m_Name: Dummy
-  m_TagString: Untagged
+  m_TagString: Visitor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,6 +146,7 @@ MonoBehaviour:
   targetNode: {fileID: 0}
   targetItemIndex: 0
   pathNodeManager: {fileID: 0}
+  visitorManager: {fileID: 0}
   state: 0
 --- !u!114 &7024676274704472373
 MonoBehaviour:
@@ -160,6 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStatic: 0
+  virtualElevation: 0
   spriteRenderer: {fileID: 3332053213167386481}
 --- !u!1 &4400036019111586016
 GameObject:
