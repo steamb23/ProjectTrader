@@ -268,7 +268,7 @@ public class VisitorAi : MonoBehaviour
         // 이동 완료후 처리
         StopCoroutine(findCounterCoroutine);
         var currentWaitNumber = pathNodeManager.WaitQueue.Count - 1;
-        Debug.Log($"currentWaitNumber = {currentWaitNumber}, counterWaitNumber = {counterWaitNumber}");
+        //Debug.Log($"currentWaitNumber = {currentWaitNumber}, counterWaitNumber = {counterWaitNumber}");
         // 기억했던 대기번호와 현재 대기번호가 상이하면 새로운 대기 노드 검색
         if (currentWaitNumber != counterWaitNumber)
         {
