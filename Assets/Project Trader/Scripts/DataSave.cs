@@ -54,11 +54,11 @@ public class DataSave : MonoBehaviour
     void SaveJson(string objson)
     {
         UnityEngine.Debug.Log("save");
-        File.WriteAllText(Application.dataPath + "/Project Trader/Classes/SaveData.json", objson);
+        File.WriteAllText(Application.persistentDataPath + "/SaveData.json", objson);
     }
     string LoadJson()
     {
-        string loadJson = File.ReadAllText(Application.dataPath + "/Project Trader/Classes/SaveData.json");
+        string loadJson = File.ReadAllText(Application.persistentDataPath + "/SaveData.json");
         return loadJson;
     }
 
