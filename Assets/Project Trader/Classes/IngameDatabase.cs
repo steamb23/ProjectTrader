@@ -7,7 +7,7 @@ using ProjectTrader.Datas;
 using UnityEditor.iOS;
 using UnityEngine;
 
-namespace ProjectTrader
+namespace ProjectTrader.Datas
 {
     
     public static class IngameDatabase
