@@ -32,6 +32,7 @@ namespace ProjectTrader
             }
         }
         public static ReadOnlyContainer<ItemData> ItemDatas { get; private set; }
+        public static ReadOnlyContainer<MaterialData> MaterialDatas { get; private set; }
 
         static IngameDatabase()
         {
@@ -50,7 +51,9 @@ namespace ProjectTrader
 
                 itemDatas[i] = itemData;
             }
+#pragma warning disable CS0618 // 형식 또는 멤버는 사용되지 않습니다.
             Set(itemDatas);
+#pragma warning restore CS0618 // 형식 또는 멤버는 사용되지 않습니다.
         }
 
         [Obsolete("게임 초기화 단계에서만 호출해야합니다.")]

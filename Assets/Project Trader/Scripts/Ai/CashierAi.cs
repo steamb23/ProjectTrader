@@ -37,7 +37,7 @@ class CashierAi : MonoBehaviour
                 int price = 0;
                 foreach (var item in visitor.WishItems)
                 {
-                    price += item.Data.SellPrice * item.Count;
+                    price += item.GetData().SellPrice * item.Count;
                 }
 
                 // 구매할 아이템 초기화

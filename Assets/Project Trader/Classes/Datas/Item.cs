@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace ProjectTrader.Datas
 {
+    /// <summary>
+    /// 아이템을 참조하는 값을 나타냅니다.
+    /// </summary>
     [Serializable]
     public struct Item
     {
@@ -37,6 +40,6 @@ namespace ProjectTrader.Datas
         /// <summary>
         /// 데이터 가져오기
         /// </summary>
-        public ItemData Data => IngameDatabase.ItemDatas[code];
+        public ItemData GetData() => IngameDatabase.ItemDatas[code];
     }
 }

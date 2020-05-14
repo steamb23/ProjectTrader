@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectTrader.SpriteDatas;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,8 @@ namespace ProjectTrader.Datas
         {
             None = 0,
         }
+
+        public Sprite GetSprite() => ItemSpriteData.GetItemSprite(code);
 
         public int Code
         {
