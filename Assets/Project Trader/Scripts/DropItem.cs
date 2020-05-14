@@ -13,6 +13,7 @@ public class DropItem : MonoBehaviour
     GameObject datasave;
     GameObject mouseOb;
     GameObject coin;
+
     bool inCoin = false;
     // Start is called before the first frame update
     void Start()

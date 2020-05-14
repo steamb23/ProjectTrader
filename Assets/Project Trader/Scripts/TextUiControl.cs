@@ -28,7 +28,10 @@ public class TextUiControl : MonoBehaviour
 
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            PrintDate();
+        }
     }
     // 말풍선의 종류, x위치,y위치,문자열+유지시간 추가가능,유지시간
     public void CreativeTextBox(int a, int x, int y, string gg, int ti)
@@ -84,12 +87,20 @@ public class TextUiControl : MonoBehaviour
     
     public void PrintDate()
     {
-        GameObject date = GameObject.Find("SaveData");
+        /*GameObject date = GameObject.Find("SaveData");
         string time = date.GetComponent<TimeControl>().gameDay.ToString("MM / dd");
 
         textObject = GameObject.Find("Date");
         tmp = textObject.GetComponent<TextMeshProUGUI>();
-        tmp.text = time;
+        tmp.text = time;*/
+
+        var gameDateTimeManager = FindObjectOfType<GameDateTimeManager>();
+        int currentDay = gameDateTimeManager.GameDateTime.Day;
+        int currentMonth = gameDateTimeManager.GameDateTime.Month;
+
+        textObject = GameObject.Find("Date");
+        tmp = textObject.GetComponent<TextMeshProUGUI>();
+        tmp.text = currentMonth.ToString()+"/"+currentDay.ToString();
 
     }
     
@@ -101,5 +112,9 @@ public class TextUiControl : MonoBehaviour
         tmp.text = name;
     }
 
+    public void PrintHp()
+    {
+
+    }
 
 }
