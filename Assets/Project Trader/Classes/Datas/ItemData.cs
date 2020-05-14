@@ -24,6 +24,13 @@ namespace ProjectTrader.Datas
 
         public Sprite GetSprite() => ItemSpriteData.GetItemSprite(code);
 
+        /// <summary>
+        /// 제작에 필요한 재료의 데이터를 가져옵니다.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public MaterialData GetMaterial(int index) => IngameDatabase.MaterialDatas[materialCodes[index]];
+
         public int Code
         {
             get => this.code;
