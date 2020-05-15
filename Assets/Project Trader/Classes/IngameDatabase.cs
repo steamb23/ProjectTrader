@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProjectTrader.Datas;
-using UnityEditor.iOS;
 using UnityEngine;
 
 namespace ProjectTrader.Datas
