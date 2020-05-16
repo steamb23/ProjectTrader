@@ -43,15 +43,19 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: cafcb4afb33085a47b911238cb677ee9, type: 3}
-    totalSpriteSurfaceArea: 53248
+    totalSpriteSurfaceArea: 69632
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: bda4e1a11761c7343ba1e5863fdb5257, type: 3}
+  - {fileID: 21300000, guid: de6299f2769779842912efbd400ceb92, type: 3}
   - {fileID: 21300000, guid: 516f9723607dbd94198f51d677658c12, type: 3}
   - {fileID: 21300000, guid: 773e9825b974688449be7710434d32c8, type: 3}
   - {fileID: 21300000, guid: 42325116d31dced49b4e9017bc891dc5, type: 3}
+  - {fileID: 21300000, guid: d213425639bd40042a7a2c73ec0cef89, type: 3}
   - {fileID: 21300000, guid: c563817661029eb4f960c24935ee88c4, type: 3}
+  - {fileID: 21300000, guid: efcd30a6561dbc74eb7d1f6d423723b9, type: 3}
+  - {fileID: 21300000, guid: a7f72509675d09c46ae1b47efd529248, type: 3}
   - {fileID: 21300000, guid: 28170219741581b47b9b816704f1e331, type: 3}
   - {fileID: 21300000, guid: 4757054a64e795b4aa87eec206383d46, type: 3}
   - {fileID: 21300000, guid: 0b88d47a4bc1c2b44be7c5b63fc41e71, type: 3}
@@ -61,18 +65,22 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 66b6f11f79c551d439918d2c5a24f9cf, type: 3}
   - {fileID: 21300000, guid: 0b0b4e2f4908d22438518c5abf4cc6d8, type: 3}
   m_PackedSpriteNamesToIndex:
-  - archer_side
+  - archer_left
+  - archer_right
   - thief_front
-  - thief_side
+  - thief_left
   - swordman2_front
+  - thief_right
   - thief_back
-  - swordman2_side
+  - priest_right
+  - swordman2_right
+  - swordman2_left
   - priest_front
   - archer_front
   - front
   - archer_back
   - swordman2_back
-  - priest_side
+  - priest_left
   - priest_back
   m_Tag: CharactorSpriteAtlas
   m_IsVariant: 0
