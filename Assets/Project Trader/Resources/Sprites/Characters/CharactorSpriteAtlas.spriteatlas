@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: CharactorSpriteAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 2
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: cafcb4afb33085a47b911238cb677ee9, type: 3}
+    totalSpriteSurfaceArea: 53248
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: bda4e1a11761c7343ba1e5863fdb5257, type: 3}
+  - {fileID: 21300000, guid: 516f9723607dbd94198f51d677658c12, type: 3}
+  - {fileID: 21300000, guid: 773e9825b974688449be7710434d32c8, type: 3}
+  - {fileID: 21300000, guid: 42325116d31dced49b4e9017bc891dc5, type: 3}
+  - {fileID: 21300000, guid: c563817661029eb4f960c24935ee88c4, type: 3}
+  - {fileID: 21300000, guid: 28170219741581b47b9b816704f1e331, type: 3}
+  - {fileID: 21300000, guid: 4757054a64e795b4aa87eec206383d46, type: 3}
+  - {fileID: 21300000, guid: 0b88d47a4bc1c2b44be7c5b63fc41e71, type: 3}
+  - {fileID: 21300000, guid: ff6ef29c8259b70499197ee0fad21280, type: 3}
+  - {fileID: 21300000, guid: fc14366d1b2615a49b419451606726b7, type: 3}
+  - {fileID: 21300000, guid: 082c5f3ebfae19045a99d43a33264aec, type: 3}
+  - {fileID: 21300000, guid: 66b6f11f79c551d439918d2c5a24f9cf, type: 3}
+  - {fileID: 21300000, guid: 0b0b4e2f4908d22438518c5abf4cc6d8, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - archer_side
+  - thief_front
+  - thief_side
+  - swordman2_front
+  - thief_back
+  - swordman2_side
+  - priest_front
+  - archer_front
+  - front
+  - archer_back
+  - swordman2_back
+  - priest_side
+  - priest_back
+  m_Tag: CharactorSpriteAtlas
+  m_IsVariant: 0
