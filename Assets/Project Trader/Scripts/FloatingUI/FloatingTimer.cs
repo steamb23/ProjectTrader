@@ -7,42 +7,35 @@ using UnityEngine.UI;
 
 public class FloatingTimer : FloatingUIBase
 {
-    public const string FloatingTimerResourcePath = "Prefabs/FloatingUI/FloatingTimer";
+    public const string PrefabPath = "Prefabs/FloatingUI/FloatingTimer";
 
-    public static FloatingTimer CreateFloatingTimer(Transform targetTransform, float targetTime, Action<FloatingTimer> timeoutCallback) =>
-        CreateFloatingTimer(targetTransform, Vector3.zero, targetTime, timeoutCallback);
+    public static FloatingTimer Create(Transform targetTransform, float targetTime, Action<FloatingTimer> timeoutCallback) =>
+        Create(targetTransform, default, targetTime, timeoutCallback);
 
-    public static FloatingTimer CreateFloatingTimer(Transform targetTransform, Vector3 offset, float targetTime, Action<FloatingTimer> timeoutCallback)
+    public static FloatingTimer Create(Transform targetTransform, Vector3 offset, float targetTime, Action<FloatingTimer> timeoutCallback)
     {
-        var gameObjectAsset = Resources.Load<GameObject>(FloatingTimerResourcePath);
-        var gameObject = Instantiate(gameObjectAsset);
-
-        var behaviour = gameObject.GetComponent<FloatingTimer>();
-        var image = gameObject.GetComponent<Image>();
-
-        // 부모관계 설정
-        var floatingCanvas = GameObject.Find("FloatingCanvas");
-        var transform = gameObject.transform;
-        transform.SetParent(floatingCanvas.transform, true);
-        transform.localScale = Vector3.one;
-        image.SetNativeSize();
-        image.fillAmount = 0;
-
+        var floatingTimer = CreateFloatingUI<FloatingTimer>(PrefabPath);
+        var behaviour = floatingTimer.behaviour;
+        var image = floatingTimer.image;
         // 초기화
+        image.fillAmount = 0;
         behaviour.targetTime = targetTime;
         behaviour.timeoutCallback = timeoutCallback;
 
         behaviour.targetTransform = targetTransform;
         behaviour.offset = offset;
-        behaviour.SetPosition();
+        behaviour.SetTarget(targetTransform, offset);
 
         return behaviour;
     }
 
-
     public UnityEngine.UI.Image uiImage;
     public float targetTime = 0;
     public float currentTime = 0;
+
+    public float timeRatio = 1f;
+    // 클릭시 부스팅될 값
+    public float boostRatio = 1f;
 
     public Action<FloatingTimer> timeoutCallback;
     bool isDestory = false;
@@ -55,6 +48,11 @@ public class FloatingTimer : FloatingUIBase
         //Fadein();
     }
 
+    public void Click()
+    {
+        timeRatio = boostRatio;
+    }
+
     // Update is called once per frame
     protected override void Update()
     {
@@ -63,7 +61,7 @@ public class FloatingTimer : FloatingUIBase
         {
             if (currentTime <= targetTime)
             {
-                currentTime += Time.deltaTime;
+                currentTime += Time.deltaTime * timeRatio;
 
                 if (targetTime != 0)
                     uiImage.fillAmount = currentTime / targetTime;

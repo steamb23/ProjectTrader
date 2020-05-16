@@ -332,11 +332,45 @@ public class VisitorAi : MonoBehaviour
             return;
 
         state = AiState.Buying;
-        cashierAI.ItemDeal(this, () =>
+
+        // 알바가 있으면
+        if (cashierAI.IsEmployee)
+        {
+            cashierAI.ItemDeal(this, ItemDealCallback);
+        }
+        // 없으면
+        else
+        {
+            // 유저 상호작용 요청
+            FloatingButton.Create(cashierAI.transform, new Vector3(0.2f, 0), null, (button) =>
+             {
+                 Destroy(button.gameObject);
+
+                 var timer = FloatingTimer.Create(cashierAI.transform, new Vector3(0.2f, 0), 10, (floatingTimer) =>
+                 {
+                     floatingTimer.FadeoutWithDestory();
+
+                     ItemDealCallback();
+                 });
+                //timer.boostRatio = 2;
+            });
+        }
+
+        void ItemDealCallback()
         {
             // 상호작용이 끝나면 
+            // 가격 처리
+            int price = 0;
+            foreach (var item in WishItems)
+            {
+                price += item.GetData().SellPrice * item.Count;
+            }
+
+            // 구매할 아이템 초기화
+            WishItems.Clear();
+
             state = AiState.Buyed;
-        });
+        }
     }
 
     void Buying()

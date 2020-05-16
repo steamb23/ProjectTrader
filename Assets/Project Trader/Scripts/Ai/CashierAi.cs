@@ -10,11 +10,35 @@ using UnityEngine;
 /// </summary>
 class CashierAi : MonoBehaviour
 {
-    new CashierAnimation animation;
+    // 직원이 존재 할경우
+    [SerializeField]
+    private bool isEmployee;
+
+    public bool IsEmployee
+    {
+        get => isEmployee;
+        set
+        {
+            isEmployee = value;
+            GetComponentInChildren<SpriteRenderer>().enabled = value;
+        }
+    }
+
+    private new CashierAnimation animation;
+
     private void Start()
     {
         animation = GetComponentInChildren<CashierAnimation>();
+
+        IsEmployee = IsEmployee;
     }
+
+#if UNITY_EDITOR
+    private void Update()
+    {
+        IsEmployee = IsEmployee;
+    }
+#endif
 
 
     /// <summary>
@@ -23,27 +47,15 @@ class CashierAi : MonoBehaviour
     /// <param name="visitor">거래할 손님</param>
     public void ItemDeal(VisitorAi visitor, Action dealCompleted)
     {
-        if (animation != null)
-            animation.PlayDealAnimation(ItemDealCallback);
-        else
-            ItemDealCallback();
-
-        void ItemDealCallback()
+        var timer = FloatingTimer.Create(this.transform, new Vector3(0.2f, 0), 5, (floatingTimer) =>
         {
-            FloatingTimer.CreateFloatingTimer(this.transform, new Vector3(0.2f,0), 5, (floatingTimer) =>
-            {
-                floatingTimer.FadeoutWithDestory();
-                // 가격
-                int price = 0;
-                foreach (var item in visitor.WishItems)
-                {
-                    price += item.GetData().SellPrice * item.Count;
-                }
+            floatingTimer.FadeoutWithDestory();
 
-                // 구매할 아이템 초기화
-                visitor.WishItems.Clear();
-                dealCompleted?.Invoke();
-            });
-        }
+            dealCompleted?.Invoke();
+        });
+        timer.boostRatio = 3;
+
+        if (animation != null)
+            animation.PlayDealAnimation(null);
     }
 }

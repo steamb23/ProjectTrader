@@ -28,6 +28,6 @@ public class CashierAnimation : AnimationBase
         // TODO:애니메이션 코드
         yield return WaitForSecond(1);
         // 완료시 정해진 작업 실행
-        callback();
+        callback?.Invoke();
     }
 }
