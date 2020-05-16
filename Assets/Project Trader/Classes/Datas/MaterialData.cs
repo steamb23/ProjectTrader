@@ -16,9 +16,17 @@ namespace ProjectTrader.Datas
             set => code = value;
         }
 
+        public string Name
+        {
+            get => name;
+            set => name = value;
+        }
+
         #region 인스펙터 변수
         [SerializeField]
         int code;
+        [SerializeField]
+        string name;
         #endregion
     }
 }
