@@ -1,4 +1,5 @@
 ﻿using Pathfinding;
+using ProjectTrader;
 using ProjectTrader.Datas;
 using ProjectTrader.SpriteDatas;
 using System;
@@ -60,6 +61,7 @@ public class VisitorAi : MonoBehaviour
         Exit
     }
     public SpriteRenderer itemSpriteRenderer;
+    public VisitorAnimation visitorAnimation;
 
     public PathNode targetNode;
     public ItemNode targetItemNode;
@@ -96,6 +98,8 @@ public class VisitorAi : MonoBehaviour
             visitorManager = FindObjectOfType<VisitorManager>();
         if (itemSpriteRenderer == null)
             itemSpriteRenderer = GetComponentsInChildren<SpriteRenderer>()[1];
+        if (visitorAnimation == null)
+            visitorAnimation = GetComponentInChildren<VisitorAnimation>();
 
         SpriteRenderer spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         StartCoroutine(Appear());
@@ -232,6 +236,7 @@ public class VisitorAi : MonoBehaviour
     void Thinking()
     {
         //Debug.Log("Thinking");
+        visitorAnimation.direction = ProjectTrader.FourDirection.Up;
         waitTime -= Time.deltaTime;
         if (waitTime <= 0)
         {
@@ -288,6 +293,7 @@ public class VisitorAi : MonoBehaviour
 
     void ToCounter()
     {
+        visitorAnimation.direction = ProjectTrader.FourDirection.Up;
         // 이동 완료후 처리
         StopCoroutine(findCounterCoroutine);
         var currentWaitNumber = pathNodeManager.WaitQueue.Count - 1;
@@ -312,8 +318,10 @@ public class VisitorAi : MonoBehaviour
 
     void CounterWait()
     {
+        visitorAnimation.direction = FourDirection.Up;
         if (pathNodeManager.WaitQueue.Peek() == this)
         {
+            
             Debug.Log($"{name} 계산");
             state = AiState.Buy;
         }
@@ -352,8 +360,8 @@ public class VisitorAi : MonoBehaviour
 
                      ItemDealCallback();
                  });
-                //timer.boostRatio = 2;
-            });
+                 //timer.boostRatio = 2;
+             });
         }
 
         void ItemDealCallback()
