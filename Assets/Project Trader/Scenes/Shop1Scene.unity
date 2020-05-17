@@ -1106,6 +1106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   counterNode: {fileID: 518069707}
+  casherDirection: {x: 0, y: 0.63, z: 0}
   exitNode: {fileID: 1812940064}
   waitNodes:
   - {fileID: 1700846107}
