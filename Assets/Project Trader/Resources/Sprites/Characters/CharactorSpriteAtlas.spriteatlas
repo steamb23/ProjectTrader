@@ -65,22 +65,22 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 66b6f11f79c551d439918d2c5a24f9cf, type: 3}
   - {fileID: 21300000, guid: 0b0b4e2f4908d22438518c5abf4cc6d8, type: 3}
   m_PackedSpriteNamesToIndex:
-  - archer_left
-  - archer_right
-  - thief_front
-  - thief_left
-  - swordman2_front
-  - thief_right
-  - thief_back
-  - priest_right
-  - swordman2_right
-  - swordman2_left
-  - priest_front
-  - archer_front
+  - archer_pro_left
+  - archer_pro_right
+  - thief_pro_front
+  - thief_pro_left
+  - swordman2_pro_front
+  - thief_pro_right
+  - thief_pro_back
+  - priest_pro_right
+  - swordman_pro_right
+  - swordman_pro_left
+  - priest_pro_front
+  - archer_pro_front
   - front
-  - archer_back
-  - swordman2_back
-  - priest_left
-  - priest_back
+  - archer_pro_back
+  - swordman_pro_back
+  - priest_pro_left
+  - priest_pro_back
   m_Tag: CharactorSpriteAtlas
   m_IsVariant: 0

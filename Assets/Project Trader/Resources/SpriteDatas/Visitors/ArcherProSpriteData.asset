@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f116508b0ea2c4945a92f54dff51a24c, type: 3}
-  m_Name: PriestSpriteData
+  m_Name: ArcherProSpriteData
   m_EditorClassIdentifier: 
   Idle:
     Front:
-    - {fileID: 21300000, guid: 4757054a64e795b4aa87eec206383d46, type: 3}
+    - {fileID: 21300000, guid: 0b88d47a4bc1c2b44be7c5b63fc41e71, type: 3}
     Back:
-    - {fileID: 21300000, guid: 0b0b4e2f4908d22438518c5abf4cc6d8, type: 3}
+    - {fileID: 21300000, guid: fc14366d1b2615a49b419451606726b7, type: 3}
     Left:
-    - {fileID: 21300000, guid: 66b6f11f79c551d439918d2c5a24f9cf, type: 3}
+    - {fileID: 21300000, guid: bda4e1a11761c7343ba1e5863fdb5257, type: 3}
     Right:
-    - {fileID: 21300000, guid: efcd30a6561dbc74eb7d1f6d423723b9, type: 3}
+    - {fileID: 21300000, guid: de6299f2769779842912efbd400ceb92, type: 3}
   Walk:
     Front: []
     Back: []
