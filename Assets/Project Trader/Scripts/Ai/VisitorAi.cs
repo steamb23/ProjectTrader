@@ -293,7 +293,8 @@ public class VisitorAi : MonoBehaviour
 
     void ToCounter()
     {
-        visitorAnimation.direction = ProjectTrader.FourDirection.Up;
+        // 계산원 방향 바라보기
+        visitorAnimation.direction = Utils.VelocityToDirection(this.transform.position - pathNodeManager.counterNode.transform.position + pathNodeManager.casherDirection);
         // 이동 완료후 처리
         StopCoroutine(findCounterCoroutine);
         var currentWaitNumber = pathNodeManager.WaitQueue.Count - 1;
@@ -321,7 +322,7 @@ public class VisitorAi : MonoBehaviour
         visitorAnimation.direction = FourDirection.Up;
         if (pathNodeManager.WaitQueue.Peek() == this)
         {
-            
+
             Debug.Log($"{name} 계산");
             state = AiState.Buy;
         }

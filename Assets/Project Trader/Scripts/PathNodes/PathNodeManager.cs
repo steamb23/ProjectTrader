@@ -5,6 +5,7 @@ using UnityEngine;
 public class PathNodeManager : MonoBehaviour
 {
     public PathNode counterNode;
+    public Vector3 casherDirection;
     public PathNode exitNode;
     public List<PathNode> waitNodes;
     public List<PathNode> itemNodes;
@@ -20,4 +21,11 @@ public class PathNodeManager : MonoBehaviour
         WaitQueue = new Queue<VisitorAi>(waitNodes.Count);
         ItemOccupancyList = new VisitorAi[itemNodes.Count];
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawIcon(counterNode.transform.position + casherDirection, "Transform Icon");
+    }
+#endif
 }
