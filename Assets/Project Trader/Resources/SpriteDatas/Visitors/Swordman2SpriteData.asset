@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f116508b0ea2c4945a92f54dff51a24c, type: 3}
+  m_Name: Swordman2SpriteData
+  m_EditorClassIdentifier: 
+  Idle:
+    Front:
+    - {fileID: 21300000, guid: 42325116d31dced49b4e9017bc891dc5, type: 3}
+    Back:
+    - {fileID: 21300000, guid: 082c5f3ebfae19045a99d43a33264aec, type: 3}
+    Left:
+    - {fileID: 21300000, guid: 28170219741581b47b9b816704f1e331, type: 3}
+    Right:
+    - {fileID: 21300000, guid: a7f72509675d09c46ae1b47efd529248, type: 3}
+  Walk:
+    Front: []
+    Back: []
+    Left: []
+    Right: []
+  Grab:
+    Front: []
+    Back: []
+    Left: []
+    Right: []
