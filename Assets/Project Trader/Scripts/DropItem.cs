@@ -7,23 +7,33 @@ using UnityEngine;
 public class DropItem : MonoBehaviour
 {
 
-    public float chance;
     GameObject[] visitor;
     public GameObject dropItem;
+    public GameObject trashItem;
+
     GameObject datasave;
     GameObject mouseOb;
     GameObject coin;
+    GameObject[] trash;
 
     bool inCoin = false;
-    // Start is called before the first frame update
+    bool inTrash = false;
+    int trashNum = 0;
+
+    //enum값으로 변경예정 1이면 코인, 2면 쓰레기 생성
+
+    int coAndTr = 0;
+
+
     void Start()
     {
         datasave = GameObject.Find("SaveData");
         if (datasave == null)
             UnityEngine.Debug.Log("datasave error");
+        trash = new GameObject[5];
     }
 
-    // Update is called once per frame
+
     void Update()
     {
 
@@ -32,11 +42,11 @@ public class DropItem : MonoBehaviour
             CheckMouse();
 
         }
-        /* 동전
+
         int ch = UnityEngine.Random.Range(0, 1000);
         if (ch < 10)
-            CoinChance();
-        */
+            TrashChance();
+
 
     }
 
@@ -49,28 +59,51 @@ public class DropItem : MonoBehaviour
             if (cg == 0)
             {
                 inCoin = true;
-                FindVisitor();
+                FindVisitor(inCoin,1);
             }
         }
     }
-    void FindVisitor()
+
+    void TrashChance()
+    {
+        if (inTrash == false)
+        {
+            int tg = UnityEngine.Random.Range(0, 11);
+            UnityEngine.Debug.Log(tg);
+            if (tg <2)
+            {
+                FindVisitor(inTrash,2);
+            }
+        }
+    }
+    void FindVisitor(bool item,int code)
     {
 
         visitor = GameObject.FindGameObjectsWithTag("Visitor");
-        if (visitor == null)
-            inCoin = false;
+        if (visitor == null && trashNum>=5)
+            item = false;
 
         else
         {
-            int randVisitor = UnityEngine.Random.Range(0, visitor.Length+1);
+            int randVisitor = UnityEngine.Random.Range(0, visitor.Length + 1);
             if (randVisitor < visitor.Length)
             {
-                CreateCoin(visitor[randVisitor]);
+                if (code == 1)
+                {
+                    CreateCoin(visitor[randVisitor]);
+                }
+                else if(code==2)
+                {
+                    UnityEngine.Debug.Log("쓰레기만들기 호출");
+                    CreateTrash(visitor[randVisitor]);
+
+                }
                 visitor = null;
             }
             else
             {
-                inCoin = false;
+                if(code==1)
+                    inCoin = false;
             }
         }
     }
@@ -89,6 +122,11 @@ public class DropItem : MonoBehaviour
                 inCoin = false;
                 
             }
+            if(mouseOb.name=="cup_trash(Clone)")
+            {
+                Destroy(mouseOb);
+                CleanUp();
+            }
         }
     }
     void CreateCoin(GameObject abc)
@@ -101,9 +139,38 @@ public class DropItem : MonoBehaviour
 
     }
 
+    void CleanUp()
+    {
+        trashNum--;
+        inTrash = false;
+        //ui연결해서 처리
+    }
+
     public void GetCoin()
     {
         datasave.GetComponent<DataSave>().UseMoney(1);
     }
 
+    //반복문으로 빈 배열 검사해서 그곳에 새로 쓰레기 만들기-> trashNum으로 만드는게 아니라 반복문i값으로 만들어지게 수정
+    void CreateTrash(GameObject obj)
+    {
+        if (inTrash == false)
+        {
+            inTrash = true;
+            for (int i = 0; i < 5; i++)
+            {
+                if (trash[i] == null)
+                {
+                    trash[trashNum] = Instantiate(trashItem) as GameObject;
+                    trash[trashNum].transform.position = obj.transform.position;
+                    trashNum++;
+                    break;
+                }
+            }
+            if (trashNum >= 5)
+                inTrash = true;
+            else
+                inTrash = false;
+        }
+    }
 }
