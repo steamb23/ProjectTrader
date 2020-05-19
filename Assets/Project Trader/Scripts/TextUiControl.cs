@@ -19,7 +19,7 @@ public class TextUiControl : MonoBehaviour
 
     void Start()
     {
-        canvas = GameObject.Find("Canvas");
+        canvas = GameObject.Find("UICanvas");
         tbPos = GetComponent<RectTransform>();
         playData = GameObject.Find("SaveData");
         playData.GetComponent<DataSave>();
@@ -33,6 +33,7 @@ public class TextUiControl : MonoBehaviour
             PrintDate();
         }
     }
+
     // 말풍선의 종류, x위치,y위치,문자열+유지시간 추가가능,유지시간
     public void CreativeTextBox(int a, int x, int y, string gg, int ti)
     {
@@ -97,10 +98,10 @@ public class TextUiControl : MonoBehaviour
         var gameDateTimeManager = FindObjectOfType<GameDateTimeManager>();
         int currentDay = gameDateTimeManager.GameDateTime.Day;
         int currentMonth = gameDateTimeManager.GameDateTime.Month;
-
+        int totalDay = gameDateTimeManager.GameDateTime.TotalDays;
         textObject = GameObject.Find("Date");
         tmp = textObject.GetComponent<TextMeshProUGUI>();
-        tmp.text = currentMonth.ToString()+"/"+currentDay.ToString();
+        tmp.text = currentMonth.ToString()+"/"+currentDay.ToString()+" "+totalDay.ToString()+"Days";
 
     }
     
@@ -112,9 +113,10 @@ public class TextUiControl : MonoBehaviour
         tmp.text = name;
     }
 
-    public void PrintHp()
+    /*
+    public void PrintHCp(int hp, int cp)
     {
-
+        textObject = GameObject.Find("HCPtext");
     }
-
+    */
 }
