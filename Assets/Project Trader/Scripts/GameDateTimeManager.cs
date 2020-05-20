@@ -47,6 +47,12 @@ class GameDateTimeManager : MonoBehaviour
 
     [SerializeField]
     private GameDateTimeInitData data;
+    // 여는 시간
+    [SerializeField]
+    private int openningHour = 9;
+    // 닫는 시간
+    [SerializeField]
+    private int closingHour = 21;
     /// <summary>
     /// 게임내 시간 비율. 1초 = gameTimeScale
     /// </summary>
@@ -129,10 +135,45 @@ class GameDateTimeManager : MonoBehaviour
             gameDateTime.AddSecond(gameTimeInt);
             this.gameDateTime = gameDateTime;
 
+            // 문닫을 시간 확인
+            ClosingTimeUpdate();
+
 #if UNITY_EDITOR
             // 출력
             data = (GameDateTimeInitData)gameDateTime;
 #endif
         }
+    }
+
+    private void ClosingTimeUpdate()
+    {
+        // 문닫을 시간이 지났으면
+        if (GameDateTime.Hour >= closingHour)
+            Closing();
+    }
+
+    /// <summary>
+    /// 가게문을 닫고 결산 윈도우 띄우기
+    /// </summary>
+    public void Closing()
+    {
+        TimeStop();
+        var gameDateTime = GameDateTime;
+        // 닫는 시간으로 수정
+        gameDateTime.Hour = closingHour;
+        gameDateTime.Minute = 0;
+        gameDateTime.Second = 0;
+        GameDateTime = gameDateTime;
+        //TODO: 결산 윈도우 호출
+    }
+
+    public void Opening()
+    {
+        TimeStart();
+        var gameDateTime = GameDateTime;
+        // 여는 시간으로 수정
+        gameDateTime.Hour = openningHour;
+        gameDateTime.Minute = 0;
+        gameDateTime.Second = 0;
     }
 }
