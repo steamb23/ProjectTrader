@@ -1249,7 +1249,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efd71fa0f0260044192c4cf04b80c0db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScale: 288
   data:
     year: 0
     month: 0
@@ -1257,6 +1256,12 @@ MonoBehaviour:
     hour: 0
     minute: 0
     second: 0
+  openningHour: 8
+  closingHour: 21
+  gameTimeScale: 288
+  isStopped: 0
+  gameDateTime:
+    ticks: 0
   timePart: 0
 --- !u!4 &430736748
 Transform:
@@ -2097,7 +2102,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
-  m_Children: []
+  m_Children:
+  - {fileID: 1897229764}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
