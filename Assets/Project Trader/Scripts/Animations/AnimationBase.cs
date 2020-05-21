@@ -3,7 +3,7 @@ using System.Collections;
 using JetBrains.Annotations;
 using System.Diagnostics;
 
-public class AnimationBase : MonoBehaviour
+public abstract class AnimationBase : MonoBehaviour
 {
     private Coroutine coroutine;
 

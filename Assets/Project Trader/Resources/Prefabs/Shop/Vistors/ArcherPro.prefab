@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 6268907604693188871}
   - component: {fileID: 6980519800599034336}
   m_Layer: 0
-  m_Name: Archer
+  m_Name: ArcherPro
   m_TagString: Visitor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -228,6 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemSpriteRenderer: {fileID: 7630769634165561070}
+  visitorAnimation: {fileID: 0}
   targetNode: {fileID: 0}
   targetItemNode: {fileID: 0}
   targetItemNodeIndex: 0
@@ -247,7 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9f7763221d6b4c4e9ed85904f6722fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visitorSpriteData: {fileID: 11400000, guid: 5c64a7a9e479b6f419e91f8ac48af721, type: 2}
+  moveableSpriteData: {fileID: 11400000, guid: 5df0c42f1fd078b43b7e418587cdbefc, type: 2}
   spriteRenderer: {fileID: 1855165445106968387}
   aiPath: {fileID: 5943731839244378002}
   direction: 0

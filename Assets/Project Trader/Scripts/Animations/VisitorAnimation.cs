@@ -8,54 +8,19 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class VisitorAnimation : MonoBehaviour
+public class VisitorAnimation : MoveableAnimation
 {
 
-    public VisitorSpriteData visitorSpriteData;
-    public SpriteRenderer spriteRenderer;
-    public AIPath aiPath;
-    public FourDirection direction;
+    private VisitorSpriteData visitorSpriteData;
 
-
-    private Vector3 previousPosition;
-
-    private void Start()
+    protected override void Start()
     {
-        previousPosition = this.transform.position;
-
-        if (aiPath== null)
-        {
-            aiPath = GetComponentInChildren<AIPath>();
-        }
-        if (spriteRenderer == null)
-        {
-            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        }
+        base.Start();
+        visitorSpriteData = moveableSpriteData as VisitorSpriteData;
     }
 
-    private void LateUpdate()
+    protected override void LateUpdate()
     {
-        var velocity = aiPath.velocity;
-
-        if (velocity.sqrMagnitude > aiPath.maxSpeed * aiPath.maxSpeed * 0.1f)
-        {
-            direction = Utils.VelocityToDirection(velocity);
-        }
-
-        switch (direction)
-        {
-            case FourDirection.Up:
-                spriteRenderer.sprite = visitorSpriteData.Idle.Back[0];
-                break;
-            case FourDirection.Down:
-                spriteRenderer.sprite = visitorSpriteData.Idle.Front[0];
-                break;
-            case FourDirection.Right:
-                spriteRenderer.sprite = visitorSpriteData.Idle.Right[0];
-                break;
-            case FourDirection.Left:
-                spriteRenderer.sprite = visitorSpriteData.Idle.Left[0];
-                break;
-        }
+        base.LateUpdate();
     }
 }

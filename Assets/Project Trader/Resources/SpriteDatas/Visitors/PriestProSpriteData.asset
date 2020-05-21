@@ -9,18 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f116508b0ea2c4945a92f54dff51a24c, type: 3}
-  m_Name: SwordmanrProSpriteData
+  m_Script: {fileID: 11500000, guid: 50a78ef3d639e8347a96c19060e64c29, type: 3}
+  m_Name: PriestProSpriteData
   m_EditorClassIdentifier: 
   Idle:
     Front:
-    - {fileID: 21300000, guid: 42325116d31dced49b4e9017bc891dc5, type: 3}
+    - {fileID: 21300000, guid: 4757054a64e795b4aa87eec206383d46, type: 3}
     Back:
-    - {fileID: 21300000, guid: 082c5f3ebfae19045a99d43a33264aec, type: 3}
+    - {fileID: 21300000, guid: 0b0b4e2f4908d22438518c5abf4cc6d8, type: 3}
     Left:
-    - {fileID: 21300000, guid: 28170219741581b47b9b816704f1e331, type: 3}
+    - {fileID: 21300000, guid: 66b6f11f79c551d439918d2c5a24f9cf, type: 3}
     Right:
-    - {fileID: 21300000, guid: a7f72509675d09c46ae1b47efd529248, type: 3}
+    - {fileID: 21300000, guid: efcd30a6561dbc74eb7d1f6d423723b9, type: 3}
   Walk:
     Front: []
     Back: []
