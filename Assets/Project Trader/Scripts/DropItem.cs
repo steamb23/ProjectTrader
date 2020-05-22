@@ -151,6 +151,32 @@ public class DropItem : MonoBehaviour
         datasave.GetComponent<DataSave>().UseMoney(1);
     }
 
+    public GameObject FindTrash()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            if (trash[i] != null)
+            {
+                return trash[i];
+            }
+        }
+        return null;
+    }
+
+    public GameObject[] FindTrashes()
+    {
+        List<GameObject> results = new List<GameObject>(trash.Length);
+        for(int i = 0; i < 5; i++)
+        {
+            if (trash[i] != null)
+            {
+                results.Add(trash[i]);
+            }
+        }
+
+        return results.ToArray();
+    }
+
     //반복문으로 빈 배열 검사해서 그곳에 새로 쓰레기 만들기-> trashNum으로 만드는게 아니라 반복문i값으로 만들어지게 수정
     void CreateTrash(GameObject obj)
     {
