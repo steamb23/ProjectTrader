@@ -187,13 +187,13 @@ public class DropItem : MonoBehaviour
             {
                 if (trash[i] == null)
                 {
-                    trash[trashNum] = Instantiate(trashItem) as GameObject;
-                    trash[trashNum].transform.position = obj.transform.position;
+                    trash[i] = Instantiate(trashItem) as GameObject;
+                    trash[i].transform.position = obj.transform.position;
                     trashNum++;
                     break;
                 }
             }
-            if (trashNum >= 5)
+            if (FindTrashes().Length >= 5)
                 inTrash = true;
             else
                 inTrash = false;
