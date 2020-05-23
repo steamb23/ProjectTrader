@@ -8,9 +8,9 @@ public class EmployeeUiManager : MonoBehaviour
     private GameObject background = null;
 
     [SerializeField]
-    private GameObject employeeHireWindow = null;
+    private GameObject hireWindow = null;
     [SerializeField]
-    private GameObject employeeAssignWindow = null;
+    private GameObject assignWindow = null;
 
     // Start is called before the first frame update
     void Start()
@@ -21,8 +21,8 @@ public class EmployeeUiManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (employeeHireWindow.activeSelf ||
-            employeeAssignWindow.activeSelf)
+        if (hireWindow.activeSelf ||
+            assignWindow.activeSelf)
         {
             background.SetActive(true);
         }
@@ -32,8 +32,13 @@ public class EmployeeUiManager : MonoBehaviour
         }
     }
 
-    public void OpenEmployeeHire()
+    public void OpenHireWindow()
     {
-        employeeHireWindow.SetActive(true);
+        hireWindow.SetActive(true);
+    }
+
+    public void OpenAssignWindow()
+    {
+        assignWindow.SetActive(true);
     }
 }
