@@ -134,7 +134,14 @@ public class CleanerAI : MonoBehaviour
                 }
                 floatingTimer.FadeoutWithDestory();
             });
-            timer.boostRatio = 3;
+            if (timer == null)
+                state = AiState.Finding;
+            else
+            {
+                timer.boostRatio = 3;
+
+                state = AiState.Cleaning;
+            }
 
             //FloatingTimer.Create(this.transform, 5f, (floatingTimer) =>
             //{
@@ -143,7 +150,6 @@ public class CleanerAI : MonoBehaviour
             //    floatingTimer.FadeoutWithDestory();
             //    state = AiState.Cleaned;
             //});
-            state = AiState.Cleaning;
         }
         else
         {
