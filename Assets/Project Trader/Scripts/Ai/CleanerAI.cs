@@ -19,6 +19,8 @@ public class CleanerAI : MonoBehaviour
     public GameObject targetObject;
     public Transform targetTransform;
 
+    public DropItem dropItem;
+
     // A* 프로젝트
     IAstarAI astarAI;
 
@@ -30,6 +32,8 @@ public class CleanerAI : MonoBehaviour
         // 초기 상태 지정
         state = AiState.Finding;
         astarAI = GetComponent<IAstarAI>();
+
+        dropItem = GameObject.FindObjectOfType<DropItem>();
     }
 
     // Update is called once per frame
@@ -115,13 +119,30 @@ public class CleanerAI : MonoBehaviour
         {
             var colider = targetObject.GetComponent<BoxCollider2D>();
             colider.enabled = false;
-            FloatingTimer.Create(this.transform, 5f, (floatingTimer) =>
+
+            var timer = dropItem.CollectTrash(targetObject, 5f, (floatingTimer) =>
             {
-                // 해당 쓰레기 제거
-                Destroy(targetObject);
+                if (targetObject != null)
+                {
+                    // 해당 쓰레기 제거
+                    Destroy(targetObject);
+                    state = AiState.Cleaned;
+                }
+                else
+                {
+                    state = AiState.Finding;
+                }
                 floatingTimer.FadeoutWithDestory();
-                state = AiState.Cleaned;
             });
+            timer.boostRatio = 3;
+
+            //FloatingTimer.Create(this.transform, 5f, (floatingTimer) =>
+            //{
+            //    // 해당 쓰레기 제거
+            //    Destroy(targetObject);
+            //    floatingTimer.FadeoutWithDestory();
+            //    state = AiState.Cleaned;
+            //});
             state = AiState.Cleaning;
         }
         else
