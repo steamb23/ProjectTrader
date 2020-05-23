@@ -469,6 +469,7 @@ MonoBehaviour:
   state: 0
   targetObject: {fileID: 0}
   targetTransform: {fileID: 0}
+  dropItem: {fileID: 0}
 --- !u!114 &160896433
 MonoBehaviour:
   m_ObjectHideFlags: 0
