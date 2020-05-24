@@ -43,7 +43,7 @@ public class VisitorManager : MonoBehaviour
             {
                 var visitorInfo = PeekVisitorInfo();
                 var obj = Instantiate(visitorInfo.visitor);
-                obj.transform.position = this.transform.position;
+                obj.transform.position = pathNodeManager.exitNode.transform.position;
                 visitors.Add(obj);
             }
         }

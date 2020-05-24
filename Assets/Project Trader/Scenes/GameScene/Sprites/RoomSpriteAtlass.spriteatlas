@@ -43,12 +43,13 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 3baf1865dc1bb2a43afa99756699f6ee, type: 3}
-    totalSpriteSurfaceArea: 258794
+    totalSpriteSurfaceArea: 489194
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: 32487382f48c6074c913463a85cbf796, type: 3}
   - {fileID: 21300000, guid: a2ddc733214227a4db8a5b941bc30e86, type: 3}
+  - {fileID: 21300000, guid: c95ce748cba40664e944690cbdfd95df, type: 3}
   - {fileID: 21300000, guid: d94088291b2cbc74fa4d119d092dc747, type: 3}
   - {fileID: 21300000, guid: e4b6c22acd3f7c444bfc56c37fbe8a58, type: 3}
   - {fileID: 21300000, guid: e0944d2a9fa5ee74594d0d1ef26ae545, type: 3}
@@ -56,6 +57,7 @@ SpriteAtlas:
   m_PackedSpriteNamesToIndex:
   - Shelf
   - Ground
+  - Shop1Ground
   - Counter
   - ItemTable
   - Box
