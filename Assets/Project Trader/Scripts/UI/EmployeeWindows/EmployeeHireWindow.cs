@@ -11,6 +11,8 @@ public class EmployeeHireWindow : MonoBehaviour
     [SerializeField]
     GameObject candiateInfo2;
 
+    bool isInitialized = false;
+
     // Use this for initialization
     void Start()
     {
@@ -22,11 +24,15 @@ public class EmployeeHireWindow : MonoBehaviour
         }
         else
         {
-            RenewCandiate();
+            if (!isInitialized)
+            {
+                RenewCandiateList();
+                isInitialized = true;
+            }
         }
     }
 
-    public void RenewCandiate()
+    public void RenewCandiateList()
     {
         // 임시 초기화
         var names = new string[]
@@ -35,19 +41,26 @@ public class EmployeeHireWindow : MonoBehaviour
             "삼숙이",
             "쵸코",
             "제임스",
-            "어거스트"
+            "어거스트",
+            "민트",
+            "호롤로",
+            "한조",
+            "김근육",
+            "야옹이",
+            "뀨뀨"
         };
 
-        var candiateInfo0 = this.candiateInfo0.GetComponent<EmployeeInfo>();
-        var candiateInfo1 = this.candiateInfo1.GetComponent<EmployeeInfo>();
-        var candiateInfo2 = this.candiateInfo2.GetComponent<EmployeeInfo>();
+        var candiateInfo0 = this.candiateInfo0.GetComponent<CandiateInfo>();
+        var candiateInfo1 = this.candiateInfo1.GetComponent<CandiateInfo>();
+        var candiateInfo2 = this.candiateInfo2.GetComponent<CandiateInfo>();
 
         SetData(candiateInfo0);
         SetData(candiateInfo1);
         SetData(candiateInfo2);
 
-        void SetData(EmployeeInfo candiateInfo)
+        void SetData(CandiateInfo candiateInfo)
         {
+            // 임시 데이터
             candiateInfo.Name = names[UnityEngine.Random.Range(0, names.Length)];
             candiateInfo.Age = $"{(UnityEngine.Random.Range(0, 2) > 0 ? "남" : "여")} / {UnityEngine.Random.Range(20, 40)}";
             candiateInfo.Charisma = $"{UnityEngine.Random.Range(0, 999)}";
@@ -56,6 +69,7 @@ public class EmployeeHireWindow : MonoBehaviour
             candiateInfo.State = UnityEngine.Random.Range(0, 100) > 80 ?
                 "무경력" :
                 $"{(UnityEngine.Random.Range(0, 2) > 0 ? "정규직" : "비정규직")} {UnityEngine.Random.Range(1, 10)}년";
+            candiateInfo.Enable();
         }
     }
 
