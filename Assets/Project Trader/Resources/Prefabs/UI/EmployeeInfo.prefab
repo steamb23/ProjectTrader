@@ -1530,6 +1530,7 @@ GameObject:
   - component: {fileID: 8275797553710976239}
   - component: {fileID: 7415549735128303176}
   - component: {fileID: 118529162426536435}
+  - component: {fileID: 6316783283409568024}
   m_Layer: 5
   m_Name: EmployeeInfo
   m_TagString: Untagged
@@ -1605,6 +1606,30 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &6316783283409568024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5223252480005481360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7928e81e60503144ca66b44a2ede5f27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameField: {fileID: 6268961994791025387}
+  ageField: {fileID: 3254804818951680971}
+  charismaField: {fileID: 4551345353978740728}
+  inteligentField: {fileID: 2221647655330649642}
+  dexterityField: {fileID: 2660149719114544000}
+  stateField: {fileID: 1697804034033084001}
+  _name: 
+  age: 
+  charisma: 
+  inteligent: 
+  dexterity: 
+  state: 
 --- !u!1 &6175431249269551249
 GameObject:
   m_ObjectHideFlags: 0
