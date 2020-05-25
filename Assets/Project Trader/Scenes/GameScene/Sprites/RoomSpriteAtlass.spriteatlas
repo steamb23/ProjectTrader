@@ -43,24 +43,34 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 3baf1865dc1bb2a43afa99756699f6ee, type: 3}
-    totalSpriteSurfaceArea: 489194
+    totalSpriteSurfaceArea: 517342
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 3be7b2517e1246b41b04911f0211a9ce, type: 3}
   - {fileID: 21300000, guid: 32487382f48c6074c913463a85cbf796, type: 3}
   - {fileID: 21300000, guid: a2ddc733214227a4db8a5b941bc30e86, type: 3}
+  - {fileID: 21300000, guid: eb408f458f30d6645972b6418b8bee10, type: 3}
+  - {fileID: 21300000, guid: dee570b735f1c4a458c27b976625afc7, type: 3}
+  - {fileID: 21300000, guid: 75c25548b28af8744a05c290fa7dc4e5, type: 3}
   - {fileID: 21300000, guid: c95ce748cba40664e944690cbdfd95df, type: 3}
   - {fileID: 21300000, guid: d94088291b2cbc74fa4d119d092dc747, type: 3}
   - {fileID: 21300000, guid: e4b6c22acd3f7c444bfc56c37fbe8a58, type: 3}
   - {fileID: 21300000, guid: e0944d2a9fa5ee74594d0d1ef26ae545, type: 3}
+  - {fileID: 21300000, guid: 9ee6a57d0fb8aec4db9a2d5137a47679, type: 3}
   - {fileID: 21300000, guid: 3b2e159fe74741245b4205ccbc6bd4e7, type: 3}
   m_PackedSpriteNamesToIndex:
+  - "1\uB2E8\uACC4 \uC11C\uB78D"
   - Shelf
   - Ground
+  - "1\uB2E8\uACC4 \uBC15\uC2A4"
+  - "1\uB2E8\uACC4 \uC120\uBC18"
+  - "\uB808\uBCA81 \uACC4\uC0B0\uB300"
   - Shop1Ground
   - Counter
   - ItemTable
   - Box
+  - "\uAE30\uBCF8 \uD14C\uC774\uBE14"
   - Chiffonier
   m_Tag: RoomSpriteAtlass
   m_IsVariant: 0
