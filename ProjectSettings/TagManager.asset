@@ -7,6 +7,8 @@ TagManager:
   - PathNode
   - Item
   - Visitor
+  - ItemTable
+  - Slot
   layers:
   - Default
   - TransparentFX
