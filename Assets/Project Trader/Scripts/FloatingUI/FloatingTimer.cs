@@ -16,7 +16,7 @@ public class FloatingTimer : FloatingUIBase
     {
         var floatingTimer = CreateFloatingUI<FloatingTimer>(PrefabPath);
         var behaviour = floatingTimer.behaviour;
-        var image = floatingTimer.image;
+        var image = floatingTimer.behaviour.uiImage;
         // 초기화
         image.fillAmount = 0;
         behaviour.targetTime = targetTime;
@@ -45,7 +45,7 @@ public class FloatingTimer : FloatingUIBase
     {
         if (uiImage == null)
             uiImage = GetComponentInChildren<UnityEngine.UI.Image>();
-        //Fadein();
+        Fadein();
     }
 
     public void Click()
@@ -78,51 +78,41 @@ public class FloatingTimer : FloatingUIBase
         }
     }
 
-    //public void Fadein()
-    //{
-    //    StartCoroutine(FadeinCoroutine());
-    //    IEnumerator FadeinCoroutine()
-    //    {
-    //        var color = uiImage.color;
-    //        color.a = 0;
-    //        uiImage.color = color;
-    //        yield return null;
-    //        while (true)
-    //        {
-    //            color = uiImage.color;
-    //            color.a += 1 / 0.2f * Time.deltaTime;
-    //            if (color.a >= 1)
-    //            {
-    //                color.a = 1;
-    //                break; // 루프 탈출
-    //            }
-    //            else
-    //            {
-    //                uiImage.color = color;
-    //            }
-    //            yield return null;
-    //        }
-    //    }
-    //}
+    public void Fadein()
+    {
+        var canvasGroup = GetComponent<CanvasGroup>();
+        StartCoroutine(FadeinCoroutine());
+        IEnumerator FadeinCoroutine()
+        {
+            canvasGroup.alpha = 0;
+            yield return null;
+            while (true)
+            {
+                canvasGroup.alpha += 1 / 0.2f * Time.deltaTime;
+                if (canvasGroup.alpha >= 1)
+                {
+                    canvasGroup.alpha = 1;
+                    break; // 루프 탈출
+                }
+                yield return null;
+            }
+        }
+    }
 
     public void FadeoutWithDestory()
     {
         isDestory = true;
+        var canvasGroup = GetComponent<CanvasGroup>();
         StartCoroutine(FadeoutWithDestoryCoroutine());
         IEnumerator FadeoutWithDestoryCoroutine()
         {
             while (true)
             {
-                var color = uiImage.color;
-                color.a -= 1 / 0.2f * Time.deltaTime;
-                if (color.a <= 0)
+                canvasGroup.alpha -= 1 / 0.2f * Time.deltaTime;
+                if (canvasGroup.alpha <= 0)
                 {
                     Destroy(gameObject);
                     break; // 루프 탈출
-                }
-                else
-                {
-                    uiImage.color = color;
                 }
                 yield return null;
             }
