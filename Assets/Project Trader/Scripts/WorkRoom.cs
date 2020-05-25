@@ -18,6 +18,7 @@ public class WorkRoom : MonoBehaviour
     TextMeshProUGUI[] slotText;
     GameObject[] recipe;
     GameObject[] material;
+
     bool[] rcslot;
     int materialNum;
 
@@ -36,25 +37,7 @@ public class WorkRoom : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            possible = true;
-            UnityEngine.Debug.Log("이거누르긴함");
-            SetRecipeScroll();
-            materialNum = 2;
-            SetMaterial();
 
-        }
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            materialNum = 3;
-            SetMaterial();
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            materialNum = 4;
-            SetMaterial();
-        }
     }
 
     //공방 ui생성
@@ -100,7 +83,7 @@ public class WorkRoom : MonoBehaviour
     {
         if (possible == true) {
             GameObject go = Instantiate(makePopup) as GameObject;
-            go.transform.SetParent((GameObject.Find("WorkShop")).transform);
+            go.transform.SetParent((GameObject.Find("SubUi")).transform);
             RectTransform tbPos = go.GetComponent<RectTransform>();
             tbPos.anchoredPosition = new Vector3(0, 0);
         }
