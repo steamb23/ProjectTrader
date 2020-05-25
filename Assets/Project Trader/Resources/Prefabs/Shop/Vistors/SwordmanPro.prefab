@@ -252,6 +252,10 @@ MonoBehaviour:
   spriteRenderer: {fileID: 7951457304341398722}
   aiPath: {fileID: 2710041021454842899}
   direction: 0
+  state: 0
+  walkAnimationInterval: 0.2
+  time: 0
+  frame: 0
 --- !u!114 &2384723270866952838
 MonoBehaviour:
   m_ObjectHideFlags: 0
