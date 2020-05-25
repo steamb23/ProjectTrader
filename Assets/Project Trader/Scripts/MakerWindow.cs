@@ -38,22 +38,23 @@ public class MakerWindow : MonoBehaviour
 
     void Start()
     {
-        makerWindow.SetActive(true);
+
         //생성창으로 이동
         SetItemslot();
         SetCheckdisplay(1, 1);
+        makerWindow.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.L))
         {
-            //OpenMakerWindow();
+            OpenMakerWindow();
         }
         if (Input.GetKeyDown(KeyCode.G))
         {
-            //CloseMakerWindow();
+            CloseMakerWindow();
         }
             /*
             if (Input.GetKeyDown(KeyCode.G))
