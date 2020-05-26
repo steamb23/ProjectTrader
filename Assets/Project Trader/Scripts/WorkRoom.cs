@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using ProjectTrader;
+using ProjectTrader.Datas;
+using ProjectTrader.SpriteDatas;
 
 public class WorkRoom : MonoBehaviour
 {
@@ -10,6 +13,12 @@ public class WorkRoom : MonoBehaviour
     public GameObject makePopup;
     public GameObject slot;
     public GameObject materialSlot;
+    public GameObject workroom;
+
+    public Sprite material1;
+    public Sprite material2;
+
+    Image[] ItemImage;
 
     GameObject materialView;
     GameObject recipeScroll;
@@ -27,17 +36,23 @@ public class WorkRoom : MonoBehaviour
 
     void Start()
     {
+
         con = GameObject.Find("Content");
         if (con == null)
             UnityEngine.Debug.Log("content없음");
         //material0 = IngameDatabase.ItemDatas[1].GetMaterial(0);
         //전체 생성하는 함수 먼저
         recipeScroll = GameObject.Find("RecipeView");
+        CloseWorkShop();
     }
 
     void Update()
     {
-
+        
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            CloseWorkShop();
+        }
     }
 
     //공방 ui생성
@@ -53,14 +68,24 @@ public class WorkRoom : MonoBehaviour
     {
         recipe = new GameObject[6];
         rcslot = new bool[6];
-        for(int i = 0; i < 6; i++)
+        for(int i = 0; i < 4; i++)
         {
             recipe[i] = Instantiate(slot) as GameObject;
             SetRecipeSlot(i);
             recipe[i].transform.SetParent(con.transform);
+            recipe[i].transform.localScale = Vector3.one;
+            SlotImageSet(i);
             rcslot[i] = false;
 
         }
+    }
+
+    void SlotImageSet(int i)
+    {
+
+        ItemImage = recipe[i].GetComponentsInChildren<Image>();
+        ItemImage[5].sprite = ItemSpriteData.GetItemSprite(i+1);
+
     }
 
     //순서대로 최대 제작 가능 개수, 이름 , 소모 피로도
@@ -71,8 +96,6 @@ public class WorkRoom : MonoBehaviour
         slotText[1].text = "pine";
         slotText[2].text = 20.ToString();
     }
-
-
 
     void SetMakeRecipe()
     {
@@ -89,7 +112,6 @@ public class WorkRoom : MonoBehaviour
         }
     }
 
-
     void SetMaterial()
     {
         if (material != null)
@@ -98,7 +120,7 @@ public class WorkRoom : MonoBehaviour
                 Destroy(material[i]);
         }
 
-        GameObject m_standard = GameObject.Find("MaterialSlot");
+        GameObject m_standard = GameObject.Find("MaterialmakeSlot");
         RectTransform standard = m_standard.GetComponent<RectTransform>();
 
         switch (materialNum)
@@ -109,8 +131,10 @@ public class WorkRoom : MonoBehaviour
                 {
                     material[i] = Instantiate(materialSlot) as GameObject;
                     material[i].transform.SetParent((GameObject.Find("WorkRoom")).transform);
+                    material[i].transform.localScale = Vector3.one;
+                    //MaterialSetSprite(material[i], i);
                     RectTransform tbPos = material[i].GetComponent<RectTransform>();
-                    tbPos.anchoredPosition = new Vector3(standard.anchoredPosition.x-(180+100*i), standard.anchoredPosition.y);
+                    tbPos.anchoredPosition = new Vector3(standard.anchoredPosition.x-(210+120*i), standard.anchoredPosition.y);
                 }
                 break;
             case 3:
@@ -119,11 +143,12 @@ public class WorkRoom : MonoBehaviour
                 {
                     material[i] = Instantiate(materialSlot) as GameObject;
                     material[i].transform.SetParent((GameObject.Find("WorkRoom")).transform);
+                    material[i].transform.localScale = Vector3.one;
                     RectTransform tbPos = material[i].GetComponent<RectTransform>();
                     if(i!=2)
-                        tbPos.anchoredPosition = new Vector3(standard.anchoredPosition.x - (180 + 100 * i), standard.anchoredPosition.y-30);
+                        tbPos.anchoredPosition = new Vector3(standard.anchoredPosition.x - (210 + 120 * i), standard.anchoredPosition.y-60);
                     else
-                        tbPos.anchoredPosition = new Vector3(standard.anchoredPosition.x - 230, standard.anchoredPosition.y+40);
+                        tbPos.anchoredPosition = new Vector3(standard.anchoredPosition.x - 270, standard.anchoredPosition.y+50);
                 }
                 break;
             case 4:
@@ -132,11 +157,12 @@ public class WorkRoom : MonoBehaviour
                 {
                     material[i] = Instantiate(materialSlot) as GameObject;
                     material[i].transform.SetParent((GameObject.Find("WorkRoom")).transform);
+                    material[i].transform.localScale = Vector3.one;
                     RectTransform tbPos = material[i].GetComponent<RectTransform>();
                     if (i < 2)
-                        tbPos.anchoredPosition = new Vector3(standard.anchoredPosition.x - (180 + 100 * i), standard.anchoredPosition.y - 30);
+                        tbPos.anchoredPosition = new Vector3(standard.anchoredPosition.x - (210 + 120 * i), standard.anchoredPosition.y - 60);
                     else
-                        tbPos.anchoredPosition = new Vector3(standard.anchoredPosition.x - (180 + 100 * (i-2)), standard.anchoredPosition.y + 40);
+                        tbPos.anchoredPosition = new Vector3(standard.anchoredPosition.x - (210 + 120 * (i-2)), standard.anchoredPosition.y + 50);
                 }
                 break;
             default:
@@ -144,10 +170,37 @@ public class WorkRoom : MonoBehaviour
         }
     }
 
+    void MaterialSetSprite(GameObject go,int i)
+    {
+        Image[] ma = new Image[2];
+        ma = go.GetComponentsInChildren<Image>();
+        ma[1].sprite = material1;
+        if (i == 1)
+            ma[1].sprite = material2;
+
+        TextMeshProUGUI[] te = new TextMeshProUGUI[2];
+        te = go.GetComponentsInChildren<TextMeshProUGUI>();
+        te[0].text = 5.ToString();
+        if (i == 1)
+            te[0].text = 6.ToString();
+
+    }
+
     public void CloseWorkShop()
     {
-        GameObject wR = GameObject.Find("WorkRoom");
-        RectTransform tbpos = wR.GetComponent<RectTransform>();
-        tbpos.anchoredPosition = new Vector3(1500, 0);
+        workroom.SetActive(false);
     }
+
+    public void Openpopup()
+    {
+        workroom.SetActive(true);
+        materialNum = 2;
+        SetMaterial();
+        SetRecipeScroll();
+    }
+    public void Closepopup()
+    {
+        workroom.SetActive(false);
+    }
+
 }

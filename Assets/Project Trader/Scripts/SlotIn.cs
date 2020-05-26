@@ -6,7 +6,6 @@ public class SlotIn : MonoBehaviour
 {
     public int count;
     public int code;
-
     public void SetSlotInData(int cunt, int cod)
     {
         count = cunt;
