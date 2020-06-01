@@ -69,7 +69,7 @@ public class DropItem : MonoBehaviour
         if (inTrash == false)
         {
             int tg = UnityEngine.Random.Range(0, 11);
-            UnityEngine.Debug.Log(tg);
+            //UnityEngine.Debug.Log(tg);
             if (tg < 2)
             {
                 FindVisitor(inTrash, 2);

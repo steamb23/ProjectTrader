@@ -8,7 +8,7 @@ public class TableCheck : MonoBehaviour
     GameObject[] table;
     GameObject[] item;
     GameObject displayWindow;
-
+    GameObject makeWindow;
     public GameObject choiceTable
     {
         set;
@@ -18,10 +18,9 @@ public class TableCheck : MonoBehaviour
     void Start()
     {
         displayWindow = GameObject.Find("selltimewindow");
+        makeWindow = GameObject.Find("makeroom");
     }
-    // Start is called before the first frame update
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -40,16 +39,17 @@ public class TableCheck : MonoBehaviour
         {
             if (rayHit.collider.gameObject.tag == "ItemTable")
             {
-                //tablename = rayHit.collider.gameObject.name;
-                //UnityEngine.Debug.Log("djfwlejfklsdjfklsjdf");
                 choiceTable=SetDisplayTable(rayHit.collider.gameObject);
                 CreateDisplayWindow();
+            }
+            if (rayHit.collider.gameObject.tag == "Makeroom")
+            {
+                CreateMakeRoom();
             }
         }
 
     }
 
-    //해당 오브젝트를 반환하여 사용?
     GameObject SetDisplayTable(GameObject hitTable)
     {
         int i;
@@ -70,6 +70,11 @@ public class TableCheck : MonoBehaviour
 
     void CreateDisplayWindow()
     {
-        displayWindow.GetComponent<MakerWindow>().OpenMakerWindow();
+        displayWindow.GetComponent<SellWindow>().OpenMakerWindow();
+    }
+
+    void CreateMakeRoom()
+    {
+        makeWindow.GetComponent<MakerUI>().OpenMakeRoom();
     }
 }

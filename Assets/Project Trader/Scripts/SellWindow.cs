@@ -6,9 +6,9 @@ using TMPro;
 using ProjectTrader;
 using ProjectTrader.Datas;
 using ProjectTrader.SpriteDatas;
-using System.Diagnostics;
 
-public class MakerWindow : MonoBehaviour
+
+public class SellWindow : MonoBehaviour
 {
     //배치할때 값주고받을 아이템
     Item arrowC;
@@ -53,13 +53,9 @@ public class MakerWindow : MonoBehaviour
     {
         SetsettingButton();
 
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            minusCont();
-        }
     }    
 
-    //*테스트용* 임의로 count를 0으로 만드는 코드
+    /*테스트용* 임의로 count를 0으로 만드는 코드
     void minusCont()
     {
         GameObject[] sellingItem = GameObject.FindGameObjectsWithTag("Item");
@@ -67,7 +63,7 @@ public class MakerWindow : MonoBehaviour
         reitem.Count = 0;
         sellingItem[1].GetComponent<DisplayedItem>().Item = reitem;
     }
-
+    */
 
     //슬롯 제거하는 코드도 추가로 작성(불러오기전에 제거하고 다시 불러올수있도록
     public void OpenMakerWindow()
@@ -78,9 +74,11 @@ public class MakerWindow : MonoBehaviour
 
     public void CloseMakerWindow()
     {
-        //슬롯 제거하는 코드도 추가로 작성
+        //슬롯 리로드하는 코드도 추가로 작성
         makerWindow.SetActive(false);
     }
+
+    //슬롯 세팅(임시로 이미 생성되어있으면 추가로 생성하지 않도록 함)
     void SetItemslot()
     {
         if (setslot == false)
@@ -105,6 +103,7 @@ public class MakerWindow : MonoBehaviour
         }
     }
     
+    //임시로 슬롯내 스크립트 설정
     void SlotScriptSet()
     {
         GameObject[] slotsetting = GameObject.FindGameObjectsWithTag("Slot");
@@ -174,6 +173,7 @@ public class MakerWindow : MonoBehaviour
 
     }
 
+    //디스플레이할 아이템 보여주기
 
     public void SetCheckdisplay(int num, int code)
     {
@@ -190,9 +190,9 @@ public class MakerWindow : MonoBehaviour
     {
 
         tableData = setTable.GetComponent<TableCheck>().choiceTable;
+        popupWindow.SetActive(true);
         popupWindow.GetComponent<MakePopScript>().Openpopup();
         popupWindow.GetComponent<MakePopScript>().SetPopupItem(display.Count, display.Code,tableData);
-        UnityEngine.Debug.Log("눌럿다고");
     }
 }
 
