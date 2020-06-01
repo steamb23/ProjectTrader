@@ -243,10 +243,10 @@ public class MakerUI : MonoBehaviour
     //만들 아이템코드와 갯수 설정 하고 팝업으로
     void MakeItemInfo(int cod, int count)
     {
-        makeItem[clickEmployee].Code = cod;
-        makeItem[clickEmployee].Count = count;
-        makeItemData[clickEmployee] = makeItem[clickEmployee].GetData();
-        if(working[clickEmployee]==false && employeeInfo[clickEmployee] == true)
+        makeItem[clickEmployee-1].Code = cod;
+        makeItem[clickEmployee-1].Count = count;
+        makeItemData[clickEmployee-1] = makeItem[clickEmployee-1].GetData();
+        if(working[clickEmployee-1]==false && employeeInfo[clickEmployee-1] == true)
         {
             canMake = true;
         }
