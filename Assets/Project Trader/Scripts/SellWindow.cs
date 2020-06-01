@@ -6,9 +6,9 @@ using TMPro;
 using ProjectTrader;
 using ProjectTrader.Datas;
 using ProjectTrader.SpriteDatas;
-using System.Collections.Specialized;
 
-public class MakerWindow : MonoBehaviour
+
+public class SellWindow : MonoBehaviour
 {
     //배치할때 값주고받을 아이템
     Item arrowC;
@@ -28,97 +28,91 @@ public class MakerWindow : MonoBehaviour
 
     public GameObject popupWindow;
 
+    GameObject tableData;
+    GameObject setTable;
+
     GameObject[] itemnum;
     TextMeshProUGUI[] slotText;
     Image[] ItemImage;
     GameObject[] arrowSprite; //화살표
     public GameObject makerWindow;
+
     //임시로 선언하는 화살표용 bool
     bool setArrow = false;
+    //임시로 선언하는 슬롯세팅 bool
+    bool setslot = false;
 
     void Start()
     {
-
+        setTable = GameObject.Find("selltimewindow");
         //생성창으로 이동
-        SetItemslot();
-        SetCheckdisplay(1, 1);
-        makerWindow.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            OpenMakerWindow();
-        }
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            CloseMakerWindow();
-        }
-            /*
-            if (Input.GetKeyDown(KeyCode.G))
-            {
-                SetItemslot();
-            }
-            if (Input.GetMouseButtonDown(0))
-            {
-                CheckingMouse();
+        SetsettingButton();
 
-            }*/
-        }
+    }    
 
-    /*
-    void CheckingMouse()
+    /*테스트용* 임의로 count를 0으로 만드는 코드
+    void minusCont()
     {
-        
-        Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 clickPos = new Vector2(worldPos.x, worldPos.y);
-        Ray2D ray = new Ray2D(clickPos,Vector2.zero);
-        RaycastHit2D rayHit = Physics2D.Raycast(ray.origin, ray.direction);
-
-        if (rayHit.collider.gameObject.tag == "ItemTable")
-        {
-            tablename = rayHit.collider.gameObject.name;
-            UnityEngine.Debug.Log("djfwlejfklsdjfklsjdf");
-        }
-
+        GameObject[] sellingItem = GameObject.FindGameObjectsWithTag("Item");
+        Item reitem = sellingItem[1].GetComponent<DisplayedItem>().Item;
+        reitem.Count = 0;
+        sellingItem[1].GetComponent<DisplayedItem>().Item = reitem;
     }
     */
-    void OpenMakerWindow()
+
+    //슬롯 제거하는 코드도 추가로 작성(불러오기전에 제거하고 다시 불러올수있도록
+    public void OpenMakerWindow()
     {
         makerWindow.SetActive(true);
+        SetItemslot();
     }
 
     public void CloseMakerWindow()
     {
+        //슬롯 리로드하는 코드도 추가로 작성
         makerWindow.SetActive(false);
     }
+
+    //슬롯 세팅(임시로 이미 생성되어있으면 추가로 생성하지 않도록 함)
     void SetItemslot()
     {
-        itemnum = new GameObject[5];
-        slotItem = new Item[5];
-        slotItemData = new ItemData[5];
-
-        //아이템 가진 수만큼
-        for (int i = 0; i < 5; i++)
+        if (setslot == false)
         {
-            itemnum[i] = Instantiate(itemSlot) as GameObject;
+            itemnum = new GameObject[5];
+            slotItem = new Item[5];
+            slotItemData = new ItemData[5];
 
-            SetItemInfo(i);
-            itemnum[i].transform.SetParent((GameObject.Find("ItemContent")).transform);
-            itemnum[i].transform.localScale = Vector3.one;
+            //아이템 가진 수만큼
+            for (int i = 0; i < 5; i++)
+            {
+                itemnum[i] = Instantiate(itemSlot) as GameObject;
+
+                SetItemInfo(i);
+                itemnum[i].transform.SetParent((GameObject.Find("ItemContent")).transform);
+                itemnum[i].transform.localScale = Vector3.one;
 
 
+            }
+            SlotScriptSet();
+            setslot = true;
         }
-        SlotScriptSet();
     }
     
+    //임시로 슬롯내 스크립트 설정
     void SlotScriptSet()
     {
         GameObject[] slotsetting = GameObject.FindGameObjectsWithTag("Slot");
-        for(int i=0;i<slotsetting.Length;i++)
+        for (int i = 0; i < slotsetting.Length; i++)
+        {
             slotsetting[i].GetComponent<SlotIn>().SetSlotInData(slotItem[i].Count, slotItem[i].Code);
+            if (i == 0)
+                slotsetting[i].GetComponent<SlotIn>().PushButton();
+        }
     }
 
     //슬롯생성할때 멤버 바꾸기
@@ -145,18 +139,8 @@ public class MakerWindow : MonoBehaviour
     void SpriteChange(int i)
     {
         ItemImage = itemnum[i].GetComponentsInChildren<Image>();
-        ItemImage[4].sprite = ItemSpriteData.GetItemSprite(slotItem[i].Code); //스프라이트 바꿈
+        ItemImage[4].sprite = ItemSpriteData.GetItemSprite(slotItem[i].Code);
 
-    }
-
-
-    //배치 아이템 바꾸는 함수 -> 태그로 찾아서 만들면 된다!!
-    void SetItem()
-    {
-        GameObject ii = GameObject.Find("Item");
-        Item reitem = ii.GetComponent<DisplayedItem>().Item;
-        reitem.Code = 5;
-        ii.GetComponent<DisplayedItem>().Item = reitem;
     }
 
 
@@ -189,6 +173,7 @@ public class MakerWindow : MonoBehaviour
 
     }
 
+    //디스플레이할 아이템 보여주기
 
     public void SetCheckdisplay(int num, int code)
     {
@@ -200,10 +185,14 @@ public class MakerWindow : MonoBehaviour
         //텍스트랑 image찾아서 변경
     }
 
-    //팝업윈도우 생성,할당
+    //팝업윈도우 생성,할당,테이블 데이터 보내기
     public void SetPopUpWindow()
     {
-        popupWindow.GetComponent<MakePopScript>().SetPopupItem(display.Count, display.Code);
+
+        tableData = setTable.GetComponent<TableCheck>().choiceTable;
+        popupWindow.SetActive(true);
+        popupWindow.GetComponent<MakePopScript>().Openpopup();
+        popupWindow.GetComponent<MakePopScript>().SetPopupItem(display.Count, display.Code,tableData);
     }
 }
 

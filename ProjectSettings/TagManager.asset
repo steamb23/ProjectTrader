@@ -9,6 +9,8 @@ TagManager:
   - Visitor
   - ItemTable
   - Slot
+  - MPEB
+  - Makeroom
   layers:
   - Default
   - TransparentFX

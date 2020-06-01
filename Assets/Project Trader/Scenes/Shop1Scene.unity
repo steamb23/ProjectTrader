@@ -671,6 +671,11 @@ PrefabInstance:
     - target: {fileID: 4426954722865159754, guid: 2cec7c5cc2bdc7d41bfe5cf9e5e3434f,
         type: 3}
       propertyPath: item.code
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4426954722865159754, guid: 2cec7c5cc2bdc7d41bfe5cf9e5e3434f,
+        type: 3}
+      propertyPath: item.count
       value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1061,7 +1066,7 @@ GameObject:
   - component: {fileID: 781205069}
   m_Layer: 8
   m_Name: GameObject (5)
-  m_TagString: Untagged
+  m_TagString: Makeroom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2624,7 +2629,12 @@ PrefabInstance:
     - target: {fileID: 4426954722865159754, guid: 2cec7c5cc2bdc7d41bfe5cf9e5e3434f,
         type: 3}
       propertyPath: item.code
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4426954722865159754, guid: 2cec7c5cc2bdc7d41bfe5cf9e5e3434f,
+        type: 3}
+      propertyPath: item.count
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cec7c5cc2bdc7d41bfe5cf9e5e3434f, type: 3}
