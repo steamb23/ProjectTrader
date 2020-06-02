@@ -34,10 +34,10 @@ public class DataSave : MonoBehaviour
         string load = LoadJson();
         UnityEngine.Debug.Log(load);
         var loadData = JsonToObject<PlayData>(load);
-        pda.money = loadData.money;
-        pda.level = loadData.level;
-        pda.famous = loadData.famous;
-        pda.shopName = loadData.shopName;
+        pda.Money = loadData.Money;
+        pda.Level = loadData.Level;
+        pda.Awareness = loadData.Awareness;
+        pda.ShopName = loadData.ShopName;
         //출력함수추가
     }
 
@@ -69,19 +69,19 @@ public class DataSave : MonoBehaviour
         switch (Data)
         {
             case "Money":
-                textUi.GetComponent<TextUiControl>().PrintMoney(pda.money);
+                textUi.GetComponent<TextUiControl>().PrintMoney(pda.Money);
                 break;
             case "Tired":
-                textUi.GetComponent<TextUiControl>().PrintTired(pda.maxTired, pda.tired);
+                textUi.GetComponent<TextUiControl>().PrintTired(pda.MaxFatigue, pda.Fatigue);
                 break;
             case "Level":
-                textUi.GetComponent<TextUiControl>().PrintLevel(pda.level);
+                textUi.GetComponent<TextUiControl>().PrintLevel(pda.Level);
                 break;
             case "Famous":
-                textUi.GetComponent<TextUiControl>().PrintFamous(pda.famous);
+                textUi.GetComponent<TextUiControl>().PrintFamous(pda.Awareness);
                 break;
             case "ShopName":
-                textUi.GetComponent<TextUiControl>().PrintShopName(pda.shopName);
+                textUi.GetComponent<TextUiControl>().PrintShopName(pda.ShopName);
                 break;
             //case "Date":
             //    textUi.GetComponent<TextUiControl>().PrintDate(pda.date);
@@ -92,8 +92,8 @@ public class DataSave : MonoBehaviour
 
     public void UseMoney(int mon)
     {
-        if (pda.money + mon > 0)
-            pda.money += mon;
+        if (pda.Money + mon > 0)
+            pda.Money += mon;
 
         //돈이 부족할시 + 돈이 부족합니다 출력
         else
@@ -102,15 +102,15 @@ public class DataSave : MonoBehaviour
     }
     public void UseLevel(int lev)
     {
-        pda.level += lev;
+        pda.Level += lev;
         PrintData("Level");
     }
     public void UseFamous(int fam)
     {
-        if (pda.famous + fam > 0)
-            pda.famous += fam;
+        if (pda.Awareness + fam > 0)
+            pda.Awareness += fam;
         //인지도는 0이하로 떨어지지 않는다
         else
-            pda.famous = 0;
+            pda.Awareness = 0;
     }
 }
