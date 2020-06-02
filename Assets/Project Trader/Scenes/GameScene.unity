@@ -12577,16 +12577,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visitorInfos:
-  - visitor: {fileID: 4639997292672621298, guid: 4061208e2319bff419863ae65dc6d6de,
+  - visitor: {fileID: 7312877796483539523, guid: 3df47fab6ba16f54bb199c818cebc5a0,
       type: 3}
     priority: 1
-  - visitor: {fileID: 4000053653181102451, guid: 3df47fab6ba16f54bb199c818cebc5a0,
+  - visitor: {fileID: 7312877796483539523, guid: 19c41ee9b9c38904ba079804a547d9e0,
       type: 3}
     priority: 1
-  - visitor: {fileID: 3232052120699809583, guid: 19c41ee9b9c38904ba079804a547d9e0,
+  - visitor: {fileID: 7312877796483539523, guid: 4061208e2319bff419863ae65dc6d6de,
       type: 3}
     priority: 1
-  - visitor: {fileID: 164318679165438141, guid: 28d2fed6c936de24d9a91b5e90194f36,
+  - visitor: {fileID: 7312877796483539523, guid: 28d2fed6c936de24d9a91b5e90194f36,
       type: 3}
     priority: 1
   pathNodeManager: {fileID: 0}
@@ -16966,6 +16966,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90dcb771dfbc0ba4090b224b2aa9d1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pda:
+    money: 0
+    level: 0
+    maxFatigue: 0
+    fatigue: 0
+    awareness: 0
+    shopName: 
+    date:
+      ticks: 0
+    shopSize: 0
 --- !u!4 &1791022366
 Transform:
   m_ObjectHideFlags: 0
