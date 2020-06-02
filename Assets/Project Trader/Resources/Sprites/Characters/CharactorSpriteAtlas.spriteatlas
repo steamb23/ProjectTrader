@@ -43,7 +43,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: cafcb4afb33085a47b911238cb677ee9, type: 3}
-    totalSpriteSurfaceArea: 333824
+    totalSpriteSurfaceArea: 332288
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -91,6 +91,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 80a76af833c139443a68f1aec466afad, type: 3}
   - {fileID: 21300000, guid: a7f72509675d09c46ae1b47efd529248, type: 3}
   - {fileID: 21300000, guid: 28170219741581b47b9b816704f1e331, type: 3}
+  - {fileID: 21300000, guid: 4f5b9739b63d33f49bb490dc3f2e93d2, type: 3}
   - {fileID: 21300000, guid: f799d979d3d404e43b64fda7b73ef779, type: 3}
   - {fileID: 21300000, guid: de33df7935d2c224282c6d5ec78c427c, type: 3}
   - {fileID: 21300000, guid: 2313ff89fcdaa254db00577be25cd54f, type: 3}
@@ -173,6 +174,7 @@ SpriteAtlas:
   - ani_thief_pro_back4
   - swordman_pro_right
   - swordman_pro_left
+  - CharactorShadow
   - ani_priest_pro_front3
   - ani_archer_pro_right1
   - ani_thief_pro_left3
