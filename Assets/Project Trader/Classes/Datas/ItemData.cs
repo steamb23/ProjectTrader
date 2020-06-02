@@ -13,13 +13,18 @@ namespace ProjectTrader.Datas
     {
         public enum ItemType
         {
-            None
+            None = 0,
+            Material = 1,
+            Craftable = 2
         }
 
         [Flags]
         public enum BuyFlags : int
         {
             None = 0,
+            Craft = 1,
+            GuildShop = 2,
+            WitchShop = 4
         }
 
         public Sprite GetSprite() => ItemSpriteData.GetItemSprite(code);
@@ -30,6 +35,7 @@ namespace ProjectTrader.Datas
         /// <param name="index"></param>
         /// <returns></returns>
         //public ItemData GetMaterial(int index) => IngameDatabase.MaterialDatas[materialCodes[index]];
+        public ItemData GetMaterial(int index) => IngameDatabase.ItemDatas[materialCodes[index]];
 
         public int Code
         {
