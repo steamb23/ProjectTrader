@@ -29,7 +29,7 @@ namespace ProjectTrader.Datas
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public MaterialData GetMaterial(int index) => IngameDatabase.MaterialDatas[materialCodes[index]];
+        //public ItemData GetMaterial(int index) => IngameDatabase.MaterialDatas[materialCodes[index]];
 
         public int Code
         {

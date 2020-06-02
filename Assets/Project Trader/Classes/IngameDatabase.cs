@@ -31,7 +31,7 @@ namespace ProjectTrader.Datas
             }
         }
         public static ReadOnlyContainer<ItemData> ItemDatas { get; private set; }
-        public static ReadOnlyContainer<MaterialData> MaterialDatas { get; private set; }
+        //public static ReadOnlyContainer<MaterialData> MaterialDatas { get; private set; }
 
         static IngameDatabase()
         {
@@ -83,21 +83,21 @@ namespace ProjectTrader.Datas
             }
             #endregion
 
-            #region 재료 데이터 초기화
-            {
-                csvData = CsvData.LoadFromResources("Datas/MaterialData");
-                MaterialData[] datas = new MaterialData[csvData.RowLength];
-                for (int i = 1; i < datas.Length; i++)
-                {
-                    MaterialData data = new MaterialData();
-                    data.Code = Convert.ToInt32(csvData[i, "CODE"]);
-                    data.Name = Convert.ToString(csvData[i, "NAME"]);
+            //#region 재료 데이터 초기화
+            //{
+            //    csvData = CsvData.LoadFromResources("Datas/MaterialData");
+            //    MaterialData[] datas = new MaterialData[csvData.RowLength];
+            //    for (int i = 1; i < datas.Length; i++)
+            //    {
+            //        MaterialData data = new MaterialData();
+            //        data.Code = Convert.ToInt32(csvData[i, "CODE"]);
+            //        data.Name = Convert.ToString(csvData[i, "NAME"]);
 
-                    datas[i] = data;
-                }
-                Set(datas);
-            }
-            #endregion
+            //        datas[i] = data;
+            //    }
+            //    Set(datas);
+            //}
+            //#endregion
 #pragma warning restore CS0618 // 형식 또는 멤버는 사용되지 않습니다.
         }
 
@@ -109,9 +109,9 @@ namespace ProjectTrader.Datas
                 case ItemData[] itemDatas:
                     ItemDatas = itemDatas;
                     break;
-                case MaterialData[] materialDatas:
-                    MaterialDatas = materialDatas;
-                    break;
+                //case MaterialData[] materialDatas:
+                //    MaterialDatas = materialDatas;
+                //    break;
 
             }
         }
