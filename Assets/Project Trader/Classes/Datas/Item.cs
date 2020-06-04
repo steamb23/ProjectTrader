@@ -41,5 +41,20 @@ namespace ProjectTrader.Datas
         /// 데이터 가져오기
         /// </summary>
         public ItemData GetData() => IngameDatabase.ItemDatas[code];
+
+        #region 연산자
+
+        public static explicit operator int(Item item) => item.code;
+
+        public static implicit operator Item(int itemCode) => new Item() { code = itemCode };
+
+        public override bool Equals(object obj) => code.Equals(obj);
+
+        public override int GetHashCode() => code.GetHashCode();
+
+        public static bool operator ==(Item left, Item right) => left.code == right.code;
+
+        public static bool operator !=(Item left, Item right) => left.code != right.code;
+        #endregion
     }
 }
