@@ -11,6 +11,7 @@ TagManager:
   - Slot
   - MPEB
   - Makeroom
+  - ItemShop
   layers:
   - Default
   - TransparentFX
