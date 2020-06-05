@@ -11,7 +11,7 @@ namespace ProjectTrader.Datas
     [Serializable]
     public class ItemData
     {
-        public enum ItemType
+        public enum ItemType : int
         {
             None = 0,
             Material = 1,
@@ -82,12 +82,12 @@ namespace ProjectTrader.Datas
             get => this.buyType;
             set => this.buyType = value;
         }
-        public int ShopPrice
+        public IntRange ShopPrice
         {
             get => this.shopPrice;
             set => this.shopPrice = value;
         }
-        public int WitchShopPrice
+        public IntRange WitchShopPrice
         {
             get => this.witchShopPrice;
             set => this.witchShopPrice = value;
@@ -97,33 +97,26 @@ namespace ProjectTrader.Datas
             get => this.craftDelay;
             set => this.craftDelay = value;
         }
+        public float Awareness
+        {
+            get => this.awareness;
+            set => this.awareness = value;
+        }
 
         #region 인스펙터 변수
-        [SerializeField]
-        int code;
-        [SerializeField]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2235")]
-        string name;
-        [SerializeField]
-        ItemType type;
-        [SerializeField]
-        int sellPrice;
-        [SerializeField]
-        int tier;
-        [SerializeField]
-        int[] materialCodes;
-        [SerializeField]
-        int[] materialNeeds;
-        [SerializeField]
-        int craftCost;
-        [SerializeField]
-        BuyFlags buyType;
-        [SerializeField]
-        int shopPrice;
-        [SerializeField]
-        int witchShopPrice;
-        [SerializeField]
-        float craftDelay;
+        [SerializeField] int code;
+        [SerializeField] string name;
+        [SerializeField] ItemType type;
+        [SerializeField] int sellPrice;
+        [SerializeField] int tier;
+        [SerializeField] int[] materialCodes;
+        [SerializeField] int[] materialNeeds;
+        [SerializeField] BuyFlags buyType;
+        [SerializeField] IntRange shopPrice;
+        [SerializeField] IntRange witchShopPrice;
+        [SerializeField] int craftCost;
+        [SerializeField] float craftDelay;
+        [SerializeField] float awareness;
         #endregion
     }
 }

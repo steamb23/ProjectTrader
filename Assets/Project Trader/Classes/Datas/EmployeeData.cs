@@ -46,15 +46,35 @@ namespace ProjectTrader.Datas
             get => this.dexterity;
             set => this.dexterity = value;
         }
+        public int Cost
+        {
+            get => this.cost;
+            set => this.cost = value;
+        }
         public int Tier
         {
             get => this.tier;
             set => this.tier = value;
         }
-        public int SpriteCode
+        public int HairSpriteCode
         {
-            get => this.spriteCode;
-            set => this.spriteCode = value;
+            get => this.hairSpriteCode;
+            set => this.hairSpriteCode = value;
+        }
+        public int SkinSpriteCode
+        {
+            get => this.skinSpriteCode;
+            set => this.skinSpriteCode = value;
+        }
+        public int HatSpriteCode
+        {
+            get => this.hatSpriteCode;
+            set => this.hatSpriteCode = value;
+        }
+        public int CostumeSpriteCode
+        {
+            get => this.costumeSpriteCode;
+            set => this.costumeSpriteCode = value;
         }
 
 
@@ -65,8 +85,12 @@ namespace ProjectTrader.Datas
         [SerializeField] int charisma;
         [SerializeField] int intelligent;
         [SerializeField] int dexterity;
+        [SerializeField] int cost;
         [SerializeField] int tier;
-        [SerializeField] int spriteCode;
+        [SerializeField] int hairSpriteCode;
+        [SerializeField] int skinSpriteCode;
+        [SerializeField] int hatSpriteCode;
+        [SerializeField] int costumeSpriteCode;
         #endregion
     }
 }
