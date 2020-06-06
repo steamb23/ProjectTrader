@@ -58,7 +58,7 @@ public abstract class MoveableAnimation : MonoBehaviour
             {
                 time -= walkAnimationInterval;
                 frame++;
-                if(whileCount++ > 10)
+                if (whileCount++ > 10)
                 {
                     Debug.LogWarning("walkAnimationInterval이 현재 Time.deltaTime보다 값이 작아 무한 루프가 발생했습니다!");
                     time = 0;
@@ -82,54 +82,53 @@ public abstract class MoveableAnimation : MonoBehaviour
                 WalkAnimaition();
                 break;
         }
+    }
 
-
-        void IdleAnimation()
+    protected virtual void IdleAnimation()
+    {
+        switch (direction)
         {
-            switch (direction)
-            {
-                case FourDirection.Up:
-                    spriteRenderer.sprite = moveableSpriteData.Idle.Back[0];
-                    break;
-                case FourDirection.Down:
-                    spriteRenderer.sprite = moveableSpriteData.Idle.Front[0];
-                    break;
-                case FourDirection.Right:
-                    spriteRenderer.sprite = moveableSpriteData.Idle.Right[0];
-                    break;
-                case FourDirection.Left:
-                    spriteRenderer.sprite = moveableSpriteData.Idle.Left[0];
-                    break;
-            }
+            case FourDirection.Up:
+                spriteRenderer.sprite = moveableSpriteData.Idle.Back[0];
+                break;
+            case FourDirection.Down:
+                spriteRenderer.sprite = moveableSpriteData.Idle.Front[0];
+                break;
+            case FourDirection.Right:
+                spriteRenderer.sprite = moveableSpriteData.Idle.Right[0];
+                break;
+            case FourDirection.Left:
+                spriteRenderer.sprite = moveableSpriteData.Idle.Left[0];
+                break;
         }
-        void WalkAnimaition()
+    }
+    protected virtual void WalkAnimaition()
+    {
+        switch (direction)
         {
-            switch (direction)
-            {
-                case FourDirection.Up:
-                    if (moveableSpriteData.Walk.Back.Length > 0)
-                        spriteRenderer.sprite = moveableSpriteData.Walk.Back[frame % moveableSpriteData.Walk.Back.Length];
-                    else goto default;
-                    break;
-                case FourDirection.Down:
-                    if (moveableSpriteData.Walk.Front.Length > 0)
-                        spriteRenderer.sprite = moveableSpriteData.Walk.Front[frame % moveableSpriteData.Walk.Front.Length];
-                    else goto default;
-                    break;
-                case FourDirection.Right:
-                    if (moveableSpriteData.Walk.Right.Length > 0)
-                        spriteRenderer.sprite = moveableSpriteData.Walk.Right[frame % moveableSpriteData.Walk.Right.Length];
-                    else goto default;
-                    break;
-                case FourDirection.Left:
-                    if (moveableSpriteData.Walk.Left.Length > 0)
-                        spriteRenderer.sprite = moveableSpriteData.Walk.Left[frame % moveableSpriteData.Walk.Left.Length];
-                    else goto default;
-                    break;
-                default:
-                    IdleAnimation();
-                    break;
-            }
+            case FourDirection.Up:
+                if (moveableSpriteData.Walk.Back.Length > 0)
+                    spriteRenderer.sprite = moveableSpriteData.Walk.Back[frame % moveableSpriteData.Walk.Back.Length];
+                else goto default;
+                break;
+            case FourDirection.Down:
+                if (moveableSpriteData.Walk.Front.Length > 0)
+                    spriteRenderer.sprite = moveableSpriteData.Walk.Front[frame % moveableSpriteData.Walk.Front.Length];
+                else goto default;
+                break;
+            case FourDirection.Right:
+                if (moveableSpriteData.Walk.Right.Length > 0)
+                    spriteRenderer.sprite = moveableSpriteData.Walk.Right[frame % moveableSpriteData.Walk.Right.Length];
+                else goto default;
+                break;
+            case FourDirection.Left:
+                if (moveableSpriteData.Walk.Left.Length > 0)
+                    spriteRenderer.sprite = moveableSpriteData.Walk.Left[frame % moveableSpriteData.Walk.Left.Length];
+                else goto default;
+                break;
+            default:
+                IdleAnimation();
+                break;
         }
     }
 }
