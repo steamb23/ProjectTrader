@@ -13,6 +13,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 05c45bc1d3221ed479bf333bb4ce301e,
         type: 2}
+    - target: {fileID: 1602506860480340669, guid: d196d5d8e0d67b2478fa66ede0897799,
+        type: 3}
+      propertyPath: moveableSpriteDatas.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 05c45bc1d3221ed479bf333bb4ce301e,
+        type: 2}
+    - target: {fileID: 1602506860480340669, guid: d196d5d8e0d67b2478fa66ede0897799,
+        type: 3}
+      propertyPath: animationDatas.Array.data[0].movableSpriteData
+      value: 
+      objectReference: {fileID: 11400000, guid: 05c45bc1d3221ed479bf333bb4ce301e,
+        type: 2}
     - target: {fileID: 1855165445106968387, guid: d196d5d8e0d67b2478fa66ede0897799,
         type: 3}
       propertyPath: m_Sprite

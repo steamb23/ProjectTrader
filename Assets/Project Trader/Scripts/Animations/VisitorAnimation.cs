@@ -10,17 +10,4 @@ using UnityEngine;
 
 public class VisitorAnimation : MoveableAnimation
 {
-
-    private VisitorSpriteData visitorSpriteData;
-
-    protected override void Start()
-    {
-        base.Start();
-        visitorSpriteData = moveableSpriteData as VisitorSpriteData;
-    }
-
-    protected override void LateUpdate()
-    {
-        base.LateUpdate();
-    }
 }

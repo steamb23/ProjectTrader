@@ -249,8 +249,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9f7763221d6b4c4e9ed85904f6722fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveableSpriteData: {fileID: 11400000, guid: 5df0c42f1fd078b43b7e418587cdbefc, type: 2}
-  spriteRenderer: {fileID: 1855165445106968387}
+  animationDatas:
+  - movableSpriteData: {fileID: 0}
+    spriteRenderer: {fileID: 1855165445106968387}
   aiPath: {fileID: 5943731839244378002}
   direction: 0
   state: 0

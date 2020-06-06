@@ -3,11 +3,18 @@ using System.Collections;
 using ProjectTrader.SpriteDatas;
 using Pathfinding;
 using ProjectTrader;
+using System;
 
 public abstract class MoveableAnimation : MonoBehaviour
 {
-    public MovableSpriteData moveableSpriteData;
-    public SpriteRenderer spriteRenderer;
+    [Serializable]
+    public struct AnimationData
+    {
+        public MovableSpriteData movableSpriteData;
+        public SpriteRenderer spriteRenderer;
+    }
+
+    public AnimationData[] animationDatas;
     public AIPath aiPath;
     public FourDirection direction;
 
@@ -35,10 +42,6 @@ public abstract class MoveableAnimation : MonoBehaviour
         if (aiPath == null)
         {
             aiPath = GetComponentInChildren<AIPath>();
-        }
-        if (spriteRenderer == null)
-        {
-            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
     }
 
@@ -86,49 +89,59 @@ public abstract class MoveableAnimation : MonoBehaviour
 
     protected virtual void IdleAnimation()
     {
-        switch (direction)
+        for (int i = 0; i < animationDatas.Length; i++)
         {
-            case FourDirection.Up:
-                spriteRenderer.sprite = moveableSpriteData.Idle.Back[0];
-                break;
-            case FourDirection.Down:
-                spriteRenderer.sprite = moveableSpriteData.Idle.Front[0];
-                break;
-            case FourDirection.Right:
-                spriteRenderer.sprite = moveableSpriteData.Idle.Right[0];
-                break;
-            case FourDirection.Left:
-                spriteRenderer.sprite = moveableSpriteData.Idle.Left[0];
-                break;
+            var spriteRenderer = animationDatas[i].spriteRenderer;
+            var movableSpriteData = animationDatas[i].movableSpriteData;
+            switch (direction)
+            {
+                case FourDirection.Up:
+                    spriteRenderer.sprite = movableSpriteData.Idle.Back[0];
+                    break;
+                case FourDirection.Down:
+                    spriteRenderer.sprite = movableSpriteData.Idle.Front[0];
+                    break;
+                case FourDirection.Right:
+                    spriteRenderer.sprite = movableSpriteData.Idle.Right[0];
+                    break;
+                case FourDirection.Left:
+                    spriteRenderer.sprite = movableSpriteData.Idle.Left[0];
+                    break;
+            }
         }
     }
     protected virtual void WalkAnimaition()
     {
-        switch (direction)
+        for (int i = 0; i < animationDatas.Length; i++)
         {
-            case FourDirection.Up:
-                if (moveableSpriteData.Walk.Back.Length > 0)
-                    spriteRenderer.sprite = moveableSpriteData.Walk.Back[frame % moveableSpriteData.Walk.Back.Length];
-                else goto default;
-                break;
-            case FourDirection.Down:
-                if (moveableSpriteData.Walk.Front.Length > 0)
-                    spriteRenderer.sprite = moveableSpriteData.Walk.Front[frame % moveableSpriteData.Walk.Front.Length];
-                else goto default;
-                break;
-            case FourDirection.Right:
-                if (moveableSpriteData.Walk.Right.Length > 0)
-                    spriteRenderer.sprite = moveableSpriteData.Walk.Right[frame % moveableSpriteData.Walk.Right.Length];
-                else goto default;
-                break;
-            case FourDirection.Left:
-                if (moveableSpriteData.Walk.Left.Length > 0)
-                    spriteRenderer.sprite = moveableSpriteData.Walk.Left[frame % moveableSpriteData.Walk.Left.Length];
-                else goto default;
-                break;
-            default:
-                IdleAnimation();
-                break;
+            var spriteRenderer = animationDatas[i].spriteRenderer;
+            var movableSpriteData = animationDatas[i].movableSpriteData;
+            switch (direction)
+            {
+                case FourDirection.Up:
+                    if (movableSpriteData.Walk.Back.Length > 0)
+                        spriteRenderer.sprite = movableSpriteData.Walk.Back[frame % movableSpriteData.Walk.Back.Length];
+                    else goto default;
+                    break;
+                case FourDirection.Down:
+                    if (movableSpriteData.Walk.Front.Length > 0)
+                        spriteRenderer.sprite = movableSpriteData.Walk.Front[frame % movableSpriteData.Walk.Front.Length];
+                    else goto default;
+                    break;
+                case FourDirection.Right:
+                    if (movableSpriteData.Walk.Right.Length > 0)
+                        spriteRenderer.sprite = movableSpriteData.Walk.Right[frame % movableSpriteData.Walk.Right.Length];
+                    else goto default;
+                    break;
+                case FourDirection.Left:
+                    if (movableSpriteData.Walk.Left.Length > 0)
+                        spriteRenderer.sprite = movableSpriteData.Walk.Left[frame % movableSpriteData.Walk.Left.Length];
+                    else goto default;
+                    break;
+                default:
+                    IdleAnimation();
+                    break;
+            }
         }
     }
 }

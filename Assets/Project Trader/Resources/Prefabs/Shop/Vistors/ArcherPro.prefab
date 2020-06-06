@@ -7,10 +7,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1602506860480340669, guid: d196d5d8e0d67b2478fa66ede0897799,
+        type: 3}
+      propertyPath: moveableSpriteDatas.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5df0c42f1fd078b43b7e418587cdbefc,
+        type: 2}
+    - target: {fileID: 1602506860480340669, guid: d196d5d8e0d67b2478fa66ede0897799,
+        type: 3}
+      propertyPath: animationDatas.Array.data[0].movableSpriteData
+      value: 
+      objectReference: {fileID: 11400000, guid: 5df0c42f1fd078b43b7e418587cdbefc,
+        type: 2}
     - target: {fileID: 4608506488214121083, guid: d196d5d8e0d67b2478fa66ede0897799,
         type: 3}
       propertyPath: m_Name
-      value: '@Template'
+      value: ArcherPro
       objectReference: {fileID: 0}
     - target: {fileID: 5179420253757041055, guid: d196d5d8e0d67b2478fa66ede0897799,
         type: 3}
