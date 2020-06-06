@@ -143,8 +143,6 @@ public class SellWindow : MonoBehaviour
 
     }
 
-
-    //배치된 아이템 수를 검사하고 0일때 화살표,버튼 호출(ui호출은 버튼에서 처리) ->그다음에 코드, 카운트 교체(배치버튼으로)
     void SetsettingButton()
     {
         GameObject[] go = GameObject.FindGameObjectsWithTag("Item");
@@ -185,10 +183,9 @@ public class SellWindow : MonoBehaviour
         //텍스트랑 image찾아서 변경
     }
 
-    //팝업윈도우 생성,할당,테이블 데이터 보내기
+
     public void SetPopUpWindow()
     {
-
         tableData = setTable.GetComponent<TableCheck>().choiceTable;
         popupWindow.SetActive(true);
         popupWindow.GetComponent<MakePopScript>().Openpopup();

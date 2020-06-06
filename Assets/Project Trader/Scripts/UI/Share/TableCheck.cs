@@ -9,6 +9,7 @@ public class TableCheck : MonoBehaviour
     GameObject[] item;
     GameObject displayWindow;
     GameObject makeWindow;
+    GameObject itemShop;
     public GameObject choiceTable
     {
         set;
@@ -19,6 +20,7 @@ public class TableCheck : MonoBehaviour
     {
         displayWindow = GameObject.Find("selltimewindow");
         makeWindow = GameObject.Find("makeroom");
+        itemShop = GameObject.Find("itemshop");
     }
 
     void Update()
@@ -45,6 +47,10 @@ public class TableCheck : MonoBehaviour
             if (rayHit.collider.gameObject.tag == "Makeroom")
             {
                 CreateMakeRoom();
+            }
+            if (rayHit.collider.gameObject.tag == "ItemShop")
+            {
+                CreateItemShop();
             }
         }
 
@@ -76,5 +82,10 @@ public class TableCheck : MonoBehaviour
     void CreateMakeRoom()
     {
         makeWindow.GetComponent<MakerUI>().OpenMakeRoom();
+    }
+
+    void CreateItemShop()
+    {
+        itemShop.GetComponent<ShopWindow>().OpenShopWindow();
     }
 }

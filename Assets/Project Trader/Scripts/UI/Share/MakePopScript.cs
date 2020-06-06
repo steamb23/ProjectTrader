@@ -21,6 +21,12 @@ public class MakePopScript : MonoBehaviour
     public Image makerItemImage;
     public TextMeshProUGUI makerName;
 
+    //상점
+    public Slider shopslider;
+    public TextMeshProUGUI shopitemname;
+    public Image shopitemsprite;
+    public TextMeshProUGUI shopitemnum;
+
 
     Item popItem;
     ItemData popItemData;
@@ -38,12 +44,14 @@ public class MakePopScript : MonoBehaviour
     {
         NONE=0,
         SELLPOPUP,
-        MAKERPOPUP
+        MAKERPOPUP,
+        SHOPPOPUP,
     };
 
     //자기자신 배치 팝업, 공방 팝업
     public GameObject popUpWindow;
     public GameObject makerPopupwindow;
+    public GameObject shopPopup;
 
     TextMeshProUGUI chaneT;
     bool sell;
@@ -85,6 +93,10 @@ public class MakePopScript : MonoBehaviour
                 makerNumSlider.maxValue = popItem.Count;
                 makerNumSlider.minValue = 1;
                 break;
+            case PopupState.SHOPPOPUP:
+                shopslider.maxValue = popItem.Count;
+                shopslider.minValue = 1;
+                break;
             case PopupState.NONE:
                 break;
         }
@@ -99,6 +111,9 @@ public class MakePopScript : MonoBehaviour
                 break;
             case PopupState.MAKERPOPUP:
                 makermaxNum.text = makerNumSlider.value.ToString() + "/" + makerNumSlider.maxValue.ToString();
+                break;
+            case PopupState.SHOPPOPUP:
+                shopitemnum.text = shopslider.value.ToString() + "/" + shopslider.maxValue.ToString();
                 break;
             case PopupState.NONE:
                 break;
@@ -155,7 +170,6 @@ public class MakePopScript : MonoBehaviour
     }
 
     //아래부턴 공방ui
-    //알바탭으로 제작하라는 신호 보내기(타이머는 알바탭에서 관리? 공방은 정보를 아이템이아니라 알바탭으로 보내기
 
     public void OpenMakePopup()
     {
@@ -173,7 +187,7 @@ public class MakePopScript : MonoBehaviour
         popItem.Count = cunt;
         popItem.Code = cod;
         popItemData = popItem.GetData();
-        makerItemImage.sprite = ItemSpriteData.GetItemSprite(popItem.Code);
+        makerItemImage.sprite = popItemData.GetSprite();
         makerName.text = popItemData.Name;
         employeeslot = emplslot;
         SetNum();
@@ -184,5 +198,41 @@ public class MakePopScript : MonoBehaviour
         GameObject go = GameObject.Find("makeroom");
         go.GetComponent<MakerTimer>().StartTimer(employeeslot-1,popItem.Code,popItem.Count);//버튼,코드,갯수
         CloseMakePopup();
+    }
+
+
+
+    //상점
+    public void ShopPopupOpen()
+    {
+        popupstate = PopupState.SHOPPOPUP;
+    }
+
+
+    public void SetShopItem(int cod,int cunt)
+    {
+        UnityEngine.Debug.Log(cod.ToString());
+        popItem.Code = cod;
+        popItem.Count = cunt;
+        popItemData = popItem.GetData();
+        shopitemsprite.sprite = popItemData.GetSprite();
+        shopitemname.text = popItemData.Name;
+        SetNum();
+    }
+
+    public void SetBuyItem()
+    {
+        //이곳에서 돈 확인
+        GameObject go = GameObject.Find("itemshop");
+        go.GetComponent<ShopWindow>().SetbuyNum(popItem.Code, (int)shopslider.value);
+        go.GetComponent<ShopTimer>().SetInfo((int)shopslider.value, popItem.Code);
+        //이곳에서 인벤토리?에 아이템추가(불러오기)
+        CloseShopPopup();
+    }
+
+    public void CloseShopPopup()
+    {
+        popupstate = PopupState.NONE;
+        shopPopup.SetActive(false);
     }
 }

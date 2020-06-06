@@ -14,8 +14,6 @@ public class TextUiControl : MonoBehaviour
     GameObject canvas;
     RectTransform tbPos;
     TextMeshProUGUI tmp;
-    //텍스트가 나타났다 사라지는 시간
-    //public int textBoxTime=2;
 
     void Start()
     {
