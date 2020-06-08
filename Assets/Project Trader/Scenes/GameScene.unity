@@ -20560,6 +20560,12 @@ MonoBehaviour:
     date:
       ticks: 0
     shopSize: 0
+    ownedItems: []
+    displayedItems: []
+    hiredEmployees: []
+    cashers: []
+    cleaners: []
+    crafter: []
 --- !u!4 &1791022366
 Transform:
   m_ObjectHideFlags: 0
