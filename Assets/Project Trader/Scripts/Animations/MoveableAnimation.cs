@@ -23,7 +23,7 @@ public abstract class MoveableAnimation : MonoBehaviour
         Idle,
         Walk,
     }
-
+    private AnimationState prevState;
     public AnimationState state;
 
     public float walkAnimationInterval = 0.2f;
@@ -34,6 +34,22 @@ public abstract class MoveableAnimation : MonoBehaviour
 
 
     private Vector3 previousPosition;
+
+    public AnimationState State
+    {
+        get => this.state;
+        set
+        {
+            this.state = value;
+            if (state != prevState)
+            {
+                prevState = state;
+                frame = 0;
+                time = 0;
+            }
+        }
+    }
+
     // Use this for initialization
     protected virtual void Start()
     {
@@ -48,35 +64,32 @@ public abstract class MoveableAnimation : MonoBehaviour
     // Update is called once per frame
     protected virtual void LateUpdate()
     {
+        time += Time.deltaTime;
+        int whileCount = 0;
+        while (time > walkAnimationInterval)
+        {
+            time -= walkAnimationInterval;
+            frame++;
+            if (whileCount++ > 10)
+            {
+                Debug.LogWarning("walkAnimationInterval이 현재 Time.deltaTime보다 값이 작아 무한 루프가 발생했습니다!");
+                time = 0;
+            }
+        }
+
         var velocity = aiPath.velocity;
 
         if (velocity.sqrMagnitude > aiPath.maxSpeed * aiPath.maxSpeed * 0.1f)
         {
             direction = Utils.VelocityToDirection(velocity);
-            state = AnimationState.Walk;
-
-            time += Time.deltaTime;
-            int whileCount = 0;
-            while (time > walkAnimationInterval)
-            {
-                time -= walkAnimationInterval;
-                frame++;
-                if (whileCount++ > 10)
-                {
-                    Debug.LogWarning("walkAnimationInterval이 현재 Time.deltaTime보다 값이 작아 무한 루프가 발생했습니다!");
-                    time = 0;
-                }
-            }
+            State = AnimationState.Walk;
         }
         else
         {
-            state = AnimationState.Idle;
-
-            frame = 0;
-            time = 0;
+            State = AnimationState.Idle;
         }
 
-        switch (state)
+        switch (State)
         {
             case AnimationState.Idle:
                 IdleAnimation();

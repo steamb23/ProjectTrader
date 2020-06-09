@@ -21,6 +21,8 @@ public class CleanerAI : MonoBehaviour
 
     public DropItem dropItem;
 
+    public EmployeeAnimation animation;
+
     // A* 프로젝트
     IAstarAI astarAI;
 
@@ -34,6 +36,7 @@ public class CleanerAI : MonoBehaviour
         astarAI = GetComponent<IAstarAI>();
 
         dropItem = GameObject.FindObjectOfType<DropItem>();
+        animation = GetComponent<EmployeeAnimation>();
     }
 
     // Update is called once per frame
@@ -141,6 +144,8 @@ public class CleanerAI : MonoBehaviour
                 timer.boostRatio = 3;
 
                 state = AiState.Cleaning;
+                if (animation != null)
+                    animation.IdleState = EmployeeAnimation.IdleStateType.Cleaning;
             }
 
             //FloatingTimer.Create(this.transform, 5f, (floatingTimer) =>
@@ -171,5 +176,7 @@ public class CleanerAI : MonoBehaviour
     {
         // 다시 추적 시작
         state = AiState.Finding;
+        if (animation != null)
+            animation.IdleState = EmployeeAnimation.IdleStateType.Default;
     }
 }

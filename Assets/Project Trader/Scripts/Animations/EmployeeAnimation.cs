@@ -10,18 +10,30 @@ public class EmployeeAnimation : MoveableAnimation
         Default,
         Cleaning
     }
-
+    IdleStateType prevState;
     [SerializeField] IdleStateType idleState;
+    [SerializeField] bool easterEgg;
 
     public IdleStateType IdleState
     {
         get => this.idleState;
-        set => this.idleState = value;
+        set
+        {
+            this.idleState = value;
+            if (idleState != prevState)
+            {
+                prevState = idleState;
+                frame = 0;
+                time = 0;
+            }
+
+            easterEgg = Random.Range(0f, 1f) < 0.000005f;
+        }
     }
 
     protected override void IdleAnimation()
     {
-        switch (idleState)
+        switch (IdleState)
         {
             default:
                 base.IdleAnimation();
@@ -34,6 +46,8 @@ public class EmployeeAnimation : MoveableAnimation
 
     protected virtual void CleaningAnimation()
     {
+        if (easterEgg)
+            frame++;
         for (int i = 0; i < animationDatas.Length; i++)
         {
             var spriteRenderer = animationDatas[i].spriteRenderer;
@@ -42,7 +56,6 @@ public class EmployeeAnimation : MoveableAnimation
             if (movableSpriteData.Cleaning.Length > 0)
                 spriteRenderer.sprite = movableSpriteData.Cleaning[frame % movableSpriteData.Cleaning.Length];
             else base.IdleAnimation();
-            break;
         }
     }
 }
