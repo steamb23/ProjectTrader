@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectTrader;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -50,6 +51,9 @@ class CashierAi : MonoBehaviour
         var timer = FloatingTimer.Create(this.transform, new Vector3(0.2f, 0), 5, (floatingTimer) =>
         {
             floatingTimer.FadeoutWithDestory();
+
+            if (visitor.WishItems.Count > 0)
+                PlayData.CurrentData.Money += visitor.WishItems[0].GetData().SellPrice;
 
             dealCompleted?.Invoke();
         });
