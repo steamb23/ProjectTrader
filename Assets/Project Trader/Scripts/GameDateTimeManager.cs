@@ -45,8 +45,6 @@ class GameDateTimeManager : MonoBehaviour
     // 현실시간 300초 = 게임시간 1440분 = 게임시간 86400초
     // 현실시간 1초 = 게임시간 288초
 
-    [SerializeField]
-    private GameDateTimeInitData data;
     // 여는 시간
     [SerializeField]
     private int openningHour = 9;
@@ -60,6 +58,11 @@ class GameDateTimeManager : MonoBehaviour
     private float gameTimeScale = 288f;
     [SerializeField]
     private bool isStopped = false;
+    [Header("디버깅용")]
+    [SerializeField]
+    private bool isNext;
+    [SerializeField]
+    private GameDateTimeInitData data;
     [SerializeField]
     private GameDateTime gameDateTime;
     [SerializeField]
@@ -131,9 +134,11 @@ class GameDateTimeManager : MonoBehaviour
             // 소수점부 남기고 0으로 초기화
             timePart -= gameTimeInt;
 
+            this.gameDateTime = PlayData.CurrentData.Date;
             var gameDateTime = this.gameDateTime;
             gameDateTime.AddSecond(gameTimeInt);
             this.gameDateTime = gameDateTime;
+            PlayData.CurrentData.Date = gameDateTime;
 
             // 문닫을 시간 확인
             ClosingTimeUpdate();
@@ -141,6 +146,16 @@ class GameDateTimeManager : MonoBehaviour
 #if UNITY_EDITOR
             // 출력
             data = (GameDateTimeInitData)gameDateTime;
+#endif
+        }
+        else
+        {
+#if UNITY_EDITOR
+            if (isNext)
+            {
+                isNext = false;
+                Opening();
+            }
 #endif
         }
     }
@@ -158,22 +173,25 @@ class GameDateTimeManager : MonoBehaviour
     public void Closing()
     {
         TimeStop();
-        var gameDateTime = GameDateTime;
+        var gameDateTime = PlayData.CurrentData.Date;
         // 닫는 시간으로 수정
         gameDateTime.Hour = closingHour;
         gameDateTime.Minute = 0;
         gameDateTime.Second = 0;
-        GameDateTime = gameDateTime;
+        PlayData.CurrentData.Date = gameDateTime;
         //TODO: 결산 윈도우 호출
     }
 
     public void Opening()
     {
         TimeStart();
-        var gameDateTime = GameDateTime;
+        var gameDateTime = PlayData.CurrentData.Date;
         // 여는 시간으로 수정
         gameDateTime.Hour = openningHour;
         gameDateTime.Minute = 0;
         gameDateTime.Second = 0;
+        // 다음날
+        gameDateTime.AddDay(1);
+        PlayData.CurrentData.Date = gameDateTime;
     }
 }
