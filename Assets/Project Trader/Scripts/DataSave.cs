@@ -72,7 +72,7 @@ public class DataSave : MonoBehaviour
                 textUi.GetComponent<TextUiControl>().PrintMoney(pda.Money);
                 break;
             case "Tired":
-                textUi.GetComponent<TextUiControl>().PrintTired(pda.MaxFatigue, pda.Fatigue);
+                textUi.GetComponent<TextUiControl>().PrintTired(pda.MaxStamina, pda.Stamina);
                 break;
             case "Level":
                 textUi.GetComponent<TextUiControl>().PrintLevel(pda.Level);

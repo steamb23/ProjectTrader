@@ -10,14 +10,32 @@ namespace ProjectTrader
     [Serializable]
     public class PlayData
     {
+        static PlayData()
+        {
+            // 기본 데이터 설정.
+            // 추후에 게임 진입시 초기화하도록 할 예정
+            SetCurrentData(new PlayData());
+        }
+
+        public static PlayData CurrentData
+        {
+            get;
+            private set;
+        }
+
+        public static void SetCurrentData(PlayData playData)
+        {
+            CurrentData = playData;
+        }
+
         #region 인스펙터 변수 & 초기 값
         [SerializeField] int money = 10000;
         [SerializeField] int level = 1;
-        [SerializeField] int maxFatigue;
-        [SerializeField] int fatigue;
+        [SerializeField] int maxStamina;
+        [SerializeField] int stamina;
         [SerializeField] float awareness;
         [SerializeField] string shopName;
-        [SerializeField] GameDateTime date;
+        [SerializeField] GameDateTime date = new GameDateTime(hour: 8); // 오픈 시간
         [SerializeField] int shopSize;
         [SerializeField] List<Item> ownedItems = new List<Item>();
         [SerializeField] Item[] displayedItems;
@@ -48,19 +66,19 @@ namespace ProjectTrader
         /// <summary>
         /// 최대 피로도
         /// </summary>
-        public int MaxFatigue
+        public int MaxStamina
         {
-            get => maxFatigue;
-            set => maxFatigue = value;
+            get => maxStamina;
+            set => maxStamina = value;
         }
 
         /// <summary>
         /// 현재 피로도
         /// </summary>
-        public int Fatigue
+        public int Stamina
         {
-            get => fatigue;
-            set => fatigue = value;
+            get => stamina;
+            set => stamina = value;
         }
 
         /// <summary>
