@@ -58,37 +58,37 @@ namespace ProjectTrader
         public int TotalSeconds
         {
             get => ticks / TicksPerSecond;
-            set => ticks = value * TicksPerSecond;
+            //set => ticks = value * TicksPerSecond;
         }
 
         public int TotalMinutes
         {
             get => ticks / TicksPerMinute;
-            set => ticks = value * TicksPerMinute;
+            //set => ticks = value * TicksPerMinute;
         }
 
         public int TotalHours
         {
             get => ticks / TicksPerHour;
-            set => ticks = value * TicksPerHour;
+            //set => ticks = value * TicksPerHour;
         }
 
         public int TotalDays
         {
-            get => ticks / TicksPerDay;
-            set => ticks = value * TicksPerDay;
+            get => ticks / TicksPerDay + 1;
+            //set => ticks = (value - 1) * TicksPerDay;
         }
 
         public int TotalMonths
         {
-            get => ticks / TicksPerMonth;
-            set => ticks = value * TicksPerMonth;
+            get => ticks / TicksPerMonth + 1;
+            //set => ticks = (value - 1) * TicksPerMonth;
         }
 
         public int TotalYears
         {
-            get => ticks / TicksPerYear;
-            set => ticks = value * TicksPerYear;
+            get => ticks / TicksPerYear + 1;
+            //set => ticks = (value - 1) * TicksPerYear;
         }
 
         public int Second
@@ -124,16 +124,16 @@ namespace ProjectTrader
         public int Year
         {
             get => TotalYears;
-            set => TotalYears = value;
+            set => AddYear(value - Year);
         }
 
-        public void AddSecond() => TotalSeconds++;
-        public void AddSecond(int value) => TotalSeconds += value;
-        public void AddMinute(int value) => TotalMinutes += value;
-        public void AddHour(int value) => TotalHours += value;
-        public void AddDay(int value) => TotalDays += value;
-        public void AddMonth(int value) => TotalMonths += value;
-        public void AddYear(int value) => TotalYears += value;
+        public void AddSecond() => ticks += TicksPerSecond;
+        public void AddSecond(int value) => ticks += value * TicksPerSecond;
+        public void AddMinute(int value) => ticks += value * TicksPerMinute;
+        public void AddHour(int value) => ticks += value * TicksPerHour;
+        public void AddDay(int value) => ticks += value * TicksPerDay;
+        public void AddMonth(int value) => ticks += value * TicksPerMonth;
+        public void AddYear(int value) => ticks += value * TicksPerYear;
 
         public override string ToString() => Year + "년 " + Month + "월 " + Day + "일 " + Hour + "시 " + Minute + "분 " + Second + "초";
     }
