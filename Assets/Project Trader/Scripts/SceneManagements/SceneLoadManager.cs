@@ -4,6 +4,20 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoadManager : MonoBehaviour
 {
+    static SceneLoadManager()
+    {
+        GameObject gameObject = new GameObject("SceneLoadManager");
+        gameObject.AddComponent<SceneLoadManager>();
+
+        // 게임오브젝트 인스턴스화
+        gameObject = Instantiate(gameObject);
+
+        // 정적 인스턴스 프로퍼티 설정
+        Instance = gameObject.GetComponent<SceneLoadManager>();
+    }
+
+    public static SceneLoadManager Instance { get; }
+
     public enum ShopScene
     {
         Shop1,
@@ -54,7 +68,7 @@ public class SceneLoadManager : MonoBehaviour
         SceneManager.LoadScene(sceneName, loadSceneMode);
     }
 
-    private void Start()
+    private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
     }
