@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Project Trader/Scenes/MainScene.unity
+    guid: bdf1f44bc305eaf43a455b7d996392b7
+  - enabled: 1
     path: Assets/Project Trader/Scenes/GameScene.unity
     guid: 0f75d20c0936a514b840fd042a9080b3
   - enabled: 1
@@ -14,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Project Trader/Scenes/Shop1Scene.unity
     guid: fa627693e204de0489ab10d898f1a9aa
+  - enabled: 1
+    path: Assets/Project Trader/Scenes/LoadingScene.unity
+    guid: 846668a7570c07041968c8aeae9cd107
   m_configObjects: {}

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEditorInternal;
 
 public class EmployeeHireWindow_ResetButton : MonoBehaviour
 {

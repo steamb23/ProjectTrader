@@ -41,31 +41,48 @@ public class SceneLoadManager : MonoBehaviour
 
     public void LoadScene(ShopScene shopScene)
     {
-        // 초기화 후 다시 불러오기
-        LoadScene("GameScene");
-        string shopSceneName;
-        switch (shopScene)
+        ShowLoadingScene(() =>
         {
-            case ShopScene.Shop1:
-                shopSceneName = "Shop1Scene";
-                break;
-            case ShopScene.Shop2:
-                shopSceneName = "Shop2Scene";
-                break;
-            case ShopScene.Shop3:
-                shopSceneName = "Shop3Scene";
-                break;
-            default:
-                shopSceneName = "";
-                break;
-        }
-        LoadScene(shopSceneName, LoadSceneMode.Additive);
-        LoadScene("TownScene", LoadSceneMode.Additive);
+            // 초기화 후 다시 불러오기
+            SceneManager.LoadScene("GameScene");
+            string shopSceneName;
+            switch (shopScene)
+            {
+                case ShopScene.Shop1:
+                    shopSceneName = "Shop1Scene";
+                    break;
+                case ShopScene.Shop2:
+                    shopSceneName = "Shop2Scene";
+                    break;
+                case ShopScene.Shop3:
+                    shopSceneName = "Shop3Scene";
+                    break;
+                default:
+                    shopSceneName = "";
+                    break;
+            }
+            SceneManager.LoadScene(shopSceneName, LoadSceneMode.Additive);
+            SceneManager.LoadScene("TownScene", LoadSceneMode.Additive);
+        });
     }
 
     public void LoadScene(string sceneName, LoadSceneMode loadSceneMode = LoadSceneMode.Single)
     {
-        SceneManager.LoadScene(sceneName, loadSceneMode);
+        ShowLoadingScene(() =>
+        {
+            SceneManager.LoadScene(sceneName, loadSceneMode);
+        });
+    }
+
+    public void ShowLoadingScene(System.Action action)
+    {
+        SceneManager.LoadScene("LoadingScene", LoadSceneMode.Additive);
+        StartCoroutine(LoadingSceneCoroutine());
+        IEnumerator LoadingSceneCoroutine()
+        {
+            yield return null;
+            action();
+        }
     }
 
     private void Awake()
