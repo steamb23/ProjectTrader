@@ -7,7 +7,7 @@ using System;
 public class EmployeeInfo : MonoBehaviour
 {
     [Serializable]
-    public class EmployeeData
+    public class EmploemyeeData
     {
         [SerializeField]
         public string name;
@@ -38,7 +38,7 @@ public class EmployeeInfo : MonoBehaviour
 
     [Space]
     [SerializeField]
-    EmployeeData employeeData;
+    EmploemyeeData employeeData;
 
     public string Name
     {

@@ -3,6 +3,7 @@ using System.Collections;
 
 public class CandiateInfo : EmployeeInfo
 {
+
     public void Disable()
     {
         var canvasGroup = GetComponent<CanvasGroup>();
@@ -16,4 +17,5 @@ public class CandiateInfo : EmployeeInfo
         canvasGroup.interactable = true;
         canvasGroup.alpha = 1f;
     }
+
 }

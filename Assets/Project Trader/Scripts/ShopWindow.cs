@@ -6,7 +6,7 @@ using TMPro;
 using ProjectTrader;
 using ProjectTrader.Datas;
 using ProjectTrader.SpriteDatas;
-
+using System.ComponentModel;
 
 public class ShopWindow : MonoBehaviour
 {
@@ -16,6 +16,7 @@ public class ShopWindow : MonoBehaviour
     public GameObject shopslot;
     public GameObject shopPopup;
 
+    GameObject useData;
     //슬롯에 필요
     GameObject[] shopItem;
     Item[] shopItemInfo;
@@ -28,18 +29,21 @@ public class ShopWindow : MonoBehaviour
     bool setwindow = false;
     Image[] slotImage;
     TextMeshProUGUI[] slottext;
+
     void Start()
     {
-        
+        useData = GameObject.Find("SaveData");
     }
 
 
     void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.W))
         {
             SetShopslot();
         }
+        */
     }
 
     public void OpenShopWindow()
@@ -61,7 +65,7 @@ public class ShopWindow : MonoBehaviour
     //슬롯
     void SetShopslot()
     {
-        //임시 지정
+        //임시 지정, 판매슬롯은 변동이 없기 때문에 한번 생성후 고정,material개수만큼
         shopItem = new GameObject[5];
         shopItemInfo = new Item[5];
         shopItemData = new ItemData[5];
@@ -97,8 +101,11 @@ public class ShopWindow : MonoBehaviour
         slottext[0].text = shopItemData[i].Name;
         slottext[1].text = (itemMaxnum[i] - buyNum[i]).ToString() + "/" + itemMaxnum[i].ToString();
         slottext[2].text = "00:00";
-        slottext[3].text = shopItemData[i].ShopPrice.ToString();
-        
+        //slottext[3].text = shopItemData[i].ShopPrice.ToString();
+        int dd = UnityEngine.Random.Range(100, 500);
+        slottext[3].text = dd.ToString();
+
+
     }
     void SlotImage(int i)
     {
@@ -150,11 +157,16 @@ public class ShopWindow : MonoBehaviour
                     SetshopslotData(i);
                     SlotInDataSet(i);
                 }
-                //UnityEngine.Debug.Log( cod.ToString()+": 코드 , "+(i).ToString() + " 번째 슬롯 재설정");
                 return;
             }
         }
     }
 
+    //돈 사용, 아이템 추가,아이템 코드와 카운트, 아이템 가격이 필요함
+    public void InItemUseMoney(Item sellitem,int value)
+    {
+        //useData.GetComponent<DataSave>().UseMoney(); //가격추가하고
+        useData.GetComponent<DataSave>().UseItem(sellitem.Code,value);
+    }
 
 }

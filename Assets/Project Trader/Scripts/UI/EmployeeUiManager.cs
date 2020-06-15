@@ -11,6 +11,11 @@ public class EmployeeUiManager : MonoBehaviour
     private GameObject hireWindow = null;
     [SerializeField]
     private GameObject assignWindow = null;
+    [SerializeField]
+    private GameObject watingWindow = null;
+    [SerializeField]
+    private GameObject buttongroup = null;
+
 
     // Start is called before the first frame update
     void Start()
@@ -21,15 +26,18 @@ public class EmployeeUiManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CloseButton();
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.H))
         {
             OpenHireWindow();
         }
+
 #endif
 
         if (hireWindow.activeSelf ||
-            assignWindow.activeSelf)
+            assignWindow.activeSelf ||
+            watingWindow.activeSelf)
         {
             background.SetActive(true);
         }
@@ -41,11 +49,41 @@ public class EmployeeUiManager : MonoBehaviour
 
     public void OpenHireWindow()
     {
+        if (assignWindow.activeSelf || watingWindow.activeSelf)
+        {
+            assignWindow.SetActive(false);
+            watingWindow.SetActive(false);
+        }
+        buttongroup.SetActive(true);
         hireWindow.SetActive(true);
     }
 
     public void OpenAssignWindow()
     {
+        if (hireWindow.activeSelf || watingWindow.activeSelf)
+        {
+            hireWindow.SetActive(false);
+            watingWindow.SetActive(false);
+        }
         assignWindow.SetActive(true);
+        buttongroup.SetActive(true);
+    }
+
+    public void OpenWatingWindow()
+    {
+        if (hireWindow.activeSelf ||assignWindow.activeSelf)
+        {
+            hireWindow.SetActive(false);
+            assignWindow.SetActive(false);
+        }
+        buttongroup.SetActive(false);
+        watingWindow.SetActive(true);
+        this.gameObject.GetComponent<EmployeeDataCatch>().AddEmp();
+    }
+
+    public void CloseButton()
+    {
+        if (!hireWindow.activeSelf && !assignWindow.activeSelf)
+            buttongroup.SetActive(false);
     }
 }
