@@ -21,7 +21,7 @@ public class EmployeeUiManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-#if UNITY_EDITOR
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
         if (Input.GetKeyDown(KeyCode.H))
         {
             OpenHireWindow();

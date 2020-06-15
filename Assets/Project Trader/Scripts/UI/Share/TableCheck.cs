@@ -66,7 +66,7 @@ public class TableCheck : MonoBehaviour
             if (table[i] == hitTable)
             {
 
-                return item[i+1];
+                return item[i];
             }
         }
         return item[i];
