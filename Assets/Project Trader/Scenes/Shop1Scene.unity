@@ -600,7 +600,7 @@ GameObject:
   - component: {fileID: 471350511}
   m_Layer: 8
   m_Name: ItemTable
-  m_TagString: ItemTable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2384,7 +2384,7 @@ GameObject:
   - component: {fileID: 1682295495}
   m_Layer: 8
   m_Name: ItemTable (1)
-  m_TagString: ItemTable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

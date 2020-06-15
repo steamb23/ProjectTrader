@@ -75,19 +75,19 @@ namespace ProjectTrader
 
         public int TotalDays
         {
-            get => ticks / TicksPerDay + 1;
+            get => ticks / TicksPerDay;
             //set => ticks = (value - 1) * TicksPerDay;
         }
 
         public int TotalMonths
         {
-            get => ticks / TicksPerMonth + 1;
+            get => ticks / TicksPerMonth;
             //set => ticks = (value - 1) * TicksPerMonth;
         }
 
         public int TotalYears
         {
-            get => ticks / TicksPerYear + 1;
+            get => ticks / TicksPerYear;
             //set => ticks = (value - 1) * TicksPerYear;
         }
 

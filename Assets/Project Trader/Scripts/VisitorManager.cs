@@ -11,6 +11,8 @@ public class VisitorManager : MonoBehaviour
         public float priority;
     }
 
+    [SerializeField] GameDateTimeManager gameDateTimeManager;
+
     public List<VisitorInfo> visitorInfos;
     public PathNodeManager pathNodeManager;
     [Tooltip("초당 들어올 확률")]
@@ -29,13 +31,18 @@ public class VisitorManager : MonoBehaviour
             pathNodeManager = FindObjectOfType<PathNodeManager>();
         }
 
+        if (gameDateTimeManager == null)
+        {
+            gameDateTimeManager = FindObjectOfType<GameDateTimeManager>();
+        }
+
         maxVisitor = pathNodeManager.itemNodes.Count;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (visitors.Count < maxVisitor)
+        if (visitors.Count < maxVisitor && !gameDateTimeManager.IsStopped)
         {
             // 랜덤
             var random = Random.Range(0, 1f);
