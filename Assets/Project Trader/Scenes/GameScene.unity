@@ -20980,7 +20980,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropItem: {fileID: 3685273068723076065, guid: 4de85acb168d2524e97d5fbe4d3541ec,
     type: 3}
-  trashItem: {fileID: 2734067372159387242, guid: 04ce65f41e794824db144e9adb9f087b,
+  trashItem: {fileID: 6059462691135343572, guid: befacc5f61545a64b9af62656103d425,
     type: 3}
 --- !u!4 &1753350879
 Transform:
