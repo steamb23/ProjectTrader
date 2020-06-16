@@ -20,24 +20,26 @@ public class ShopTimer : MonoBehaviour
     {
         shopwindow = GameObject.Find("itemshop");
 
-        //임시 초기화
+        //임시 초기화-material개수만큼으로 변경
         inTimer = new bool[5];
         itemDelay = new float[5];
         itembuyNum = new int[5];
+
         for (int i = 0; i < 5; i++)
             itembuyNum[i] = 0;
+
         Maxvalue = new int[5];
 
     }
 
-    //타이머를 호출하기위한 준비 임시로 delay가아니라 5를 할당
+    //타이머를 호출하기위한 준비 임시로 delay가아니라 10를 할당
     public void SetInfo(int bn,int cod)
     {
         itembuyNum[cod - 1] += bn;
         if (inTimer[cod-1] != true)
         {
             inTimer[cod - 1] = true;
-            StartCoroutine(Timer(5, cod));
+            StartCoroutine(Timer(10, cod));
         }
 
     }
@@ -53,7 +55,7 @@ public class ShopTimer : MonoBehaviour
             inTimer[cod - 1] = false;
         }
         else
-            StartCoroutine(Timer(5, cod));
+            StartCoroutine(Timer(10, cod));
     }
 
     //딜레이,아이템 코드
@@ -72,6 +74,4 @@ public class ShopTimer : MonoBehaviour
         else
             StartCoroutine(Timer(slottimer, cod));
     }
-
-
 }

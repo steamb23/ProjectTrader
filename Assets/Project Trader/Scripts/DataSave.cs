@@ -5,15 +5,35 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
+using ProjectTrader.Datas;
+using ProjectTrader.SpriteDatas;
 
 public class DataSave : MonoBehaviour
 {
     GameObject textUi;
+    GameObject sell;
     public PlayData pda = new PlayData();
+
+    //임시 인벤토리/30개만 저장
+    public Item[] playerItem;
+    //임시 알바고용
+    [SerializeField]
+    public EmployeeData[] emp;
+    int empsize;
 
     void Start()
     {
         textUi = GameObject.Find("TextUiControl");
+        sell = GameObject.Find("selltimewindow");
+        emp = new EmployeeData[10];
+        empsize = 0;
+        playerItem = new Item[5];
+        //또다시 임시 초기화->저장된 데이터에서 받아오도록 수정
+        for(int i = 0; i < 5; i++)
+        {
+            playerItem[i].Code = i + 1;
+            playerItem[i].Count = 6;
+        }
         GameLoad();
     }
 
@@ -90,15 +110,18 @@ public class DataSave : MonoBehaviour
         }
     }
 
-    public void UseMoney(int mon)
+    public bool UseMoney(int mon)
     {
         if (pda.Money + mon > 0)
+        {
             pda.Money += mon;
+        }
 
         //돈이 부족할시 + 돈이 부족합니다 출력
         else
-            return;
+            return false;
         PrintData("Money");
+        return true;
     }
     public void UseLevel(int lev)
     {
@@ -112,5 +135,74 @@ public class DataSave : MonoBehaviour
         //인지도는 0이하로 떨어지지 않는다
         else
             pda.Awareness = 0;
+    }
+
+    //임시로 코드별로 먼저 선언해 넣은 뒤 count로만 체크
+    public bool UseItem(int cod,int count)
+    {
+        for(int i = 0; i < 5; i++)
+        {
+            if (playerItem[i].Code == cod)
+            {
+                if (playerItem[i].Count + count >= 0)
+                {
+                    playerItem[i].Count += count;
+                    return true;
+                }
+                else
+                    return false;
+            }
+        }
+        return false;
+    }
+
+    
+    public void SetItemList()
+    {
+        sell.GetComponent<SellWindow>().SetItem(playerItem);
+    }
+
+    //알바생 추가/제거 check가 1이면 추가, 0이면 제거
+    public void UseEmp(int cod,int check)
+    {
+        if (check == 1) //추가
+        {
+            if (empsize < 9)
+            {
+                emp[empsize].Code = cod;
+                empsize++;
+            }
+        }
+        else if (check == 0) //제거
+        {
+            for(int i = 0; i < empsize; i++)
+            {
+                if (emp[i].Code == cod)
+                {
+                    if (i == empsize)
+                        empsize--;
+                    else
+                    {
+                        for(int j = i; j < empsize-1; j++)
+                        {
+                            emp[j].Code = emp[j + 1].Code;
+                        }
+                        empsize--;
+                    }
+                }
+            }
+        }
+       
+    }
+
+    //임시로 직원을 찾아Fi 해고/고용 하는 코드
+    public void FHireEmp(string name,int j)
+    {
+        for(int i = 0; i < empsize; i++)
+        {
+            if (emp[i].Name == name)
+                UseEmp(emp[i].Code, j);
+        }
+        //Debug.LogError("검사함");
     }
 }

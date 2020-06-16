@@ -120,7 +120,7 @@ public class MakePopScript : MonoBehaviour
         }
     }
 
-    //공방용으로 하나 만드는 편이 낫다
+    //배치용
     public void SetPopupItem(int cunt, int cod,GameObject obj)
     {
         popItem.Count = cunt;
@@ -130,18 +130,24 @@ public class MakePopScript : MonoBehaviour
         SetNum();
     }
 
+    //이곳에 회수하는 코드, 아이템 count제거하는 코드 추가
     public void SetItem()
     {
         
         sell = SellItemCheck(popItem.Code);
-        if (sell != false)
+        if (sell)
         {
             Item reitem = choiceTableData.GetComponent<DisplayedItem>().Item;
             reitem.Code = popItem.Code;
             reitem.Count = popItem.Count;
+            GameObject gogo = GameObject.Find("selltimewindow");
+            if(choiceTableData.GetComponent<DisplayedItem>().Item.Count>0)
+                gogo.GetComponent<SellWindow>().DisItemCheck(choiceTableData.GetComponent<DisplayedItem>().Item.Code, choiceTableData.GetComponent<DisplayedItem>().Item.Count); //있는 아이템 회수
+            
             choiceTableData.GetComponent<DisplayedItem>().Item = reitem;
             //임의로
-            GameObject gogo = GameObject.Find("selltimewindow");
+            
+            gogo.GetComponent<SellWindow>().DisItemCheck(reitem.Code,-reitem.Count); //배치한 수 만큼 가진 수에서 제거
             gogo.GetComponent<SellWindow>().CloseMakerWindow();
             Closepopup();
         }
@@ -226,7 +232,8 @@ public class MakePopScript : MonoBehaviour
         GameObject go = GameObject.Find("itemshop");
         go.GetComponent<ShopWindow>().SetbuyNum(popItem.Code, (int)shopslider.value);
         go.GetComponent<ShopTimer>().SetInfo((int)shopslider.value, popItem.Code);
-        //이곳에서 인벤토리?에 아이템추가(불러오기)
+        //이곳에서 인벤토리?에 아이템추가(불러오기)->메인 코드에서 작성
+        go.GetComponent<ShopWindow>().InItemUseMoney(popItem, (int)shopslider.value);
         CloseShopPopup();
     }
 

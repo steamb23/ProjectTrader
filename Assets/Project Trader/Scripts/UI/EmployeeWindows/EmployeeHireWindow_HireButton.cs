@@ -7,9 +7,12 @@ public class EmployeeHireWindow_HireButton : MonoBehaviour
     CandiateInfo candiateInfo;
     [SerializeField]
     EmployeeCount employeeCount;
-
+    GameObject savedata;
+    GameObject empcatch;
     private void Start()
     {
+        empcatch = GameObject.Find("EmployeeUICanvas");
+        savedata = GameObject.Find("SaveData");
         if (candiateInfo == null)
         {
             candiateInfo = GetComponentInParent<CandiateInfo>();
@@ -28,6 +31,9 @@ public class EmployeeHireWindow_HireButton : MonoBehaviour
         // 이하 임시 구현
         if (employeeCount.Count < employeeCount.MaxCount)
         {
+            //Debug.LogError("고용하러 옴");
+            savedata.GetComponent<DataSave>().FHireEmp(candiateInfo.GetComponent<EmployeeInfo>().Name,1);
+            empcatch.GetComponent<EmployeeDataCatch>().SetEmpData(candiateInfo);
             candiateInfo.Disable();
             employeeCount.Count++;
         }

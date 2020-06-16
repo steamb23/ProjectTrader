@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using ProjectTrader;
+using ProjectTrader.Datas;
 
 public class EmployeeHireWindow : MonoBehaviour
 {
@@ -10,12 +12,15 @@ public class EmployeeHireWindow : MonoBehaviour
     GameObject candiateInfo1;
     [SerializeField]
     GameObject candiateInfo2;
+    [SerializeField]
+    EmployeeData emp;
 
     bool isInitialized = false;
 
     // Use this for initialization
     void Start()
     {
+        
         if (candiateInfo0 == null ||
             candiateInfo1 == null ||
             candiateInfo2 == null)
@@ -31,7 +36,7 @@ public class EmployeeHireWindow : MonoBehaviour
             }
         }
     }
-
+    
     public void RenewCandiateList()
     {
         // 임시 초기화
@@ -47,7 +52,13 @@ public class EmployeeHireWindow : MonoBehaviour
             "한조",
             "김근육",
             "야옹이",
-            "뀨뀨"
+            "뀨뀨",
+            "두두",
+            "까꿍이",
+            "뚱땅이",
+            "겐지",
+            "둘리",
+            "길동이"
         };
 
         var candiateInfo0 = this.candiateInfo0.GetComponent<CandiateInfo>();
@@ -69,9 +80,11 @@ public class EmployeeHireWindow : MonoBehaviour
             candiateInfo.State = UnityEngine.Random.Range(0, 100) > 80 ?
                 "무경력" :
                 $"{(UnityEngine.Random.Range(0, 2) > 0 ? "정규직" : "비정규직")} {UnityEngine.Random.Range(1, 10)}년";
+            
             candiateInfo.Enable();
         }
     }
+
 
     // Update is called once per frame
     void Update()

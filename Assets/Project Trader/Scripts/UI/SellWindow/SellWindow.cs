@@ -6,30 +6,27 @@ using TMPro;
 using ProjectTrader;
 using ProjectTrader.Datas;
 using ProjectTrader.SpriteDatas;
-
+using System.Diagnostics;
 
 public class SellWindow : MonoBehaviour
 {
     //배치할때 값주고받을 아이템
     Item arrowC;
-    Item[] slotItem;
+    public Item[] slotItem;
 
     ItemData[] slotItemData;
     //배치할 아이템
     Item display;
 
     public GameObject itemSlot;
-
     public GameObject arrow;
-
     public TextMeshProUGUI setPrice;
-
     public Image setImage;
-
     public GameObject popupWindow;
 
     GameObject tableData;
     GameObject setTable;
+    GameObject savedata;
 
     GameObject[] itemnum;
     TextMeshProUGUI[] slotText;
@@ -45,27 +42,16 @@ public class SellWindow : MonoBehaviour
     void Start()
     {
         setTable = GameObject.Find("selltimewindow");
-        //생성창으로 이동
+        savedata = GameObject.Find("SaveData");
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         SetsettingButton();
 
     }    
 
-    /*테스트용* 임의로 count를 0으로 만드는 코드
-    void minusCont()
-    {
-        GameObject[] sellingItem = GameObject.FindGameObjectsWithTag("Item");
-        Item reitem = sellingItem[1].GetComponent<DisplayedItem>().Item;
-        reitem.Count = 0;
-        sellingItem[1].GetComponent<DisplayedItem>().Item = reitem;
-    }
-    */
-
-    //슬롯 제거하는 코드도 추가로 작성(불러오기전에 제거하고 다시 불러올수있도록
     public void OpenMakerWindow()
     {
         makerWindow.SetActive(true);
@@ -78,63 +64,58 @@ public class SellWindow : MonoBehaviour
         makerWindow.SetActive(false);
     }
 
-    //슬롯 세팅(임시로 이미 생성되어있으면 추가로 생성하지 않도록 함)
+    //슬롯 세팅(임시로 이미 생성되어있으면 추가로 생성하지 않도록 함) 아이템개수를 받아오면좋을거같은디,,
+    //code양만큼 생성하고 count가 0이면 표시하지 않도록 함->슬롯밖에서 설정
     void SetItemslot()
     {
+        savedata.GetComponent<DataSave>().SetItemList();
         if (setslot == false)
         {
             itemnum = new GameObject[5];
-            slotItem = new Item[5];
+            //slotItem = new Item[5];
             slotItemData = new ItemData[5];
 
             //아이템 가진 수만큼
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < slotItem.Length; i++)
             {
                 itemnum[i] = Instantiate(itemSlot) as GameObject;
 
-                SetItemInfo(i);
                 itemnum[i].transform.SetParent((GameObject.Find("ItemContent")).transform);
                 itemnum[i].transform.localScale = Vector3.one;
+                SetItemInfo(i);
 
 
             }
-            SlotScriptSet();
             setslot = true;
-        }
-    }
-    
-    //임시로 슬롯내 스크립트 설정
-    void SlotScriptSet()
-    {
-        GameObject[] slotsetting = GameObject.FindGameObjectsWithTag("Slot");
-        for (int i = 0; i < slotsetting.Length; i++)
-        {
-            slotsetting[i].GetComponent<SlotIn>().SetSlotInData(slotItem[i].Count, slotItem[i].Code);
-            if (i == 0)
-                slotsetting[i].GetComponent<SlotIn>().PushButton();
+            itemnum[0].GetComponent<SlotIn>().PushButton();
         }
     }
 
-    //슬롯생성할때 멤버 바꾸기
+    //슬롯생성할때 멤버 바꾸기> 가지고있는 아이템 표시(재료 제외>일정 코드 이상부터 count가 1이상만 표시)
     void SetItemInfo(int i)
     {
+        if (itemnum[i].activeSelf == false)
+            itemnum[i].SetActive(true);
         slotText = itemnum[i].GetComponentsInChildren<TextMeshProUGUI>();
-
-        //임시로 값 할당
-        slotItem[i].Code = i + 1;
 
         slotItemData[i] = slotItem[i].GetData();
         slotText[0].text = slotItemData[i].SellPrice.ToString();
 
-        slotItem[i].Count= UnityEngine.Random.Range(1, 99);
         slotText[1].text = "x" + slotItem[i].Count.ToString();
-
-        
-
         SpriteChange(i);
+        SlotScriptSet(i);
+        if (slotItem[i].Count <= 0)
+        {
+            itemnum[i].SetActive(false);
+        }
 
     }
 
+    //슬롯내 스크립트 수정
+    void SlotScriptSet(int i)
+    {
+        itemnum[i].GetComponent<SlotIn>().SetSlotInData(slotItem[i].Count, slotItem[i].Code);
+    }
 
     void SpriteChange(int i)
     {
@@ -189,7 +170,26 @@ public class SellWindow : MonoBehaviour
         tableData = setTable.GetComponent<TableCheck>().choiceTable;
         popupWindow.SetActive(true);
         popupWindow.GetComponent<MakePopScript>().Openpopup();
+        //아이템을 하나 보내주는 걸로
         popupWindow.GetComponent<MakePopScript>().SetPopupItem(display.Count, display.Code,tableData);
+    }
+
+    //아이템코드에 따라 조금 수정-아이템 초기화 코드
+    public void SetItem(Item[] pItem)
+    {
+        slotItem = new Item[pItem.Length];
+        for(int i = 0; i < slotItem.Length; i++)
+        {
+            slotItem[i] = pItem[i];
+        }
+    }
+
+    //아이템 제거,회수용
+    public void DisItemCheck(int cod, int value)
+    {
+        savedata.GetComponent<DataSave>().UseItem(cod, value);
+        savedata.GetComponent<DataSave>().SetItemList();
+        SetItemInfo(cod - 1);
     }
 }
 

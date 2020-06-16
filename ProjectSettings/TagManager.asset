@@ -12,6 +12,8 @@ TagManager:
   - MPEB
   - Makeroom
   - ItemShop
+  - EMPSlot
+  - EMPInfo
   layers:
   - Default
   - TransparentFX

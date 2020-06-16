@@ -122,7 +122,7 @@ public class DropItem : MonoBehaviour
                 inCoin = false;
 
             }
-            if (mouseOb.name == "cup_trash(Clone)")
+            if (mouseOb.name == "Trash(Clone)")
             {
                 CollectTrash(mouseOb);
                 CleanUp();

@@ -7,6 +7,8 @@ using ProjectTrader;
 using ProjectTrader.Datas;
 using ProjectTrader.SpriteDatas;
 using System.Linq;
+using System.Dynamic;
+using System.ComponentModel;
 
 //새로 사용할 공방 스크립트
 
@@ -17,6 +19,7 @@ public class MakerUI : MonoBehaviour
     public GameObject materialSlot;
     public GameObject makerpopupwindow;
     public GameObject makewindow;
+    GameObject data;
 
     Item[] slotItem;           //슬롯 아이템
     ItemData[] recipeData;     //슬롯 데이터 받아올 아이템데이터
@@ -40,9 +43,9 @@ public class MakerUI : MonoBehaviour
     int materialNum;                //재료 갯수 > 슬롯에서 데이터로 받아오기
     int[] maNeeds;
 
-    bool[] employeeInfo; //임시로 알바생이 있다는 표시
-    bool[] working;     //슬롯이 일하고 있다면
-    int clickEmployee=1;//알바선택창
+    bool[] employeeInfo;  //임시로 알바생이 있다는 표시
+    bool[] working;       //슬롯이 일하고 있다면
+    int clickEmployee=1;  //알바선택창
 
     public Sprite b_on;
     public Sprite b_off;
@@ -51,14 +54,19 @@ public class MakerUI : MonoBehaviour
     bool canMake=false;
 
     GameObject tim;
+
     void Start()
     {
+        data = GameObject.Find("SaveData");
+        maNeeds = new int[4];
         con = GameObject.Find("RecipeContent");
+        //초기화기준=총 아이템 개수만큼(csv)진행하고, 안쓰는 공간은 비워둔채로
         makeItemData = new ItemData[3];
         makeItem = new Item[3];
         employeeInfo = new bool[3];
         working = new bool[3];
         tim = GameObject.Find("makeroom");
+
         //임시 초기화
         for (int i = 0; i < 3; i++)
         {
@@ -70,10 +78,7 @@ public class MakerUI : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            SetRecipeScroll();
-        }
+
     }
 
 
@@ -134,7 +139,7 @@ public class MakerUI : MonoBehaviour
             default:
                 break;
         }
-        //여기에 제작창에 뜨는 것들 바꾸는 코드까지 추가+시간변화같은거
+        MaterialSlotSetting();
     }
     
     //스크롤에 슬롯 생성
@@ -181,13 +186,10 @@ public class MakerUI : MonoBehaviour
         slotText[2].text = 5.ToString();//제작가능한 숫자->재료들의 양을 계산해서 최솟값찾기, 이걸 반환해서 별다른 계산없이 팝업에서 사용하도록
     }
 
-
-
     //임시코드
     //타이머 추가
     //데이터 관리 추가
     //슬롯 데이터 부여 추가
-
 
     //슬롯 세팅할때
     void INSlotScriptSet()
@@ -201,7 +203,7 @@ public class MakerUI : MonoBehaviour
             int k = UnityEngine.Random.Range(5, 10);
             slotsetting[i].GetComponent<SlotIn>().SetSlotInData(k,slotItem[i].Code);
             if (i == 0)
-                slotsetting[i].GetComponent<SlotIn>().MakerslotPushButton();//어느정도 수정을 해봅시다
+                slotsetting[i].GetComponent<SlotIn>().MakerslotPushButton();
         }
     }
 
@@ -212,7 +214,6 @@ public class MakerUI : MonoBehaviour
         
         if (materialNum == null)
             return;
-        maNeeds = new int[4];
         materialSample.Code = cod;
         disRecipeData= materialSample.GetData();
         maNeeds = disRecipeData.MaterialNeeds;
@@ -234,10 +235,21 @@ public class MakerUI : MonoBehaviour
 
     }
 
-    //재료창을 수정해서 출력
+    //재료창을 수정해서 출력 레시피의 코드를 받아서 그 아이템이 필요한 material의
+    //스프라이트(스프라이트는 아이템에 같이)를 불러옴
     void MaterialSlotSetting()
     {
-
+        int[] mtcod = new int[4];
+        mtcod=disRecipeData.MaterialCodes;
+        //ItemData matData;
+        //material의 이미지를 받아서 변경
+        Image[] mimg;
+        for(int i = 0; i < materialNum; i++)
+        {
+            mimg=material[i].GetComponentsInChildren<Image>();
+            //matData.Code = mtcod[i];
+            mimg[1].sprite = ItemSpriteData.GetItemSprite(mtcod[i]);
+        }
     }
     
     //만들 아이템코드와 갯수 설정 하고 팝업으로
@@ -328,5 +340,26 @@ public class MakerUI : MonoBehaviour
         for (int i = 0; i < recipe.Length; i++)
             Destroy(recipe[i]);
         makewindow.SetActive(false);
+    }
+
+    //제작시 count,money-하는 코드
+    public void CheckCost()
+    {
+        int[] mt = new int[4];
+        int[] ct = new int[4];
+        //bool[] ok = new bool[4];
+        mt = disRecipeData.MaterialCodes;
+        ct = disRecipeData.MaterialNeeds;
+        for (int i = 0; i < materialNum; i++)
+        {
+            data.GetComponent<DataSave>().UseItem(mt[i],ct[i]);
+        }
+        data.GetComponent<DataSave>().UseMoney(-(disRecipeData.CraftCost));
+
+    }
+
+    public void MakeSuccess(Item makeItem)
+    {
+        data.GetComponent<DataSave>().UseItem(makeItem.Code,1);
     }
 }
