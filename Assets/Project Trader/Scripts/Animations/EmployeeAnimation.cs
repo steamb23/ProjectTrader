@@ -10,7 +10,7 @@ public class EmployeeAnimation : MoveableAnimation
         Default,
         Cleaning
     }
-    IdleStateType prevState;
+    IdleStateType prevIdleState;
     [SerializeField] IdleStateType idleState;
     [SerializeField] bool easterEgg;
 
@@ -20,9 +20,9 @@ public class EmployeeAnimation : MoveableAnimation
         set
         {
             this.idleState = value;
-            if (idleState != prevState)
+            if (idleState != prevIdleState)
             {
-                prevState = idleState;
+                prevIdleState = idleState;
                 frame = 0;
                 time = 0;
             }
