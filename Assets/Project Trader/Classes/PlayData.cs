@@ -43,6 +43,7 @@ namespace ProjectTrader
         [SerializeField] Employee[] cashers;
         [SerializeField] Employee[] cleaners;
         [SerializeField] Employee[] crafter;
+        [SerializeField] int remainedRest = 10; // 기본값은 0
         #endregion
 
         /// <summary>
@@ -165,6 +166,15 @@ namespace ProjectTrader
         {
             get => this.crafter;
             set => this.crafter = value;
+        }
+
+        /// <summary>
+        /// 남은 휴식
+        /// </summary>
+        public int RemainedRest
+        {
+            get => this.remainedRest;
+            set => this.remainedRest = value;
         }
 
         //public PlayData()

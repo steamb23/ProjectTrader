@@ -82,6 +82,9 @@ class GameDateTimeManager : MonoBehaviour
         {
             gameDateTime = value;
 
+            if (PlayData.CurrentData != null)
+                PlayData.CurrentData.Date = value;
+
 #if UNITY_EDITOR
             // 초기화
             data = (GameDateTimeInitData)gameDateTime;
@@ -97,6 +100,9 @@ class GameDateTimeManager : MonoBehaviour
         get => timePart;
         set => timePart = value;
     }
+    public int OpenningHour => this.openningHour;
+    public int ClosingHour => this.closingHour;
+
     public void TimeStart()
     {
         isStopped = false;
@@ -151,6 +157,7 @@ class GameDateTimeManager : MonoBehaviour
         else
         {
 #if UNITY_EDITOR
+            // 디버깅용으로 인스펙터에서 IsNext가 활성화되었을때 동작하기 위한 용도임
             if (isNext)
             {
                 isNext = false;

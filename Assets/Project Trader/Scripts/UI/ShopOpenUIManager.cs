@@ -6,6 +6,7 @@ public class ShopOpenUIManager : MonoBehaviour
     [SerializeField] GameDateTimeManager timeManager;
     [SerializeField] VisitorManager visitorManager;
     [SerializeField] GameObject shopOpenButtonObject;
+    [SerializeField] ShopOpenMessageBoxWindow shopOpenMessageBox;
 
     // Use this for initialization
     void Start()
@@ -19,6 +20,11 @@ public class ShopOpenUIManager : MonoBehaviour
         {
             Debug.LogWarning("성능 경고: vistorManager 필드가 자동으로 할당되었습니다.");
             visitorManager = FindObjectOfType<VisitorManager>();
+        }
+        if (shopOpenMessageBox == null)
+        {
+            Debug.LogWarning("성능경고: shopOpenMessageBox 필드가 자동으로 할당되었습니다.");
+            shopOpenMessageBox = FindObjectOfType<ShopOpenMessageBoxWindow>();
         }
 
         CheckTimerStoped();
@@ -35,7 +41,8 @@ public class ShopOpenUIManager : MonoBehaviour
 
     public void ShopOpenButtonClick()
     {
-        timeManager.Opening();
+        //timeManager.Opening();
+        shopOpenMessageBox.Show();
     }
 
     // Update is called once per frame
