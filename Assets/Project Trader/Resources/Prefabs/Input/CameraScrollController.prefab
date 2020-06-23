@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8487322182126569761}
   - component: {fileID: 8487322182126569760}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CameraScrollController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,7 +63,7 @@ GameObject:
   - component: {fileID: 8487322182591152768}
   - component: {fileID: 8487322182591152771}
   - component: {fileID: 8487322182591152770}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: CameraScrollControllerCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 8487322183096308197}
   - component: {fileID: 8487322183096308187}
   - component: {fileID: 8487322183096308186}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

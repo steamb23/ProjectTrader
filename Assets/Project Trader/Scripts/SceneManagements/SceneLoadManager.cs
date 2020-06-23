@@ -32,6 +32,11 @@ public class SceneLoadManager : MonoBehaviour
 
         townSceneCameraManager.CameraActive(true);
         gameSceneCameraManager.CameraActive(false);
+
+        // FloatCanvas 캔버스 렌더링 끄기
+        var floatingCanvasGameObject = GameObject.Find("FloatingCanvas");
+        var floatingCanvas = floatingCanvasGameObject.GetComponent<Canvas>();
+        floatingCanvas.enabled = false;
     }
 
     public void CloseTownScene()
@@ -41,6 +46,11 @@ public class SceneLoadManager : MonoBehaviour
 
         townSceneCameraManager.CameraActive(false);
         gameSceneCameraManager.CameraActive(true);
+
+        // FloatCanvas 캔버스 렌더링 켜기
+        var floatingCanvasGameObject = GameObject.Find("FloatingCanvas");
+        var floatingCanvas = floatingCanvasGameObject.GetComponent<Canvas>();
+        floatingCanvas.enabled = true;
     }
 
     public void LoadScene(ShopScene shopScene)
