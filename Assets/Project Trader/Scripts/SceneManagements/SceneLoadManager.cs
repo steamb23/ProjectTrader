@@ -27,16 +27,20 @@ public class SceneLoadManager : MonoBehaviour
 
     public void OpenTownScene()
     {
-        var rootObject = GameObject.Find("TownSceneRoot");
+        var townSceneCameraManager = GameObject.Find("TownSceneCameraManager").GetComponent<CameraManager>();
+        var gameSceneCameraManager = GameObject.Find("GameSceneCameraManager").GetComponent<CameraManager>();
 
-        rootObject.SetActive(true);
+        townSceneCameraManager.CameraActive(true);
+        gameSceneCameraManager.CameraActive(false);
     }
 
     public void CloseTownScene()
     {
-        var rootObject = GameObject.Find("TownSceneRoot");
+        var townSceneCameraManager = GameObject.Find("TownSceneCameraManager").GetComponent<CameraManager>();
+        var gameSceneCameraManager = GameObject.Find("GameSceneCameraManager").GetComponent<CameraManager>();
 
-        rootObject.SetActive(false);
+        townSceneCameraManager.CameraActive(false);
+        gameSceneCameraManager.CameraActive(true);
     }
 
     public void LoadScene(ShopScene shopScene)
