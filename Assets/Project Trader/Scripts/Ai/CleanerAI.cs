@@ -19,7 +19,7 @@ public class CleanerAI : MonoBehaviour
     public GameObject targetObject;
     public Transform targetTransform;
 
-    public DropItem dropItem;
+    public ScrapManager scrapManager;
 
     public EmployeeAnimation animation;
 
@@ -35,7 +35,7 @@ public class CleanerAI : MonoBehaviour
         state = AiState.Finding;
         astarAI = GetComponent<IAstarAI>();
 
-        dropItem = GameObject.FindObjectOfType<DropItem>();
+        scrapManager = FindObjectOfType<ScrapManager>();
         animation = GetComponent<EmployeeAnimation>();
     }
 
@@ -87,8 +87,8 @@ public class CleanerAI : MonoBehaviour
         if (waitTime < 0)
         {
             // 쓰레기 찾기
-            var dropItem = FindObjectOfType<DropItem>();
-            var trashes = dropItem.FindTrashes();
+            //var scrapManager = FindObjectOfType<ScrapManager>();
+            var trashes = scrapManager.FindTrashes();
             if (trashes.Length > 0)
             {
                 // 가장 가까운 쓰레기 찾기
@@ -123,19 +123,19 @@ public class CleanerAI : MonoBehaviour
             var colider = targetObject.GetComponent<BoxCollider2D>();
             colider.enabled = false;
 
-            var timer = dropItem.CollectTrash(targetObject, 5f, (floatingTimer) =>
+            var timer = scrapManager.CollectTrash(targetObject, 5f, (floatingTimer) =>
             {
                 if (targetObject != null)
                 {
                     // 해당 쓰레기 제거
-                    Destroy(targetObject);
+                    //Destroy(targetObject);
                     state = AiState.Cleaned;
                 }
                 else
                 {
                     state = AiState.Finding;
                 }
-                floatingTimer.FadeoutWithDestory();
+                //floatingTimer.FadeoutWithDestory();
             });
             if (timer == null)
                 state = AiState.Finding;

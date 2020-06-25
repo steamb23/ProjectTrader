@@ -26649,7 +26649,7 @@ GameObject:
   - component: {fileID: 1753350879}
   - component: {fileID: 1753350878}
   m_Layer: 0
-  m_Name: DropItem
+  m_Name: ScrapManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26667,9 +26667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1698dd12611599a479eec1755e1e9c33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropItem: {fileID: 3685273068723076065, guid: 4de85acb168d2524e97d5fbe4d3541ec,
-    type: 3}
-  trashItem: {fileID: 6059462691135343572, guid: befacc5f61545a64b9af62656103d425,
+  scrapPrefab: {fileID: 6059462691135343572, guid: befacc5f61545a64b9af62656103d425,
     type: 3}
 --- !u!4 &1753350879
 Transform:
