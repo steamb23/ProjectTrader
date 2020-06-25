@@ -235,7 +235,7 @@ public class DropItem : MonoBehaviour
         }
         else
         {
-            UnityEngine.Debug.LogError($"{gameObject}는 DropItem 스크립트에서 관리되는 쓰레기 오브젝트가 아닙니다.");
+            UnityEngine.Debug.LogWarning($"{gameObject}는 DropItem 스크립트에서 관리되는 쓰레기 오브젝트가 아닙니다.");
         }
 
         return null;
