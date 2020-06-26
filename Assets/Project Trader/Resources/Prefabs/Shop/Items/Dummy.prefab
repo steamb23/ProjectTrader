@@ -144,4 +144,4 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   item:
     code: 1
-    count: 5
+    count: 3

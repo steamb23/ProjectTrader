@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GoToTownObject : ClickableObject
+public class GoToShopClick : ClickableObject
 {
     public override void Click()
     {
-        SceneLoadManager.Instance.OpenTownScene();
+        SceneLoadManager.Instance.CloseTownScene();
     }
 }

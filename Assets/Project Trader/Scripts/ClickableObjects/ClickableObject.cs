@@ -8,7 +8,7 @@ public abstract class ClickableObject : MonoBehaviour
 {
     // 드래그 오차
     // 드래그되는 상황에서도 클릭 판정 가능하려면 무한대로 설정
-    [SerializeField] float dragSafeDistance = 10;
+    [SerializeField] float dragSafeDistance = 20;
 
     // 드래그한 거리의 제곱
     float sqrDragDistance = 0f;
