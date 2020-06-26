@@ -113,27 +113,32 @@ public class CameraScrollController : MonoBehaviour
 
     Vector2 cameraVelocity;
     Vector2 previousDragPos;
+    Vector2 prePreviousDragPos;
     public void DragBegin(BaseEventData eventData)
     {
-        var data = eventData as PointerEventData;
+        //var data = eventData as PointerEventData;
 
         cameraVelocity = Vector2.zero;
-        previousDragPos = data.position;
+        previousDragPos = (Vector2)Input.mousePosition;
     }
     public void Drag(BaseEventData eventData)
     {
-        var data = eventData as PointerEventData;
+        //var data = eventData as PointerEventData;
 
         var ratio = Ratio;
 
-        camera.transform.Translate((previousDragPos - data.position) / 100 / ratio);
-        previousDragPos = data.position;
+        camera.transform.Translate((previousDragPos - (Vector2)Input.mousePosition) / 100 / ratio);
+        prePreviousDragPos = previousDragPos;
+        previousDragPos = (Vector2)Input.mousePosition;
     }
     public void DragEnd(BaseEventData eventData)
     {
-        var data = eventData as PointerEventData;
+        //var data = eventData as PointerEventData;
         var ratio = Ratio;
-        cameraVelocity = (previousDragPos - data.position) / 100 / ratio;
+
+        // previous값의 평균을 구하여 속도 설정
+        Vector2 dragVelocity = (previousDragPos + prePreviousDragPos) * 0.5f;
+        cameraVelocity = (dragVelocity - (Vector2)Input.mousePosition) / 100 / ratio;
     }
 
     Rect CameraRect
