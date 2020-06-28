@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using ProjectTrader.Datas;
 
 public class EmployeeHireWindow_HireButton : MonoBehaviour
 {
@@ -8,10 +9,12 @@ public class EmployeeHireWindow_HireButton : MonoBehaviour
     [SerializeField]
     EmployeeCount employeeCount;
     GameObject savedata;
+    [SerializeField]
     GameObject empcatch;
+    Employee emp;
     private void Start()
     {
-        empcatch = GameObject.Find("EmployeeUICanvas");
+        //empcatch = GameObject.Find("EmployeeUICanvas");
         savedata = GameObject.Find("SaveData");
         if (candiateInfo == null)
         {
@@ -31,11 +34,15 @@ public class EmployeeHireWindow_HireButton : MonoBehaviour
         // 이하 임시 구현
         if (employeeCount.Count < employeeCount.MaxCount)
         {
-            //Debug.LogError("고용하러 옴");
-            savedata.GetComponent<DataSave>().FHireEmp(candiateInfo.GetComponent<EmployeeInfo>().Name,1);
-            empcatch.GetComponent<EmployeeDataCatch>().SetEmpData(candiateInfo);
+            emp.Code = candiateInfo.Code;
+            emp.State = candiateInfo.State;
+            emp.Age = candiateInfo.Age;
+
+            savedata.GetComponent<DataSave>().FHireEmp(emp,1);
+            empcatch.GetComponent<EmployeeDataCatch>().SetEmpData(emp);
             candiateInfo.Disable();
             employeeCount.Count++;
+
         }
     }
 }

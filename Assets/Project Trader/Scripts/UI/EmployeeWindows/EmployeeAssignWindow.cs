@@ -7,18 +7,23 @@ using UnityEngine;
 //그럼 슬롯은 그 데이터로 주기만하면됨
 //배치 버튼별로 코드를 따로 만들자^^..
 //급한대로 한명씩만 고용
+
 public class EmployeeAssignWindow : MonoBehaviour
 {
     GameObject[] slotset;
+    int[] slothire;
     [SerializeField]
     GameObject manager;
-    // Start is called before the first frame update
+
+
     void Start()
     {
-
+        slothire = new int[3];
+        for (int i = 0; i < 3; i++)
+            slothire[i] = 0;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         
@@ -32,7 +37,6 @@ public class EmployeeAssignWindow : MonoBehaviour
         {
             slotset[i].GetComponent<EmployeeSlot>().SetInfo(0);
         }
-
     }
 
     public void SlotCleanInfo()
@@ -43,7 +47,6 @@ public class EmployeeAssignWindow : MonoBehaviour
         {
             slotset[i].GetComponent<EmployeeSlot>().SetInfo(1);
         }
-
     }
 
     public void SlotCraftInfo()
@@ -56,4 +59,5 @@ public class EmployeeAssignWindow : MonoBehaviour
         }
 
     }
+    
 }

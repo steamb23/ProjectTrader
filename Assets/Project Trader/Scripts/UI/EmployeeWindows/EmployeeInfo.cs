@@ -21,6 +21,8 @@ public class EmployeeInfo : MonoBehaviour
         public string dexterity;
         [SerializeField]
         public string state;
+        [SerializeField]
+        public int code;
     }
 
     [SerializeField]
@@ -74,6 +76,12 @@ public class EmployeeInfo : MonoBehaviour
     {
         get => employeeData.state;
         set => stateField.text = employeeData.state = value;
+    }
+
+    public int Code
+    {
+        get => employeeData.code;
+        set => employeeData.code = value;
     }
 
     public void ClearProperties()

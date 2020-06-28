@@ -110,7 +110,7 @@ public class ShopWindow : MonoBehaviour
     void SlotImage(int i)
     {
         Image[] slotImage = shopItem[i].GetComponentsInChildren<Image>();
-        slotImage[5].sprite = shopItemData[i].GetSprite();
+        slotImage[6].sprite = shopItemData[i].GetSprite();
     }
     //타이머출력
     public void SetTimePrint(int i, bool timer,float timedelay)
