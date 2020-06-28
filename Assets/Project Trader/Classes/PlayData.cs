@@ -31,8 +31,8 @@ namespace ProjectTrader
         #region 인스펙터 변수 & 초기 값
         [SerializeField] int money = 10000;
         [SerializeField] int level = 1;
-        [SerializeField] int maxStamina;
-        [SerializeField] int stamina;
+        [SerializeField] int maxStamina = 200;
+        [SerializeField] int stamina = 100;
         [SerializeField] float awareness;
         [SerializeField] string shopName;
         [SerializeField] GameDateTime date = new GameDateTime(hour: 8); // 오픈 시간
@@ -79,7 +79,13 @@ namespace ProjectTrader
         public int Stamina
         {
             get => stamina;
-            set => stamina = value;
+            set
+            {
+                stamina = value;
+                // 최댓값으로 고정
+                if (MaxStamina < value)
+                    stamina = MaxStamina;
+            }
         }
 
         /// <summary>
