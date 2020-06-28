@@ -3306,6 +3306,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8487322182126569760, guid: ce4051ddafa721041ae85002a62e343e,
+        type: 3}
+      propertyPath: cameraRegion.x
+      value: 6.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8487322182126569760, guid: ce4051ddafa721041ae85002a62e343e,
+        type: 3}
+      propertyPath: cameraRegion.y
+      value: 3.6
+      objectReference: {fileID: 0}
     - target: {fileID: 8487322182126569761, guid: ce4051ddafa721041ae85002a62e343e,
         type: 3}
       propertyPath: m_LocalPosition.x
