@@ -17,15 +17,13 @@ public class DataSave : MonoBehaviour
     //임시 인벤토리/30개만 저장
     public Item[] playerItem;
     //임시 알바고용
-    [SerializeField]
-    public EmployeeData[] emp;
+    Employee[] empInfo;
     int empsize;
-
     void Start()
     {
         textUi = GameObject.Find("TextUiControl");
         sell = GameObject.Find("selltimewindow");
-        emp = new EmployeeData[10];
+        empInfo = new Employee[9];
         empsize = 0;
         playerItem = new Item[5];
         //또다시 임시 초기화->저장된 데이터에서 받아오도록 수정
@@ -163,45 +161,44 @@ public class DataSave : MonoBehaviour
     }
 
     //알바생 추가/제거 check가 1이면 추가, 0이면 제거
-    public void UseEmp(int cod,int check)
+    public void UseEmp(Employee emp, int check)
     {
         if (check == 1) //추가
         {
             if (empsize < 9)
             {
-                emp[empsize].Code = cod;
+                empInfo[empsize] = emp;
                 empsize++;
             }
         }
         else if (check == 0) //제거
         {
-            for(int i = 0; i < empsize; i++)
+            for (int i = 0; i < empsize; i++)
             {
-                if (emp[i].Code == cod)
+                if (empInfo[i].Code == emp.Code)
                 {
                     if (i == empsize)
                         empsize--;
                     else
                     {
-                        for(int j = i; j < empsize-1; j++)
+                        for (int j = i; j < empsize - 1; j++)
                         {
-                            emp[j].Code = emp[j + 1].Code;
+                            empInfo[j] = empInfo[j + 1];
                         }
                         empsize--;
                     }
                 }
             }
         }
-       
     }
 
-    //임시로 직원을 찾아Fi 해고/고용 하는 코드
-    public void FHireEmp(string name,int j)
+    //임시로 직원을 찾아 해고/고용 하는 코드
+    public void FHireEmp(Employee emp, int j)
     {
-        for(int i = 0; i < empsize; i++)
+        for (int i = 0; i < empsize; i++)
         {
-            if (emp[i].Name == name)
-                UseEmp(emp[i].Code, j);
+            if (empInfo[i] == emp)
+                UseEmp(empInfo[i], j);
         }
         //Debug.LogError("검사함");
     }

@@ -1,31 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading;
+using ProjectTrader.Datas;
+
 
 public class EmployeeDisplayWindow_FireButton : MonoBehaviour
 {
+
     [SerializeField]
-    CandiateInfo candiateInfo;
+    GameObject disemployee;
+
     [SerializeField]
     EmployeeCount employeeCount;
+
+    [SerializeField]
+    EmployeeInfo empinfo;
+    Employee emp;
     GameObject savedata;
-    // Start is called before the first frame update
+    GameObject dataCatch;
+
+
     void Start()
     {
         savedata = GameObject.Find("SaveData");
-        if (candiateInfo == null)
-        {
-            candiateInfo = GetComponentInParent<CandiateInfo>();
-            if (candiateInfo == null)
-                Debug.LogError("EmployeeHireWindow_FireButton가 초기화 되지 않았습니다.");
-        }
+        dataCatch = GameObject.Find("EmployeeUICanvas");
+        //empinfo = disemployee.GetComponent<EmployeeInfo>();
         if (employeeCount == null)
         {
             Debug.LogError("EmployeeHireWindow_FireButton에 오브젝트가 연결되지 않았습니다.");
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -33,12 +39,23 @@ public class EmployeeDisplayWindow_FireButton : MonoBehaviour
 
     public void Click()
     {
-        if (0<employeeCount.Count)
+        MoveempInfo();
+        if (0<employeeCount.Count&&emp.Code>0)
         {
-            candiateInfo.Disable();
-            savedata.GetComponent<DataSave>().FHireEmp(candiateInfo.GetComponent<EmployeeInfo>().Name,0);
+            UnityEngine.Debug.Log("해고누름");
+            //해고하고 isWork를 false로 해줘야함
+            savedata.GetComponent<DataSave>().FHireEmp(emp,0);
+            dataCatch.GetComponent<EmployeeDataCatch>().FireEmployee(emp);
             employeeCount.Count--;
-            Debug.LogError("정상작동");
+
         }
+    }
+
+    //info를 employee에 보냄
+    void MoveempInfo()
+    {
+        emp.Code = disemployee.GetComponent<EmployeeInfo>().Code;
+        emp.Age = disemployee.GetComponent<EmployeeInfo>().Age;
+        emp.State = disemployee.GetComponent<EmployeeInfo>().State;
     }
 }

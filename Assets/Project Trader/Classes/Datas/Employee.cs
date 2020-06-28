@@ -9,12 +9,15 @@ namespace ProjectTrader.Datas
     [Serializable]
     public struct Employee
     {
-        /// <summary>
-        /// 아이템 코드
-        /// </summary>
+
         [UnityEngine.SerializeField]
         private int code;
+        private string age;
+        private string state;
 
+        /// <summary>
+        /// 직원 코드
+        /// </summary>
         public int Code
         {
             get => code;
@@ -22,9 +25,27 @@ namespace ProjectTrader.Datas
         }
 
         /// <summary>
+        /// 직원 나이
+        /// </summary>
+        public string Age
+        {
+            get => age;
+            set => age = value;
+        }
+
+        /// <summary>
+        /// 직원 상태
+        /// </summary>
+        public string State
+        {
+            get => state;
+            set => state = value;
+        }
+
+        /// <summary>
         /// 데이터 가져오기
         /// </summary>
-        public ItemData GetData() => IngameDatabase.ItemDatas[code];
+        public EmployeeData GetData() => IngameDatabase.EmployeeDatas[code];
 
 
         #region 연산자

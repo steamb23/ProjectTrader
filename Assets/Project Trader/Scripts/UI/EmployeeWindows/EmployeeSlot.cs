@@ -10,9 +10,19 @@ public class EmployeeSlot :EmployeeInfo
     TextMeshProUGUI name;
     [SerializeField]
     TextMeshProUGUI state;
+    //정보가 들어가는 위치를 위한 int값
     int disCode;
-    bool working = false; //일하고 있는가? > 배치되면 true로 추가고용이 불가하도록 한다.
-    EmployeeInfo emp;
+    //고용상태를 알기 위해 배치를 누르면 무조건적으로 슬롯에 신호를 전달해야 한다
+    //슬롯안에 데이터가 들어있는가?
+    public bool indata
+    {
+        set;
+        get;
+    }
+
+
+    Employee emp;
+    EmployeeData empData;
     GameObject assign;
 
     void Start()
@@ -23,28 +33,32 @@ public class EmployeeSlot :EmployeeInfo
 
     void Update()
     {
-        if (emp == null)
+        if (indata==false)
         {
             name.text = " ";
             state.text = " ";
         }
     }
-    public void SetEmpInfo(EmployeeInfo hireemployee)
-    {
-        emp = hireemployee;
-        name.text = emp.Name;
-        state.text = emp.State;
 
+    public void SetEmpInfo(Employee emp2)
+    {
+        emp = emp2;
+        empData = emp.GetData();
+        name.text = empData.Name;
+        state.text = emp2.State;
     }
 
 
     public void Click()
     {
-        assign=GameObject.Find("EmployeeUICanvas");
-        assign.GetComponent<EmployeeDataCatch>().AssignDataSet(disCode, emp);
+        if (indata == true)
+        {
+            assign = GameObject.Find("EmployeeUICanvas");
+            assign.GetComponent<EmployeeDataCatch>().AssignDataSet(disCode, emp);
+        }
     }
 
-    //
+    //배치 위치를 보내주는 함수
     public void SetInfo(int c)
     {
         disCode = c;
