@@ -15,7 +15,8 @@ public class EmployeeUiManager : MonoBehaviour
     private GameObject watingWindow = null;
     [SerializeField]
     private GameObject buttongroup = null;
-
+    [SerializeField]
+    GameObject ButtonGroup;
 
     // Start is called before the first frame update
     void Start()
@@ -55,6 +56,7 @@ public class EmployeeUiManager : MonoBehaviour
         }
         buttongroup.SetActive(true);
         hireWindow.SetActive(true);
+        ButtonGroup.GetComponent<EmpButtonGroup>().HireButtonOn();
     }
 
     public void OpenAssignWindow()
@@ -66,6 +68,7 @@ public class EmployeeUiManager : MonoBehaviour
         }
         assignWindow.SetActive(true);
         buttongroup.SetActive(true);
+        ButtonGroup.GetComponent<EmpButtonGroup>().AssignButtonOn();
     }
 
     public void OpenWatingWindow()
@@ -78,11 +81,20 @@ public class EmployeeUiManager : MonoBehaviour
         buttongroup.SetActive(false);
         watingWindow.SetActive(true);
         this.gameObject.GetComponent<EmployeeDataCatch>().AddEmp();
+
     }
 
     public void CloseButton()
     {
         if (!hireWindow.activeSelf && !assignWindow.activeSelf)
             buttongroup.SetActive(false);
+    }
+
+    public void CloseWaiting()
+    {
+        assignWindow.SetActive(true);
+        buttongroup.SetActive(true);
+        watingWindow.SetActive(false);
+        ButtonGroup.GetComponent<EmpButtonGroup>().AssignButtonOn();
     }
 }

@@ -31,7 +31,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: be5d8854a255bc34787421cf3a6cab3c, type: 3}
-    totalSpriteSurfaceArea: 6403482
+    totalSpriteSurfaceArea: 6423760
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -52,6 +52,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 30e588b3320f68a4d9093613b639f4ab, type: 3}
   - {fileID: 21300000, guid: 1a8a64d3dae7cc84dbfb3ec78f1e5f15, type: 3}
   - {fileID: 21300000, guid: 762f3004626b4a241bb11fe21e68180f, type: 3}
+  - {fileID: 21300000, guid: 8c4ff114a82c65447958f9e33ad99452, type: 3}
   - {fileID: 21300000, guid: ba3b644466c47964894dba08e09586bc, type: 3}
   - {fileID: 21300000, guid: 94d4e554d68d7794bb166c62d03eb672, type: 3}
   - {fileID: 21300000, guid: 135958a4eb4a44f469508254dc6b2616, type: 3}
@@ -61,14 +62,17 @@ SpriteAtlas:
   - {fileID: 21300000, guid: ff6bbe160ebc9d74e8139f32e1a057df, type: 3}
   - {fileID: 21300000, guid: 5238dd567d1120641b26b25f6b14aae0, type: 3}
   - {fileID: 21300000, guid: 57eb56a6bfae9e148bad702f535f1eb4, type: 3}
+  - {fileID: 21300000, guid: 7bc9d9a6679b28e4b8364526c13eccd1, type: 3}
   - {fileID: 21300000, guid: e7237ad64b1e523498bd9823fe4278ce, type: 3}
   - {fileID: 21300000, guid: b3fbc3070bd02e441bea88e6ab429e19, type: 3}
   - {fileID: 21300000, guid: 1363a317a3ed2fb489a5e2650cd5d7ec, type: 3}
   - {fileID: 21300000, guid: 71cf84d75efaf544cb9e5f462ccd35b3, type: 3}
+  - {fileID: 21300000, guid: 3f2609d72e9986841ba25a7195016b5b, type: 3}
   - {fileID: 21300000, guid: 3652f9f7d03ea834f931d9a67d4eadcd, type: 3}
   - {fileID: 21300000, guid: 09020328258e23146bbab74a65db7cd0, type: 3}
   - {fileID: 21300000, guid: 139edc28c85e5ed4f8ee7f196c17c368, type: 3}
   - {fileID: 21300000, guid: 529488383f011fe4e8d975210cccca3a, type: 3}
+  - {fileID: 21300000, guid: b7682c58da4451b4bb88ea36874b5f5a, type: 3}
   - {fileID: 21300000, guid: 5abad978017ace7439400eeb384e2d2c, type: 3}
   - {fileID: 21300000, guid: 335e2798527616d49add6a331da875d5, type: 3}
   - {fileID: 21300000, guid: 4bf18f98bed2bc744a87b77c44703936, type: 3}
@@ -83,6 +87,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 04f5dd4a356de8d4c9149f71fd4ad6b2, type: 3}
   - {fileID: 21300000, guid: 716e479af96cb8d4c990e316ee15e02e, type: 3}
   - {fileID: 21300000, guid: a37729ba6db26ea4b8ccb2bd587ba7e7, type: 3}
+  - {fileID: 21300000, guid: e9aab6eac7c6c9547981570d05e37ddd, type: 3}
   - {fileID: 21300000, guid: 6bfe0b3bcd0421f43831ba0d087375f5, type: 3}
   - {fileID: 21300000, guid: 8d00174ba9392324aafd38651654126c, type: 3}
   - {fileID: 21300000, guid: 9d10de5bba833d846a11b4683686395f, type: 3}
@@ -90,6 +95,9 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 6a270f0c40824714684ef7b220d81a21, type: 3}
   - {fileID: 21300000, guid: 2495e82c0e4412146aa6e380197a0934, type: 3}
   - {fileID: 21300000, guid: 871570cc631020344bd5a65ade51bedc, type: 3}
+  - {fileID: 21300000, guid: e7f8b61d518fa424797602ee4121ded9, type: 3}
+  - {fileID: 21300000, guid: 03a24d1db01baf64abf02b9c2f472d4c, type: 3}
+  - {fileID: 21300000, guid: 176c132dfc80aa34da6861030e98287d, type: 3}
   - {fileID: 21300000, guid: 2d13794d80667124d8d5d0811218c759, type: 3}
   - {fileID: 21300000, guid: 1b70ac6d1d437a040a5ce6a054f4416f, type: 3}
   - {fileID: 21300000, guid: b181889d911c39445a6b47288fb283cd, type: 3}
@@ -125,6 +133,7 @@ SpriteAtlas:
   - "\uC0C1\uC810UI_01"
   - Btn_Green_minus
   - img_Blue_Musicbar_bg
+  - 2_2
   - Brown_bg
   - img_Blue_Music
   - Btn_Blue
@@ -134,14 +143,17 @@ SpriteAtlas:
   - popup_bg_02
   - "\uACC4\uC0B0\uAD6C\uC9C1"
   - "\uC7A0\uAE08 \uC544\uC774\uCF58"
+  - 3_2
   - Icon_Date
   - img_Green_Musicbar
   - "\uCCAD\uC18C \uC544\uC774\uCF58"
   - "\uD0C0\uC774\uBA38 \uBC30\uACBD"
+  - 3_1
   - Btn_Green_02
   - Btn_Blue_plus
   - "\uC54C\uBC14\uCC44\uC6A9 \uC544\uC774\uCF58"
   - "\uC54C\uBC14\uBC30\uCE58 \uC544\uC774\uCF58"
+  - "\uD0DD2"
   - Img_pause_bg
   - Icon_Save
   - img_Arrow
@@ -156,6 +168,7 @@ SpriteAtlas:
   - "\uAC00\uACF5 \uC544\uC774\uCF58"
   - "\uD0DD(\uC120\uD0DD)"
   - icon_Green_Music
+  - 2_1
   - Btn_x
   - popup_bg_02
   - bg_gradation
@@ -163,6 +176,9 @@ SpriteAtlas:
   - Icon_request
   - LightBrown_bg
   - Icon_Fatigability
+  - 1_2
+  - 1_1
+  - "\uD0DD1"
   - img_Icon_bg
   - "\uC0C1\uC810UI_03"
   - Icon_Awareness
