@@ -12,7 +12,7 @@ public class DataSave : MonoBehaviour
 {
     GameObject textUi;
     GameObject sell;
-    public PlayData pda = new PlayData();
+    //public PlayData pda = new PlayData();
 
     //임시 인벤토리/30개만 저장
     public Item[] playerItem;
@@ -42,6 +42,8 @@ public class DataSave : MonoBehaviour
 
     public void GameSave()
     {
+        var pda = PlayData.CurrentData;
+
         string jsondata = ObjsonMake(pda);
         SaveJson(jsondata);
         textUi.GetComponent<TextUiControl>().CreativeTextBox(0,0,100,"Game Save!",2);
@@ -49,6 +51,8 @@ public class DataSave : MonoBehaviour
 
     public void GameLoad()
     {
+        var pda = PlayData.CurrentData;
+
         string load = LoadJson();
         UnityEngine.Debug.Log(load);
         var loadData = JsonToObject<PlayData>(load);
@@ -84,6 +88,8 @@ public class DataSave : MonoBehaviour
 
     void PrintData(string Data)
     {
+        var pda = PlayData.CurrentData;
+
         switch (Data)
         {
             case "Money":
@@ -110,6 +116,8 @@ public class DataSave : MonoBehaviour
 
     public bool UseMoney(int mon)
     {
+        var pda = PlayData.CurrentData;
+
         if (pda.Money + mon > 0)
         {
             pda.Money += mon;
@@ -123,11 +131,15 @@ public class DataSave : MonoBehaviour
     }
     public void UseLevel(int lev)
     {
+        var pda = PlayData.CurrentData;
+
         pda.Level += lev;
         PrintData("Level");
     }
     public void UseFamous(int fam)
     {
+        var pda = PlayData.CurrentData;
+
         if (pda.Awareness + fam > 0)
             pda.Awareness += fam;
         //인지도는 0이하로 떨어지지 않는다
