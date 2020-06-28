@@ -14,6 +14,13 @@ public class ShopOpenMessageBoxWindow : MonoBehaviour
     /// <param name="isReview">심사인 경우 메시지와 동작을 다르게 표시합니다.</param>
     public void Show(bool isReview = false)
     {
+        // 한달이 지났으면 = 오늘이 1일이면 (0부터 시작하기 때문에 1을 빼야함)
+        // 휴식횟수 초기화
+        if (PlayData.CurrentData.Date.Day == 1 - 1)
+        {
+            PlayData.CurrentData.RemainedRest = 10;
+        }
+
         gameObject.SetActive(true);
 
         // 심사인 경우
