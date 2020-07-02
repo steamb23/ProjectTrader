@@ -21,13 +21,13 @@ public class EmployeeDataCatch : MonoBehaviour
     //버튼 코드가 1일땐 0~2까지, 2일땐 3~5까지, 3일땐 6에서 8까지 ->배치할때/출력할때 같이 사용
     int slotNum;
     int buttonCode;
-    public GameObject[] slotInfo;
-    public GameObject hireData;
+    GameObject[] slotInfo;
+    GameObject hireData;
 
     //고용한 직원, 배치한 직원 ->전부 코드로
-    public Employee[] allemp;
-    public Employee[] hireemp;
-    public bool[] isWork;
+    Employee[] allemp;
+    Employee[] hireemp;
+    bool[] isWork;
     //출력용
     Employee printemp;
     EmployeeData pempdata;

@@ -29,10 +29,10 @@ namespace ProjectTrader
         }
 
         #region 인스펙터 변수 & 초기 값
-        [SerializeField] int money = 10000;
+        [SerializeField] int money = 1000;
         [SerializeField] int level = 1;
         [SerializeField] int maxStamina = 200;
-        [SerializeField] int stamina = 100;
+        [SerializeField] int stamina = 0;
         [SerializeField] float awareness;
         [SerializeField] string shopName;
         [SerializeField] GameDateTime date = new GameDateTime(hour: 8); // 오픈 시간

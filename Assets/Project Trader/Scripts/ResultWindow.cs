@@ -6,12 +6,26 @@ using TMPro;
 
 public class ResultWindow : MonoBehaviour
 {
-    int sellGold;//임시 판매금-이후 판매 시스템에서 처리
-    int tip;
-    int totalvisitor; //방문자- 방문ai쪽에서 받아오기
-    int rent=50;//임시 임대료
-    TextMeshProUGUI tmp;
-    // Start is called before the first frame update
+    [SerializeField]
+    TextMeshProUGUI sell;
+    [SerializeField]
+    TextMeshProUGUI tip;
+    [SerializeField]
+    TextMeshProUGUI rent;
+    [SerializeField]
+    TextMeshProUGUI salary;
+    [SerializeField]
+    TextMeshProUGUI total;
+    [SerializeField]
+    TextMeshProUGUI visitor;
+
+    int sellmoney;
+    int tipmoney;
+    int rentmoney;
+    int salarymoney;
+    int totalmoney;
+    int visitornum;
+
     void Start()
     {
         
@@ -23,14 +37,4 @@ public class ResultWindow : MonoBehaviour
         
     }
 
-    void CreateResultWindow()
-    {
-
-    }
-
-    void ResultText(string textName)
-    {
-        tmp = (GameObject.Find(textName)).GetComponent <TextMeshProUGUI> ();
-        tmp.text = "555555";
-    }
 }

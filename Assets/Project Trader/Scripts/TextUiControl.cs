@@ -17,7 +17,7 @@ public class TextUiControl : MonoBehaviour
 
     void Start()
     {
-        canvas = GameObject.Find("UICanvas");
+        canvas = GameObject.Find("SubUi");
         tbPos = GetComponent<RectTransform>();
         playData = GameObject.Find("SaveData");
         playData.GetComponent<DataSave>();
