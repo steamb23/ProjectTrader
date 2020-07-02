@@ -44,6 +44,14 @@ namespace ProjectTrader
         [SerializeField] Employee[] cleaners;
         [SerializeField] Employee[] crafter;
         [SerializeField] int remainedRest = 10; // 기본값은 0
+        // 가이드 퀘스트 달성 목록
+        [SerializeField] List<QuestState> guideQuestStates;
+        // 일일 퀘스트 데이터 목록
+        [SerializeField] List<QuestData> dailyQuestDatas;
+        // 일일 퀘스트 달성 목록
+        [SerializeField] List<QuestState> dailyQuestStates;
+        // 일일 퀘스트 갱신 시간
+        [SerializeField] GameDateTime recentDailyQuestUpdateDate;
         #endregion
 
         /// <summary>
@@ -183,9 +191,76 @@ namespace ProjectTrader
             set => this.remainedRest = value;
         }
 
-        //public PlayData()
-        //{
+        /// <summary>
+        /// 가이드 퀘스트 상태
+        /// </summary>
+        public List<QuestState> GuideQuestStates
+        {
+            get => this.guideQuestStates;
+            set => this.guideQuestStates = value;
+        }
 
+        /// <summary>
+        /// 일일 퀘스트 데이터, 매일 정각이 지나면 갱신
+        /// </summary>
+        public List<QuestData> DailyQuestDatas
+        {
+            get => this.dailyQuestDatas;
+            set => this.dailyQuestDatas = value;
+        }
+
+        /// <summary>
+        /// 일일 퀘스트 진행 상태
+        /// </summary>
+        public List<QuestState> DailyQuestStates
+        {
+            get => this.dailyQuestStates;
+            set => this.dailyQuestStates = value;
+        }
+
+        /// <summary>
+        /// 최근 일일 퀘스트 갱신 일자
+        /// </summary>
+        public GameDateTime RecentDailyQuestUpdateDate
+        {
+            get => this.recentDailyQuestUpdateDate;
+            set => this.recentDailyQuestUpdateDate = value;
+        }
+
+        ///// <summary>
+        ///// 퀘스트 갱신
+        ///// </summary>
+        //public void UpdateDailyQuest()
+        //{
+        //    // 퀘스트 데이터 초기화
+        //    DailyQuestDatas.Clear();
+        //    dailyQuestStates.Clear();
+
+        //    // 인게임 데이터에서 일일 퀘스트 데이터 가져와서 
+        //}
+
+        ///// <summary>
+        ///// 데이터 무결성 검사 등등...
+        ///// </summary>
+        //public void CheckData()
+        //{
+        //    CheckDailyQuest();
+        //}
+
+
+
+        ///// <summary>
+        ///// 일일 퀘스트 체크
+        ///// </summary>
+        //private void CheckDailyQuest()
+        //{
+        //    var now = DateTime.Now;
+        //    // 최근 갱신 일자에서 하루 이상 지났으면
+        //    if (now.Day - RecentDailyQuestUpdateDate.Day >= 1)
+        //    {
+        //        // 퀘스트 갱신
+        //        UpdateDailyQuest();
+        //    }
         //}
     }
 }
