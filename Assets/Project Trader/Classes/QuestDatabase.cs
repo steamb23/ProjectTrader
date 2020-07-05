@@ -20,6 +20,28 @@ namespace ProjectTrader.Datas
                 GoalAmount = 1,
                 RewardTypeData = QuestData.RewardType.Gold,
                 RewardAmount = 100
+            },
+            new QuestData()
+            {
+                Code = 1,
+                Name = "아이템 배치 1",
+                Description  = "아이템을 다른 아이템 3개 배치해보자",
+                Summary = "다른 종류 아이템 3개 배치",
+                GoalTypeData = QuestData.GoalType.SetItem,
+                GoalAmount = 3,
+                RewardTypeData = QuestData.RewardType.Gold,
+                RewardAmount = 100
+            },
+            new QuestData()
+            {
+                Code = 2,
+                Name = "재료 구입 1",
+                Description  = "모험가 길드에서 무화초를 10개 구입하자",
+                Summary = "무화초 10개 구입",
+                GoalTypeData = QuestData.GoalType.BuyItem,
+                GoalAmount = 3,
+                RewardTypeData = QuestData.RewardType.Gold,
+                RewardAmount = 100
             }
         };
         public static IReadOnlyList<QuestData> DailyQuestDatas { get; } = new QuestData[]

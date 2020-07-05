@@ -6,6 +6,7 @@ using UnityEngine.Assertions;
 using ProjectTrader.Datas;
 using Unity.Collections;
 using TMPro;
+using UnityEditorInternal;
 
 public class GuideQuestCard : MonoBehaviour
 {
@@ -19,19 +20,29 @@ public class GuideQuestCard : MonoBehaviour
         set
         {
             this.isRewarded = value;
-            rewardButton.interactable = !value;
-            if (isRewarded)
+            //CheckInteractable();
+        }
+    }
+
+    public bool IsInteractable
+    {
+        get => isInteractable;
+        set
+        {
+            isInteractable = value;
+            rewardButton.interactable = isInteractable && isGoal;
+            if (isInteractable)
             {
                 foreach (var image in images)
                 {
-                    image.color = Color.gray;
+                    image.color = Color.white;
                 }
             }
             else
             {
                 foreach (var image in images)
                 {
-                    image.color = Color.white;
+                    image.color = Color.gray;
                 }
             }
         }
@@ -44,7 +55,7 @@ public class GuideQuestCard : MonoBehaviour
         {
             this.questState = value;
 
-            CheckQuestState();
+            //CheckQuestState();
         }
     }
 
@@ -68,13 +79,17 @@ public class GuideQuestCard : MonoBehaviour
     [Tooltip("퀘스트 상태")]
     [SerializeField] QuestState questState;
     [Header("UI 컴포넌트")]
+    [SerializeField] TextMeshProUGUI descriptionText;
     [SerializeField] Button rewardButton;
     [SerializeField] TextMeshProUGUI rewardButtonText;
     [SerializeField] Image progressBarImage;
 
     [Header("디버그")]
+    [SerializeField] GuideQuestPanel guideQuestPanel;
     [SerializeField] Image[] images;
     [SerializeField] bool isRewarded;
+    [SerializeField] bool isInteractable;
+    [SerializeField] bool isGoal;
     [Range(0, 1)]
     [SerializeField] float progress;
 
@@ -85,6 +100,16 @@ public class GuideQuestCard : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        progressBarMaxWidth = progressBarImage.rectTransform.sizeDelta.x;
+
+        descriptionText.text = questState.GetQuestData().Summary;
+    }
+
+    public void Initialize()
+    {
+        if (guideQuestPanel == null)
+            guideQuestPanel = GameObject.FindObjectOfType<GuideQuestPanel>();
+
         images = GetComponentsInChildren<Image>(true);
 
         // UI컴포넌트가 설정이 됬는지 체크
@@ -98,15 +123,12 @@ public class GuideQuestCard : MonoBehaviour
         {
             throw new Exception("GuideQuestCard에서 하나 이상의 UI 컴포넌트를 설정 하지 않았습니다. 디자인을 변경했다면 코드도 변경이 필요할 수 있습니다.");
         }
-
-
-        progressBarMaxWidth = progressBarImage.rectTransform.sizeDelta.x;
     }
 
     /// <summary>
     /// 퀘스트 데이터를 체크하여 UI에 반영합니다.
     /// </summary>
-    public void CheckQuestState()
+    public void Check()
     {
         if (questState != null)
         {
@@ -114,32 +136,53 @@ public class GuideQuestCard : MonoBehaviour
             IsRewarded = questState.IsRewarded;
 
             CheckProgress();
+            CheckInteractable();
         }
         else
         {
             throw new Exception("questState가 null입니다.");
         }
+    }
 
-        // 현재 진행상황을 체크합니다.
-        void CheckProgress()
+    // 현재 진행상황을 체크합니다.
+    void CheckProgress()
+    {
+        var goalAmount = questState.GetQuestData().GoalAmount;
+        var currentAmount = questState.CurrentAmount;
+
+        var progress = currentAmount / (float)goalAmount;
+        Progress = progress;
+
+        if (1 - progress < 1e-6f) // (progress >= 1)
         {
-            var goalAmount = questState.GetQuestData().GoalAmount;
-            var currentAmount = questState.CurrentAmount;
+            rewardButtonText.text = "받기";
+            // isRewarded가 false일때만 상호작용 가능
+            //rewardButton.interactable = !IsInteractable;
+            isGoal = true;
+        }
+        else
+        {
+            rewardButtonText.text = "미달성";
+            //rewardButton.interactable = false;
+            isGoal = false;
+        }
+    }
 
-            var progress = currentAmount / (float)goalAmount;
-            Progress = progress;
-
-            if (progress - 1 < 1e-6f) // (progress >= 1)
+    void CheckInteractable()
+    {
+        // 이전 퀘스트가 완료되었는지
+        bool prevQuestIsRewarded = false;
+        // 현재 인덱스 확인
+        var currentCardsIndex = guideQuestPanel.GuideQuestCards.IndexOf(this);
+        if (currentCardsIndex >= 0)
+        {
+            if (currentCardsIndex == 0 ||
+                guideQuestPanel.GuideQuestCards[currentCardsIndex - 1].isRewarded)
             {
-                rewardButtonText.text = "받기";
-                // isRewarded가 false일때만 상호작용 가능
-                rewardButton.interactable = !isRewarded;
-            }
-            else
-            {
-                rewardButtonText.text = "미달성";
-                rewardButton.interactable = false;
+                prevQuestIsRewarded = true;
             }
         }
+
+        IsInteractable = !IsRewarded && prevQuestIsRewarded;
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using UnityEngine;
 
@@ -16,12 +17,13 @@ namespace ProjectTrader
             // 기본 데이터 설정.
             // 추후에 게임 진입시 초기화하도록 할 예정
             SetCurrentData(new PlayData());
+            CurrentData.isInitialized = true;
         }
 
         public static PlayData CurrentData
         {
             get;
-            private set;
+            set;
         }
 
         public static void SetCurrentData(PlayData playData)
@@ -46,19 +48,22 @@ namespace ProjectTrader
         [SerializeField] Employee[] crafter;
         [SerializeField] int remainedRest = 10; // 기본값은 0
         // 가이드 퀘스트 달성 목록
-        [SerializeField] List<QuestState> guideQuestStates;
+        [SerializeField] List<QuestState> guideQuestStates = new List<QuestState>();
         // 일일 퀘스트 데이터 목록
-        [SerializeField] List<QuestData> dailyQuestDatas;
+        [SerializeField] List<QuestData> dailyQuestDatas = new List<QuestData>();
         // 일일 퀘스트 달성 목록
-        [SerializeField] List<QuestState> dailyQuestStates;
+        [SerializeField] List<QuestState> dailyQuestStates = new List<QuestState>();
         // 일일 퀘스트 갱신 시간
         [SerializeField] GameDateTime recentDailyQuestUpdateDate;
+        [SerializeField] bool isInitialized = false;
         #endregion
 
         /// <summary>
         /// 모든 데이터가 데이터베이스와 동기화되있는 상태인지 체크
         /// </summary>
         bool isSynced;
+
+        public bool IsInitialized => isInitialized;
 
         /// <summary>
         /// 현재 보유 금전
@@ -257,7 +262,7 @@ namespace ProjectTrader
 
             foreach (var questData in QuestDatabase.GuideQuestDatas)
             {
-                var questState = GuideQuestStates.Find((questState) => questState.Code == questData.Code);
+                var questState = GuideQuestStates.Find((qs) => qs.Code == questData.Code);
 
                 // 데이터가 없으면 추가
                 if (questState == null)

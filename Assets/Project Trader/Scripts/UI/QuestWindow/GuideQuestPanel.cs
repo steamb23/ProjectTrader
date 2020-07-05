@@ -14,6 +14,7 @@ public class GuideQuestPanel : MonoBehaviour
 
     [Header("프리팹")]
     [SerializeField] GameObject guideQuestCardPrefab;
+    [SerializeField] Transform componentTransform;
 
     [SerializeField] List<GuideQuestCard> guideQuestCards = new List<GuideQuestCard>();
 
@@ -28,7 +29,7 @@ public class GuideQuestPanel : MonoBehaviour
     public void WindowOpened()
     {
         ClearGuideQuestCards();
-        
+
     }
 
     /// <summary>
@@ -41,10 +42,15 @@ public class GuideQuestPanel : MonoBehaviour
         var gameObject = Instantiate(guideQuestCardPrefab);
 
         var guideQuestCard = gameObject.GetComponent<GuideQuestCard>();
-        guideQuestCard.QuestState = questState;
+        guideQuestCard.Initialize();
 
+        guideQuestCard.QuestState = questState;
+        guideQuestCard.transform.SetParent(componentTransform);
         // 목록에 추가
         guideQuestCards.Add(guideQuestCard);
+
+        // 데이터 체크
+        guideQuestCard.Check();
 
         return guideQuestCard;
     }

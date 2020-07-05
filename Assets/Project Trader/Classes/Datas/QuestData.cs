@@ -59,7 +59,15 @@ namespace ProjectTrader.Datas
             /// <summary>
             /// 직접 청소
             /// </summary>
-            SelfCleaning
+            SelfCleaning,
+            /// <summary>
+            /// 아이템 제작
+            /// </summary>
+            CraftingItem,
+            /// <summary>
+            /// 아이템 구매
+            /// </summary>
+            BuyItem,
         }
 
         public int Code

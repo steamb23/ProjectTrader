@@ -19,6 +19,12 @@ public class DataSave : MonoBehaviour
     //임시 알바고용
     Employee[] empInfo;
     int empsize;
+
+    private void Awake()
+    {
+        GameLoad();
+    }
+
     void Start()
     {
         textUi = GameObject.Find("TextUiControl");
@@ -32,7 +38,6 @@ public class DataSave : MonoBehaviour
             playerItem[i].Code = i + 1;
             playerItem[i].Count = 6;
         }
-        GameLoad();
     }
 
     void Update()
@@ -51,16 +56,21 @@ public class DataSave : MonoBehaviour
 
     public void GameLoad()
     {
-        var pda = PlayData.CurrentData;
-
         string load = LoadJson();
-        UnityEngine.Debug.Log(load);
+        Debug.Log($"데이터 로드 : {load}");
         var loadData = JsonToObject<PlayData>(load);
-        pda.Money = loadData.Money;
-        pda.Level = loadData.Level;
-        pda.Awareness = loadData.Awareness;
-        pda.ShopName = loadData.ShopName;
-        //출력함수추가
+        if (loadData.IsInitialized)
+        {
+            PlayData.CurrentData = loadData;
+            Debug.Log("로드 성공");
+        }
+        else
+        {
+            Debug.Log("로드 실패, 새 데이터로 시작");
+
+            // 게임 데이터베이스와 동기화
+            PlayData.CurrentData.SyncData();
+        }
     }
 
     string ObjsonMake(object obj)
