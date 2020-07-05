@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -53,6 +54,11 @@ namespace ProjectTrader
         // 일일 퀘스트 갱신 시간
         [SerializeField] GameDateTime recentDailyQuestUpdateDate;
         #endregion
+
+        /// <summary>
+        /// 모든 데이터가 데이터베이스와 동기화되있는 상태인지 체크
+        /// </summary>
+        bool isSynced;
 
         /// <summary>
         /// 현재 보유 금전
@@ -197,7 +203,11 @@ namespace ProjectTrader
         public List<QuestState> GuideQuestStates
         {
             get => this.guideQuestStates;
-            set => this.guideQuestStates = value;
+            set
+            {
+                if (!isSynced) SyncData();
+                this.guideQuestStates = value;
+            }
         }
 
         /// <summary>
@@ -225,6 +235,49 @@ namespace ProjectTrader
         {
             get => this.recentDailyQuestUpdateDate;
             set => this.recentDailyQuestUpdateDate = value;
+        }
+
+        /// <summary>
+        /// 게임 데이터 베이스에 동기화
+        /// 
+        /// TODO:플레이 데이터 초기화 혹은 로딩 과정에서 호출해줄 필요가 있음.
+        /// </summary>
+        public void SyncData()
+        {
+            SyncQuestStateFromQuestData();
+            isSynced = true;
+        }
+
+        /// <summary>
+        /// 퀘스트 데이터에 맞게 퀘스트 스테이트 목록을 동기화합니다.
+        /// </summary>
+        void SyncQuestStateFromQuestData()
+        {
+            var workQueue = new Queue<QuestState>();
+
+            foreach (var questData in QuestDatabase.GuideQuestDatas)
+            {
+                var questState = GuideQuestStates.Find((questState) => questState.Code == questData.Code);
+
+                // 데이터가 없으면 추가
+                if (questState == null)
+                {
+                    questState = new QuestState()
+                    {
+                        Code = questData.Code,
+                        QuestTypeData = QuestState.QuestType.Guide
+                    };
+                    GuideQuestStates.Add(questState);
+                }
+                workQueue.Enqueue(questState);
+            }
+
+            // 내용 복사 (이미 정렬되있는 것으로 간주함)
+            GuideQuestStates.Clear();
+            foreach (var questState in workQueue)
+            {
+                GuideQuestStates.Add(questState);
+            }
         }
 
         ///// <summary>

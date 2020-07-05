@@ -28,6 +28,14 @@ namespace ProjectTrader.Datas
             set => this.code = value;
         }
         /// <summary>
+        /// 현재 달성량
+        /// </summary>
+        public int CurrentAmount
+        {
+            get => this.currentAmount;
+            set => this.currentAmount = value;
+        }
+        /// <summary>
         /// 보상을 수령했는지 여부
         /// </summary>
         public bool IsRewarded
@@ -42,8 +50,16 @@ namespace ProjectTrader.Datas
             set => this.questTypeData = value;
         }
 
+        /// <summary>
+        /// 퀘스트 데이터의 인스턴스를 가져옵니다.
+        /// </summary>
+        /// <returns></returns>
         public QuestData GetQuestData() => GetQuestData(QuestTypeData);
 
+        /// <summary>
+        /// 퀘스트 데이터의 인스턴스를 가져옵니다.
+        /// </summary>
+        /// <returns></returns>
         public QuestData GetQuestData(QuestType questType)
         {
             switch (questType)
@@ -56,11 +72,9 @@ namespace ProjectTrader.Datas
             }
         }
 
-        [SerializeField]
-        int code;
-        [SerializeField]
-        bool isRewarded;
-        [SerializeField]
-        QuestType questTypeData;
+        [SerializeField] int code;
+        [SerializeField] int currentAmount;
+        [SerializeField] bool isRewarded;
+        [SerializeField] QuestType questTypeData;
     }
 }
