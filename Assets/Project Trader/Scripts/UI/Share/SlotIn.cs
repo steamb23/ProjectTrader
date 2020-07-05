@@ -45,5 +45,4 @@ public class SlotIn : MonoBehaviour
             go.GetComponent<TextUiControl>().CreativeTextBox(0, 0, -30, "구매할 수 있는 수량이 아닙니다.", 2);
         }
     }
-
 }

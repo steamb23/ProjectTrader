@@ -1,24 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ProjectTrader;
 
 //튜토리얼을 보면 tutorial스크립트 자체를 꺼버리기
 public class Tutorial : MonoBehaviour
 {
     [SerializeField]
+    GameObject tutorialwindow;
+    [SerializeField]
     GameObject[] tutorial;
     [SerializeField]
     int num;
-    int empnum;
-    [SerializeField]
-    GameObject[] tutorialwindow;
-    [SerializeField]
-    GameObject towmcamera;
+    GameObject town;
+    
     // Start is called before the first frame update
     void Start()
     {
+        var playData = PlayData.CurrentData;
+        if (playData.Tutorial == true)
+            tutorialwindow.SetActive(false);
         num = 0;
-        empnum = 3;
     }
 
     // Update is called once per frame
@@ -33,49 +35,52 @@ public class Tutorial : MonoBehaviour
     void ChangeTutorial()
     {
         num++;
-        //if (num == tutorial.Length)
-        //{
-        //    this.gameObject.SetActive(false);
-        //    return;
-        //}
-        if (num < 3)
+
+        if (num >= tutorial.Length)
         {
-            if (num >= 3)
-                tutorial[0].SetActive(false);
-            if (num != 1)
-                tutorial[num - 1].SetActive(false);
-            tutorial[num].SetActive(true);
+            tutorial[tutorial.Length - 1].SetActive(false);
+            var playData = PlayData.CurrentData;
+            playData.Tutorial = true;
+            tutorialwindow.SetActive(false);
+            return;
         }
-        if (tutorialwindow[0].activeSelf == true || tutorialwindow[1].activeSelf == true || tutorialwindow[2].activeSelf == true)
+      
+
+        if (num != 1)
+            tutorial[num - 1].SetActive(false);
+        tutorial[num].SetActive(true);
+        if (num >= 3&&num<9)
         {
-            if (tutorial[2].activeSelf == true)
-                tutorial[2].SetActive(false);
-            EmployeeTutorial();
+            tutorialwindow.GetComponent<Emptutorial>().EmptutorialStart(num);
         }
-    }
-
-    void EmployeeTutorial()
-    {
-        empnum++;
-        if (empnum <= 5)
+        if (num >= 9 && num < 14)
         {
-            tutorial[empnum - 1].SetActive(false);
-            tutorial[empnum].SetActive(true);
+            if (num == 9)
+            {
+                tutorialwindow.GetComponent<TownShopTutorial>().MoveTown(num);
+            }
+            if (num == 9 || num == 12)
+                TownTutorial(num);
+            tutorialwindow.GetComponent<TownShopTutorial>().ShopWindowTutorial(num);
+        }
+        if (num >= 13 && num<17)
+        {
+            tutorialwindow.GetComponent<TownShopTutorial>().MakerWindowTutorial(num);
+            if(num==16)
+                TownTutorial(num);
+        }
+        if (num >=17)
+        {
+            if(num==17)
+                tutorialwindow.GetComponent<TownShopTutorial>().MoveTown(num);
+            tutorialwindow.GetComponent<DisplayTutorial>().DisplayTutorialSet(num);
         }
     }
 
-    void ShopTutorial()
+    //town튜토리얼용 카메라 호출
+    void TownTutorial(int num)
     {
-
-    }
-
-    void MakerTutorial()
-    {
-
-    }
-
-    void DisplayTutorial()
-    {
-
+        town = GameObject.Find("Towntutorial");
+        town.GetComponent<TownTutorial>().TownCameraSet(num);
     }
 }

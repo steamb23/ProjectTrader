@@ -130,22 +130,26 @@ public class SellWindow : MonoBehaviour
 
         if (setArrow == false)
         {
-            arrowSprite = new GameObject[go.Length - 1];
-            for (int j = 1; j < go.Length; j++)
+            arrowSprite = new GameObject[go.Length];
+            for (int j = 0; j < go.Length; j++)
             {
-                arrowSprite[j-1] = Instantiate(arrow) as GameObject;
-                arrowSprite[j-1].transform.position = new Vector3(go[j].transform.position.x, go[j].transform.position.y + 0.6f, -1);
-                arrowSprite[j - 1].SetActive(false);
+                arrowSprite[j] = Instantiate(arrow) as GameObject;
+                arrowSprite[j].transform.position = new Vector3(go[j].transform.position.x, go[j].transform.position.y + 0.6f, -1);
+                arrowSprite[j ].SetActive(false);
             }
             setArrow = true;
         }
 
-        for (int i = 1; i < go.Length; i++)
+        for (int i = 0; i < go.Length; i++)
         {
             arrowC = go[i].GetComponent<DisplayedItem>().Item;
             if (arrowC.Count <= 0)
             {
-                arrowSprite[i - 1].SetActive(true);
+                arrowSprite[i ].SetActive(true);
+            }
+            else
+            {
+                arrowSprite[i ].SetActive(false);
             }
 
         }
