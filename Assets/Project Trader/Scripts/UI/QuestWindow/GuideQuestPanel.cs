@@ -3,6 +3,8 @@ using System.Collections;
 using Boo.Lang;
 using ProjectTrader.Datas;
 using ProjectTrader;
+using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class GuideQuestPanel : MonoBehaviour
 {
@@ -20,7 +22,12 @@ public class GuideQuestPanel : MonoBehaviour
 
     private void Start()
     {
-        InitializeGuideQuestCards();
+        //InitializeGuideQuestCards();
+    }
+
+    private void OnEnable()
+    {
+        WindowOpened();
     }
 
     /// <summary>
@@ -28,8 +35,9 @@ public class GuideQuestPanel : MonoBehaviour
     /// </summary>
     public void WindowOpened()
     {
+        // 카드 초기화후 다시 생성
         ClearGuideQuestCards();
-
+        InitializeGuideQuestCards();
     }
 
     /// <summary>
@@ -63,6 +71,9 @@ public class GuideQuestPanel : MonoBehaviour
             // 생성
             CreateGuideQuestCard(questState);
         }
+
+        // 스크롤 뷰 위치 초기화
+        ScrollToCurrentActiveCard();
     }
 
     public void ClearGuideQuestCards()
@@ -78,6 +89,61 @@ public class GuideQuestPanel : MonoBehaviour
 
         // 리스트 클리어
         guideQuestCards.Clear();
+    }
+
+    /// <summary>
+    /// 현재 활성화된 카드로 스크롤합니다.
+    /// </summary>
+    public void ScrollToCurrentActiveCard()
+    {
+        GuideQuestCard activeCard = null;
+        
+        // 현재 활성화된 퀘스트 카드 검색
+        foreach (var card in guideQuestCards)
+        {
+            if (card.IsInteractable)
+            {
+                activeCard = card;
+                break;
+            }
+        }
+
+        StartCoroutine(NextFrame());
+        IEnumerator NextFrame()
+        {
+            yield return null;
+            ScrollToCard(activeCard);
+        }
+    }
+
+    /// <summary>
+    /// 해당 카드의 위치로 스크롤합니다. 가능하면 패널에서 관리되는 카드가 확실할 경우에만 호출하세요.
+    /// </summary>
+    /// <param name="card">패널에서 관리되는 퀘스트 카드 컴포넌트</param>
+    public void ScrollToCard(GuideQuestCard card)
+    {
+        var scrollRect = GetComponent<ScrollRect>();
+
+        if (card != null)
+        {
+            var cardRectTransform = card.GetComponent<RectTransform>();
+            // 활성화된 카드의 로컬 위치 알아내기
+            var horizontalActiveCardLocalPosition = cardRectTransform.offsetMin.x;
+
+            // Rect 마스크와 컨텐츠의 넓이 가져오기 (Scale이 항상 1이라는 가정하에)
+            var rectMaskWidth = GetComponentInChildren<RectMask2D>().rectTransform.rect.width;
+            var contentsWidth = scrollRect.content.rect.width;
+
+            // 오른쪽에서 움직임이 제한되는 위치
+            var horizontalMaxPosition = Mathf.Max(contentsWidth - rectMaskWidth, 0);
+            //카드의 노멀라이즈된 위치 알아내기
+            var horizontalNormalizedPosition = horizontalMaxPosition != 0 ?
+                horizontalActiveCardLocalPosition / horizontalMaxPosition :
+                0f;
+
+            // 스크롤 렉트 설정
+            scrollRect.horizontalNormalizedPosition = Mathf.Min(horizontalNormalizedPosition, 1f);
+        }
     }
 
     // 필요 없을듯... 나중에 필요하면 다시 활성화
