@@ -1302,6 +1302,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 42310459}
+  - component: {fileID: 42310460}
   m_Layer: 5
   m_Name: QuestWindow
   m_TagString: Untagged
@@ -1325,6 +1326,7 @@ RectTransform:
   - {fileID: 451892031}
   - {fileID: 598696875}
   - {fileID: 1349809865}
+  - {fileID: 1713449169}
   - {fileID: 1612239154}
   m_Father: {fileID: 1006308747}
   m_RootOrder: 14
@@ -1334,6 +1336,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 896, y: 453}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &42310460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42310458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dc3fa0ac4b6af64c8d18473b37a3aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guideQuestPanel: {fileID: 1349809869}
+  dailyQuestPanel: {fileID: 1713449170}
 --- !u!1 &42977939
 GameObject:
   m_ObjectHideFlags: 0
@@ -9130,7 +9146,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 451892033}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 42310460}
+        m_MethodName: SwitchToDailyQuestPanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &451892033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9550,7 +9577,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 471786337}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 42310460}
+        m_MethodName: SwitchToGuideQuestPanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &471786337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25403,8 +25441,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1349809865}
-  - component: {fileID: 1349809868}
-  - component: {fileID: 1349809867}
   - component: {fileID: 1349809866}
   - component: {fileID: 1349809869}
   m_Layer: 5
@@ -25465,42 +25501,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1349809867
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1349809864}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ff6bbe160ebc9d74e8139f32e1a057df, type: 3}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1349809868
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1349809864}
-  m_CullTransparentMesh: 0
 --- !u!114 &1349809869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30335,7 +30335,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 42310459}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -31470,6 +31470,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1708922404}
   m_CullTransparentMesh: 0
+--- !u!1 &1713449168
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1713449169}
+  - component: {fileID: 1713449170}
+  m_Layer: 5
+  m_Name: DailyQuestPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1713449169
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713449168}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 42310459}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 111, y: 0}
+  m_SizeDelta: {x: -315.7, y: -148}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1713449170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713449168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 726beb3e92d388346a196480ac986785, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1721311485 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1061682334, guid: 9c8b63bbac1d397448c8003ae67a8cd5,
