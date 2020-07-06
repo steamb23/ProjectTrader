@@ -67,7 +67,7 @@ public class GuideQuestCard : MonoBehaviour
             this.progress = value;
 
             progress = Mathf.Clamp01(progress);
-            var maxWidth = progressBarMaxWidth;
+            var maxWidth = ProgressBarMaxWidth;
             var width = progress * maxWidth;
 
             var sizeDelta = progressBarImage.rectTransform.sizeDelta;
@@ -94,13 +94,25 @@ public class GuideQuestCard : MonoBehaviour
     [SerializeField] float progress;
 
     float progressBarMaxWidth;
+    bool isProgressBarMaxWidthCached;
+    float ProgressBarMaxWidth
+    {
+        get
+        {
+            if (!isProgressBarMaxWidthCached)
+            {
+                progressBarMaxWidth = progressBarImage.rectTransform.sizeDelta.x;
+                isProgressBarMaxWidthCached = true;
+            }
+            return progressBarMaxWidth;
+        }
+    }
 
 
 
     // Use this for initialization
     void Start()
     {
-        progressBarMaxWidth = progressBarImage.rectTransform.sizeDelta.x;
 
         descriptionText.text = questState.GetQuestData().Summary;
     }
@@ -123,6 +135,12 @@ public class GuideQuestCard : MonoBehaviour
         {
             throw new Exception("GuideQuestCard에서 하나 이상의 UI 컴포넌트를 설정 하지 않았습니다. 디자인을 변경했다면 코드도 변경이 필요할 수 있습니다.");
         }
+    }
+
+    private void OnEnable()
+    {
+        if (guideQuestPanel != null)
+            Check();
     }
 
     /// <summary>

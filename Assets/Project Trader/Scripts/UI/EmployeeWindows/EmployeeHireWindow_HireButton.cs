@@ -38,6 +38,9 @@ public class EmployeeHireWindow_HireButton : MonoBehaviour
             emp.State = candiateInfo.State;
             emp.Age = candiateInfo.Age;
 
+            // 퀘스트 트리거
+            ProjectTrader.QuestManager.TriggerHireEmployee();
+
             savedata.GetComponent<DataSave>().FHireEmp(emp,1);
             empcatch.GetComponent<EmployeeDataCatch>().SetEmpData(emp);
             candiateInfo.Disable();
