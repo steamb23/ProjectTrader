@@ -105,7 +105,7 @@ public class DailyQuestCard : MonoBehaviour
         {
             if (!isProgressBarMaxWidthCached)
             {
-                progressBarMaxWidth = progressBarImage.rectTransform.sizeDelta.x;
+                progressBarMaxWidth = progressBarImage.rectTransform.rect.width;
                 isProgressBarMaxWidthCached = true;
             }
             return progressBarMaxWidth;
@@ -117,7 +117,8 @@ public class DailyQuestCard : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        Initialize();
+        UpdateData();
         //descriptionText.text = questState.GetQuestData().Summary;
     }
 
@@ -167,9 +168,16 @@ public class DailyQuestCard : MonoBehaviour
     /// </summary>
     public void UpdateData()
     {
-        questState = PlayData.CurrentData.DailyQuestStates[0];
+        if (PlayData.CurrentData.DailyQuestStates.Count > 0)
+        {
+            questState = PlayData.CurrentData.DailyQuestStates[0];
 
-        descriptionText.text = questState.GetQuestData().Summary;
+            descriptionText.text = questState.GetQuestData().Summary;
+        }
+        else
+        {
+            questState = null;
+        }
 
         Check();
     }
@@ -189,7 +197,8 @@ public class DailyQuestCard : MonoBehaviour
         }
         else
         {
-            throw new Exception("questState가 null입니다.");
+            descriptionText.text = "퀘스트 없음";
+            IsInteractable = false;
         }
     }
 
@@ -219,6 +228,7 @@ public class DailyQuestCard : MonoBehaviour
 
     void CheckInteractable()
     {
+
         IsInteractable = !IsRewarded;
     }
 }

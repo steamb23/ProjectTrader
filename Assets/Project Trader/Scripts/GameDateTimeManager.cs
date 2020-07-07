@@ -200,5 +200,8 @@ class GameDateTimeManager : MonoBehaviour
         // 다음날
         gameDateTime.AddDay(1);
         PlayData.CurrentData.Date = gameDateTime;
+
+        // 일일 퀘스트 갱신
+        PlayData.CurrentData.UpdateDailyQuest();
     }
 }

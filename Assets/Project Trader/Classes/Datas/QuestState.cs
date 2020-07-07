@@ -68,7 +68,7 @@ namespace ProjectTrader.Datas
                 case QuestType.Guide:
                     return QuestDatabase.GuideQuestDatas[code];
                 case QuestType.Daily:
-                    return QuestDatabase.GuideQuestDatas[code];
+                    return QuestDatabase.DailyQuestDatas[code];
             }
         }
 

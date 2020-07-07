@@ -101,7 +101,7 @@ public class GuideQuestCard : MonoBehaviour
         {
             if (!isProgressBarMaxWidthCached)
             {
-                progressBarMaxWidth = progressBarImage.rectTransform.sizeDelta.x;
+                progressBarMaxWidth = progressBarImage.rectTransform.rect.width;
                 isProgressBarMaxWidthCached = true;
             }
             return progressBarMaxWidth;

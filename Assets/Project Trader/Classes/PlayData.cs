@@ -17,6 +17,7 @@ namespace ProjectTrader
             // 기본 데이터 설정.
             // 추후에 게임 진입시 초기화하도록 할 예정
             SetCurrentData(new PlayData());
+            //CurrentData.UpdateDailyQuest();
             CurrentData.isInitialized = true;
         }
 
@@ -289,6 +290,8 @@ namespace ProjectTrader
                 QuestTypeData = QuestState.QuestType.Daily,
                 Code = QuestDatabase.DailyQuestDatas[index].Code
             });
+
+            RecentDailyQuestUpdateDate = Date;
         }
 
         ///// <summary>
