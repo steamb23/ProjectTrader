@@ -144,6 +144,21 @@ public class GuideQuestCard : MonoBehaviour
     }
 
     /// <summary>
+    /// 보상 받기 터치
+    /// </summary>
+    public void TouchRewardButton()
+    {
+        if (!questState.IsRewarded)
+        {
+            questState.Reward();
+
+            // 패널 갱신
+            guideQuestPanel.ClearGuideQuestCards();
+            guideQuestPanel.InitializeGuideQuestCards();
+        }
+    }
+
+    /// <summary>
     /// 퀘스트 데이터를 체크하여 UI에 반영합니다.
     /// </summary>
     public void Check()

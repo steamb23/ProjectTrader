@@ -420,7 +420,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1448709707219639089}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1448709708720760920}
+        m_MethodName: TouchRewardButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1448709707503537668
 GameObject:
   m_ObjectHideFlags: 0
@@ -872,6 +883,9 @@ MonoBehaviour:
   rewardButton: {fileID: 1448709707219639102}
   rewardButtonText: {fileID: 1448709708470654687}
   progressBarImage: {fileID: 1448709707996704515}
+  guideQuestPanel: {fileID: 0}
   images: []
   isRewarded: 0
+  isInteractable: 0
+  isGoal: 0
   progress: 0

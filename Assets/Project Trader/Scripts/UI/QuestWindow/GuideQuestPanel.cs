@@ -38,6 +38,9 @@ public class GuideQuestPanel : MonoBehaviour
         // 카드 초기화후 다시 생성
         ClearGuideQuestCards();
         InitializeGuideQuestCards();
+
+        // 스크롤 뷰 위치 초기화
+        ScrollToCurrentActiveCard();
     }
 
     /// <summary>
@@ -72,9 +75,6 @@ public class GuideQuestPanel : MonoBehaviour
             // 생성
             CreateGuideQuestCard(questState);
         }
-
-        // 스크롤 뷰 위치 초기화
-        ScrollToCurrentActiveCard();
     }
 
     public void ClearGuideQuestCards()

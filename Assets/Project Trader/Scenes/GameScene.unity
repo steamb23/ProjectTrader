@@ -1350,6 +1350,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guideQuestPanel: {fileID: 1349809869}
   dailyQuestPanel: {fileID: 1713449170}
+  guideQuestButton: {fileID: 471786336}
+  dailyQuestButton: {fileID: 451892032}
+  clickedSprite: {fileID: 21300000, guid: a6427726c789d4744a3084e3b5f125cc, type: 3}
+  releasedSprite: {fileID: 21300000, guid: 204b219c26e879245aa4f1b636b3cfdb, type: 3}
 --- !u!1 &42977939
 GameObject:
   m_ObjectHideFlags: 0

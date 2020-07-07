@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 /// <summary>
 /// 퀘스트 윈도우 전체를 관리하는 비헤이비어입니다.
@@ -8,6 +9,11 @@ public class QuestWindow : MonoBehaviour
 {
     [SerializeField] GuideQuestPanel guideQuestPanel;
     [SerializeField] DailyQuestPanel dailyQuestPanel;
+    [SerializeField] Button guideQuestButton;
+    [SerializeField] Button dailyQuestButton;
+
+    [SerializeField] Sprite clickedSprite;
+    [SerializeField] Sprite releasedSprite;
 
     private void OnEnable()
     {
@@ -22,6 +28,9 @@ public class QuestWindow : MonoBehaviour
     {
         guideQuestPanel.gameObject.SetActive(true);
         dailyQuestPanel.gameObject.SetActive(false);
+
+        guideQuestButton.image.sprite = clickedSprite;
+        dailyQuestButton.image.sprite = releasedSprite;
     }
 
     /// <summary>
@@ -31,5 +40,8 @@ public class QuestWindow : MonoBehaviour
     {
         guideQuestPanel.gameObject.SetActive(false);
         dailyQuestPanel.gameObject.SetActive(true);
+
+        guideQuestButton.image.sprite = releasedSprite;
+        dailyQuestButton.image.sprite = clickedSprite;
     }
 }

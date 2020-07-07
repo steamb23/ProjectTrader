@@ -72,6 +72,23 @@ namespace ProjectTrader.Datas
             }
         }
 
+        /// <summary>
+        /// 보상을 지급합니다. 보상여부는 체크하지 않으니 호출전에 체크 필요!
+        /// </summary>
+        public void Reward()
+        {
+            var questData = GetQuestData();
+
+            switch (questData.RewardTypeData)
+            {
+                case QuestData.RewardType.Gold:
+                    PlayData.CurrentData.Money += questData.RewardAmount;
+                    break;
+            }
+
+            isRewarded = true;
+        }
+
         [SerializeField] int code;
         [SerializeField] int currentAmount;
         [SerializeField] bool isRewarded;
