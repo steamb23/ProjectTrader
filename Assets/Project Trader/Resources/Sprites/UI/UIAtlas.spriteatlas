@@ -31,7 +31,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: be5d8854a255bc34787421cf3a6cab3c, type: 3}
-    totalSpriteSurfaceArea: 6574450
+    totalSpriteSurfaceArea: 6583810
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -107,6 +107,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 1b70ac6d1d437a040a5ce6a054f4416f, type: 3}
   - {fileID: 21300000, guid: b181889d911c39445a6b47288fb283cd, type: 3}
   - {fileID: 21300000, guid: d24a450eea038a94d9ab1608b108becf, type: 3}
+  - {fileID: 21300000, guid: 3132bb0e14751814c806bea26d18efc2, type: 3}
   - {fileID: 21300000, guid: 55eb714e5123ba140a7b68b0de4b1edc, type: 3}
   - {fileID: 21300000, guid: f933c17e831b7aa4ba88ebde1697c4bf, type: 3}
   - {fileID: 21300000, guid: eb55557e7777bf94bbdf2022712549ec, type: 3}
@@ -193,6 +194,7 @@ SpriteAtlas:
   - "\uC0C1\uC810UI_03"
   - Icon_Awareness
   - icon_silver
+  - Btn_Red
   - "\uD50C\uB808\uC774\uC5B4 \uACE8\uB4DC"
   - Icon_Arbeit
   - img_Btn_bg
