@@ -54,6 +54,7 @@ public class GuideQuestPanel : MonoBehaviour
 
         guideQuestCard.QuestState = questState;
         guideQuestCard.transform.SetParent(componentTransform);
+        guideQuestCard.transform.localScale = Vector3.one; // 720p외의 환경에서 스케일 문제 발생 수정
         // 목록에 추가
         guideQuestCards.Add(guideQuestCard);
 
