@@ -1,12 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 using System;
-using UnityEngine.Assertions;
 using ProjectTrader.Datas;
-using Unity.Collections;
 using TMPro;
-using UnityEditorInternal;
 
 public class GuideQuestCard : MonoBehaviour
 {

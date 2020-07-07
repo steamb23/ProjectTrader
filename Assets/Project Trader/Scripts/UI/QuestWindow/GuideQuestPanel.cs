@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Boo.Lang;
 using ProjectTrader.Datas;
 using ProjectTrader;
-using UnityEngine.UIElements;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class GuideQuestPanel : MonoBehaviour
 {

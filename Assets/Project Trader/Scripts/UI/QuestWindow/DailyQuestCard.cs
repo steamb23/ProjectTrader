@@ -1,12 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 using System;
-using UnityEngine.Assertions;
 using ProjectTrader.Datas;
-using Unity.Collections;
 using TMPro;
-using UnityEditorInternal;
 using ProjectTrader;
 
 // 원래는 GuideQuest와 다형성 구현해야함...
