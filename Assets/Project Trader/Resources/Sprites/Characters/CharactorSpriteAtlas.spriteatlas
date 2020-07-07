@@ -43,7 +43,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: cafcb4afb33085a47b911238cb677ee9, type: 3}
-    totalSpriteSurfaceArea: 3174912
+    totalSpriteSurfaceArea: 3191296
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -237,6 +237,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 6f0462e3ab4e30845854f447503bfff3, type: 3}
   - {fileID: 21300000, guid: e69c84e3e33d4fb4d91300f717c11e0c, type: 3}
   - {fileID: 21300000, guid: e6ff59e30e5d4bb42bca5d04e64b1134, type: 3}
+  - {fileID: 21300000, guid: cb8ec5f35025dae4f83fb08a73fbc186, type: 3}
   - {fileID: 21300000, guid: 7aaf7af304336d1499ac79baae44feb9, type: 3}
   - {fileID: 21300000, guid: 6aef8ef30211dfa498c1f768a3750998, type: 3}
   - {fileID: 21300000, guid: dd4fa5040740d7e4c9badd4a21201ed9, type: 3}
@@ -373,6 +374,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 6b5128f6c0b174749bde43a416d0d562, type: 3}
   - {fileID: 21300000, guid: 8275e007b6eea0a4e93ad5ed882228b5, type: 3}
   - {fileID: 21300000, guid: 1384e50775cef014a80a2140cb960128, type: 3}
+  - {fileID: 21300000, guid: 4b38090728b438f4cb799ec2b1409e01, type: 3}
   - {fileID: 21300000, guid: 217bff07bdb91284a840de8978e1c435, type: 3}
   - {fileID: 21300000, guid: 2b52b6173ea4c1349b646f542026996b, type: 3}
   - {fileID: 21300000, guid: 16d1ef1741dc65343bfe42a7c2cc72cc, type: 3}
@@ -555,6 +557,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 994454ca46b48e04a8af85ea67965a34, type: 3}
   - {fileID: 21300000, guid: d13fc4cac6ada1246af475079417499e, type: 3}
   - {fileID: 21300000, guid: d60728cab39b7494288faa5e07c2632b, type: 3}
+  - {fileID: 21300000, guid: 065811da02ce5304984651b3bc9f1cc8, type: 3}
   - {fileID: 21300000, guid: 07e264dac6e44ca459862aa68aa85d18, type: 3}
   - {fileID: 21300000, guid: 7b8ed5da69615384cae79348203c07e9, type: 3}
   - {fileID: 21300000, guid: 9afed8da79e0da9429fa845608ea356e, type: 3}
@@ -717,6 +720,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 1b2f340e6118baa47b5abc554d955ae0, type: 3}
   - {fileID: 21300000, guid: 610d170e2a24541429aabaa6610d9bca, type: 3}
   - {fileID: 21300000, guid: 1d79470e46453304bafe997540faadae, type: 3}
+  - {fileID: 21300000, guid: a43faa0ec903eaa41849c5d72b6568e9, type: 3}
   - {fileID: 21300000, guid: 2c61ee0e3cb4e6346ae879f3d6613b5a, type: 3}
   - {fileID: 21300000, guid: 6204c91ea65106c449b04fb9f3a33462, type: 3}
   - {fileID: 21300000, guid: d5aa922e50ac7b143818c1c93fa950c9, type: 3}
@@ -1014,6 +1018,7 @@ SpriteAtlas:
   - ani_priest_pro_left1
   - ani_swordman_pro_right4
   - ani_acc_sweep_ribbon_back1
+  - ani_sweep_broom_front1
   - skine_left3
   - ani_skin_sweep_b_front4
   - f_short_yellow_left
@@ -1150,6 +1155,7 @@ SpriteAtlas:
   - ani_skin_sweep_e_front1
   - m_hair_long_red_back4
   - ani_archer_pro_leftt3
+  - ani_sweep_broom_front4
   - ani_skin_sweep_e_back3
   - m_hair_short_red_back1
   - m_hair_short_brown_front1
@@ -1332,6 +1338,7 @@ SpriteAtlas:
   - skind_right2
   - f_hair_short_yellow_left4
   - m_hair_long_black_left1
+  - ani_sweep_broom_front2
   - ani_hair_f_short_red_sweep_back4
   - m_clothes_back3
   - skinb_left4
@@ -1494,6 +1501,7 @@ SpriteAtlas:
   - m_hair_short_red_back2
   - f_clothes_back4
   - skine_right3
+  - ani_sweep_broom_front3
   - m_hair_long_black_front3
   - skine_back4
   - f_hair_short_brown_right2
