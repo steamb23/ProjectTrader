@@ -33,7 +33,7 @@ public class DataSave : MonoBehaviour
         empsize = 0;
         playerItem = new Item[5];
         //또다시 임시 초기화->저장된 데이터에서 받아오도록 수정
-        for(int i = 0; i < 5; i++)
+        for (int i = 0; i < 5; i++)
         {
             playerItem[i].Code = i + 1;
             playerItem[i].Count = 6;
@@ -51,7 +51,7 @@ public class DataSave : MonoBehaviour
 
         string jsondata = ObjsonMake(pda);
         SaveJson(jsondata);
-        textUi.GetComponent<TextUiControl>().CreativeTextBox(0,0,100,"Game Save!",2);
+        textUi.GetComponent<TextUiControl>().CreativeTextBox(0, 0, 100, "Game Save!", 2);
     }
 
     public void GameLoad()
@@ -59,7 +59,8 @@ public class DataSave : MonoBehaviour
         string load = LoadJson();
         Debug.Log($"데이터 로드 : {load}");
         var loadData = JsonToObject<PlayData>(load);
-        if (loadData.IsInitialized)
+
+        if (loadData != null && loadData.IsInitialized)
         {
             PlayData.CurrentData = loadData;
             Debug.Log("로드 성공");
@@ -77,12 +78,12 @@ public class DataSave : MonoBehaviour
     {
         return JsonUtility.ToJson(obj);
     }
-    
+
     T JsonToObject<T>(string jsonData)
     {
         return JsonUtility.FromJson<T>(jsonData);
     }
-    
+
     void SaveJson(string objson)
     {
         UnityEngine.Debug.Log("save");
@@ -90,8 +91,17 @@ public class DataSave : MonoBehaviour
     }
     string LoadJson()
     {
-        string loadJson = File.ReadAllText(Application.persistentDataPath + "/SaveData.json");
-        return loadJson;
+        try
+        {
+            return File.ReadAllText(Application.persistentDataPath + "/SaveData.json");
+        }
+        catch (FileNotFoundException e)
+        {
+            Debug.Log("파일 없음...");
+            Debug.Log(e);
+
+            return "";
+        }
     }
 
     //출력,updown함수
@@ -117,10 +127,10 @@ public class DataSave : MonoBehaviour
             case "ShopName":
                 textUi.GetComponent<TextUiControl>().PrintShopName(pda.ShopName);
                 break;
-            //case "Date":
-            //    textUi.GetComponent<TextUiControl>().PrintDate(pda.date);
-            //    break;
-            //Date에 int로 수 저장하고 TimeSpan이용하여 더하여 출력
+                //case "Date":
+                //    textUi.GetComponent<TextUiControl>().PrintDate(pda.date);
+                //    break;
+                //Date에 int로 수 저장하고 TimeSpan이용하여 더하여 출력
         }
     }
 
@@ -158,9 +168,9 @@ public class DataSave : MonoBehaviour
     }
 
     //임시로 코드별로 먼저 선언해 넣은 뒤 count로만 체크
-    public bool UseItem(int cod,int count)
+    public bool UseItem(int cod, int count)
     {
-        for(int i = 0; i < 5; i++)
+        for (int i = 0; i < 5; i++)
         {
             if (playerItem[i].Code == cod)
             {
@@ -176,7 +186,7 @@ public class DataSave : MonoBehaviour
         return false;
     }
 
-    
+
     public void SetItemList()
     {
         sell.GetComponent<SellWindow>().SetItem(playerItem);
