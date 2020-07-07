@@ -49,8 +49,6 @@ namespace ProjectTrader
         [SerializeField] int remainedRest = 10; // 기본값은 0
         // 가이드 퀘스트 달성 목록
         [SerializeField] List<QuestState> guideQuestStates = new List<QuestState>();
-        // 일일 퀘스트 데이터 목록
-        [SerializeField] List<QuestData> dailyQuestDatas = new List<QuestData>();
         // 일일 퀘스트 달성 목록
         [SerializeField] List<QuestState> dailyQuestStates = new List<QuestState>();
         // 일일 퀘스트 갱신 시간
@@ -216,15 +214,6 @@ namespace ProjectTrader
         }
 
         /// <summary>
-        /// 일일 퀘스트 데이터, 매일 정각이 지나면 갱신
-        /// </summary>
-        public List<QuestData> DailyQuestDatas
-        {
-            get => this.dailyQuestDatas;
-            set => this.dailyQuestDatas = value;
-        }
-
-        /// <summary>
         /// 일일 퀘스트 진행 상태
         /// </summary>
         public List<QuestState> DailyQuestStates
@@ -283,6 +272,23 @@ namespace ProjectTrader
             {
                 GuideQuestStates.Add(questState);
             }
+        }
+
+        /// <summary>
+        /// 일일 퀘스트를 갱신합니다.
+        /// </summary>
+        public void UpdateDailyQuest()
+        {
+            DailyQuestStates.Clear();
+
+            // 가져올 퀘스트 코드
+            int index = UnityEngine.Random.Range(0, QuestDatabase.DailyQuestDatas.Count);
+
+            DailyQuestStates.Add(new QuestState()
+            {
+                QuestTypeData = QuestState.QuestType.Daily,
+                Code = QuestDatabase.DailyQuestDatas[index].Code
+            });
         }
 
         ///// <summary>

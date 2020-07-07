@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace ProjectTrader
 {
     /// <summary>
-    /// 퀘스트 조건을 트리거링하는 정적 클래스입니다.
+    /// 퀘스트 관련 메소드를 모아둔 정적 클래스입니다.
     /// </summary>
     public static class QuestManager
     {
