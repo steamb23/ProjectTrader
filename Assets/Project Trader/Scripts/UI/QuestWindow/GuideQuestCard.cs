@@ -180,6 +180,8 @@ public class GuideQuestCard : MonoBehaviour
         var currentAmount = questState.CurrentAmount;
 
         var progress = currentAmount / (float)goalAmount;
+        if (float.IsNaN(progress))
+            progress = 1;
         Progress = progress;
 
         if (1 - progress < 1e-6f) // (progress >= 1)

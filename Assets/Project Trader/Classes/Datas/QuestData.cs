@@ -49,9 +49,8 @@ namespace ProjectTrader.Datas
             /// </summary>
             VisitorCount,
             /// <summary>
-            /// 등급 심사
+            /// 등급 심사, 아직 등급심사 구현이 되지 않음.
             /// </summary>
-            //TODO:아직 등급심사 구현이 되지 않음.
             ReviewRating,
             /// <summary>
             /// 직접 아이템 판매
@@ -62,14 +61,13 @@ namespace ProjectTrader.Datas
             /// </summary>
             SelfCleaning,
             /// <summary>
-            /// 아이템 제작
+            /// 아이템 제작, 어느타이밍에 넣어야할지 모름
             /// </summary>
-            // TODO:어느타이밍에 넣어야할지 모름
+            // 
             CraftingItem,
             /// <summary>
-            /// 아이템 구매
+            /// 아이템 구매, 아이템 구매구현이 되지 않음.
             /// </summary>
-            //TODO:아이템 구현이 되지 않음.
             BuyItem,
         }
 
