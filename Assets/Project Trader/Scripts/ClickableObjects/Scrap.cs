@@ -26,6 +26,9 @@ public class Scrap : ClickableObject
             var scrapManager = FindObjectOfType<ScrapManager>();
             scrapManager.CollectTrash(gameObject, 5f, (timer) =>
             {
+                // 직접 청소 퀘스트 트리거
+                ProjectTrader.QuestManager.Trigger(ProjectTrader.Datas.QuestData.GoalType.SelfCleaning, 1);
+
                 isClickLock = false;
             });
         }

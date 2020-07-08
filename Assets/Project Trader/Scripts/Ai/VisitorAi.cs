@@ -360,6 +360,8 @@ public class VisitorAi : MonoBehaviour
                      floatingTimer.FadeoutWithDestory();
 
                      ItemDealCallback();
+                     // 직접 판매 퀘스트 트리거
+                     ProjectTrader.QuestManager.Trigger(ProjectTrader.Datas.QuestData.GoalType.SelfDeal, 1);
                  });
                  //timer.boostRatio = 2;
              });
@@ -374,6 +376,9 @@ public class VisitorAi : MonoBehaviour
             {
                 price += item.GetData().SellPrice * item.Count;
             }
+
+            // 아이템 판매 퀘스트 트리거
+            ProjectTrader.QuestManager.Trigger(QuestData.GoalType.SellItem, 1);
 
             // 구매할 아이템 초기화
             WishItems.Clear();

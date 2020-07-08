@@ -143,13 +143,21 @@ public class MakePopScript : MonoBehaviour
             GameObject gogo = GameObject.Find("selltimewindow");
             if(choiceTableData.GetComponent<DisplayedItem>().Item.Count>0)
                 gogo.GetComponent<SellWindow>().DisItemCheck(choiceTableData.GetComponent<DisplayedItem>().Item.Code, choiceTableData.GetComponent<DisplayedItem>().Item.Count); //있는 아이템 회수
-            
+
+            var previousItem = choiceTableData.GetComponent<DisplayedItem>().Item;
+            // 변경할 아이템과 현재 아이템이 다르면
+            if (reitem!= previousItem)
+                // 아이템 배치 변경 퀘스트 트리거
+                ProjectTrader.QuestManager.Trigger(QuestData.GoalType.ChangeItem, 1);
             choiceTableData.GetComponent<DisplayedItem>().Item = reitem;
             //임의로
             
             gogo.GetComponent<SellWindow>().DisItemCheck(reitem.Code,-reitem.Count); //배치한 수 만큼 가진 수에서 제거
             gogo.GetComponent<SellWindow>().CloseMakerWindow();
             Closepopup();
+
+            // 아이템 배치 퀘스트 트리거
+            ProjectTrader.QuestManager.Trigger(QuestData.GoalType.SetItem, 1);
         }
 
     }

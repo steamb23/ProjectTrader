@@ -52,6 +52,9 @@ public class VisitorManager : MonoBehaviour
                 var obj = Instantiate(visitorInfo.visitor);
                 obj.transform.position = pathNodeManager.exitNode.transform.position;
                 visitors.Add(obj);
+
+                // 손님 방문 퀘스트 트리거
+                ProjectTrader.QuestManager.Trigger(ProjectTrader.Datas.QuestData.GoalType.VisitorCount, 1);
             }
         }
     }

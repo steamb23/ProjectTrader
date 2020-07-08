@@ -14,17 +14,30 @@ namespace ProjectTrader
     {
 
         /// <summary>
-        /// 직원 고용 트리거
+        /// 퀘스트 트리거, 모든 퀘스트 상태 데이터의 <see cref="QuestData.goalAmount"/>에 매개변수 <paramref name="amount"/>의 값을 추가합니다.
         /// </summary>
-        public static void TriggerHireEmployee(int amount = 1) =>
-            AddAmount(amount, (data) => data.GetQuestData().GoalTypeData == QuestData.GoalType.HireEmployee);
+        public static void Trigger(QuestData.GoalType goalType, int amount = 1) =>
+            AddAmount(amount, (data) => data.GetQuestData().GoalTypeData == goalType);
 
 
         static void AddAmount(int amount, Predicate<QuestState> match)
         {
-            // TODO:일일 퀘스트는 해당 데이터 구조 수정하는대로 추가
-            var guideQuests = PlayData.CurrentData.GuideQuestStates.Find(match);
-            guideQuests.CurrentAmount += amount;
+            // 가이드 퀘스트
+            var guideQuests = PlayData.CurrentData.GuideQuestStates.FindAll(match);
+            if (guideQuests != null)
+            {
+                foreach (var guideQuest in guideQuests)
+                {
+                    guideQuest.CurrentAmount += amount;
+                }
+            }
+
+            // 일일 퀘스트
+            var dailyQuest = PlayData.CurrentData.DailyQuestStates.Find(match);
+            if (dailyQuest != null)
+            {
+                dailyQuest.CurrentAmount += amount;
+            }
         }
     }
 }
