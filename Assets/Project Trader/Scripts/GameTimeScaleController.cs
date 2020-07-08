@@ -17,11 +17,7 @@ class GameTimeScaleController : MonoBehaviour
         {
             case 1:
                 timeScale = 2;
-                buttonText.text = "(2x) 더 빠르게";
-                break;
-            case 2:
-                timeScale = 3;
-                buttonText.text = "(3x) 느리게";
+                buttonText.text = "(2x) 느리게";
                 break;
             default:
                 timeScale = 1;
