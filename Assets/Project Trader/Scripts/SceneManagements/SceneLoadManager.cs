@@ -10,7 +10,7 @@ public class SceneLoadManager : MonoBehaviour
         gameObject.AddComponent<SceneLoadManager>();
 
         // 게임오브젝트 인스턴스화
-        gameObject = Instantiate(gameObject);
+        //gameObject = Instantiate(gameObject);
 
         // 정적 인스턴스 프로퍼티 설정
         Instance = gameObject.GetComponent<SceneLoadManager>();
