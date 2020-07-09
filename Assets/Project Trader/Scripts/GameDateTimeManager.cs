@@ -127,7 +127,7 @@ class GameDateTimeManager : MonoBehaviour
 
     private void Start()
     {
-        GameDateTime = (GameDateTime)data;
+        //GameDateTime = (GameDateTime)data;
     }
 
     private void Update()
