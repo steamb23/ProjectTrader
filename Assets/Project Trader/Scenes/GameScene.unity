@@ -24530,7 +24530,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "30,000 \uACE8\uB4DC"
+  m_text: "999,999 \uACE8\uB4DC"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f604783d308d2434b8323fc3394439c2, type: 2}
   m_sharedMaterial: {fileID: 879648642049286094, guid: f604783d308d2434b8323fc3394439c2,
@@ -24600,7 +24600,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1229155441}
-    characterCount: 9
+    characterCount: 10
     spriteCount: 0
     spaceCount: 1
     wordCount: 3
@@ -34149,6 +34149,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1752080330}
+  - component: {fileID: 1752080331}
   m_Layer: 5
   m_Name: ReviewResultWindow
   m_TagString: Untagged
@@ -34182,6 +34183,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 412, y: 468}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1752080331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752080329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 931cb412da058e547ad80e4fe41af69c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  successReviewResultVariation: {fileID: 87898672}
+  failReviewResultVariation: {fileID: 1335021270}
+  rewardText: {fileID: 1229155441}
 --- !u!1 &1753350877
 GameObject:
   m_ObjectHideFlags: 0
