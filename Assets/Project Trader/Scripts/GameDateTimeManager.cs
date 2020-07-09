@@ -1,5 +1,6 @@
 ﻿using ProjectTrader;
 using System;
+using System.Collections;
 using System.Diagnostics;
 using UnityEngine;
 
@@ -186,7 +187,23 @@ class GameDateTimeManager : MonoBehaviour
         gameDateTime.Minute = 0;
         gameDateTime.Second = 0;
         PlayData.CurrentData.Date = gameDateTime;
-        //TODO: 결산 윈도우 호출
+
+        StartCoroutine(Coroutine());
+
+        IEnumerator Coroutine()
+        {
+            var visitorManager = FindObjectOfType<VisitorManager>();
+
+            // 손님이 모두 나갈때까지 대기
+            while (visitorManager.visitors.Count > 0)
+            {
+                yield return null;
+            }
+            //TODO: 결산 윈도우 호출
+
+            // 저장
+            FindObjectOfType<DataSave>().GameSave();
+        }
     }
 
     public void Opening()
