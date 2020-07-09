@@ -31,11 +31,12 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: be5d8854a255bc34787421cf3a6cab3c, type: 3}
-    totalSpriteSurfaceArea: 6583810
+    totalSpriteSurfaceArea: 7098610
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: 3f275d207bd73724aad9c4bd287b6aad, type: 3}
+  - {fileID: 21300000, guid: 099f8960c18608049b0582989cd37540, type: 3}
   - {fileID: 21300000, guid: 45088180c428fcb4a98ade27c861d1d5, type: 3}
   - {fileID: 21300000, guid: 1bb83690878118749bbb7124802e08d8, type: 3}
   - {fileID: 21300000, guid: dba0d0412e5b425409fc33dd2e17c11d, type: 3}
@@ -48,6 +49,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: a9d18032bd838204aabcabfe899fd6d1, type: 3}
   - {fileID: 21300000, guid: 8e9e59a200bef0b4a8f8fd5a0eda8109, type: 3}
   - {fileID: 21300000, guid: 589c5e139d9ca5a4b85e55a4805f89e0, type: 3}
+  - {fileID: 21300000, guid: af228f13e194d19489e29a23647fae9d, type: 3}
   - {fileID: 21300000, guid: efbc6b33f32c40d42b8ced1f97d88e1f, type: 3}
   - {fileID: 21300000, guid: e1c692a3e194d5545ad8b976228dfc1c, type: 3}
   - {fileID: 21300000, guid: 30e588b3320f68a4d9093613b639f4ab, type: 3}
@@ -64,6 +66,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: ff6bbe160ebc9d74e8139f32e1a057df, type: 3}
   - {fileID: 21300000, guid: a6427726c789d4744a3084e3b5f125cc, type: 3}
   - {fileID: 21300000, guid: 5238dd567d1120641b26b25f6b14aae0, type: 3}
+  - {fileID: 21300000, guid: 8486e066cf925a248bc7f4538522b603, type: 3}
   - {fileID: 21300000, guid: 57eb56a6bfae9e148bad702f535f1eb4, type: 3}
   - {fileID: 21300000, guid: 7bc9d9a6679b28e4b8364526c13eccd1, type: 3}
   - {fileID: 21300000, guid: e7237ad64b1e523498bd9823fe4278ce, type: 3}
@@ -86,7 +89,9 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 6a14d1f809942664fbf9f2bef845f06e, type: 3}
   - {fileID: 21300000, guid: 53922d29ceebdf343aee45aea3354fa3, type: 3}
   - {fileID: 21300000, guid: ace92749326081146bf2f5fee77afd10, type: 3}
+  - {fileID: 21300000, guid: 34e42c7941ca03c499be729c67791695, type: 3}
   - {fileID: 21300000, guid: b8adcd79d39d2824e9fb93a35829a3e7, type: 3}
+  - {fileID: 21300000, guid: 867d4ba99d2e8d8449139e721077c5b8, type: 3}
   - {fileID: 21300000, guid: b9cf9fc9feaec6145bc9bf231a3d4c15, type: 3}
   - {fileID: 21300000, guid: 04f5dd4a356de8d4c9149f71fd4ad6b2, type: 3}
   - {fileID: 21300000, guid: 716e479af96cb8d4c990e316ee15e02e, type: 3}
@@ -99,11 +104,14 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 6a270f0c40824714684ef7b220d81a21, type: 3}
   - {fileID: 21300000, guid: 2495e82c0e4412146aa6e380197a0934, type: 3}
   - {fileID: 21300000, guid: 204b219c26e879245aa4f1b636b3cfdb, type: 3}
+  - {fileID: 21300000, guid: eff18eac672d8f241aba1ca883281b1f, type: 3}
   - {fileID: 21300000, guid: 871570cc631020344bd5a65ade51bedc, type: 3}
+  - {fileID: 21300000, guid: 99ff88fc7f0fbdf468c1d719924c9bf8, type: 3}
   - {fileID: 21300000, guid: e7f8b61d518fa424797602ee4121ded9, type: 3}
   - {fileID: 21300000, guid: 03a24d1db01baf64abf02b9c2f472d4c, type: 3}
   - {fileID: 21300000, guid: 176c132dfc80aa34da6861030e98287d, type: 3}
   - {fileID: 21300000, guid: 2d13794d80667124d8d5d0811218c759, type: 3}
+  - {fileID: 21300000, guid: 79899e5d72abef44d86f6280758db170, type: 3}
   - {fileID: 21300000, guid: 1b70ac6d1d437a040a5ce6a054f4416f, type: 3}
   - {fileID: 21300000, guid: b181889d911c39445a6b47288fb283cd, type: 3}
   - {fileID: 21300000, guid: d24a450eea038a94d9ab1608b108becf, type: 3}
@@ -123,6 +131,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 76abc8ffd9e44134f9fcc041db869919, type: 3}
   m_PackedSpriteNamesToIndex:
   - Icon_Coin
+  - "\uBE5B2"
   - Btn_Blue_minus
   - icon_Green_bg
   - popup_bg_03
@@ -135,6 +144,7 @@ SpriteAtlas:
   - Btn_Green_plus
   - Blue_bg
   - Btn_Green
+  - "\uBE5B1"
   - Brown_bg
   - "\uCD5C\uB300 \uC778\uC6D0"
   - "\uC0C1\uC810UI_01"
@@ -151,6 +161,7 @@ SpriteAtlas:
   - popup_bg_02
   - Btn_Blue_2
   - "\uACC4\uC0B0\uAD6C\uC9C1"
+  - "\uC2E4\uD328"
   - "\uC7A0\uAE08 \uC544\uC774\uCF58"
   - 3_2
   - Icon_Date
@@ -173,7 +184,9 @@ SpriteAtlas:
   - "\uC6D0"
   - popup_bg_04
   - img_Category
+  - "\uAC00\uAC8C \uB4F1\uAE09 \uC5C5"
   - popup_bg_01
+  - "\uC885\uC774 \uAC00\uB8E8"
   - "\uC0C1\uC810UI_02"
   - "\uAC00\uACF5 \uC544\uC774\uCF58"
   - "\uD0DD(\uC120\uD0DD)"
@@ -186,11 +199,14 @@ SpriteAtlas:
   - Icon_request
   - LightBrown_bg
   - Btn_LightBrown
+  - "\uAC00\uAC8C \uB4F1\uAE09 \uC720\uC9C0"
   - Icon_Fatigability
+  - "\uBC18\uC9DD"
   - 1_2
   - 1_1
   - "\uD0DD1"
   - img_Icon_bg
+  - "\uC131\uACF5"
   - "\uC0C1\uC810UI_03"
   - Icon_Awareness
   - icon_silver
