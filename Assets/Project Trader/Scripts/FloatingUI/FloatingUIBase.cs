@@ -22,6 +22,7 @@ public abstract class FloatingUIBase : MonoBehaviour
         transform.SetParent(floatingCanvas.transform, true);
         transform.localScale = Vector3.one;
 
+        if(image!=null)
         image.SetNativeSize();
 
         return (gameObject, behaviour as T, image, transform);

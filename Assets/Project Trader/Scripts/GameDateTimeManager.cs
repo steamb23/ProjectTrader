@@ -42,6 +42,9 @@ class GameDateTimeManager : MonoBehaviour
         }
     }
 
+    [SerializeField] VisitorManager visitorManager;
+    [SerializeField] ReviewResultWindow reviewResultWindow;
+
     // 현실시간 5분 = 게임시간 1일
     // 현실시간 300초 = 게임시간 1440분 = 게임시간 86400초
     // 현실시간 1초 = 게임시간 288초
@@ -147,6 +150,7 @@ class GameDateTimeManager : MonoBehaviour
             this.gameDateTime = gameDateTime;
             PlayData.CurrentData.Date = gameDateTime;
 
+            TimeCheck();
             // 문닫을 시간 확인
             ClosingTimeUpdate();
 
@@ -168,11 +172,40 @@ class GameDateTimeManager : MonoBehaviour
         }
     }
 
-    private void ClosingTimeUpdate()
+    bool checked12h;
+
+    /// <summary>
+    /// 시간을 체크하고 특정 시간의 이벤트를 실행합니다.
+    /// </summary>
+    private void TimeCheck()
     {
+        const bool isTest = true;
+
+        // 12시
+        if (GameDateTime.Hour >= 12 && !checked12h)
+        {
+            // 심사일 체크
+            if (isTest || gameDateTime.TotalDays > 0 && gameDateTime.TotalDays % 30 == 0)
+            {
+                // 심사 연출 시작
+                FindObjectOfType<ReviewManager>().StartDirecting();
+            }
+
+            checked12h = true;
+        }
+
         // 문닫을 시간이 지났으면
         if (GameDateTime.Hour >= closingHour)
+        {
             Closing();
+
+            // 체크 변수 초기화
+            checked12h = false;
+        }
+    }
+
+    private void ClosingTimeUpdate()
+    {
     }
 
     /// <summary>
@@ -192,14 +225,15 @@ class GameDateTimeManager : MonoBehaviour
 
         IEnumerator Coroutine()
         {
-            var visitorManager = FindObjectOfType<VisitorManager>();
-
             // 손님이 모두 나갈때까지 대기
             while (visitorManager.visitors.Count > 0)
             {
                 yield return null;
             }
+
             //TODO: 결산 윈도우 호출
+
+            // 결산 윈도우가 닫힐때까지 대기
 
             // 저장
             FindObjectOfType<DataSave>().GameSave();
@@ -220,5 +254,6 @@ class GameDateTimeManager : MonoBehaviour
 
         // 일일 퀘스트 갱신
         PlayData.CurrentData.UpdateDailyQuest();
+
     }
 }
