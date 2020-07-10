@@ -43,7 +43,7 @@ class GameDateTimeManager : MonoBehaviour
     }
 
     [SerializeField] VisitorManager visitorManager;
-    [SerializeField] ReviewResultWindow reviewResultWindow;
+    [SerializeField] JudgeResultWindow reviewResultWindow;
 
     // 현실시간 5분 = 게임시간 1일
     // 현실시간 300초 = 게임시간 1440분 = 게임시간 86400초
@@ -188,7 +188,7 @@ class GameDateTimeManager : MonoBehaviour
             if (isTest || gameDateTime.TotalDays > 0 && gameDateTime.TotalDays % 30 == 0)
             {
                 // 심사 연출 시작
-                FindObjectOfType<ReviewManager>().StartDirecting();
+                FindObjectOfType<JudgeManager>().StartDirecting();
             }
 
             checked12h = true;

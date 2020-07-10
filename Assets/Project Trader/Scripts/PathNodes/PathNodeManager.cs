@@ -9,7 +9,7 @@ public class PathNodeManager : MonoBehaviour
     public PathNode exitNode;
     public List<PathNode> waitNodes;
     public List<PathNode> itemNodes;
-    public List<PathNode> reviewNodes;
+    public List<PathNode> judgeNodes;
 
     // 아이템 점유 상태
     public VisitorAi[] ItemOccupancyList { get; private set; }

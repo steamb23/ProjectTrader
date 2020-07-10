@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-class ReviewerAi : MonoBehaviour
+class JudgeAi : MonoBehaviour
 {
     public GameObject targetObject;
     public Transform targetTransform;

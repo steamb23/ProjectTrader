@@ -8,14 +8,14 @@ using ProjectTrader;
 /// <summary>
 /// 심사 연출 관리자
 /// </summary>
-public class ReviewManager : MonoBehaviour
+public class JudgeManager : MonoBehaviour
 {
     [Tooltip("심사 위원")]
-    [SerializeField] ReviewerAi[] reviewerPrefabs;
+    [SerializeField] JudgeAi[] judgePrefabs;
     [SerializeField] PathNodeManager pathNodeManager;
-    [SerializeField] ReviewResultWindow resultWindow;
+    [SerializeField] JudgeResultWindow resultWindow;
 
-    List<ReviewerAi> reviewerInstances = new List<ReviewerAi>();
+    List<JudgeAi> judgeInstances = new List<JudgeAi>();
 
     bool isDirecting;
 
@@ -40,13 +40,13 @@ public class ReviewManager : MonoBehaviour
 
             #region 심사위원 생성 및 이동
             int i = 0;
-            foreach (var reviewerPrefab in reviewerPrefabs.OrderBy((item) => Random.Range(0, int.MaxValue)))
+            foreach (var judgePrefab in judgePrefabs.OrderBy((item) => Random.Range(0, int.MaxValue)))
             {
-                var reviewerInstance = Instantiate(reviewerPrefab);
-                reviewerInstance.transform.position = pathNodeManager.exitNode.transform.position;
-                reviewerInstance.SetTarget(pathNodeManager.reviewNodes[i].transform);
+                var judgeInstance = Instantiate(judgePrefab);
+                judgeInstance.transform.position = pathNodeManager.exitNode.transform.position;
+                judgeInstance.SetTarget(pathNodeManager.judgeNodes[i].transform);
 
-                reviewerInstances.Add(reviewerInstance);
+                judgeInstances.Add(judgeInstance);
 
                 i++;
                 yield return waitObject;
@@ -58,10 +58,10 @@ public class ReviewManager : MonoBehaviour
             do
             {
                 isWait = false;
-                foreach (var reviewerInstance in reviewerInstances)
+                foreach (var judgeInstance in judgeInstances)
                 {
                     // 심사위원이 아직 위치에 도착하지 않았으면 계속 대기
-                    if (reviewerInstance.targetTransform != null)
+                    if (judgeInstance.targetTransform != null)
                     {
                         isWait = true;
                         break;
@@ -69,7 +69,7 @@ public class ReviewManager : MonoBehaviour
                     //// 도착했으면 정면을 바라봄
                     //else
                     //{
-                    //    reviewerInstance.RandomDirection();
+                    //    judgeInstance.RandomDirection();
                     //}
                 }
                 if (isWait)
@@ -78,7 +78,7 @@ public class ReviewManager : MonoBehaviour
             #endregion
 
             #region 위치했으면 텍스트 띄우기
-            var text = FloatingText.Create(reviewerInstances[reviewerInstances.Count - 1].transform, new Vector3(1, 1), "");
+            var text = FloatingText.Create(judgeInstances[judgeInstances.Count - 1].transform, new Vector3(1, 1), "");
 
             waitObject = new WaitForSeconds(1);
             // 귀찮으므로 하드코딩
@@ -128,9 +128,9 @@ public class ReviewManager : MonoBehaviour
             #endregion
 
             #region 심사위원 퇴장
-            foreach (var reviewerInstance in reviewerInstances)
+            foreach (var judgeInstance in judgeInstances)
             {
-                reviewerInstance.SetTarget(pathNodeManager.exitNode.transform);
+                judgeInstance.SetTarget(pathNodeManager.exitNode.transform);
             }
             #endregion
 
@@ -172,12 +172,12 @@ public class ReviewManager : MonoBehaviour
             do
             {
                 isWait = false;
-                foreach (var reviewerInstance in reviewerInstances)
+                foreach (var judgeInstance in judgeInstances)
                 {
                     // 심사위원이 아직 위치에 도착하지 않았으면 계속 대기
-                    if (reviewerInstance != null)
+                    if (judgeInstance != null)
                     {
-                        if (reviewerInstance.targetTransform != null)
+                        if (judgeInstance.targetTransform != null)
                         {
                             isWait = true;
                             //break;
@@ -185,14 +185,14 @@ public class ReviewManager : MonoBehaviour
                         // 도착했으면 삭제
                         else
                         {
-                            Destroy(reviewerInstance.gameObject);
+                            Destroy(judgeInstance.gameObject);
                         }
                     }
                 }
                 if (isWait)
                     yield return null;
             } while (isWait);
-            reviewerInstances.Clear();
+            judgeInstances.Clear();
             #endregion
         }
     }

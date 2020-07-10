@@ -34153,7 +34153,7 @@ GameObject:
   - component: {fileID: 1752080330}
   - component: {fileID: 1752080331}
   m_Layer: 5
-  m_Name: ReviewResultWindow
+  m_Name: JudgeResultWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34197,8 +34197,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 931cb412da058e547ad80e4fe41af69c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  successReviewResultVariation: {fileID: 87898672}
-  failReviewResultVariation: {fileID: 1335021270}
+  successJudgeResultVariation: {fileID: 87898672}
+  failJudgeResultVariation: {fileID: 1335021270}
   rewardText: {fileID: 1229155441}
 --- !u!1 &1753350877
 GameObject:
@@ -36801,7 +36801,7 @@ GameObject:
   - component: {fileID: 1857793802}
   - component: {fileID: 1857793803}
   m_Layer: 0
-  m_Name: ReviewManager
+  m_Name: JudgeManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36833,7 +36833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d2af649ac3df9f418da362d52208bfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reviewerPrefabs:
+  judgePrefabs:
   - {fileID: 4641915152699631981, guid: 02cdc09c926d046479e87e18d066eacd, type: 3}
   - {fileID: 4641915152699631981, guid: 02cdc09c926d046479e87e18d066eacd, type: 3}
   - {fileID: 4641915152699631981, guid: 02cdc09c926d046479e87e18d066eacd, type: 3}

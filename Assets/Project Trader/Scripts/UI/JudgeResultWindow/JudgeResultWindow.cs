@@ -4,13 +4,13 @@ using System;
 using UnityEngine.UI;
 using TMPro;
 
-public class ReviewResultWindow : MonoBehaviour
+public class JudgeResultWindow : MonoBehaviour
 {
 
     [Tooltip("심사 성공시의 결과 연출")]
-    [SerializeField] GameObject successReviewResultVariation;
+    [SerializeField] GameObject successJudgeResultVariation;
     [Tooltip("심사 실패시의 결과 연출")]
-    [SerializeField] GameObject failReviewResultVariation;
+    [SerializeField] GameObject failJudgeResultVariation;
     [Tooltip("상금 금액")]
     [SerializeField] TextMeshProUGUI rewardText;
 
@@ -31,8 +31,8 @@ public class ReviewResultWindow : MonoBehaviour
     /// </summary>
     public void ShowSucess(int reward)
     {
-        successReviewResultVariation.SetActive(true);
-        failReviewResultVariation.SetActive(false);
+        successJudgeResultVariation.SetActive(true);
+        failJudgeResultVariation.SetActive(false);
 
         Reward = reward;
 
@@ -44,8 +44,8 @@ public class ReviewResultWindow : MonoBehaviour
     /// </summary>
     public void ShowFail(int reward)
     {
-        successReviewResultVariation.SetActive(false);
-        failReviewResultVariation.SetActive(true);
+        successJudgeResultVariation.SetActive(false);
+        failJudgeResultVariation.SetActive(true);
 
         Reward = reward;
 
