@@ -370,9 +370,13 @@ public class VisitorAi : MonoBehaviour
             // 상호작용이 끝나면 
             // 가격 처리
             int price = 0;
+            FindObjectOfType<SoundControl>().PaySound();
+            PlayData.CurrentData.Awareness += 1;
+            FindObjectOfType<Uiup>().Upawareness(1);
             foreach (var item in WishItems)
             {
                 price += item.GetData().SellPrice * item.Count;
+                FindObjectOfType<Uiup>().Upmoney(price);
             }
 
             // 구매할 아이템 초기화

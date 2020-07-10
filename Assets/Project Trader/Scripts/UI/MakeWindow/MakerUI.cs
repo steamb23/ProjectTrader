@@ -45,7 +45,7 @@ public class MakerUI : MonoBehaviour
 
     bool[] employeeInfo;  //임시로 알바생이 있다는 표시
     bool[] working;       //슬롯이 일하고 있다면
-    int clickEmployee=1;  //알바선택창
+    int clickEmployee;  //알바선택창
 
     public Sprite b_on;
     public Sprite b_off;
@@ -82,7 +82,7 @@ public class MakerUI : MonoBehaviour
     }
 
 
-    //재료창 생성
+    //재료창 생성 
     void SetMaterial()
     {
         if (material != null)
@@ -105,7 +105,7 @@ public class MakerUI : MonoBehaviour
                     material[i].transform.SetParent((GameObject.Find("MakerRoom")).transform);
                     material[i].transform.localScale = Vector3.one;
                     RectTransform tbPos = material[i].GetComponent<RectTransform>();
-                    tbPos.anchoredPosition = new Vector3(standard.anchoredPosition.x - (210 + 120 * i), standard.anchoredPosition.y);
+                    tbPos.anchoredPosition = new Vector3(standard.anchoredPosition.x - (210 + 140 * i), standard.anchoredPosition.y);
                 }
                 break;
             case 3:
@@ -117,9 +117,9 @@ public class MakerUI : MonoBehaviour
                     material[i].transform.localScale = Vector3.one;
                     RectTransform tbPos = material[i].GetComponent<RectTransform>();
                     if (i != 2)
-                        tbPos.anchoredPosition = new Vector3(standard.anchoredPosition.x - (210 + 120 * i), standard.anchoredPosition.y - 60);
+                        tbPos.anchoredPosition = new Vector3(standard.anchoredPosition.x - (210 + 140 * i), standard.anchoredPosition.y - 70);
                     else
-                        tbPos.anchoredPosition = new Vector3(standard.anchoredPosition.x - 270, standard.anchoredPosition.y + 50);
+                        tbPos.anchoredPosition = new Vector3(standard.anchoredPosition.x - 280, standard.anchoredPosition.y + 60);
                 }
                 break;
             case 4:
@@ -131,9 +131,9 @@ public class MakerUI : MonoBehaviour
                     material[i].transform.localScale = Vector3.one;
                     RectTransform tbPos = material[i].GetComponent<RectTransform>();
                     if (i < 2)
-                        tbPos.anchoredPosition = new Vector3(standard.anchoredPosition.x - (210 + 120 * i), standard.anchoredPosition.y - 60);
+                        tbPos.anchoredPosition = new Vector3(standard.anchoredPosition.x - (210 + 140 * i), standard.anchoredPosition.y - 70);
                     else
-                        tbPos.anchoredPosition = new Vector3(standard.anchoredPosition.x - (210 + 120 * (i - 2)), standard.anchoredPosition.y + 50);
+                        tbPos.anchoredPosition = new Vector3(standard.anchoredPosition.x - (210 + 140 * (i - 2)), standard.anchoredPosition.y + 60);
                 }
                 break;
             default:
@@ -145,7 +145,8 @@ public class MakerUI : MonoBehaviour
     //스크롤에 슬롯 생성
     void SetRecipeScroll()
     {
-        PushOneButton();//첫번째 눌러놓기
+        FindObjectOfType<MakeEmpslot>().PushOneButton();
+        //PushOneButton();//첫번째 눌러놓기
         recipe = new GameObject[6];
         slotItem = new Item[5];
         recipeData = new ItemData[5];
@@ -201,9 +202,9 @@ public class MakerUI : MonoBehaviour
         for (int i = 0; i < slotsetting.Length; i++)
         {
             int k = UnityEngine.Random.Range(5, 10);
-            slotsetting[i].GetComponent<SlotIn>().SetSlotInData(k,slotItem[i].Code);
+            slotsetting[i].GetComponent<MakeSlot>().SetSlotInData(k,slotItem[i].Code);
             if (i == 0)
-                slotsetting[i].GetComponent<SlotIn>().MakerslotPushButton();
+                slotsetting[i].GetComponent<MakeSlot>().MakerslotPushButton();
         }
     }
 
@@ -255,6 +256,7 @@ public class MakerUI : MonoBehaviour
     //만들 아이템코드와 갯수 설정 하고 팝업으로
     void MakeItemInfo(int cod, int count)
     {
+        clickEmployee=FindObjectOfType<MakeEmpslot>().clickEmployee;
         makeItem[clickEmployee-1].Code = cod;
         makeItem[clickEmployee-1].Count = count;
         makeItemData[clickEmployee-1] = makeItem[clickEmployee-1].GetData();
@@ -271,60 +273,8 @@ public class MakerUI : MonoBehaviour
         if (canMake == true)
         {
             makerpopupwindow.SetActive(true);
-            makerpopupwindow.GetComponent<MakePopScript>().OpenMakePopup();
-            makerpopupwindow.GetComponent<MakePopScript>().SetMakerPopupData(5, materialSample.Code, clickEmployee);//갯수코드슬롯
-        }
-    }
-
-
-    //임시 알바제작창 버튼
-
-    public void PushOneButton()
-    {
-        clickEmployee = 1;
-        ChangeButtonInfo();
-        tim.GetComponent<MakerTimer>().NumSet(0);
-    }
-
-    public void PushTwoButton()
-    {
-        clickEmployee = 2;
-        ChangeButtonInfo();
-        tim.GetComponent<MakerTimer>().NumSet(1);
-    }
-
-    public void PushThreeButton()
-    {
-        clickEmployee = 3;
-        ChangeButtonInfo();
-        tim.GetComponent<MakerTimer>().NumSet(2);
-    }
-
-    //버튼 위치 스프라이트 바꿔주기..
-    void ChangeButtonInfo()
-    {
-        GameObject[] bu = GameObject.FindGameObjectsWithTag("MPEB");
-        Image[] img=new Image[3];
-        GameObject go = GameObject.Find("alba_bg");
-        RectTransform bg = go.GetComponent<RectTransform>();
-        rt = new RectTransform[3];
-        for (int j = 0; j < 3; j++)
-        {
-            img[j] = bu[j].GetComponentInChildren<Image>();
-            rt[j] = bu[j].GetComponent<RectTransform>();
-        }
-        for (int i = 0; i < bu.Length; i++)
-        {
-            if (clickEmployee == i+1)
-            {
-                img[i].sprite = b_on;
-                rt[i].anchoredPosition = new Vector3(bg.anchoredPosition.x-180, rt[i].anchoredPosition.y);
-            }
-            else
-            {
-                img[i].sprite = b_off;
-                rt[i].anchoredPosition = new Vector3(bg.anchoredPosition.x-160,rt[i].anchoredPosition.y);
-            }
+            //makerpopupwindow.GetComponent<MakePopScript>().OpenMakePopup();
+            makerpopupwindow.GetComponent<MakePopup>().SetMakerPopupData(5, materialSample.Code, clickEmployee);//갯수코드슬롯
         }
     }
 
@@ -354,7 +304,7 @@ public class MakerUI : MonoBehaviour
         {
             data.GetComponent<DataSave>().UseItem(mt[i],ct[i]);
         }
-        data.GetComponent<DataSave>().UseMoney(-(disRecipeData.CraftCost));
+        data.GetComponent<DataSave>().UseMoney(-(disRecipeData.CraftCost)); //교체
 
     }
 

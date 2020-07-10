@@ -17,5 +17,4 @@ public class CandiateInfo : EmployeeInfo
         canvasGroup.interactable = true;
         canvasGroup.alpha = 1f;
     }
-
 }

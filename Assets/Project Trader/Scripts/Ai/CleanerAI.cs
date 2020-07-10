@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Pathfinding;
+using ProjectTrader;
 using System;
 
 public class CleanerAI : MonoBehaviour
@@ -122,14 +123,20 @@ public class CleanerAI : MonoBehaviour
         {
             var colider = targetObject.GetComponent<BoxCollider2D>();
             colider.enabled = false;
-
+            FindObjectOfType<SoundControl>().CleanUpSound();
             var timer = scrapManager.CollectTrash(targetObject, 5f, (floatingTimer) =>
             {
+
                 if (targetObject != null)
                 {
                     // 해당 쓰레기 제거
                     //Destroy(targetObject);
+                    var playData = PlayData.CurrentData;
+                    playData.Stamina += 1;
+                    FindObjectOfType<SoundControl>().CleanUpStop();
+                    FindObjectOfType<Uiup>().Upstamina(1);
                     state = AiState.Cleaned;
+
                 }
                 else
                 {
@@ -166,6 +173,7 @@ public class CleanerAI : MonoBehaviour
 
     private void Cleaning()
     {
+
         if (targetObject == null)
         {
             state = AiState.Finding;

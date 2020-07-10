@@ -10,17 +10,24 @@ using System.Threading;
 
 public class MakerTimer : MonoBehaviour
 {
-
     Item[] make;
-    ItemData[] making;
+    public ItemData[] making
+    {
+        get;
+        set;
+    }
     public TextMeshProUGUI timePrint;
 
     GameObject makeui;
     float[] timer;
     int makeTableNum;//들어오는 제작창
     int printtype;
-    bool[] inTimer;   //타이머가 굴러가야 하는지
-
+    public bool[] inTimer
+    {
+        get;
+        set;
+    }//타이머가 굴러가야 하는지
+    bool[] timerstop= new bool[3];
     void Start()
     {
         makeui = GameObject.Find("makeroom");
@@ -40,12 +47,17 @@ public class MakerTimer : MonoBehaviour
         
     }
 
-
+    public void StopTimer()
+    {
+        int slotcod= FindObjectOfType<MakeEmpslot>().clickEmployee-1;
+        UnityEngine.Debug.Log("타이머 중단 호출 / 슬롯 코드 : "+slotcod.ToString());
+        timerstop[slotcod] = true;
+    }
 
     //타이머를 세팅하고 돌림
     public void StartTimer(int makertable,int cod,int cout)
     {
-        if (inTimer[makertable] != true)
+        if (inTimer[makertable] != true || timerstop[makertable]==true)
         {
             make[makertable].Code = cod;
             make[makertable].Count = cout;
@@ -55,7 +67,7 @@ public class MakerTimer : MonoBehaviour
             //timer[makeTableNum] = making[makeTableNum].CraftDelay*cout;
             timer[makeTableNum] = 10;
             inTimer[makertable] = true;
-
+            timerstop[makeTableNum] = false;
 
             UnityEngine.Debug.Log("타이머 코루틴 작동시작");
             StartCoroutine(Timer(inTimer[makertable], makertable));
@@ -67,7 +79,7 @@ public class MakerTimer : MonoBehaviour
 
     IEnumerator Timer(bool inTimer,int i)
     {
-        if (inTimer == true)
+        if (inTimer == true&& timerstop[i] ==false)
         {
             UnityEngine.Debug.Log((i+1).ToString()+"번 : " + timer[i].ToString());
             timer[i] -= 1f;
@@ -123,6 +135,7 @@ public class MakerTimer : MonoBehaviour
             inTimer[i] = false;
             UnityEngine.Debug.Log((i+1).ToString()+"번 종료");
             makeui.GetComponent<MakerUI>().MakeSuccess(make[i]);
+            FindObjectOfType<MakeEmpslot>().PrintMakeItemSprite();
             //아이템개수+1
         }
     }

@@ -8,6 +8,10 @@ public class SlotIn : MonoBehaviour
     public int count;
     public int code;
     GameObject go;
+    GameObject sound;
+
+
+
     public void SetSlotInData(int cunt, int cod)
     {
         count = cunt;
@@ -17,15 +21,12 @@ public class SlotIn : MonoBehaviour
 
     public void PushButton()
     {
+        sound = GameObject.Find("SoundControler");
+        sound.GetComponent<SoundControl>().ButtonSound2();
         GameObject go = GameObject.Find("selltimewindow");
         go.GetComponent<SellWindow>().SetCheckdisplay(count, code);
     }
 
-    public void MakerslotPushButton()
-    {
-        GameObject go = GameObject.Find("makeroom");
-        go.GetComponent<MakerUI>().SetMakerBg(count, code);
-    }
 
     //공방용 슬롯데이터도 주고받도록
     //코드,피로도,이름
@@ -33,6 +34,8 @@ public class SlotIn : MonoBehaviour
     {
         if (count > 0)
         {
+            sound = GameObject.Find("SoundControler");
+            sound.GetComponent<SoundControl>().ButtonSound2();
             UnityEngine.Debug.Log(count.ToString());
             GameObject go = GameObject.Find("itemshop");
             go.GetComponent<ShopWindow>().OpenShopPopup();

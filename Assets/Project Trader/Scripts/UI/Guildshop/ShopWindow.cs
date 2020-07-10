@@ -38,12 +38,7 @@ public class ShopWindow : MonoBehaviour
 
     void Update()
     {
-        /*
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            SetShopslot();
-        }
-        */
+
     }
 
     public void OpenShopWindow()

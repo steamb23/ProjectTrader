@@ -20,14 +20,14 @@ public class EmployeeSlot :EmployeeInfo
         get;
     }
 
-
+    GameObject sound;
     Employee emp;
     EmployeeData empData;
     GameObject assign;
 
     void Start()
     {
-        
+        sound = GameObject.Find("SoundControler");
     }
 
 
@@ -53,6 +53,7 @@ public class EmployeeSlot :EmployeeInfo
     {
         if (indata == true)
         {
+            sound.GetComponent<SoundControl>().ButtonSound2();
             assign = GameObject.Find("EmployeeUICanvas");
             assign.GetComponent<EmployeeDataCatch>().AssignDataSet(disCode, emp);
         }

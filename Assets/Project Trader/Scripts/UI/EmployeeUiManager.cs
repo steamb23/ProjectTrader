@@ -69,6 +69,7 @@ public class EmployeeUiManager : MonoBehaviour
         assignWindow.SetActive(true);
         buttongroup.SetActive(true);
         ButtonGroup.GetComponent<EmpButtonGroup>().AssignButtonOn();
+        FindObjectOfType<EmployeeAssignButton>().PushCleanerButton();
     }
 
     public void OpenWatingWindow()

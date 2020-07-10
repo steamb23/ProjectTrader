@@ -15,12 +15,6 @@ public class MakePopScript : MonoBehaviour
     public TextMeshProUGUI maxNum;
     public Image itemImage;
 
-    //공방
-    public Slider makerNumSlider;
-    public TextMeshProUGUI makermaxNum;
-    public Image makerItemImage;
-    public TextMeshProUGUI makerName;
-
     //상점
     public Slider shopslider;
     public TextMeshProUGUI shopitemname;
@@ -44,13 +38,13 @@ public class MakePopScript : MonoBehaviour
     {
         NONE=0,
         SELLPOPUP,
-        MAKERPOPUP,
+        //MAKERPOPUP,
         SHOPPOPUP,
     };
 
     //자기자신 배치 팝업, 공방 팝업
     public GameObject popUpWindow;
-    public GameObject makerPopupwindow;
+    //public GameObject makerPopupwindow;
     public GameObject shopPopup;
 
     TextMeshProUGUI chaneT;
@@ -89,10 +83,6 @@ public class MakePopScript : MonoBehaviour
                 sellNumSlider.maxValue = popItem.Count;
                 sellNumSlider.minValue = 1;
                 break;
-            case PopupState.MAKERPOPUP:
-                makerNumSlider.maxValue = popItem.Count;
-                makerNumSlider.minValue = 1;
-                break;
             case PopupState.SHOPPOPUP:
                 shopslider.maxValue = popItem.Count;
                 shopslider.minValue = 1;
@@ -108,9 +98,6 @@ public class MakePopScript : MonoBehaviour
         {
             case PopupState.SELLPOPUP:
                 maxNum.text = sellNumSlider.value.ToString() + "/" + sellNumSlider.maxValue.ToString();
-                break;
-            case PopupState.MAKERPOPUP:
-                makermaxNum.text = makerNumSlider.value.ToString() + "/" + makerNumSlider.maxValue.ToString();
                 break;
             case PopupState.SHOPPOPUP:
                 shopitemnum.text = shopslider.value.ToString() + "/" + shopslider.maxValue.ToString();
@@ -174,38 +161,6 @@ public class MakePopScript : MonoBehaviour
         }
         return true;
     }
-
-    //아래부턴 공방ui
-
-    public void OpenMakePopup()
-    {
-        popupstate = PopupState.MAKERPOPUP;
-    }
-
-    public void CloseMakePopup()
-    {
-        popupstate = PopupState.NONE;
-        makerPopupwindow.SetActive(false);
-    }
-
-    public void SetMakerPopupData(int cunt, int cod,int emplslot)
-    {
-        popItem.Count = cunt;
-        popItem.Code = cod;
-        popItemData = popItem.GetData();
-        makerItemImage.sprite = popItemData.GetSprite();
-        makerName.text = popItemData.Name;
-        employeeslot = emplslot;
-        SetNum();
-    }
-
-    public void SetMakeItem()
-    {
-        GameObject go = GameObject.Find("makeroom");
-        go.GetComponent<MakerTimer>().StartTimer(employeeslot-1,popItem.Code,popItem.Count);//버튼,코드,갯수
-        CloseMakePopup();
-    }
-
 
 
     //상점

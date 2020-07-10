@@ -23,6 +23,7 @@ public class NoStemina : MonoBehaviour
             if (playData.Money >= 1000)
             {
                 playData.Money -= 1000;
+                FindObjectOfType<Uiup>().Upstamina(playData.MaxStamina - playData.Stamina);
                 playData.Stamina = playData.MaxStamina;
                 openshopwindow.GetComponent<ShopOpenMessageBoxWindow>().OpenButtonClick();
                 gameObject.SetActive(false);

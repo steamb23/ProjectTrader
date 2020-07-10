@@ -70,13 +70,13 @@ public class TownShopTutorial : MonoBehaviour
                 break;
             case 14://슬롯누르기
                 shopslot = GameObject.FindGameObjectsWithTag("Slot");
-                shopslot[0].GetComponent<SlotIn>().MakerslotPushButton();
+                shopslot[0].GetComponent<MakeSlot>().MakerslotPushButton();
                 break;
             case 15://팝업생성
                 makerwindow.GetComponent<MakerUI>().CreateMakePopup();
                 break;
             case 16:
-                makerpopup.GetComponent<MakePopScript>().SetMakeItem();
+                makerpopup.GetComponent<MakePopup>().SetMakeItem();
                 makerwindow.GetComponent<MakerUI>().CloseMakeRoom();
                 break;
 
