@@ -157,11 +157,11 @@ public class ShopWindow : MonoBehaviour
         }
     }
 
-    //돈 사용, 아이템 추가,아이템 코드와 카운트, 아이템 가격이 필요함
-    public void InItemUseMoney(Item sellitem,int value)
-    {
-        //useData.GetComponent<DataSave>().UseMoney(); //가격추가하고
-        useData.GetComponent<DataSave>().UseItem(sellitem.Code,value);
-    }
+    ////돈 사용, 아이템 추가,아이템 코드와 카운트, 아이템 가격이 필요함
+    //public void InItemUseMoney(Item sellitem,int value)
+    //{
+    //    //useData.GetComponent<DataSave>().UseMoney(); //가격추가하고
+    //    useData.GetComponent<DataSave>().UseItem(sellitem.Code,value);
+    //}
 
 }

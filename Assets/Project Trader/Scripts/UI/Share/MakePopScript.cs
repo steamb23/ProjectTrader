@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using ProjectTrader;
 using ProjectTrader.Datas;
 using ProjectTrader.SpriteDatas;
 
@@ -107,7 +108,7 @@ public class MakePopScript : MonoBehaviour
         }
     }
 
-    //배치용
+    //배치용->배치 playData에 추가
     public void SetPopupItem(int cunt, int cod,GameObject obj)
     {
         popItem.Count = cunt;
@@ -141,7 +142,7 @@ public class MakePopScript : MonoBehaviour
 
     }
 
-    //아이템이 판매중인가
+    //아이템이 판매중인가 ->playData에서 검사
     bool SellItemCheck(int cod)
     {
         sellingItem = GameObject.FindGameObjectsWithTag("Item");
@@ -184,11 +185,21 @@ public class MakePopScript : MonoBehaviour
     public void SetBuyItem()
     {
         //이곳에서 돈 확인
-        GameObject go = GameObject.Find("itemshop");
-        go.GetComponent<ShopWindow>().SetbuyNum(popItem.Code, (int)shopslider.value);
-        go.GetComponent<ShopTimer>().SetInfo((int)shopslider.value, popItem.Code);
-        //이곳에서 인벤토리?에 아이템추가(불러오기)->메인 코드에서 작성
-        go.GetComponent<ShopWindow>().InItemUseMoney(popItem, (int)shopslider.value);
+        if (PlayData.CurrentData.Money >= popItem.Count * popItemData.SellPrice)
+        {
+            popItem.Count = (int)shopslider.value;
+            PlayData.CurrentData.Money -= popItem.Count * popItemData.SellPrice;
+            FindObjectOfType<DataSave>().ItemListAdd(popItem);
+
+            GameObject go = GameObject.Find("itemshop");
+            go.GetComponent<ShopWindow>().SetbuyNum(popItem.Code, (int)shopslider.value);
+            go.GetComponent<ShopTimer>().SetInfo((int)shopslider.value, popItem.Code);
+
+        }
+        else
+        {
+            uiText.GetComponent<TextUiControl>().CreativeTextBox(0, 0, 50, "돈이 부족합니다.", 2);
+        }
         CloseShopPopup();
     }
 

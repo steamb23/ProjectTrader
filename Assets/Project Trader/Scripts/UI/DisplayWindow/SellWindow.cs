@@ -61,22 +61,27 @@ public class SellWindow : MonoBehaviour
     public void CloseMakerWindow()
     {
         //슬롯 리로드하는 코드도 추가로 작성
+        if (itemnum != null)
+        {
+            for (int i = 0; i < itemnum.Length; i++)
+                Destroy(itemnum[i]);
+        }
         makerWindow.SetActive(false);
     }
 
     //슬롯 세팅(임시로 이미 생성되어있으면 추가로 생성하지 않도록 함) 아이템개수를 받아오면좋을거같은디,,
-    //code양만큼 생성하고 count가 0이면 표시하지 않도록 함->슬롯밖에서 설정
     void SetItemslot()
     {
-        savedata.GetComponent<DataSave>().SetItemList();
-        if (setslot == false)
+        //savedata.GetComponent<DataSave>().SetItemList();
+        if (PlayData.CurrentData.OwnedItems.Count>0)
         {
-            itemnum = new GameObject[5];
+            int dataitemnum = PlayData.CurrentData.OwnedItems.Count;
+            itemnum = new GameObject[dataitemnum];
             //slotItem = new Item[5];
-            slotItemData = new ItemData[5];
+            slotItemData = new ItemData[dataitemnum];
 
             //아이템 가진 수만큼
-            for (int i = 0; i < slotItem.Length; i++)
+            for (int i = 0; i < dataitemnum; i++)
             {
                 itemnum[i] = Instantiate(itemSlot) as GameObject;
 
@@ -87,40 +92,42 @@ public class SellWindow : MonoBehaviour
 
             }
             setslot = true;
-            itemnum[0].GetComponent<SlotIn>().PushButton();
+            if (itemnum != null)
+                itemnum[0].GetComponent<SlotIn>().PushButton();
         }
     }
 
     //슬롯생성할때 멤버 바꾸기> 가지고있는 아이템 표시(재료 제외>일정 코드 이상부터 count가 1이상만 표시)
     void SetItemInfo(int i)
     {
-        if (itemnum[i].activeSelf == false)
-            itemnum[i].SetActive(true);
+        //if (itemnum[i].activeSelf == false)
+        //    itemnum[i].SetActive(true);
+        Item slotItem = PlayData.CurrentData.OwnedItems[i];
         slotText = itemnum[i].GetComponentsInChildren<TextMeshProUGUI>();
 
-        slotItemData[i] = slotItem[i].GetData();
+        slotItemData[i] = slotItem.GetData();
         slotText[0].text = slotItemData[i].SellPrice.ToString();
 
-        slotText[1].text = "x" + slotItem[i].Count.ToString();
-        SpriteChange(i);
-        SlotScriptSet(i);
-        if (slotItem[i].Count <= 0)
-        {
-            itemnum[i].SetActive(false);
-        }
+        slotText[1].text = "x" + slotItem.Count.ToString();
+        SpriteChange(slotItem,i);
+        SlotScriptSet(slotItem,i);
+        //if (slotItem[i].Count <= 0)
+        //{
+        //    itemnum[i].SetActive(false);
+        //}
 
     }
 
     //슬롯내 스크립트 수정
-    void SlotScriptSet(int i)
+    void SlotScriptSet(Item item,int i)
     {
-        itemnum[i].GetComponent<SlotIn>().SetSlotInData(slotItem[i].Count, slotItem[i].Code);
+        itemnum[i].GetComponent<SlotIn>().SetSlotInData(item.Count, item.Code);
     }
 
-    void SpriteChange(int i)
+    void SpriteChange(Item item,int i)
     {
         ItemImage = itemnum[i].GetComponentsInChildren<Image>();
-        ItemImage[4].sprite = ItemSpriteData.GetItemSprite(slotItem[i].Code);
+        ItemImage[4].sprite = ItemSpriteData.GetItemSprite(item.Code);
 
     }
 
@@ -171,11 +178,14 @@ public class SellWindow : MonoBehaviour
 
     public void SetPopUpWindow()
     {
-        tableData = setTable.GetComponent<TableCheck>().choiceTable;
-        popupWindow.SetActive(true);
-        popupWindow.GetComponent<MakePopScript>().Openpopup();
-        //아이템을 하나 보내주는 걸로
-        popupWindow.GetComponent<MakePopScript>().SetPopupItem(display.Count, display.Code,tableData);
+        if (itemnum != null)
+        {
+            tableData = setTable.GetComponent<TableCheck>().choiceTable;
+            popupWindow.SetActive(true);
+            popupWindow.GetComponent<MakePopScript>().Openpopup();
+            //아이템을 하나 보내주는 걸로
+            popupWindow.GetComponent<MakePopScript>().SetPopupItem(display.Count, display.Code, tableData);
+        }
     }
 
     //아이템코드에 따라 조금 수정-아이템 초기화 코드
