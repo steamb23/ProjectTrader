@@ -234,4 +234,40 @@ public class DataSave : MonoBehaviour
         }
         //Debug.LogError("검사함");
     }
+
+    //playData 아이템 추가용
+    public void ItemListAdd(Item initem)
+    {
+        bool initemtrue = false;
+        Item listItem;
+        if (PlayData.CurrentData.OwnedItems.Count > 0)
+        {
+            for (int i = 0; i < PlayData.CurrentData.OwnedItems.Count; i++)
+            {
+                if (PlayData.CurrentData.OwnedItems[i].Code == initem.Code)
+                {
+                    listItem = PlayData.CurrentData.OwnedItems[i];
+                    initem.Count += listItem.Count;
+                    PlayData.CurrentData.OwnedItems[i]= initem;
+                    initemtrue = true;
+                }
+
+            }
+            if (initemtrue == false)
+            {
+                PlayData.CurrentData.OwnedItems.Add(initem);
+            }
+        }
+        else
+        {
+            PlayData.CurrentData.OwnedItems.Add(initem);
+        }
+
+        //테스트용
+        for(int i = 0; i < PlayData.CurrentData.OwnedItems.Count; i++)
+        {
+            listItem = PlayData.CurrentData.OwnedItems[i];
+            UnityEngine.Debug.Log("들어간 아이템 코드: "+listItem.Code.ToString()+"들어간 아이템 수량 "+listItem.Count.ToString());
+        }
+    }
 }

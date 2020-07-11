@@ -37,8 +37,8 @@ public class ShopOpenMessageBoxWindow : MonoBehaviour
         UpdateData();
 
         // 열수 없으면 열기버튼 비활성화
-        if (openButton != null) openButton.interactable = PlayData.CurrentData?.Stamina >= ReductionRestPoint;
-        else Debug.LogError("openButton 필드가 할당되지 않았습니다.");
+        //if (openButton != null) openButton.interactable = PlayData.CurrentData?.Stamina >= ReductionRestPoint;
+        //else Debug.LogError("openButton 필드가 할당되지 않았습니다.");
         // 남은 휴식횟수가 없으면 버튼 비활성화
         if (restButton != null) restButton.interactable = remainedRest > 0;
         else Debug.LogError("restButton 필드가 할당되지 않았습니다.");
@@ -54,7 +54,8 @@ public class ShopOpenMessageBoxWindow : MonoBehaviour
     [SerializeField] TMPro.TextMeshProUGUI remainedRestText;
     [SerializeField] Button openButton;
     [SerializeField] Button restButton;
-
+    [SerializeField]
+    GameObject nohpwindow;
     int regenerationRestPoint;
     int reductionRestPoint;
     int remainedRest;
@@ -141,18 +142,28 @@ public class ShopOpenMessageBoxWindow : MonoBehaviour
     {
         // 다음날 아침으로 일자 변경
         var gameDateTimeManager = FindObjectOfType<GameDateTimeManager>();
-
-        gameDateTimeManager.Opening();
-
         var playData = PlayData.CurrentData;
         if (playData != null)
         {
-            playData.Stamina -= ReductionRestPoint;
+            if ((playData.Stamina - ReductionRestPoint) >= 0)
+            {
+                playData.Stamina -= ReductionRestPoint;
+                gameDateTimeManager.Opening();
+
+
+
+                // 아마 페이드인 아웃 묘사가 들어가야함
+
+                // 창 숨기기
+                gameObject.SetActive(false);
+            }
+            else
+            {
+                nohpwindow.SetActive(true);
+                gameObject.SetActive(false);
+            }
+
         }
 
-        // 아마 페이드인 아웃 묘사가 들어가야함
-
-        // 창 숨기기
-        gameObject.SetActive(false);
     }
 }

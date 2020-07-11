@@ -48,6 +48,7 @@ namespace ProjectTrader
         [SerializeField] Employee[] cleaners;
         [SerializeField] Employee[] crafter;
         [SerializeField] int remainedRest = 10; // 기본값은 0
+        [SerializeField] bool tutorial = false;
         // 가이드 퀘스트 달성 목록
         [SerializeField] List<QuestState> guideQuestStates = new List<QuestState>();
         // 일일 퀘스트 달성 목록
@@ -208,6 +209,16 @@ namespace ProjectTrader
             set => this.remainedRest = value;
         }
 
+        /// <summary>
+        /// 튜토리얼 유무
+        /// </summary>
+        public bool Tutorial
+        {
+            get => this.tutorial;
+            set => this.tutorial = value;
+        }
+
+        //public PlayData()
         /// <summary>
         /// 가이드 퀘스트 상태
         /// </summary>

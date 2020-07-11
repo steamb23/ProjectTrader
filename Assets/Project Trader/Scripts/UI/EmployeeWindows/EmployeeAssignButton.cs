@@ -6,6 +6,13 @@ public class EmployeeAssignButton : MonoBehaviour
 {
     [SerializeField]
     GameObject data;
+
+    [SerializeField]
+    GameObject slot1;
+
+    [SerializeField]
+    GameObject slot2;
+
     public int buttonCode
     {
         set;
@@ -45,6 +52,24 @@ public class EmployeeAssignButton : MonoBehaviour
 
     void SetPrint()
     {
+        if(buttonCode==0 || buttonCode == 1)
+        {
+            var canvasGroup = slot1.GetComponent<CanvasGroup>();
+            canvasGroup.interactable = false;
+            canvasGroup.alpha = 0.5f;
+            canvasGroup = slot2.GetComponent<CanvasGroup>();
+            canvasGroup.interactable = false;
+            canvasGroup.alpha = 0.5f;
+        }
+        else
+        {
+            var canvasGroup = slot1.GetComponent<CanvasGroup>();
+            canvasGroup.interactable = true;
+            canvasGroup.alpha = 1.0f;
+            canvasGroup = slot2.GetComponent<CanvasGroup>();
+            canvasGroup.interactable = true;
+            canvasGroup.alpha = 1.0f;
+        }
         data.GetComponent<EmployeeDataCatch>().SetbuttonCode(buttonCode);
         data.GetComponent<EmployeeDataCatch>().PrintAssignSlot();
     }

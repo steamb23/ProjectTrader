@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using ProjectTrader;
 using ProjectTrader.Datas;
 using ProjectTrader.SpriteDatas;
 
@@ -14,12 +15,6 @@ public class MakePopScript : MonoBehaviour
     public Slider sellNumSlider;
     public TextMeshProUGUI maxNum;
     public Image itemImage;
-
-    //공방
-    public Slider makerNumSlider;
-    public TextMeshProUGUI makermaxNum;
-    public Image makerItemImage;
-    public TextMeshProUGUI makerName;
 
     //상점
     public Slider shopslider;
@@ -44,13 +39,13 @@ public class MakePopScript : MonoBehaviour
     {
         NONE=0,
         SELLPOPUP,
-        MAKERPOPUP,
+        //MAKERPOPUP,
         SHOPPOPUP,
     };
 
     //자기자신 배치 팝업, 공방 팝업
     public GameObject popUpWindow;
-    public GameObject makerPopupwindow;
+    //public GameObject makerPopupwindow;
     public GameObject shopPopup;
 
     TextMeshProUGUI chaneT;
@@ -89,10 +84,6 @@ public class MakePopScript : MonoBehaviour
                 sellNumSlider.maxValue = popItem.Count;
                 sellNumSlider.minValue = 1;
                 break;
-            case PopupState.MAKERPOPUP:
-                makerNumSlider.maxValue = popItem.Count;
-                makerNumSlider.minValue = 1;
-                break;
             case PopupState.SHOPPOPUP:
                 shopslider.maxValue = popItem.Count;
                 shopslider.minValue = 1;
@@ -109,9 +100,6 @@ public class MakePopScript : MonoBehaviour
             case PopupState.SELLPOPUP:
                 maxNum.text = sellNumSlider.value.ToString() + "/" + sellNumSlider.maxValue.ToString();
                 break;
-            case PopupState.MAKERPOPUP:
-                makermaxNum.text = makerNumSlider.value.ToString() + "/" + makerNumSlider.maxValue.ToString();
-                break;
             case PopupState.SHOPPOPUP:
                 shopitemnum.text = shopslider.value.ToString() + "/" + shopslider.maxValue.ToString();
                 break;
@@ -120,7 +108,7 @@ public class MakePopScript : MonoBehaviour
         }
     }
 
-    //배치용
+    //배치용->배치 playData에 추가
     public void SetPopupItem(int cunt, int cod,GameObject obj)
     {
         popItem.Count = cunt;
@@ -162,7 +150,7 @@ public class MakePopScript : MonoBehaviour
 
     }
 
-    //아이템이 판매중인가
+    //아이템이 판매중인가 ->playData에서 검사
     bool SellItemCheck(int cod)
     {
         sellingItem = GameObject.FindGameObjectsWithTag("Item");
@@ -182,38 +170,6 @@ public class MakePopScript : MonoBehaviour
         }
         return true;
     }
-
-    //아래부턴 공방ui
-
-    public void OpenMakePopup()
-    {
-        popupstate = PopupState.MAKERPOPUP;
-    }
-
-    public void CloseMakePopup()
-    {
-        popupstate = PopupState.NONE;
-        makerPopupwindow.SetActive(false);
-    }
-
-    public void SetMakerPopupData(int cunt, int cod,int emplslot)
-    {
-        popItem.Count = cunt;
-        popItem.Code = cod;
-        popItemData = popItem.GetData();
-        makerItemImage.sprite = popItemData.GetSprite();
-        makerName.text = popItemData.Name;
-        employeeslot = emplslot;
-        SetNum();
-    }
-
-    public void SetMakeItem()
-    {
-        GameObject go = GameObject.Find("makeroom");
-        go.GetComponent<MakerTimer>().StartTimer(employeeslot-1,popItem.Code,popItem.Count);//버튼,코드,갯수
-        CloseMakePopup();
-    }
-
 
 
     //상점
@@ -237,11 +193,21 @@ public class MakePopScript : MonoBehaviour
     public void SetBuyItem()
     {
         //이곳에서 돈 확인
-        GameObject go = GameObject.Find("itemshop");
-        go.GetComponent<ShopWindow>().SetbuyNum(popItem.Code, (int)shopslider.value);
-        go.GetComponent<ShopTimer>().SetInfo((int)shopslider.value, popItem.Code);
-        //이곳에서 인벤토리?에 아이템추가(불러오기)->메인 코드에서 작성
-        go.GetComponent<ShopWindow>().InItemUseMoney(popItem, (int)shopslider.value);
+        if (PlayData.CurrentData.Money >= popItem.Count * popItemData.SellPrice)
+        {
+            popItem.Count = (int)shopslider.value;
+            PlayData.CurrentData.Money -= popItem.Count * popItemData.SellPrice;
+            FindObjectOfType<DataSave>().ItemListAdd(popItem);
+
+            GameObject go = GameObject.Find("itemshop");
+            go.GetComponent<ShopWindow>().SetbuyNum(popItem.Code, (int)shopslider.value);
+            go.GetComponent<ShopTimer>().SetInfo((int)shopslider.value, popItem.Code);
+
+        }
+        else
+        {
+            uiText.GetComponent<TextUiControl>().CreativeTextBox(0, 0, 50, "돈이 부족합니다.", 2);
+        }
         CloseShopPopup();
     }
 

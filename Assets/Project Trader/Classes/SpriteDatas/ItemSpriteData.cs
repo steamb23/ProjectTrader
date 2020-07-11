@@ -35,6 +35,8 @@ namespace ProjectTrader.SpriteDatas
 
         public static Sprite GetItemSprite(int code)
         {
+            if (code == 0)
+                return null;
             if (Instance == null)
             {
                 Debug.LogError("ItemSpriteData의 인스턴스를 불러올 수 없습니다.");
