@@ -359,6 +359,10 @@ public class VisitorAi : MonoBehaviour
                  {
                      floatingTimer.FadeoutWithDestory();
 
+                     if (WishItems.Count > 0)
+                         PlayData.CurrentData.Money += WishItems[0].GetData().SellPrice;
+                     PlayData.CurrentData.Awareness += 1;
+
                      ItemDealCallback();
                      // 직접 판매 퀘스트 트리거
                      ProjectTrader.QuestManager.Trigger(ProjectTrader.Datas.QuestData.GoalType.SelfDeal, 1);

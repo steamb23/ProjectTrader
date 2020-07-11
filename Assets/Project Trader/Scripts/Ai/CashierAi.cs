@@ -54,6 +54,7 @@ class CashierAi : MonoBehaviour
 
             if (visitor.WishItems.Count > 0)
                 PlayData.CurrentData.Money += visitor.WishItems[0].GetData().SellPrice;
+            PlayData.CurrentData.Awareness += 1;
 
             dealCompleted?.Invoke();
         });

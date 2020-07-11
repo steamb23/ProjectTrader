@@ -142,12 +142,12 @@ public class JudgeManager : MonoBehaviour
             switch (PlayData.CurrentData.Level)
             {
                 case 1:
-                    goal = 1000;
+                    goal = 500;
                     successReward = 30000;
                     failReward = 5000;
                     break;
                 case 2:
-                    goal = 2500;
+                    goal = 1500;
                     successReward = 50000;
                     failReward = 5000;
                     break;
