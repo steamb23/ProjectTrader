@@ -151,20 +151,25 @@ public class JudgeManager : MonoBehaviour
                     successReward = 50000;
                     failReward = 5000;
                     break;
+                default:
+                    goal = int.MaxValue;
+                    successReward = 0;
+                    failReward = 0;
+                    break;
             }
 
-            if (true||PlayData.CurrentData.Awareness > goal)
+            if (PlayData.CurrentData.Awareness > goal)
             {
-                resultWindow.ShowSucess(successReward);
                 // 상금 지급
                 PlayData.CurrentData.Money += successReward;
-                //TODO: 등급 업 처리
+                // 등급 업 처리
                 PlayData.CurrentData.Level += 1;
+                resultWindow.ShowSucess(successReward);
             }
             else
             {
-                resultWindow.ShowFail(failReward);
                 PlayData.CurrentData.Money += failReward;
+                resultWindow.ShowFail(failReward);
             }
             isDirecting = false;
             #endregion

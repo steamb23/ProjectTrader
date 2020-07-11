@@ -241,8 +241,6 @@ namespace ProjectTrader
 
         /// <summary>
         /// 게임 데이터 베이스에 동기화
-        /// 
-        /// TODO:플레이 데이터 초기화 혹은 로딩 과정에서 호출해줄 필요가 있음.
         /// </summary>
         public void SyncData()
         {
