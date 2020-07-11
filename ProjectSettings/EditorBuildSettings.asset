@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Project Trader/Scenes/Shop1Scene.unity
     guid: fa627693e204de0489ab10d898f1a9aa
   - enabled: 1
+    path: Assets/Project Trader/Scenes/Shop2Scene.unity
+    guid: 38d30c891e7416641af8cc141eaa5f83
+  - enabled: 1
     path: Assets/Project Trader/Scenes/LoadingScene.unity
     guid: 846668a7570c07041968c8aeae9cd107
   m_configObjects: {}

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using ProjectTrader;
 
 public class SceneLoadManager : MonoBehaviour
 {
@@ -53,7 +54,21 @@ public class SceneLoadManager : MonoBehaviour
         floatingCanvas.enabled = true;
     }
 
-    public void LoadScene(ShopScene shopScene)
+    public void LoadGameScene()
+    {
+        switch (PlayData.CurrentData.Level)
+        {
+            default:
+            case 1:
+                LoadGameScene(ShopScene.Shop1);
+                break;
+            case 2:
+                LoadGameScene(ShopScene.Shop2);
+                break;
+        }
+    }
+
+    public void LoadGameScene(ShopScene shopScene)
     {
         ShowLoadingScene(() =>
         {

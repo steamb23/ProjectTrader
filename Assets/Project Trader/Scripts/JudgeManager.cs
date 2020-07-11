@@ -159,6 +159,7 @@ public class JudgeManager : MonoBehaviour
                 // 상금 지급
                 PlayData.CurrentData.Money += successReward;
                 //TODO: 등급 업 처리
+                PlayData.CurrentData.Level += 1;
             }
             else
             {

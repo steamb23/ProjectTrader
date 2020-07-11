@@ -44,11 +44,13 @@ public class MainSceneManager : MonoBehaviour
 
         // 플레이 데이터 초기화
         // TODO: 저장된 데이터가 있으면 저장된 데이터를 불러오도록 수정해야함.
-        PlayData.SetCurrentData(new PlayData());
+        //PlayData.SetCurrentData(new PlayData());
+
+        //var dataSave = FindObjectOfType<DataSave>();
+        //dataSave.GameLoad();
 
         var sceneLoadManager = SceneLoadManager.Instance;
 
-        // TODO: 불러온 플레이 데이터에 따라 로드되도록 수정해야함.
-        sceneLoadManager.LoadScene(SceneLoadManager.ShopScene.Shop1);
+        sceneLoadManager.LoadGameScene();
     }
 }

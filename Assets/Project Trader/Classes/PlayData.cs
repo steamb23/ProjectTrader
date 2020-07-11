@@ -79,7 +79,14 @@ namespace ProjectTrader
         public int Level
         {
             get => level;
-            set => level = value;
+            set
+            {
+                // 최대 레벨 제한
+                if (value > 2)
+                    level = 2;
+                else
+                    level = value;
+            }
         }
 
         /// <summary>
