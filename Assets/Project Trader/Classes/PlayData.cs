@@ -42,7 +42,7 @@ namespace ProjectTrader
         [SerializeField] GameDateTime date = new GameDateTime(hour: 8); // 오픈 시간
         [SerializeField] int shopSize;
         [SerializeField] List<Item> ownedItems = new List<Item>();
-        [SerializeField] Item[] displayedItems;
+        [SerializeField] List<Item> displayedItems = new List<Item>();
         [SerializeField] List<Employee> hiredEmployees;
         [SerializeField] Employee[] cashers;
         [SerializeField] Employee[] cleaners;
@@ -161,7 +161,7 @@ namespace ProjectTrader
         /// <summary>
         /// 진열된 아이템
         /// </summary>
-        public Item[] DisplayedItems
+        public List<Item> DisplayedItems
         {
             get => this.displayedItems;
             set => this.displayedItems = value;

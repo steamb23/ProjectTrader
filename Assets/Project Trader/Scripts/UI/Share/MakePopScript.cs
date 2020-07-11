@@ -129,8 +129,13 @@ public class MakePopScript : MonoBehaviour
             reitem.Code = popItem.Code;
             reitem.Count = popItem.Count;
             GameObject gogo = GameObject.Find("selltimewindow");
-            if(choiceTableData.GetComponent<DisplayedItem>().Item.Count>0)
-                gogo.GetComponent<SellWindow>().DisItemCheck(choiceTableData.GetComponent<DisplayedItem>().Item.Code, choiceTableData.GetComponent<DisplayedItem>().Item.Count); //있는 아이템 회수
+            if (choiceTableData.GetComponent<DisplayedItem>().Item.Count > 0)
+            {
+                Item pitem = choiceTableData.GetComponent<DisplayedItem>().Item;
+                FindObjectOfType<DataSave>().ItemListAdd(pitem); //회수
+                //gogo.GetComponent<SellWindow>().DisItemCheck(choiceTableData.GetComponent<DisplayedItem>().Item.Code, choiceTableData.GetComponent<DisplayedItem>().Item.Count); //있는 아이템 회수
+            }
+
 
             var previousItem = choiceTableData.GetComponent<DisplayedItem>().Item;
             // 변경할 아이템과 현재 아이템이 다르면
@@ -140,7 +145,12 @@ public class MakePopScript : MonoBehaviour
             choiceTableData.GetComponent<DisplayedItem>().Item = reitem;
             //임의로
             
-            gogo.GetComponent<SellWindow>().DisItemCheck(reitem.Code,-reitem.Count); //배치한 수 만큼 가진 수에서 제거
+            //gogo.GetComponent<SellWindow>().DisItemCheck(reitem.Code,-reitem.Count); //배치한 수 만큼 가진 수에서 제거
+
+
+            //배치playdata에 추가 후 playdata에서 배치만큼 아이템 제거
+            PlayData.CurrentData.DisplayedItems.Add(reitem); //배치에 추가
+            FindObjectOfType<DataSave>().DisplayItemListRemove(reitem);
             gogo.GetComponent<SellWindow>().CloseMakerWindow();
             Closepopup();
 
@@ -150,27 +160,41 @@ public class MakePopScript : MonoBehaviour
 
     }
 
-    //아이템이 판매중인가 ->playData에서 검사
+    ////아이템이 판매중인가 ->playData에서 검사
+    //bool SellItemCheck(int cod)
+    //{
+    //    sellingItem = GameObject.FindGameObjectsWithTag("Item");
+    //    Item selling;
+    //    for (int i = 1; i < sellingItem.Length; i++)
+    //    {
+    //        selling = sellingItem[i].GetComponent<DisplayedItem>().Item;
+    //        if (sellingItem[i].name != choiceTableData.name)
+    //        {
+    //            if (cod == selling.Code)
+    //            {
+    //                uiText.GetComponent<TextUiControl>().CreativeTextBox(0, 0, 50, "이미 판매중인 아이템입니다", 2);
+    //                return false;
+    //            }
+    //        }
+
+    //    }
+    //    return true;
+    //}
+
+    //아이템이 배치중인가2
     bool SellItemCheck(int cod)
     {
-        sellingItem = GameObject.FindGameObjectsWithTag("Item");
-        Item selling;
-        for (int i = 1; i < sellingItem.Length; i++)
+        for(int i = 0; i < PlayData.CurrentData.DisplayedItems.Count; i++)
         {
-            selling = sellingItem[i].GetComponent<DisplayedItem>().Item;
-            if (sellingItem[i].name != choiceTableData.name)
+            Item checkItem = PlayData.CurrentData.DisplayedItems[i];
+            if (checkItem.Code == cod)
             {
-                if (cod == selling.Code)
-                {
-                    uiText.GetComponent<TextUiControl>().CreativeTextBox(0, 0, 50, "이미 판매중인 아이템입니다", 2);
-                    return false;
-                }
+                uiText.GetComponent<TextUiControl>().CreativeTextBox(0, 0, 50, "이미 판매중인 아이템입니다", 2);
+                return false;
             }
-
         }
         return true;
     }
-
 
     //상점
     public void ShopPopupOpen()
@@ -192,10 +216,11 @@ public class MakePopScript : MonoBehaviour
 
     public void SetBuyItem()
     {
+        popItem.Count = (int)shopslider.value;
         //이곳에서 돈 확인
         if (PlayData.CurrentData.Money >= popItem.Count * popItemData.SellPrice)
         {
-            popItem.Count = (int)shopslider.value;
+
             PlayData.CurrentData.Money -= popItem.Count * popItemData.SellPrice;
             FindObjectOfType<DataSave>().ItemListAdd(popItem);
 

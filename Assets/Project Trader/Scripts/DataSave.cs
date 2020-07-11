@@ -238,7 +238,7 @@ public class DataSave : MonoBehaviour
     //playData 아이템 추가용
     public void ItemListAdd(Item initem)
     {
-        bool initemtrue = false;
+        bool initemtrue = false; //같은 코드의 아이템이 있나 검사
         Item listItem;
         if (PlayData.CurrentData.OwnedItems.Count > 0)
         {
@@ -248,7 +248,14 @@ public class DataSave : MonoBehaviour
                 {
                     listItem = PlayData.CurrentData.OwnedItems[i];
                     initem.Count += listItem.Count;
-                    PlayData.CurrentData.OwnedItems[i]= initem;
+                    if (initem.Count > 0) //개수가 0이 넘으면
+                    {
+                        PlayData.CurrentData.OwnedItems[i] = initem;
+                    }
+                    else //갯수가 0이면
+                    {
+                        PlayData.CurrentData.OwnedItems.Remove(listItem);
+                    }
                     initemtrue = true;
                 }
 
@@ -268,6 +275,21 @@ public class DataSave : MonoBehaviour
         {
             listItem = PlayData.CurrentData.OwnedItems[i];
             UnityEngine.Debug.Log("들어간 아이템 코드: "+listItem.Code.ToString()+"들어간 아이템 수량 "+listItem.Count.ToString());
+        }
+    }
+
+    public void DisplayItemListRemove(Item item)
+    {
+        if (PlayData.CurrentData.DisplayedItems.Count <= 0|| PlayData.CurrentData.DisplayedItems==null)
+            return;
+
+        for(int i=0;i< PlayData.CurrentData.DisplayedItems.Count; i++)
+        {
+            Item listinItem = PlayData.CurrentData.DisplayedItems[i];
+            if (listinItem.Code == item.Code)
+            {
+                PlayData.CurrentData.DisplayedItems.Remove(listinItem);
+            }
         }
     }
 }

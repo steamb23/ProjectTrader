@@ -50,7 +50,7 @@ public class SellWindow : MonoBehaviour
     {
         SetsettingButton();
 
-    }    
+    }
 
     public void OpenMakerWindow()
     {
@@ -73,7 +73,7 @@ public class SellWindow : MonoBehaviour
     void SetItemslot()
     {
         //savedata.GetComponent<DataSave>().SetItemList();
-        if (PlayData.CurrentData.OwnedItems.Count>0)
+        if (PlayData.CurrentData.OwnedItems.Count > 0)
         {
             int dataitemnum = PlayData.CurrentData.OwnedItems.Count;
             itemnum = new GameObject[dataitemnum];
@@ -109,8 +109,8 @@ public class SellWindow : MonoBehaviour
         slotText[0].text = slotItemData[i].SellPrice.ToString();
 
         slotText[1].text = "x" + slotItem.Count.ToString();
-        SpriteChange(slotItem,i);
-        SlotScriptSet(slotItem,i);
+        SpriteChange(slotItem, i);
+        SlotScriptSet(slotItem, i);
         //if (slotItem[i].Count <= 0)
         //{
         //    itemnum[i].SetActive(false);
@@ -119,12 +119,12 @@ public class SellWindow : MonoBehaviour
     }
 
     //슬롯내 스크립트 수정
-    void SlotScriptSet(Item item,int i)
+    void SlotScriptSet(Item item, int i)
     {
         itemnum[i].GetComponent<SlotIn>().SetSlotInData(item.Count, item.Code);
     }
 
-    void SpriteChange(Item item,int i)
+    void SpriteChange(Item item, int i)
     {
         ItemImage = itemnum[i].GetComponentsInChildren<Image>();
         ItemImage[4].sprite = ItemSpriteData.GetItemSprite(item.Code);
@@ -142,7 +142,7 @@ public class SellWindow : MonoBehaviour
             {
                 arrowSprite[j] = Instantiate(arrow) as GameObject;
                 arrowSprite[j].transform.position = new Vector3(go[j].transform.position.x, go[j].transform.position.y + 0.6f, -1);
-                arrowSprite[j ].SetActive(false);
+                arrowSprite[j].SetActive(false);
             }
             setArrow = true;
         }
@@ -152,11 +152,11 @@ public class SellWindow : MonoBehaviour
             arrowC = go[i].GetComponent<DisplayedItem>().Item;
             if (arrowC.Count <= 0)
             {
-                arrowSprite[i ].SetActive(true);
+                arrowSprite[i].SetActive(true);
             }
             else
             {
-                arrowSprite[i ].SetActive(false);
+                arrowSprite[i].SetActive(false);
             }
 
         }
@@ -171,7 +171,7 @@ public class SellWindow : MonoBehaviour
         display.Count = num;
         ItemData displayData = display.GetData();
         setPrice.text = displayData.SellPrice.ToString();
-        setImage.sprite= ItemSpriteData.GetItemSprite(display.Code);
+        setImage.sprite = ItemSpriteData.GetItemSprite(display.Code);
         //텍스트랑 image찾아서 변경
     }
 
@@ -192,18 +192,9 @@ public class SellWindow : MonoBehaviour
     public void SetItem(Item[] pItem)
     {
         slotItem = new Item[pItem.Length];
-        for(int i = 0; i < slotItem.Length; i++)
+        for (int i = 0; i < slotItem.Length; i++)
         {
             slotItem[i] = pItem[i];
         }
     }
-
-    //아이템 제거,회수용
-    public void DisItemCheck(int cod, int value)
-    {
-        savedata.GetComponent<DataSave>().UseItem(cod, value);
-        savedata.GetComponent<DataSave>().SetItemList();
-        SetItemInfo(cod - 1);
-    }
 }
-
