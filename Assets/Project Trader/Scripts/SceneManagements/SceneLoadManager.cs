@@ -5,7 +5,12 @@ using ProjectTrader;
 
 public class SceneLoadManager : MonoBehaviour
 {
-    static SceneLoadManager()
+    public static ShopScene CurrentLoadedShopScene
+    {
+        get; private set;
+    } = (ShopScene)(-1);
+
+static SceneLoadManager()
     {
         GameObject gameObject = new GameObject("SceneLoadManager");
         gameObject.AddComponent<SceneLoadManager>();
@@ -72,8 +77,8 @@ public class SceneLoadManager : MonoBehaviour
     {
         ShowLoadingScene(() =>
         {
-            // 초기화 후 다시 불러오기
-            SceneManager.LoadScene("GameScene");
+        // 초기화 후 다시 불러오기
+        SceneManager.LoadScene("GameScene");
             string shopSceneName;
             switch (shopScene)
             {
@@ -92,6 +97,8 @@ public class SceneLoadManager : MonoBehaviour
             }
             SceneManager.LoadScene(shopSceneName, LoadSceneMode.Additive);
             SceneManager.LoadScene("TownScene", LoadSceneMode.Additive);
+
+            CurrentLoadedShopScene = shopScene;
         });
     }
 

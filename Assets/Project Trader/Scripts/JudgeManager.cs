@@ -153,7 +153,7 @@ public class JudgeManager : MonoBehaviour
                     break;
             }
 
-            if (PlayData.CurrentData.Awareness > goal)
+            if (true||PlayData.CurrentData.Awareness > goal)
             {
                 resultWindow.ShowSucess(successReward);
                 // 상금 지급

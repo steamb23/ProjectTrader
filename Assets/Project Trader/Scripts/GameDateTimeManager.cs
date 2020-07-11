@@ -237,6 +237,13 @@ class GameDateTimeManager : MonoBehaviour
 
             // 저장
             FindObjectOfType<DataSave>().GameSave();
+
+            // 현재 열려있는 상점 씬이 현재 레벨과 다르면 씬 재로딩
+            if ((int)SceneLoadManager.CurrentLoadedShopScene + 1 != PlayData.CurrentData.Level)
+            {
+                //yield return new WaitForSeconds(1);
+                SceneLoadManager.Instance.LoadGameScene();
+            }
         }
     }
 
