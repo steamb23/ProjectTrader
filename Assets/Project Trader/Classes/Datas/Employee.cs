@@ -14,6 +14,7 @@ namespace ProjectTrader.Datas
         private int code;
         private string age;
         private string state;
+        private bool iswork; //0=일하지 않음 1=일함
 
         /// <summary>
         /// 직원 코드
@@ -40,6 +41,15 @@ namespace ProjectTrader.Datas
         {
             get => state;
             set => state = value;
+        }
+
+        /// <summary>
+        /// 일하고 있는지
+        /// </summary>
+        public bool IsWork
+        {
+            get => iswork;
+            set => iswork = value;
         }
 
         /// <summary>

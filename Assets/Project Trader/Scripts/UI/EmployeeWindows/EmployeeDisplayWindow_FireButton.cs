@@ -43,9 +43,11 @@ public class EmployeeDisplayWindow_FireButton : MonoBehaviour
         if (0<employeeCount.Count&&emp.Code>0)
         {
             UnityEngine.Debug.Log("해고누름");
+            FindObjectOfType<EmployeeDataCatch>().FireEmployee(emp);
+            FindObjectOfType<DataSave>().EmployeeListRemove(emp);
             //해고하고 isWork를 false로 해줘야함
-            savedata.GetComponent<DataSave>().FHireEmp(emp,0);
-            dataCatch.GetComponent<EmployeeDataCatch>().FireEmployee(emp);
+            //savedata.GetComponent<DataSave>().FHireEmp(emp,0);
+            //dataCatch.GetComponent<EmployeeDataCatch>().FireEmployee(emp);
             employeeCount.Count--;
 
         }

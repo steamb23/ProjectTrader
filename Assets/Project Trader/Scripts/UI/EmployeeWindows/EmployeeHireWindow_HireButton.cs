@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using ProjectTrader.Datas;
+using ProjectTrader;
 
 public class EmployeeHireWindow_HireButton : MonoBehaviour
 {
@@ -37,12 +38,14 @@ public class EmployeeHireWindow_HireButton : MonoBehaviour
             emp.Code = candiateInfo.Code;
             emp.State = candiateInfo.State;
             emp.Age = candiateInfo.Age;
+            emp.IsWork = false;
+            FindObjectOfType<DataSave>().EmpAdd(emp);
 
             // 퀘스트 트리거
             ProjectTrader.QuestManager.Trigger(QuestData.GoalType.HireEmployee, 1);
 
-            savedata.GetComponent<DataSave>().FHireEmp(emp,1);
-            empcatch.GetComponent<EmployeeDataCatch>().SetEmpData(emp);
+            //savedata.GetComponent<DataSave>().FHireEmp(emp,1); //필요없음
+            //empcatch.GetComponent<EmployeeDataCatch>().SetEmpData(emp);
             candiateInfo.Disable();
             employeeCount.Count++;
 

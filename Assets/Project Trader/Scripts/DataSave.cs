@@ -167,73 +167,6 @@ public class DataSave : MonoBehaviour
             pda.Awareness = 0;
     }
 
-    //임시로 코드별로 먼저 선언해 넣은 뒤 count로만 체크
-    public bool UseItem(int cod, int count)
-    {
-        for (int i = 0; i < 5; i++)
-        {
-            if (playerItem[i].Code == cod)
-            {
-                if (playerItem[i].Count + count >= 0)
-                {
-                    playerItem[i].Count += count;
-                    return true;
-                }
-                else
-                    return false;
-            }
-        }
-        return false;
-    }
-
-
-    public void SetItemList()
-    {
-        sell.GetComponent<SellWindow>().SetItem(playerItem);
-    }
-
-    //알바생 추가/제거 check가 1이면 추가, 0이면 제거
-    public void UseEmp(Employee emp, int check)
-    {
-        if (check == 1) //추가
-        {
-            if (empsize < 9)
-            {
-                empInfo[empsize] = emp;
-                empsize++;
-            }
-        }
-        else if (check == 0) //제거
-        {
-            for (int i = 0; i < empsize; i++)
-            {
-                if (empInfo[i].Code == emp.Code)
-                {
-                    if (i == empsize)
-                        empsize--;
-                    else
-                    {
-                        for (int j = i; j < empsize - 1; j++)
-                        {
-                            empInfo[j] = empInfo[j + 1];
-                        }
-                        empsize--;
-                    }
-                }
-            }
-        }
-    }
-
-    //임시로 직원을 찾아 해고/고용 하는 코드
-    public void FHireEmp(Employee emp, int j)
-    {
-        for (int i = 0; i < empsize; i++)
-        {
-            if (empInfo[i] == emp)
-                UseEmp(empInfo[i], j);
-        }
-        //Debug.LogError("검사함");
-    }
 
     //playData 아이템 추가용
     public void ItemListAdd(Item initem)
@@ -301,5 +234,23 @@ public class DataSave : MonoBehaviour
         //        UnityEngine.Debug.Log("배치 아이템 코드: " + listItem.Code.ToString() + "배치된 아이템 수량 " + listItem.Count.ToString());
         //    }
         //}
+    }
+
+    //해고
+    public void EmployeeListRemove(Employee emp)
+    {
+        for(int i = 0; i < PlayData.CurrentData.HiredEmployees.Count; i++)
+        {
+            Employee listemp = PlayData.CurrentData.HiredEmployees[i];
+            if (listemp.Code == emp.Code)
+            {
+                PlayData.CurrentData.HiredEmployees.RemoveAt(i);
+            }
+        }
+    }
+
+    public void EmpAdd(Employee emp)
+    {
+        PlayData.CurrentData.HiredEmployees.Add(emp);
     }
 }

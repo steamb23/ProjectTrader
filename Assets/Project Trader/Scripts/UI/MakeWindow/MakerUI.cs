@@ -34,7 +34,7 @@ public class MakerUI : MonoBehaviour
     //제작할 아이템
     ItemData[] makeItemData;
     Item[] makeItem;
-
+    Item materialItem; //재료용
 
     TextMeshProUGUI[] slotText;     //슬롯에 있는 텍스트
     GameObject[] recipe;            //레시피 > 데이터로 받아오기
@@ -300,9 +300,14 @@ public class MakerUI : MonoBehaviour
         //bool[] ok = new bool[4];
         mt = disRecipeData.MaterialCodes;
         ct = disRecipeData.MaterialNeeds;
+
         for (int i = 0; i < materialNum; i++)
         {
-            data.GetComponent<DataSave>().UseItem(mt[i],ct[i]);
+
+            materialItem.Code = mt[i];
+            materialItem.Count = -ct[i];
+
+            //FindObjectOfType<DataSave>().ItemListAdd(materialItem); //임시로 가려두기
         }
         data.GetComponent<DataSave>().UseMoney(-(disRecipeData.CraftCost)); //교체
 
@@ -310,6 +315,7 @@ public class MakerUI : MonoBehaviour
 
     public void MakeSuccess(Item makeItem)
     {
-        data.GetComponent<DataSave>().UseItem(makeItem.Code,1);
+
+        FindObjectOfType<DataSave>().ItemListAdd(makeItem);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using ProjectTrader.Datas;
+using ProjectTrader;
 
 public class EmployeeSlot :EmployeeInfo
 {
@@ -48,21 +49,25 @@ public class EmployeeSlot :EmployeeInfo
         state.text = emp2.State;
     }
 
-
+    //playdata에 추가(고용된 곳->버튼 값을 받아와서 추가
     public void Click()
     {
-        if (indata == true)
+        if (indata == true && emp.IsWork==false)
         {
             sound.GetComponent<SoundControl>().ButtonSound2();
-            assign = GameObject.Find("EmployeeUICanvas");
-            assign.GetComponent<EmployeeDataCatch>().AssignDataSet(disCode, emp);
+            emp.IsWork = true;
+            //정보가 바꼈으면 바뀐 emp를 다시 playdata에 저장
+            //배치될 곳 찾아서 저장하기
+            FindObjectOfType<EmployeeDataCatch>().CheckHireEmp(emp, disCode);
+            FindObjectOfType<EmployeeDataCatch>().ReSetEmpList(emp);
+            //FindObjectOfType<EmployeeDataCatch>().CheckIsWork(emp);
+            FindObjectOfType<EmployeeUiManager>().CloseWaiting();
         }
     }
 
-    //배치 위치를 보내주는 함수
+    //배치 위치를 보내주는 함수 0-캐셔,1-청소,2-공방
     public void SetInfo(int c)
     {
         disCode = c;
-        //UnityEngine.Debug.Log("discode 값 : "+disCode.ToString());
     }
 }
