@@ -254,7 +254,8 @@ public class DataSave : MonoBehaviour
                     }
                     else //갯수가 0이면
                     {
-                        PlayData.CurrentData.OwnedItems.Remove(listItem);
+                        PlayData.CurrentData.OwnedItems.RemoveAt(i);
+                       // UnityEngine.Debug.Log("제거!");
                     }
                     initemtrue = true;
                 }
@@ -270,12 +271,12 @@ public class DataSave : MonoBehaviour
             PlayData.CurrentData.OwnedItems.Add(initem);
         }
 
-        //테스트용
-        for(int i = 0; i < PlayData.CurrentData.OwnedItems.Count; i++)
-        {
-            listItem = PlayData.CurrentData.OwnedItems[i];
-            UnityEngine.Debug.Log("들어간 아이템 코드: "+listItem.Code.ToString()+"들어간 아이템 수량 "+listItem.Count.ToString());
-        }
+        ////테스트용
+        //for(int i = 0; i < PlayData.CurrentData.OwnedItems.Count; i++)
+        //{
+        //    listItem = PlayData.CurrentData.OwnedItems[i];
+        //    //UnityEngine.Debug.Log("들어간 아이템 코드: "+listItem.Code.ToString()+"들어간 아이템 수량 "+listItem.Count.ToString());
+        //}
     }
 
     public void DisplayItemListRemove(Item item)
@@ -288,8 +289,17 @@ public class DataSave : MonoBehaviour
             Item listinItem = PlayData.CurrentData.DisplayedItems[i];
             if (listinItem.Code == item.Code)
             {
-                PlayData.CurrentData.DisplayedItems.Remove(listinItem);
+                PlayData.CurrentData.DisplayedItems.RemoveAt(i);
             }
         }
+        //테스트용
+        //if (PlayData.CurrentData.DisplayedItems.Count > 0)
+        //{
+        //    for (int i = 0; i < PlayData.CurrentData.DisplayedItems.Count; i++)
+        //    {
+        //        Item listItem = PlayData.CurrentData.DisplayedItems[i];
+        //        UnityEngine.Debug.Log("배치 아이템 코드: " + listItem.Code.ToString() + "배치된 아이템 수량 " + listItem.Count.ToString());
+        //    }
+        //}
     }
 }
