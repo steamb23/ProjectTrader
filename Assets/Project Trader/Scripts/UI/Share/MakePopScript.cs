@@ -143,8 +143,9 @@ public class MakePopScript : MonoBehaviour
                 // 아이템 배치 변경 퀘스트 트리거
                 ProjectTrader.QuestManager.Trigger(QuestData.GoalType.ChangeItem, 1);
             choiceTableData.GetComponent<DisplayedItem>().Item = reitem;
+            choiceTableData.GetComponent<DisplayedItem>().ItemCount = reitem.Count;
             //임의로
-            
+
             //gogo.GetComponent<SellWindow>().DisItemCheck(reitem.Code,-reitem.Count); //배치한 수 만큼 가진 수에서 제거
 
 
