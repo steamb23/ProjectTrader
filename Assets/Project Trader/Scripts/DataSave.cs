@@ -188,7 +188,7 @@ public class DataSave : MonoBehaviour
                     else //갯수가 0이면
                     {
                         PlayData.CurrentData.OwnedItems.RemoveAt(i);
-                       // UnityEngine.Debug.Log("제거!");
+                        // UnityEngine.Debug.Log("제거!");
                     }
                     initemtrue = true;
                 }
@@ -214,10 +214,10 @@ public class DataSave : MonoBehaviour
 
     public void DisplayItemListRemove(Item item)
     {
-        if (PlayData.CurrentData.DisplayedItems.Count <= 0|| PlayData.CurrentData.DisplayedItems==null)
+        if (PlayData.CurrentData.DisplayedItems.Count <= 0 || PlayData.CurrentData.DisplayedItems == null)
             return;
 
-        for(int i=0;i< PlayData.CurrentData.DisplayedItems.Count; i++)
+        for (int i = 0; i < PlayData.CurrentData.DisplayedItems.Count; i++)
         {
             Item listinItem = PlayData.CurrentData.DisplayedItems[i];
             if (listinItem.Code == item.Code)
@@ -239,7 +239,7 @@ public class DataSave : MonoBehaviour
     //해고
     public void EmployeeListRemove(Employee emp)
     {
-        for(int i = 0; i < PlayData.CurrentData.HiredEmployees.Count; i++)
+        for (int i = 0; i < PlayData.CurrentData.HiredEmployees.Count; i++)
         {
             Employee listemp = PlayData.CurrentData.HiredEmployees[i];
             if (listemp.Code == emp.Code)
@@ -252,5 +252,22 @@ public class DataSave : MonoBehaviour
     public void EmpAdd(Employee emp)
     {
         PlayData.CurrentData.HiredEmployees.Add(emp);
+    }
+
+    //아이템 유무를 확인(코드/개수)
+    public bool CheckGetItem(int cod,int count) 
+    {
+        if (PlayData.CurrentData.OwnedItems.Count <= 0)
+            return false;
+        for(int i=0;i< PlayData.CurrentData.OwnedItems.Count; i++)
+        {
+            if (PlayData.CurrentData.OwnedItems[i].Code == cod)
+            {
+                if (PlayData.CurrentData.OwnedItems[i].Count >= count)
+                    return true;
+                return false;
+            }
+        }
+        return false;
     }
 }
