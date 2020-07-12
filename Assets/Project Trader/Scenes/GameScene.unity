@@ -8060,7 +8060,7 @@ RectTransform:
   m_Children:
   - {fileID: 1081744741}
   m_Father: {fileID: 1451750561}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -8120,17 +8120,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 42310458}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &258776559
 MonoBehaviour:
@@ -12573,7 +12562,7 @@ RectTransform:
   m_Children:
   - {fileID: 2040788457}
   m_Father: {fileID: 1451750561}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -12632,7 +12621,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &412548168
 MonoBehaviour:
@@ -17590,7 +17579,8 @@ AudioSource:
   m_GameObject: {fileID: 580789775}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6906505673538507916, guid: 30704fe7980ca09419f2e4a794ea281f,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -29321,7 +29311,6 @@ RectTransform:
   - {fileID: 1639096096}
   - {fileID: 1526439811}
   - {fileID: 467557953}
-  - {fileID: 1558229544}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -41094,11 +41083,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 412548166}
   - {fileID: 258776557}
+  - {fileID: 412548166}
   - {fileID: 14162107}
   m_Father: {fileID: 1639096096}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -44002,8 +43991,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1821153648}
-  m_Father: {fileID: 1021351544}
-  m_RootOrder: 5
+  m_Father: {fileID: 1639096096}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -46304,6 +46293,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 489748927}
+  - {fileID: 1558229544}
   - {fileID: 1451750561}
   m_Father: {fileID: 1021351544}
   m_RootOrder: 2
@@ -46327,8 +46317,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   optionwindow: {fileID: 1484088423}
   employeewindow: {fileID: 1800615922}
-  questwindow: {fileID: 0}
+  questwindow: {fileID: 42310458}
   sound: {fileID: 580789775}
+  saveButton: {fileID: 258776558}
 --- !u!1 &1641410816
 GameObject:
   m_ObjectHideFlags: 0
