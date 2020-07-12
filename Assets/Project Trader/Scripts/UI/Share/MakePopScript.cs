@@ -121,14 +121,15 @@ public class MakePopScript : MonoBehaviour
     //이곳에 회수하는 코드, 아이템 count제거하는 코드 추가
     public void SetItem()
     {
-        
+
         sell = SellItemCheck(popItem.Code);
         if (sell)
         {
-            Item reitem = choiceTableData.GetComponent<DisplayedItem>().Item;
-            reitem.Code = popItem.Code;
-            reitem.Count = popItem.Count;
+            Item reitem=popItem;
+            reitem.Count = (int)sellNumSlider.value;
+
             GameObject gogo = GameObject.Find("selltimewindow");
+
             if (choiceTableData.GetComponent<DisplayedItem>().Item.Count > 0)
             {
                 Item pitem = choiceTableData.GetComponent<DisplayedItem>().Item;
@@ -142,16 +143,21 @@ public class MakePopScript : MonoBehaviour
             if (reitem!= previousItem)
                 // 아이템 배치 변경 퀘스트 트리거
                 ProjectTrader.QuestManager.Trigger(QuestData.GoalType.ChangeItem, 1);
+
+
+            FindObjectOfType<DataSave>().DisplayItemListRemove(choiceTableData.GetComponent<DisplayedItem>().Item);
             choiceTableData.GetComponent<DisplayedItem>().Item = reitem;
             choiceTableData.GetComponent<DisplayedItem>().ItemCount = reitem.Count;
-            //임의로
-
-            //gogo.GetComponent<SellWindow>().DisItemCheck(reitem.Code,-reitem.Count); //배치한 수 만큼 가진 수에서 제거
-
-
             //배치playdata에 추가 후 playdata에서 배치만큼 아이템 제거
             PlayData.CurrentData.DisplayedItems.Add(reitem); //배치에 추가
-            FindObjectOfType<DataSave>().DisplayItemListRemove(reitem);
+            
+
+
+            //배치한만큼 가진 수에서 빼기
+            reitem.Count = -(int)sellNumSlider.value;
+            FindObjectOfType<DataSave>().ItemListAdd(reitem);
+
+
             gogo.GetComponent<SellWindow>().CloseMakerWindow();
             Closepopup();
 

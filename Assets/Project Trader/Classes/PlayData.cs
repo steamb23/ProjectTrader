@@ -43,10 +43,10 @@ namespace ProjectTrader
         [SerializeField] int shopSize;
         [SerializeField] List<Item> ownedItems = new List<Item>();
         [SerializeField] List<Item> displayedItems = new List<Item>();
-        [SerializeField] List<Employee> hiredEmployees;
-        [SerializeField] Employee[] cashers;
-        [SerializeField] Employee[] cleaners;
-        [SerializeField] Employee[] crafter;
+        [SerializeField] List<Employee> hiredEmployees=new List<Employee>();
+        [SerializeField] Employee[] cashers = new Employee[3];
+        [SerializeField] Employee[] cleaners = new Employee[3];
+        [SerializeField] Employee[] crafter=new Employee[3];
         [SerializeField] int remainedRest = 10; // 기본값은 0
         [SerializeField] bool tutorial = false;
         // 가이드 퀘스트 달성 목록

@@ -54,6 +54,7 @@ public class MakePopup : MonoBehaviour
         makerSlider.minValue = 1;
     }
 
+    //이곳에서 알바생이 있는지 판별
     public void SetMakeItem()
     {
         GameObject go = GameObject.Find("makeroom");
