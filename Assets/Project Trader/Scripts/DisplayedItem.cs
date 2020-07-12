@@ -26,6 +26,13 @@ public class DisplayedItem : MonoBehaviour
         {
             item = value;
 
+            // null 이면 SpriteRenderer를 검색
+            if (spriteRenderer == null)
+            {
+                spriteRenderer = GetComponent<SpriteRenderer>();
+                if (spriteRenderer == null)
+                    spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            }
             spriteRenderer.sprite = ItemSpriteData.GetItemSprite(item.Code);
         }
     }
@@ -38,6 +45,13 @@ public class DisplayedItem : MonoBehaviour
             item.Count = value;
 
             // 스프라이트 표시 변경
+            // null 이면 SpriteRenderer를 검색
+            if (spriteRenderer == null)
+            {
+                spriteRenderer = GetComponent<SpriteRenderer>();
+                if (spriteRenderer == null)
+                    spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            }
             spriteRenderer.enabled = item.Count > 0;
         }
     }

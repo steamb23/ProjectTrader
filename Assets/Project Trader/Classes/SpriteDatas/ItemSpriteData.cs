@@ -35,14 +35,14 @@ namespace ProjectTrader.SpriteDatas
 
         public static Sprite GetItemSprite(int code)
         {
-            if (code == 0)
+            if (code == 0 || Instance.sprites.Length <= code)
                 return null;
             if (Instance == null)
             {
                 Debug.LogError("ItemSpriteData의 인스턴스를 불러올 수 없습니다.");
                 return null;
             }
-            return Instance.sprites[code - 1];
+            return Instance.sprites[code];
         }
     }
 }

@@ -31,7 +31,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: be5d8854a255bc34787421cf3a6cab3c, type: 3}
-    totalSpriteSurfaceArea: 7098610
+    totalSpriteSurfaceArea: 7102048
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -58,6 +58,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 8c4ff114a82c65447958f9e33ad99452, type: 3}
   - {fileID: 21300000, guid: ba3b644466c47964894dba08e09586bc, type: 3}
   - {fileID: 21300000, guid: 94d4e554d68d7794bb166c62d03eb672, type: 3}
+  - {fileID: 21300000, guid: 9da167a4c977ee44d923dbeeb70980dc, type: 3}
   - {fileID: 21300000, guid: 135958a4eb4a44f469508254dc6b2616, type: 3}
   - {fileID: 21300000, guid: 80d7f5b43fdce1d4994b5ce426120c47, type: 3}
   - {fileID: 21300000, guid: b39666c42f3e30641bc97bb0b50bf4af, type: 3}
@@ -124,6 +125,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: ee03f61f105733c4d8d45fe7dbedee40, type: 3}
   - {fileID: 21300000, guid: 38baf13f55d3b5b4f834f17da816d5e0, type: 3}
   - {fileID: 21300000, guid: 06be1b3ff13550f47bca13067ac146bc, type: 3}
+  - {fileID: 21300000, guid: df86ec4f637c8534fa1bb82e73024bc3, type: 3}
   - {fileID: 21300000, guid: 9d59745fd8291ed46aeeeb4b9c94ec42, type: 3}
   - {fileID: 21300000, guid: d9d7b65f191099f4d9407fbc57de8d1a, type: 3}
   - {fileID: 21300000, guid: a4bd0b6f389427940aa189483624a2ab, type: 3}
@@ -153,6 +155,7 @@ SpriteAtlas:
   - 2_2
   - Brown_bg
   - img_Blue_Music
+  - icon_x1
   - Btn_Blue
   - LightBrown_bg
   - Btn_Blue
@@ -219,6 +222,7 @@ SpriteAtlas:
   - "\uD0DD"
   - Green_bg
   - Btn_Green
+  - icon_x2
   - img_LightBrown
   - icon_Arrow
   - popup_bg_03png

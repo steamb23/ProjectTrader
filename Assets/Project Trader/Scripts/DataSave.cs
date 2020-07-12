@@ -38,6 +38,18 @@ public class DataSave : MonoBehaviour
             playerItem[i].Code = i + 1;
             playerItem[i].Count = 6;
         }
+
+
+        // 아이템 설정
+
+        // 진열된 아이템 오브젝트들 가져오기
+        var displayedItemComponents = FindObjectsOfType<DisplayedItem>();
+
+        for (int i = 0; i < PlayData.CurrentData.DisplayedItems.Count && i < displayedItemComponents.Length; i++)
+        {
+            var displayedItem = PlayData.CurrentData.DisplayedItems[i];
+            displayedItemComponents[i].Item = displayedItem;
+        }
     }
 
     void Update()
