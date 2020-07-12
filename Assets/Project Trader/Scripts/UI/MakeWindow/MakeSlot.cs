@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class MakeSlot : MonoBehaviour
 {
-    public int count;
     public int code;
     GameObject go;
     GameObject sound;
@@ -22,9 +21,8 @@ public class MakeSlot : MonoBehaviour
         
     }
 
-    public void SetSlotInData(int cunt, int cod)
+    public void SetSlotInData(int cod)
     {
-        count = cunt;
         code = cod;
         //UnityEngine.Debug.Log("세팅완료");
     }
@@ -32,7 +30,8 @@ public class MakeSlot : MonoBehaviour
     public void MakerslotPushButton()
     {
         FindObjectOfType<SoundControl>().ButtonSound2();
-        FindObjectOfType<MakerUI>().SetMakerBg(count, code);
+        FindObjectOfType<MakerUI>().SetMakerBg(code);
+
         //GameObject go = GameObject.Find("makeroom");
         //go.GetComponent<MakerUI>().SetMakerBg(count, code);
 

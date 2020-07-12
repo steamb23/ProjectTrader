@@ -225,12 +225,11 @@ public class MakePopScript : MonoBehaviour
     {
         popItem.Count = (int)shopslider.value;
         //이곳에서 돈 확인
-        if (PlayData.CurrentData.Money >= popItem.Count * popItemData.SellPrice)
+        if (PlayData.CurrentData.Money >= popItem.Count * popItemData.ShopPrice.max)
         {
 
-            PlayData.CurrentData.Money -= popItem.Count * popItemData.SellPrice;
+            PlayData.CurrentData.Money -= popItem.Count * popItemData.ShopPrice.max;
             FindObjectOfType<DataSave>().ItemListAdd(popItem);
-
             GameObject go = GameObject.Find("itemshop");
             go.GetComponent<ShopWindow>().SetbuyNum(popItem.Code, (int)shopslider.value);
             go.GetComponent<ShopTimer>().SetInfo((int)shopslider.value, popItem.Code);

@@ -61,14 +61,14 @@ public class ShopWindow : MonoBehaviour
     void SetShopslot()
     {
         //임시 지정, 판매슬롯은 변동이 없기 때문에 한번 생성후 고정,material개수만큼
-        shopItem = new GameObject[5];
-        shopItemInfo = new Item[5];
-        shopItemData = new ItemData[5];
-        buyNum = new int[5];
-        itemMaxnum = new int[5];
-        timeDelay = new float[5];
+        shopItem = new GameObject[55];
+        shopItemInfo = new Item[55];
+        shopItemData = new ItemData[55];
+        buyNum = new int[55];
+        itemMaxnum = new int[55];
+        timeDelay = new float[55];
 
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < 55; i++)
         {
             //임시 지정
             shopItemInfo[i].Code = i + 1;
@@ -97,8 +97,10 @@ public class ShopWindow : MonoBehaviour
         slottext[1].text = (itemMaxnum[i] - buyNum[i]).ToString() + "/" + itemMaxnum[i].ToString();
         slottext[2].text = "00:00";
         //slottext[3].text = shopItemData[i].ShopPrice.ToString();
-        int dd = UnityEngine.Random.Range(100, 500);
-        slottext[3].text = dd.ToString();
+        //int dd = UnityEngine.Random.Range(100, 500);
+        //slottext[3].text = dd.ToString();
+        //int dd = UnityEngine.Random.Range(shopItemData[i].ShopPrice.min, shopItemData[i].ShopPrice.max);
+        slottext[3].text = shopItemData[i].ShopPrice.max.ToString();
 
 
     }

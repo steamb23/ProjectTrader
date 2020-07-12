@@ -9,6 +9,7 @@ using ProjectTrader.SpriteDatas;
 using System.Linq;
 using System.Dynamic;
 using System.ComponentModel;
+using System.Runtime.InteropServices;
 
 //새로 사용할 공방 스크립트
 
@@ -26,6 +27,13 @@ public class MakerUI : MonoBehaviour
 
     [SerializeField]
     GameObject RockSlot; //잠금용 프리팹
+
+    [SerializeField]
+    TextMeshProUGUI slottime; //표기되는 개당 걸리는 시간
+
+    Item maitem;
+    ItemData matData;
+
     public GameObject slot;
     public GameObject materialSlot;
     public GameObject makerpopupwindow;
@@ -53,24 +61,23 @@ public class MakerUI : MonoBehaviour
     GameObject[] material;          //재료   > 데이터로 받아오기
 
     int materialNum;                //재료 갯수 > 슬롯에서 데이터로 받아오기
-    int[] maNeeds;
+    int[] maNeeds = new int[4];
 
     bool[] employeeInfo;  //임시로 알바생이 있다는 표시
-    bool[] working;       //슬롯이 일하고 있다면
+    public bool[] working;       //슬롯이 일하고 있다면
     int clickEmployee;  //알바선택창
 
     public Sprite b_on;
     public Sprite b_off;
     RectTransform[] rt;
 
-    bool canMake=false;
+    bool[] canMake=new bool[3];
 
     GameObject tim;
 
     void Start()
     {
         data = GameObject.Find("SaveData");
-        maNeeds = new int[4];
         con = GameObject.Find("RecipeContent");
         //초기화기준=총 아이템 개수만큼(csv)진행하고, 안쓰는 공간은 비워둔채로
         makeItemData = new ItemData[3];
@@ -154,30 +161,6 @@ public class MakerUI : MonoBehaviour
         MaterialSlotSetting();
     }
     
-    //스크롤에 슬롯 생성
-    //void SetRecipeScroll()
-    //{
-    //    FindObjectOfType<MakeEmpslot>().PushOneButton();
-    //    //PushOneButton();//첫번째 눌러놓기
-
-    //    recipe = new GameObject[6];
-    //    slotItem = new Item[5];
-    //    recipeData = new ItemData[5];
-
-    //    for (int i = 0; i < 4; i++)
-    //    {
-    //        recipe[i] = Instantiate(slot) as GameObject;
-    //        SetRecipeSlot(i);
-
-    //        //재료별로 갯수받아와서 가능한 갯수출력후
-    //        //setslotindata로 슬롯에 데이터 부여
-
-    //        recipe[i].transform.SetParent((GameObject.Find("RecipeContent")).transform);
-    //        recipe[i].transform.localScale = Vector3.one;
-    //        SlotImageSet(i);
-    //    }
-    //    INSlotScriptSet();
-    //}
 
     //슬롯 이미지 바꾸기
     void SlotImageSet(int i)
@@ -195,7 +178,7 @@ public class MakerUI : MonoBehaviour
         recipeData[i] = makeOkrecipe[i].GetData();
         slotText = recipe[i].GetComponentsInChildren<TextMeshProUGUI>();
         slotText[0].text = recipeData[i].Name;
-        slotText[1].text = recipeData[i].Tier.ToString();
+        slotText[1].text = recipeData[i].CraftCost.ToString();
         slotText[2].text = CheckMakeNum(recipeData[i]).ToString();
     }
 
@@ -210,28 +193,40 @@ public class MakerUI : MonoBehaviour
         GameObject[] slotsetting = GameObject.FindGameObjectsWithTag("Slot");
         if (slotsetting == null)
             UnityEngine.Debug.Log("슬롯없음");
-        //UnityEngine.Debug.Log("슬롯 갯수  :  "+slotsetting.Length.ToString());
         for (int i = 0; i < slotsetting.Length; i++)
         {
-            int k = UnityEngine.Random.Range(5, 10);
-            slotsetting[i].GetComponent<MakeSlot>().SetSlotInData(k,recipeData[i].Code);
+            slotsetting[i].GetComponent<MakeSlot>().SetSlotInData(recipeData[i].Code);
             if (i == 0)
                 slotsetting[i].GetComponent<MakeSlot>().MakerslotPushButton();
         }
     }
 
-    //슬롯에서 받아와 제작창 세팅
-    public void SetMakerBg(int cunt, int cod)
+    //슬롯에서 받아와 제작창 세팅 -> 시간도 여기서 출력
+    public void SetMakerBg(int cod)
     {
         int i;
-        
+        float minute;
+        float second;
+
         if (materialNum == null)
             return;
         materialSample.Code = cod;
         disRecipeData= materialSample.GetData();
         maNeeds = disRecipeData.MaterialNeeds;
 
-        for(i = 0; i < maNeeds.Length; i++)
+
+        if (disRecipeData.CraftDelay != null)
+        {
+            minute = (int)(disRecipeData.CraftDelay / 60);
+            second = (disRecipeData.CraftDelay - (60 * minute));
+            slottime.text = string.Format("{0:00}", minute) + ":" + string.Format("{0:00}", second);
+        }
+        else
+        {
+            slottime.text = "00:00";
+        }
+
+        for (i = 0; i < maNeeds.Length; i++)
         {
             UnityEngine.Debug.Log(maNeeds[i].ToString());
             if (maNeeds[i] == 0)
@@ -248,40 +243,60 @@ public class MakerUI : MonoBehaviour
     void MaterialSlotSetting()
     {
         int[] mtcod = new int[4];
+        int[] mtcount = new int[4];
+        TextMeshProUGUI mttext;
         mtcod=disRecipeData.MaterialCodes;
-        //ItemData matData;
+        mtcount = disRecipeData.MaterialNeeds;
         //material의 이미지를 받아서 변경
         Image[] mimg;
+
         for(int i = 0; i < materialNum; i++)
         {
-            mimg=material[i].GetComponentsInChildren<Image>();
-            //matData.Code = mtcod[i];
-            mimg[1].sprite = ItemSpriteData.GetItemSprite(mtcod[i]);
+            if (mtcod[i] != 0)
+            {
+
+                maitem.Code = mtcod[i];
+                matData = maitem.GetData();
+
+                mimg = material[i].GetComponentsInChildren<Image>();
+                mttext= material[i].GetComponentInChildren<TextMeshProUGUI>();
+                //matData.Code = mtcod[i];
+                mimg[1].sprite = ItemSpriteData.GetItemSprite(mtcod[i]);
+                mttext.text = "x" + mtcount[i].ToString();
+
+            }
         }
     }
     
     //만들 아이템코드와 갯수 설정 하고 팝업으로
-    void MakeItemInfo(int cod, int count)
+    void MakeItemInfo(int cod)
     {
         clickEmployee=FindObjectOfType<MakeEmpslot>().clickEmployee;
-        makeItem[clickEmployee-1].Code = cod;
-        makeItem[clickEmployee-1].Count = count;
-        makeItemData[clickEmployee-1] = makeItem[clickEmployee-1].GetData();
-        if(working[clickEmployee-1]==false && employeeInfo[clickEmployee-1] == true)
+        ItemData makeitem = materialSample.GetData();
+        
+        if (working[clickEmployee-1]==false && PlayData.CurrentData.Crafter[clickEmployee - 1].IsWork==true&& CheckMakeNum(makeitem)>0)
         {
-            canMake = true;
+            canMake[clickEmployee-1] = true;
+            working[clickEmployee - 1] = true;
+        }
+        else
+        {
+            FindObjectOfType<TextUiControl>().CreativeTextBox(0, 0, 50, "아이템을 제작할 수 없습니다.", 2);
         }
     }
 
-    //팝업만들기
+
+    //팝업만들기-> 제작 가능한지 판별 코드 추가
     public void CreateMakePopup()
     {
-        MakeItemInfo(materialSample.Code, 5);
-        if (canMake == true)
+        MakeItemInfo(materialSample.Code);
+        if (canMake[clickEmployee - 1] == true)
         {
+            canMake[clickEmployee - 1] = false;
             makerpopupwindow.SetActive(true);
             //makerpopupwindow.GetComponent<MakePopScript>().OpenMakePopup();
-            makerpopupwindow.GetComponent<MakePopup>().SetMakerPopupData(5, materialSample.Code, clickEmployee);//갯수코드슬롯
+            ItemData makeitem = materialSample.GetData();
+            makerpopupwindow.GetComponent<MakePopup>().SetMakerPopupData(CheckMakeNum(makeitem), materialSample.Code, clickEmployee);//갯수코드슬롯
         }
     }
 
@@ -289,49 +304,39 @@ public class MakerUI : MonoBehaviour
     public void OpenMakeRoom()
     {
         makewindow.SetActive(true);
-        CheckSlotRock();
-        SetrecipeSlot2();
+        CreateSlot();
         //SetRecipeScroll();
     }
 
     public void CloseMakeRoom()
     {
-        if (makeOkrecipe.Count > 0)
-        {
-            for (int i = 0; i < recipe.Length; i++)
-            {
-                Destroy(recipe[i]);
-            }
-        }
-        if (makeNorecipe.Count > 0)
-        {
-            for (int i = 0; i < rockslot.Length; i++)
-            {
-                Destroy(rockslot[i]);
-            }
-        }
+        DestroySlot();
             makewindow.SetActive(false);
     }
 
 
     //제작시 count,money-하는 코드 (가진 아이템 playdata에서 제거-후처리)
-    public void CheckCost()
+    public void CheckCost(ItemData itemdata,int cost)
     {
         int[] mt = new int[4];
         int[] ct = new int[4];
-        //bool[] ok = new bool[4];
+
         mt = disRecipeData.MaterialCodes;
         ct = disRecipeData.MaterialNeeds;
 
         for (int i = 0; i < materialNum; i++)
         {
+            if (mt[i] != 0)
+            {
+                materialItem.Code = mt[i];
+                materialItem.Count = -ct[i]*cost;
 
-            materialItem.Code = mt[i];
-            materialItem.Count = -ct[i];
-
-            //FindObjectOfType<DataSave>().ItemListAdd(materialItem); //임시로 가려두기
+                FindObjectOfType<DataSave>().ItemListAdd(materialItem); //임시로 가려두기
+            }
         }
-        //data.GetComponent<DataSave>().UseMoney(-(disRecipeData.CraftCost)); //교체
+
+        PlayData.CurrentData.Money -= itemdata.CraftCost * cost;
+
     }
 
     //----------------------------------------------------------------------------------------
@@ -350,7 +355,7 @@ public class MakerUI : MonoBehaviour
         int[] ct = new int[4];
         bool set;
 
-        for (int i = 0; i < 5; i++)//임시->데이터 들어오면 레시피부터 시작해서~ 개수?로 변경
+        for (int i = 55; i < 69; i++)//임시->데이터 들어오면 레시피부터 시작해서~ 개수?로 변경
         {
 
             checkItem.Code = i + 1;
@@ -435,7 +440,8 @@ public class MakerUI : MonoBehaviour
     //만들어질때마다 호출->가진 아이템playdata에 저장
     public void MakeSuccess(Item makeItem)
     {
-
+        UnityEngine.Debug.Log("제작완료됨! : " + makeItem.Code.ToString());
+        makeItem.Count = 1;
         FindObjectOfType<DataSave>().ItemListAdd(makeItem);
     }
 
@@ -487,5 +493,29 @@ public class MakerUI : MonoBehaviour
         }
 
         return result;
+    }
+
+    public void DestroySlot()
+    {
+        if (makeOkrecipe.Count > 0)
+        {
+            for (int i = 0; i < recipe.Length; i++)
+            {
+                Destroy(recipe[i]);
+            }
+        }
+        if (makeNorecipe.Count > 0)
+        {
+            for (int i = 0; i < rockslot.Length; i++)
+            {
+                Destroy(rockslot[i]);
+            }
+        }
+    }
+
+    public void CreateSlot()
+    {
+        CheckSlotRock();
+        SetrecipeSlot2();
     }
 }

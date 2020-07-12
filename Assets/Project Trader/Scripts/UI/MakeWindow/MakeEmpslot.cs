@@ -103,10 +103,12 @@ public class MakeEmpslot : MonoBehaviour
             canvasGroup.alpha = 1.0f;
             makingItem = FindObjectOfType<MakerTimer>().making[clickEmployee - 1];
             makeItemsprite.sprite = ItemSpriteData.GetItemSprite(makingItem.Code);
+
         }
         else
         {
             canvasGroup.alpha = 0f;
+            FindObjectOfType<MakerUI>().working[clickEmployee - 1] = false;
         }
     }
 }

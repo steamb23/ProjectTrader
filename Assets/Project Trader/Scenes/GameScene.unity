@@ -22784,11 +22784,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RockSlot: {fileID: 449151321941001780, guid: 082b3e4f4a1142d4bb03f9643c3455bb, type: 3}
+  slottime: {fileID: 1772695604}
   slot: {fileID: 5382992547373226077, guid: a8033c5c0d61ae844a916dbc6df49737, type: 3}
   materialSlot: {fileID: 7188806557384644756, guid: 0904e7eb1f27af54786b2a58bc21cea3,
     type: 3}
   makerpopupwindow: {fileID: 1054082076}
   makewindow: {fileID: 1846140700}
+  working: 
   b_on: {fileID: 21300000, guid: ff6bbe160ebc9d74e8139f32e1a057df, type: 3}
   b_off: {fileID: 21300000, guid: 9d59745fd8291ed46aeeeb4b9c94ec42, type: 3}
 --- !u!114 &767421433 stripped
@@ -65360,6 +65362,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 8107031661578775915, guid: 0904e7eb1f27af54786b2a58bc21cea3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0904e7eb1f27af54786b2a58bc21cea3, type: 3}

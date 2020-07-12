@@ -60,6 +60,8 @@ public class MakePopup : MonoBehaviour
         GameObject go = GameObject.Find("makeroom");
         go.GetComponent<MakerTimer>().StartTimer(employeeslot - 1, popItem.Code, (int)makerSlider.value);//버튼,코드,갯수
         FindObjectOfType<MakeEmpslot>().PrintMakeItemSprite();
+        FindObjectOfType<MakerUI>().CheckCost(popItemData, (int)makerSlider.value);
+        FindObjectOfType<MakerUI>().CloseMakeRoom();
         gameObject.SetActive(false);
     }
 }
