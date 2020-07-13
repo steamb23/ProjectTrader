@@ -119,10 +119,7 @@ public class VisitorAi : MonoBehaviour
                     color.a = 1;
                     break; // 루프 탈출
                 }
-                else
-                {
-                    spriteRenderer.color = color;
-                }
+                spriteRenderer.color = color;
                 yield return null;
             }
         }
@@ -359,7 +356,8 @@ public class VisitorAi : MonoBehaviour
                  {
                      floatingTimer.FadeoutWithDestory();
 
-                     if (WishItems.Count > 0) { 
+                     if (WishItems.Count > 0)
+                     {
                          PlayData.CurrentData.Money += WishItems[0].GetData().SellPrice;
                          PlayData.CurrentData.DailyStatisticsData.SellMoney += WishItems[0].GetData().SellPrice;
                      }
@@ -388,7 +386,7 @@ public class VisitorAi : MonoBehaviour
                 price += item.GetData().SellPrice * item.Count;
                 FindObjectOfType<Uiup>().Upmoney(price);
 
-                PlayData.CurrentData.Awareness += (int)item.GetData().Awareness-1; //아이템 코드에 따라 다르게
+                PlayData.CurrentData.Awareness += (int)item.GetData().Awareness - 1; //아이템 코드에 따라 다르게
                 FindObjectOfType<Uiup>().Upawareness((int)item.GetData().Awareness);
             }
 
