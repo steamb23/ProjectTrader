@@ -116,6 +116,17 @@ public class MakerUI : MonoBehaviour
         standardImage[1].sprite = disRecipeData.GetSprite();
         switch (materialNum)
         {
+            case 1:
+                material = new GameObject[1];
+                for (int i = 0; i < 1; i++)
+                {
+                    material[i] = Instantiate(materialSlot) as GameObject;
+                    material[i].transform.SetParent((GameObject.Find("MakerRoom")).transform);
+                    material[i].transform.localScale = Vector3.one;
+                    RectTransform tbPos = material[i].GetComponent<RectTransform>();
+                    tbPos.anchoredPosition = new Vector3(standard.anchoredPosition.x - (210 + 70), standard.anchoredPosition.y);
+                }
+                break;
             case 2:
                 material = new GameObject[2];
                 for (int i = 0; i < 2; i++)
@@ -508,9 +519,11 @@ public class MakerUI : MonoBehaviour
         }
         if (makeNorecipe.Count > 0)
         {
+            if (rockslot!= null) { 
             for (int i = 0; i < rockslot.Length; i++)
             {
                 Destroy(rockslot[i]);
+            }
             }
         }
     }
