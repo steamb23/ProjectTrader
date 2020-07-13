@@ -224,10 +224,15 @@ namespace ProjectTrader
         /// </summary>
         public List<QuestState> GuideQuestStates
         {
-            get => this.guideQuestStates;
+            get
+            {
+                //if (!isSynced) SyncData();
+                return this.guideQuestStates;
+            }
+
             set
             {
-                if (!isSynced) SyncData();
+                //if (!isSynced) SyncData();
                 this.guideQuestStates = value;
             }
         }

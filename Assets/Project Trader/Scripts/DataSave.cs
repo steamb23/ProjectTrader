@@ -75,6 +75,7 @@ public class DataSave : MonoBehaviour
         if (loadData != null && loadData.IsInitialized)
         {
             PlayData.CurrentData = loadData;
+            PlayData.CurrentData.SyncData();
             Debug.Log("로드 성공");
         }
         else
