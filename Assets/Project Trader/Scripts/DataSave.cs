@@ -217,12 +217,6 @@ public class DataSave : MonoBehaviour
             PlayData.CurrentData.OwnedItems.Add(initem);
         }
 
-        ////테스트용
-        //for(int i = 0; i < PlayData.CurrentData.OwnedItems.Count; i++)
-        //{
-        //    listItem = PlayData.CurrentData.OwnedItems[i];
-        //    //UnityEngine.Debug.Log("들어간 아이템 코드: "+listItem.Code.ToString()+"들어간 아이템 수량 "+listItem.Count.ToString());
-        //}
     }
 
     public void DisplayItemListRemove(Item item)
@@ -238,15 +232,7 @@ public class DataSave : MonoBehaviour
                 PlayData.CurrentData.DisplayedItems.RemoveAt(i);
             }
         }
-        //테스트용
-        //if (PlayData.CurrentData.DisplayedItems.Count > 0)
-        //{
-        //    for (int i = 0; i < PlayData.CurrentData.DisplayedItems.Count; i++)
-        //    {
-        //        Item listItem = PlayData.CurrentData.DisplayedItems[i];
-        //        UnityEngine.Debug.Log("배치 아이템 코드: " + listItem.Code.ToString() + "배치된 아이템 수량 " + listItem.Count.ToString());
-        //    }
-        //}
+
     }
 
     //해고
@@ -282,5 +268,44 @@ public class DataSave : MonoBehaviour
             }
         }
         return false;
+    }
+
+    //같은 코드가 있으면 제거
+    public void DisplayItembuy(Item disItem,int count)
+    {
+        Item listItem;
+        if (PlayData.CurrentData.DisplayedItems.Count > 0)
+        {
+            for (int i = 0; i < PlayData.CurrentData.DisplayedItems.Count; i++)
+            {
+                if (PlayData.CurrentData.DisplayedItems[i].Code == disItem.Code)
+                {
+                    listItem = PlayData.CurrentData.DisplayedItems[i];
+                    disItem.Count += -count;
+                    if (disItem.Count > 0) //개수가 0이 넘으면
+                    {
+                        PlayData.CurrentData.DisplayedItems[i] = disItem;
+                    }
+                    else //갯수가 0이면
+                    {
+                        PlayData.CurrentData.DisplayedItems.RemoveAt(i);
+                        // UnityEngine.Debug.Log("제거!");
+                        //디스플레이 아이템에 개수 전달
+                    }
+                }
+
+            }
+        }
+
+        GameObject[] table = GameObject.FindGameObjectsWithTag("Item");
+        for(int i = 0; i < table.Length; i++)
+        {
+            Item tableItem = table[i].GetComponent<DisplayedItem>().Item;
+            if (disItem.Code == tableItem.Code)
+            {
+                table[i].GetComponent<DisplayedItem>().ItemCount -= count;
+                UnityEngine.Debug.Log("구매함!");
+            }
+        }
     }
 }

@@ -251,13 +251,13 @@ public class VisitorAi : MonoBehaviour
                     Code = displayedItem.Item.Code,
                     Count = 1
                 });
+                
                 state = AiState.FindCounter;
             }
             else
             {
                 state = AiState.Discard;
             }
-
             // 아이템 점유 해제
             pathNodeManager.ItemOccupancyList[targetItemNodeIndex] = null;
         }
@@ -266,6 +266,7 @@ public class VisitorAi : MonoBehaviour
     Coroutine findCounterCoroutine;
     void FindCounter()
     {
+        FindObjectOfType<DataSave>().DisplayItembuy(WishItems[0], WishItems[0].Count);
         findCounterCoroutine = StartCoroutine(FindCounterCoroutine());
         state = AiState.ToCounter;
     }

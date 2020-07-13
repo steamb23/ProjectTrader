@@ -145,7 +145,8 @@ public class MakePopScript : MonoBehaviour
                 ProjectTrader.QuestManager.Trigger(QuestData.GoalType.ChangeItem, 1);
 
 
-            FindObjectOfType<DataSave>().DisplayItemListRemove(choiceTableData.GetComponent<DisplayedItem>().Item);
+            FindObjectOfType<DataSave>().DisplayItemListRemove(choiceTableData.GetComponent<DisplayedItem>().Item);//제거
+
             choiceTableData.GetComponent<DisplayedItem>().Item = reitem;
             choiceTableData.GetComponent<DisplayedItem>().ItemCount = reitem.Count;
             //배치playdata에 추가 후 playdata에서 배치만큼 아이템 제거
