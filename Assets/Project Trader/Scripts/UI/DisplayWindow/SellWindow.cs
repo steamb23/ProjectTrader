@@ -17,6 +17,7 @@ public class SellWindow : MonoBehaviour
     ItemData[] slotItemData;
     //배치할 아이템
     Item display;
+    ItemData displaydata;
 
     public GameObject itemSlot;
     public GameObject arrow;
@@ -73,6 +74,39 @@ public class SellWindow : MonoBehaviour
     void SetItemslot()
     {
         //savedata.GetComponent<DataSave>().SetItemList();
+        //if (PlayData.CurrentData.OwnedItems.Count > 0)
+        //{
+        //    int dataitemnum = PlayData.CurrentData.OwnedItems.Count;
+        //    itemnum = new GameObject[dataitemnum];
+        //    //slotItem = new Item[5];
+        //    slotItemData = new ItemData[dataitemnum];
+
+        //    //아이템 가진 수만큼
+        //    for (int i = 0; i < dataitemnum; i++)
+        //    {
+        //        itemnum[i] = Instantiate(itemSlot) as GameObject;
+
+        //        itemnum[i].transform.SetParent((GameObject.Find("ItemContent")).transform);
+        //        itemnum[i].transform.localScale = Vector3.one;
+        //        SetItemInfo(i);
+
+
+        //    }
+        //    setslot = true;
+        //    if (itemnum != null)
+        //        itemnum[0].GetComponent<SlotIn>().PushButton();
+        //}
+        AllItemClick();
+    }
+
+    public void AllItemClick()
+    {
+        if (itemnum != null)
+        {
+            for (int i = 0; i < itemnum.Length; i++)
+                Destroy(itemnum[i]);
+        }
+
         if (PlayData.CurrentData.OwnedItems.Count > 0)
         {
             int dataitemnum = PlayData.CurrentData.OwnedItems.Count;
@@ -96,6 +130,65 @@ public class SellWindow : MonoBehaviour
                 itemnum[0].GetComponent<SlotIn>().PushButton();
         }
     }
+
+    public void MaterialClick()
+    {
+        if (itemnum != null)
+        {
+            for (int i = 0; i < itemnum.Length; i++)
+                Destroy(itemnum[i]);
+        }
+
+        if (PlayData.CurrentData.OwnedItems.Count > 0)
+        {
+            for(int i=0;i< PlayData.CurrentData.OwnedItems.Count; i++)
+            {
+                displaydata = PlayData.CurrentData.OwnedItems[i].GetData();
+
+                if ((int)displaydata.Type == 1)
+                {
+                    itemnum[i] = Instantiate(itemSlot) as GameObject;
+
+                    itemnum[i].transform.SetParent((GameObject.Find("ItemContent")).transform);
+                    itemnum[i].transform.localScale = Vector3.one;
+                    SetItemInfo(i);
+                }
+            }
+            setslot = true;
+            if (itemnum != null)
+                itemnum[0].GetComponent<SlotIn>().PushButton();
+        }
+    }
+
+    public void CraftItemClick()
+    {
+        if (itemnum != null)
+        {
+            for (int i = 0; i < itemnum.Length; i++)
+                Destroy(itemnum[i]);
+        }
+
+        if (PlayData.CurrentData.OwnedItems.Count > 0)
+        {
+            for (int i = 0; i < PlayData.CurrentData.OwnedItems.Count; i++)
+            {
+                displaydata = PlayData.CurrentData.OwnedItems[i].GetData();
+                if ((int)displaydata.Type == 2)
+                {
+                    itemnum[i] = Instantiate(itemSlot) as GameObject;
+
+                    itemnum[i].transform.SetParent((GameObject.Find("ItemContent")).transform);
+                    itemnum[i].transform.localScale = Vector3.one;
+                    SetItemInfo(i);
+                }
+            }
+            setslot = true;
+            if (itemnum != null)
+                itemnum[0].GetComponent<SlotIn>().PushButton();
+        }
+
+    }
+
 
     //슬롯생성할때 멤버 바꾸기> 가지고있는 아이템 표시(재료 제외>일정 코드 이상부터 count가 1이상만 표시)
     void SetItemInfo(int i)

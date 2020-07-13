@@ -31,11 +31,12 @@ public class Emptutorial : MonoBehaviour
             case 3:
                 employeewindow.GetComponent<EmployeeUiManager>().OpenHireWindow();
                 break;
-            case 5:
+            case 5: 
                 hirebutton.GetComponent<EmployeeHireWindow_HireButton>().Click();
                 break;
             case 6:
                 employeewindow.GetComponent<EmployeeUiManager>().OpenAssignWindow();
+                FindObjectOfType<EmployeeAssignButton>().PushCrafterButton();
                 break;
             case 7:
                 employeewindow.GetComponent<EmployeeAssignWindow>().SlotCasherSet();

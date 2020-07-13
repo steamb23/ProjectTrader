@@ -21,14 +21,14 @@ public class ShopTimer : MonoBehaviour
         shopwindow = GameObject.Find("itemshop");
 
         //임시 초기화-material개수만큼으로 변경
-        inTimer = new bool[5];
-        itemDelay = new float[5];
-        itembuyNum = new int[5];
+        inTimer = new bool[55];
+        itemDelay = new float[55];
+        itembuyNum = new int[55];
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 55; i++)
             itembuyNum[i] = 0;
 
-        Maxvalue = new int[5];
+        Maxvalue = new int[55];
 
     }
 

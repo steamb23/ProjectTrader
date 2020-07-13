@@ -13,6 +13,7 @@ public class EmployeeHireWindow_HireButton : MonoBehaviour
     [SerializeField]
     GameObject empcatch;
     Employee emp;
+    EmployeeData empdata;
     private void Start()
     {
         //empcatch = GameObject.Find("EmployeeUICanvas");
@@ -39,15 +40,27 @@ public class EmployeeHireWindow_HireButton : MonoBehaviour
             emp.State = candiateInfo.State;
             emp.Age = candiateInfo.Age;
             emp.IsWork = false;
-            FindObjectOfType<DataSave>().EmpAdd(emp);
+            empdata = emp.GetData();
 
+            if (PlayData.CurrentData.Money - empdata.Cost >= 0)
+            {
+                PlayData.CurrentData.Money -= empdata.Cost;
+                FindObjectOfType<DataSave>().EmpAdd(emp);
+
+                ProjectTrader.QuestManager.Trigger(QuestData.GoalType.HireEmployee, 1);
+
+                //savedata.GetComponent<DataSave>().FHireEmp(emp,1); //필요없음
+                //empcatch.GetComponent<EmployeeDataCatch>().SetEmpData(emp);
+                candiateInfo.Disable();
+                employeeCount.Count++;
+
+            }
+            else
+            {
+                FindObjectOfType<TextUiControl>().CreativeTextBox(0, 0, 50, "알바생을 고용할 수 없습니다.", 2);
+            }
             // 퀘스트 트리거
-            ProjectTrader.QuestManager.Trigger(QuestData.GoalType.HireEmployee, 1);
 
-            //savedata.GetComponent<DataSave>().FHireEmp(emp,1); //필요없음
-            //empcatch.GetComponent<EmployeeDataCatch>().SetEmpData(emp);
-            candiateInfo.Disable();
-            employeeCount.Count++;
 
         }
     }

@@ -46,7 +46,7 @@ public class EmployeeSlot :EmployeeInfo
         emp = emp2;
         empData = emp.GetData();
         name.text = empData.Name;
-        state.text = emp2.State;
+        state.text = "일당: "+ empData.Cost.ToString();
     }
 
     //playdata에 추가(고용된 곳->버튼 값을 받아와서 추가

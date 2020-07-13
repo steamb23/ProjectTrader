@@ -379,12 +379,17 @@ public class VisitorAi : MonoBehaviour
             // 가격 처리
             int price = 0;
             FindObjectOfType<SoundControl>().PaySound();
-            PlayData.CurrentData.Awareness += 1;
-            FindObjectOfType<Uiup>().Upawareness(1);
+
+            //PlayData.CurrentData.Awareness += 1; //아이템 코드에 따라 다르게
+            //FindObjectOfType<Uiup>().Upawareness(1);
+
             foreach (var item in WishItems)
             {
                 price += item.GetData().SellPrice * item.Count;
                 FindObjectOfType<Uiup>().Upmoney(price);
+
+                PlayData.CurrentData.Awareness += (int)item.GetData().Awareness-1; //아이템 코드에 따라 다르게
+                FindObjectOfType<Uiup>().Upawareness((int)item.GetData().Awareness);
             }
 
             // 아이템 판매 퀘스트 트리거

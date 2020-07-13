@@ -7,6 +7,7 @@ using ProjectTrader.SpriteDatas;
 using System;
 using TMPro;
 using System.Threading;
+using System.Linq;
 
 public class MakerTimer : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class MakerTimer : MonoBehaviour
         set;
     }
     public TextMeshProUGUI timePrint;
-
+    Item stopitem;
     GameObject makeui;
     float[] timer;
     int makeTableNum;//들어오는 제작창
@@ -27,7 +28,7 @@ public class MakerTimer : MonoBehaviour
         get;
         set;
     }//타이머가 굴러가야 하는지
-    bool[] timerstop= new bool[3];
+    bool[] timerstop = new bool[3];
     void Start()
     {
         makeui = GameObject.Find("makeroom");
@@ -44,28 +45,25 @@ public class MakerTimer : MonoBehaviour
     void Update()
     {
         PrintTime(printtype);
-        
-    }
 
-    public void StopTimer()
-    {
-        int slotcod= FindObjectOfType<MakeEmpslot>().clickEmployee-1;
-        UnityEngine.Debug.Log("타이머 중단 호출 / 슬롯 코드 : "+slotcod.ToString());
-        timerstop[slotcod] = true;
     }
 
     //타이머를 세팅하고 돌림
-    public void StartTimer(int makertable,int cod,int cout)
+    public void StartTimer(int makertable, int cod, int cout)
     {
-        if (inTimer[makertable] != true || timerstop[makertable]==true)
+        if (inTimer[makertable] != true || timerstop[makertable] == true)
         {
             make[makertable].Code = cod;
             make[makertable].Count = cout;
 
             making[makertable] = make[makertable].GetData();
             makeTableNum = makertable;
-            //timer[makeTableNum] = making[makeTableNum].CraftDelay*cout;
-            timer[makeTableNum] = 10;
+
+            if (making[makertable].CraftDelay > 0)
+                timer[makeTableNum] = making[makertable].CraftDelay;
+            else
+                timer[makeTableNum] = 10;
+
             inTimer[makertable] = true;
             timerstop[makeTableNum] = false;
 
@@ -77,11 +75,11 @@ public class MakerTimer : MonoBehaviour
             UnityEngine.Debug.Log("이미 작동중입니다");
     }
 
-    IEnumerator Timer(bool inTimer,int i)
+    IEnumerator Timer(bool inTimer, int i)
     {
-        if (inTimer == true&& timerstop[i] ==false)
+        if (inTimer == true && timerstop[i] == false)
         {
-            UnityEngine.Debug.Log((i+1).ToString()+"번 : " + timer[i].ToString());
+            UnityEngine.Debug.Log((i + 1).ToString() + "번 : " + timer[i].ToString());
             timer[i] -= 1f;
             if (timer[i] <= 0f)
             {
@@ -99,7 +97,7 @@ public class MakerTimer : MonoBehaviour
 
     public void PrintTime(int slotcod)
     {
-        if (inTimer[slotcod] ==true)
+        if (inTimer[slotcod] == true)
         {
             float minute;
             float second;
@@ -107,7 +105,6 @@ public class MakerTimer : MonoBehaviour
             minute = (int)(timer[slotcod] / 60);
             second = (timer[slotcod] - (60 * minute));
             timePrint.text = string.Format("{0:00}", minute) + ":" + string.Format("{0:00}", second);
-
         }
         else
             timePrint.text = "00:00";
@@ -124,19 +121,58 @@ public class MakerTimer : MonoBehaviour
     void MakeItem(int i)
     {
         make[i].Count -= 1;
-        UnityEngine.Debug.Log((i+1).ToString()+"번 count="+(make[i].Count).ToString());
+        UnityEngine.Debug.Log((i + 1).ToString() + "번 count=" + (make[i].Count).ToString());
         if (make[i].Count > 0)
         {
-            timer[i] = 10; //
-            StartCoroutine(Timer(inTimer[i],i));
+            FindObjectOfType<MakerUI>().MakeSuccess(make[i]);
+            if (making[i].CraftDelay > 0)
+                timer[i] = making[i].CraftDelay;
+            else
+                timer[i] = 10;
+            StartCoroutine(Timer(inTimer[i], i));
         }
         else
         {
             inTimer[i] = false;
-            UnityEngine.Debug.Log((i+1).ToString()+"번 종료");
-            makeui.GetComponent<MakerUI>().MakeSuccess(make[i]);
-            FindObjectOfType<MakeEmpslot>().PrintMakeItemSprite();
+            UnityEngine.Debug.Log((i + 1).ToString() + "번 종료");
+            FindObjectOfType<MakerUI>().MakeSuccess(make[i]);
+            var makeEmpSlot = FindObjectOfType<MakeEmpslot>();
+            if (makeEmpSlot != null)
+                makeEmpSlot.PrintMakeItemSprite();
             //아이템개수+1
+        }
+    }
+
+    public void StopTimer()
+    {
+        int slotcod = FindObjectOfType<MakeEmpslot>().clickEmployee - 1;
+        UnityEngine.Debug.Log("타이머 중단 호출 / 슬롯 코드 : " + slotcod.ToString());
+        timerstop[slotcod] = true;
+        FindObjectOfType<MakerUI>().working[slotcod] = false;
+        ReturnMaterial(slotcod);
+    }
+
+    //제작 중단 시 남은 count만큼 재료 회수
+    public void ReturnMaterial(int slotcod)
+    {
+        if (make[slotcod].Count > 0)
+        {
+            //makecount 에서 남은 만큼 코드로 재료 불러와서 가진 아이템에 추가
+            int[] mtcod = new int[4];
+            int[] mtcount = new int[4];
+
+            mtcod = making[slotcod].MaterialCodes;
+            mtcount = making[slotcod].MaterialNeeds;
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (mtcod[i] != 0)
+                {
+                    stopitem.Code = mtcod[i];
+                    stopitem.Count = mtcount[i] * make[slotcod].Count;
+                    FindObjectOfType<DataSave>().ItemListAdd(stopitem);
+                }
+            }
         }
     }
 }
