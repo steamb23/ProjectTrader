@@ -160,6 +160,12 @@ public class JudgeManager : MonoBehaviour
 
             if (PlayData.CurrentData.Awareness > goal)
             {
+                // 퀘스트 트리거
+                if (PlayData.CurrentData.Level == 0)
+                    QuestManager.Trigger(ProjectTrader.Datas.QuestData.GoalType.BronzeToSilver, 1);
+                else if (PlayData.CurrentData.Level == 1)
+                    QuestManager.Trigger(ProjectTrader.Datas.QuestData.GoalType.SilverToGold, 1);
+
                 // 상금 지급
                 PlayData.CurrentData.Money += successReward;
                 // 등급 업 처리

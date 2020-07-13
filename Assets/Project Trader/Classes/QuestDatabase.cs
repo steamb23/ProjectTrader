@@ -39,8 +39,7 @@ namespace ProjectTrader.Datas
                 Description  = "모험가 길드에서 무화초를 10개 구입하자",
                 Summary = "무화초 10개 구입",
                 GoalTypeData = QuestData.GoalType.BuyItem,
-                //GoalAmount = 3,
-                GoalAmount = 0,
+                GoalAmount = 3,
                 RewardTypeData = QuestData.RewardType.Gold,
                 RewardAmount = 100
             }
@@ -67,8 +66,7 @@ namespace ProjectTrader.Datas
                 Description="아이템 10개 이상 구입 하기",
                 Summary = "아이템 10개 이상 구매",
                 GoalTypeData = QuestData.GoalType.BuyItem,
-                //GoalAmount = 10,
-                GoalAmount = 0,
+                GoalAmount = 10,
                 RewardTypeData = QuestData.RewardType.Gold,
                 RewardAmount = 100
             },
@@ -80,8 +78,7 @@ namespace ProjectTrader.Datas
                 Description="아이템 5개 이상 만들기",
                 Summary = "아이템 5개 이상 제작",
                 GoalTypeData = QuestData.GoalType.CraftingItem,
-                //GoalAmount = 5,
-                GoalAmount = 0,
+                GoalAmount = 5,
                 RewardTypeData = QuestData.RewardType.Gold,
                 RewardAmount = 100
             },
