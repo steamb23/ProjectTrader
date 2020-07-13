@@ -171,6 +171,8 @@ public class JudgeManager : MonoBehaviour
                 // 등급 업 처리
                 PlayData.CurrentData.Level += 1;
                 resultWindow.ShowSucess(successReward);
+
+                FindObjectOfType<TextUiControl>().CreativeTextBox(0, 0, 300, "업그레이드는 영업이\n끝난후 진행됩니다.", 4);
             }
             else
             {
