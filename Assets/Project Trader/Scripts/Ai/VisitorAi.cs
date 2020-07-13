@@ -359,8 +359,10 @@ public class VisitorAi : MonoBehaviour
                  {
                      floatingTimer.FadeoutWithDestory();
 
-                     if (WishItems.Count > 0)
+                     if (WishItems.Count > 0) { 
                          PlayData.CurrentData.Money += WishItems[0].GetData().SellPrice;
+                         PlayData.CurrentData.DailyStatisticsData.SellMoney += WishItems[0].GetData().SellPrice;
+                     }
                      PlayData.CurrentData.Awareness += 1;
 
                      ItemDealCallback();

@@ -13893,7 +13893,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visitorManager: {fileID: 1273220252}
-  reviewResultWindow: {fileID: 0}
+  reviewResultWindow: {fileID: 1752080331}
+  resultWindow: {fileID: 916972723}
   openningHour: 8
   closingHour: 21
   gameTimeScale: 288
@@ -20766,7 +20767,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 678928762}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 916972721}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &678928762
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -31,6 +31,20 @@ namespace ProjectTrader
         {
             CurrentData = playData;
         }
+        
+        [Serializable]
+        public class DailyStatistics
+        {
+            public int SellMoney { get; set; }
+            //public int TipMoney { get; set; }
+            public int VisitorCount { get; set; }
+
+            public void Clear()
+            {
+                SellMoney = 0;
+                VisitorCount = 0;
+            }
+        }
 
         #region 인스펙터 변수 & 초기 값
         [SerializeField] int money = 10000;
@@ -263,6 +277,8 @@ namespace ProjectTrader
             SyncQuestStateFromQuestData();
             isSynced = true;
         }
+
+        public DailyStatistics DailyStatisticsData { get; set; } = new DailyStatistics();
 
         /// <summary>
         /// 퀘스트 데이터에 맞게 퀘스트 스테이트 목록을 동기화합니다.

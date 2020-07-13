@@ -44,6 +44,7 @@ class GameDateTimeManager : MonoBehaviour
 
     [SerializeField] VisitorManager visitorManager;
     [SerializeField] JudgeResultWindow reviewResultWindow;
+    [SerializeField] ResultWindow resultWindow;
 
     // 현실시간 5분 = 게임시간 1일
     // 현실시간 300초 = 게임시간 1440분 = 게임시간 86400초
@@ -232,8 +233,13 @@ class GameDateTimeManager : MonoBehaviour
             }
 
             //TODO: 결산 윈도우 호출
+            resultWindow.gameObject.SetActive(true);
 
             // 결산 윈도우가 닫힐때까지 대기
+            while (resultWindow.gameObject.activeSelf)
+            {
+                yield return null;
+            }
 
             // 저장
             FindObjectOfType<DataSave>().GameSave();
@@ -262,5 +268,7 @@ class GameDateTimeManager : MonoBehaviour
         // 일일 퀘스트 갱신
         PlayData.CurrentData.UpdateDailyQuest();
 
+        // 통계 초기화
+        PlayData.CurrentData.DailyStatisticsData.Clear();
     }
 }

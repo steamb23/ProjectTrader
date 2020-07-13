@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using ProjectTrader;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -52,6 +53,8 @@ public class VisitorManager : MonoBehaviour
                 var obj = Instantiate(visitorInfo.visitor);
                 obj.transform.position = pathNodeManager.exitNode.transform.position;
                 visitors.Add(obj);
+
+                PlayData.CurrentData.DailyStatisticsData.VisitorCount += 1;
 
                 // 손님 방문 퀘스트 트리거
                 ProjectTrader.QuestManager.Trigger(ProjectTrader.Datas.QuestData.GoalType.VisitorCount, 1);
