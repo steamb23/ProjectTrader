@@ -180,13 +180,13 @@ class GameDateTimeManager : MonoBehaviour
     /// </summary>
     private void TimeCheck()
     {
-        const bool isTest = true;
+        const bool isTest = false;
 
         // 12시
         if (GameDateTime.Hour >= 12 && !checked12h)
         {
             // 심사일 체크
-            if (isTest || gameDateTime.TotalDays > 0 && gameDateTime.TotalDays % 30 == 0)
+            if (isTest || gameDateTime.TotalDays > 0 && gameDateTime.TotalDays % 14 == 0)
             {
                 // 심사 연출 시작
                 FindObjectOfType<JudgeManager>().StartDirecting();
