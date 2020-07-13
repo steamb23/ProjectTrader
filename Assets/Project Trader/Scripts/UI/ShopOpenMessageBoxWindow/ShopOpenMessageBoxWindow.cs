@@ -110,8 +110,8 @@ public class ShopOpenMessageBoxWindow : MonoBehaviour
     void UpdateData()
     {
         // 적절한 계산식에 따라 설정하도록 수정 예정
-        RegenerationRestPoint = 20;
-        ReductionRestPoint = 10;
+        RegenerationRestPoint = 30;
+        ReductionRestPoint = 20;
         // TODO: GameDateManager에서 한달 주기로 갱신이 필요함.
         RemainedRest = PlayData.CurrentData.RemainedRest;
     }

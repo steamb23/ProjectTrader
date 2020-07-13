@@ -30,6 +30,9 @@ public class ShopWindow : MonoBehaviour
     Image[] slotImage;
     TextMeshProUGUI[] slottext;
 
+    Item checkItem;
+    ItemData checkItemData;
+
     void Start()
     {
         useData = GameObject.Find("SaveData");
@@ -61,29 +64,34 @@ public class ShopWindow : MonoBehaviour
     void SetShopslot()
     {
         //임시 지정, 판매슬롯은 변동이 없기 때문에 한번 생성후 고정,material개수만큼
-        shopItem = new GameObject[55];
-        shopItemInfo = new Item[55];
-        shopItemData = new ItemData[55];
-        buyNum = new int[55];
-        itemMaxnum = new int[55];
-        timeDelay = new float[55];
-
-        for(int i = 0; i < 55; i++)
+        shopItem = new GameObject[85];
+        shopItemInfo = new Item[85];
+        shopItemData = new ItemData[85];
+        buyNum = new int[85];
+        itemMaxnum = new int[85];
+        timeDelay = new float[85];
+        int j = 0;
+        for(int i = 0; i < 85; i++)
         {
+            checkItem.Code = i + 1;
+            checkItemData = checkItem.GetData();
             //임시 지정
-            shopItemInfo[i].Code = i + 1;
-            shopItemData[i] = shopItemInfo[i].GetData();
-            buyNum[i] = 0;
-            itemMaxnum[i] = 30;
-            timeDelay[i] = 125f;
+            if ((int)checkItemData.Type==1) {
+                shopItemInfo[j].Code = i + 1;
+                shopItemData[j] = shopItemInfo[j].GetData();
+                buyNum[j] = 0;
+                itemMaxnum[j] = 30;
+                timeDelay[j] = 125f;
 
-            shopItem[i] = Instantiate(shopslot) as GameObject;
-            //슬롯세팅
-            SetshopslotData(i);
-            SlotInDataSet(i);
-            SlotImage(i);
-            shopItem[i].transform.SetParent((GameObject.Find("ShopContent")).transform);
-            shopItem[i].transform.localScale = Vector3.one;
+                shopItem[j] = Instantiate(shopslot) as GameObject;
+                //슬롯세팅
+                SetshopslotData(j);
+                SlotInDataSet(j);
+                SlotImage(j);
+                shopItem[j].transform.SetParent((GameObject.Find("ShopContent")).transform);
+                shopItem[j].transform.localScale = Vector3.one;
+                j++;
+            }
             
         }
 

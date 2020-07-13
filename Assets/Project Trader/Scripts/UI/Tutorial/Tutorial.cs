@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using ProjectTrader;
+using ProjectTrader.Datas;
 
 //튜토리얼을 보면 tutorial스크립트 자체를 꺼버리기
 public class Tutorial : MonoBehaviour
@@ -13,7 +14,7 @@ public class Tutorial : MonoBehaviour
     [SerializeField]
     int num;
     GameObject town;
-    
+    Item tutorialitem;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,8 +45,14 @@ public class Tutorial : MonoBehaviour
             tutorialwindow.SetActive(false);
             return;
         }
-      
 
+        if (num == 1)
+        {
+
+            tutorialitem.Code = 2;
+            tutorialitem.Count = 1;
+            FindObjectOfType<DataSave>().ItemListAdd(tutorialitem);
+        }
         if (num != 1)
             tutorial[num - 1].SetActive(false);
         tutorial[num].SetActive(true);

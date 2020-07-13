@@ -60,8 +60,12 @@ public class EmployeeHireWindow : MonoBehaviour
             int cod;
             do
             {
-                cod = UnityEngine.Random.Range(1, 19);
-
+                cod = UnityEngine.Random.Range(1, 44);
+                if (PlayData.CurrentData.Tutorial == false)
+                {
+                    cod = 1;
+                    PlayData.CurrentData.Tutorial = true;
+                }
                 //고용된 리스트에서 찾아서 구별
                 if (empui.GetComponent<EmployeeDataCatch>().CheckSameEmp(cod) == false && Checkslot(cod)==true)
                 {
@@ -75,14 +79,12 @@ public class EmployeeHireWindow : MonoBehaviour
             // 임시 데이터
             candiateInfo.Code = cod;
             candiateInfo.Name = empdata.Name;
-            candiateInfo.Age = $"{(UnityEngine.Random.Range(0, 2) > 0 ? "남" : "여")} / {UnityEngine.Random.Range(20, 40)}";
+            //candiateInfo.Age = $"{(UnityEngine.Random.Range(0, 2) > 0 ? "남" : "여")} / {UnityEngine.Random.Range(20, 40)}";
+            candiateInfo.Age = $"{((int)empdata.Gender == 1 ? "남" : "여")} / {UnityEngine.Random.Range(20, 40)}";
             candiateInfo.Charisma = empdata.Charisma.ToString();
             candiateInfo.Inteligent = empdata.Intelligent.ToString();
             candiateInfo.Dexturity = empdata.Dexterity.ToString();
-            candiateInfo.State = UnityEngine.Random.Range(0, 100) > 80 ?
-                "무경력" :
-                $"{(UnityEngine.Random.Range(0, 2) > 0 ? "정규직" : "비정규직")} {UnityEngine.Random.Range(1, 10)}년";
-            //State는 일단 냅두기
+            candiateInfo.State = "일당 : " +empdata.Cost.ToString();
             candiateInfo.Enable();
         }
     }

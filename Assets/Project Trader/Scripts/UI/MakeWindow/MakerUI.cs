@@ -355,13 +355,13 @@ public class MakerUI : MonoBehaviour
         int[] ct = new int[4];
         bool set;
 
-        for (int i = 55; i < 69; i++)//임시->데이터 들어오면 레시피부터 시작해서~ 개수?로 변경
+        for (int i = 40; i < 85; i++)//임시->데이터 들어오면 레시피부터 시작해서~ 개수?로 변경
         {
 
             checkItem.Code = i + 1;
             checkItemData = checkItem.GetData();
 
-            if (checkItemData.Type == ItemData.ItemType.Craftable) //타입이 제작아이템이면
+            if ((int)checkItemData.Type == 2) //타입이 제작아이템이면
             {
                 mt = checkItemData.MaterialCodes;
                 ct = checkItemData.MaterialNeeds;
