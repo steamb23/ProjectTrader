@@ -86,6 +86,8 @@ public class VisitorAi : MonoBehaviour
     // 카운터 대기 번호
     int counterWaitNumber = 0;
 
+    int findingCount = 0;
+
     static int debugIndex = 0;
     void Start()
     {
@@ -203,6 +205,7 @@ public class VisitorAi : MonoBehaviour
 
     void Finding()
     {
+        findingCount++;
         //Debug.Log("Finding");
         // 랜덤 아이템 선택
         targetItemNodeIndex = UnityEngine.Random.Range(0, pathNodeManager.itemNodes.Count);
@@ -210,7 +213,13 @@ public class VisitorAi : MonoBehaviour
         // TODO:해당 위치에 캐릭터가 존재하면 다시 선택하도록 수정
         if (pathNodeManager.ItemOccupancyList[targetItemNodeIndex] != null)
         {
-            state = AiState.Finding;
+            //if (refindingCount > 100)
+            //{
+            //    SetTarget(pathNodeManager.exitNode);
+            //    state = AiState.Exit;
+            //}
+            //else
+            state = AiState.Discard;
             return;
         }
 
@@ -237,21 +246,21 @@ public class VisitorAi : MonoBehaviour
         waitTime -= Time.deltaTime;
         if (waitTime <= 0)
         {
+            var displayedItem = targetItemNode.displayedItem;
             // 구매 확률
             float purchasingProbability = 0.3f;
 
             var random = UnityEngine.Random.Range(0f, 1f);
 
-            if (random < purchasingProbability)
+            if (displayedItem.ItemCount > 0 && random < purchasingProbability)
             {
-                var displayedItem = targetItemNode.displayedItem;
 
                 WishItems.Add(new Item()
                 {
                     Code = displayedItem.Item.Code,
                     Count = 1
                 });
-                
+
                 state = AiState.FindCounter;
             }
             else
@@ -432,7 +441,7 @@ public class VisitorAi : MonoBehaviour
     {
         //Debug.Log("Discard");
         // 판매 포기 확률
-        float discardProbability = 0.01f;
+        float discardProbability = 0.01f + findingCount * 0.01f;
 
         var random = UnityEngine.Random.Range(0f, 1f);
 
