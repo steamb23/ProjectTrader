@@ -18,18 +18,20 @@ public class MainButtoncontrol : MonoBehaviour
     Button saveButton;
 
     GameDateTimeManager gameDateTimeManager;
+    VisitorManager visitorManager;
 
     // Start is called before the first frame update
     void Start()
     {
         gameDateTimeManager = FindObjectOfType<GameDateTimeManager>();
+        visitorManager = FindObjectOfType<VisitorManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
         // 하루가 멈췄을 때만 저장 가능하도록
-        saveButton.interactable = (gameDateTimeManager.IsStopped);
+        saveButton.interactable = (gameDateTimeManager.IsStopped && visitorManager.visitors.Count == 0);
     }
     public void OpenOption()
     {
