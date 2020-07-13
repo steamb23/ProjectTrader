@@ -438,7 +438,7 @@ public class MakerUI : MonoBehaviour
 
         FindObjectOfType<DataSave>().ItemListAdd(makeItem);
 
-        QuestManager.Trigger(QuestData.GoalType.CraftingItem, 1);
+        QuestManager.Trigger(QuestData.GoalType.CraftingItem, 1, makeItem.Code);
     }
 
     //제작가능한 수량을 반환

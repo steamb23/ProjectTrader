@@ -16,8 +16,14 @@ namespace ProjectTrader
         /// <summary>
         /// 퀘스트 트리거, 모든 퀘스트 상태 데이터의 <see cref="QuestData.goalAmount"/>에 매개변수 <paramref name="amount"/>의 값을 추가합니다.
         /// </summary>
-        public static void Trigger(QuestData.GoalType goalType, int amount = 1) =>
-            AddAmount(amount, (data) => data.GetQuestData().GoalTypeData == goalType);
+        public static void Trigger(QuestData.GoalType goalType, int amount = 1, int goalTargetCode = 0) =>
+            AddAmount(amount, (data) =>
+            {
+                var questData = data.GetQuestData();
+                return questData.GoalTypeData == goalType &&
+                // 퀘스트 타겟코드가 0이면 무조건 발동
+                (questData.GoalTargetCode == goalTargetCode || questData.GoalTargetCode == 0);
+            });
 
 
         static void AddAmount(int amount, Predicate<QuestState> match)

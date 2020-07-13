@@ -39,7 +39,44 @@ namespace ProjectTrader.Datas
                 Description  = "모험가 길드에서 무화초를 10개 구입하자",
                 Summary = "무화초 10개 구입",
                 GoalTypeData = QuestData.GoalType.BuyItem,
-                GoalAmount = 3,
+                GoalTargetCode=1,
+                GoalAmount = 10,
+                RewardTypeData = QuestData.RewardType.Gold,
+                RewardAmount = 100
+            },
+            new QuestData()
+            {
+                Code = 3,
+                Name = "물품 제작 1",
+                Description  = "공방에서 와당포션을 10개 만들어 보자",
+                Summary = "와당포션 10개 제작",
+                GoalTypeData = QuestData.GoalType.CraftingItem,
+                GoalTargetCode=57,
+                GoalAmount = 10,
+                RewardTypeData = QuestData.RewardType.Gold,
+                RewardAmount = 100
+            },
+            new QuestData()
+            {
+                Code = 4,
+                Name = "물품 제작 2",
+                Description  = "공방에서 와당표 천갑옷을 10개 만들어 보자",
+                Summary = "와당표 천갑옷 10개 제작",
+                GoalTypeData = QuestData.GoalType.CraftingItem,
+                GoalTargetCode=58,
+                GoalAmount = 10,
+                RewardTypeData = QuestData.RewardType.Gold,
+                RewardAmount = 100
+            },
+            new QuestData()
+            {
+                Code = 5,
+                Name = "하루 방문 손님 1",
+                Description  = "하루에 방문하는 손님 30명 넘기",
+                Summary = "방문 손님 30명 달성",
+                GoalTypeData = QuestData.GoalType.VisitorCount,
+                GoalTargetCode=58,
+                GoalAmount = 30,
                 RewardTypeData = QuestData.RewardType.Gold,
                 RewardAmount = 100
             }

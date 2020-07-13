@@ -120,6 +120,11 @@ namespace ProjectTrader.Datas
             get => this.goalTypeData;
             set => this.goalTypeData = value;
         }
+        public int GoalTargetCode
+        {
+            get => this.goalTargetCode;
+            set => this.goalTargetCode = value;
+        }
         public int GoalAmount
         {
             get => this.goalAmount;
@@ -136,6 +141,8 @@ namespace ProjectTrader.Datas
         [SerializeField] string summary;
         // 목표 타입
         [SerializeField] GoalType goalTypeData;
+        // 목표 대상 코드
+        [SerializeField] int goalTargetCode;
         // 목표량
         [SerializeField] int goalAmount;
         // 보상 타입

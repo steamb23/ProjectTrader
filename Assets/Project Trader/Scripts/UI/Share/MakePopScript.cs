@@ -236,7 +236,7 @@ public class MakePopScript : MonoBehaviour
             go.GetComponent<ShopTimer>().SetInfo((int)shopslider.value, popItem.Code);
 
             // 아이템 구매 퀘스트 트리거
-            QuestManager.Trigger(QuestData.GoalType.BuyItem, (int)shopslider.value);
+            QuestManager.Trigger(QuestData.GoalType.BuyItem, (int)shopslider.value, popItem.Code);
         }
         else
         {
